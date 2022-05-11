@@ -1,9 +1,10 @@
 import { _decorator, Component, Node } from 'cc';
+import { Layer } from '../../framework/lib/Layer';
 import List from '../../framework/uiComp/list/List';
 const { ccclass, property } = _decorator;
 
 @ccclass('ListTest')
-export class ListTest extends Component {
+export class ListTest extends Layer {
       //垂直列表
       @property(List)
       listV: List = null;
