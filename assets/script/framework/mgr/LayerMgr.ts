@@ -15,9 +15,9 @@ export class LayerMgr {
 
     public init() {
         let self = this;
-        self.layer = self.addCom2GRoot('layer');
-        self.dlg = self.addCom2GRoot('dlg');
-        self.msg = self.addCom2GRoot('msg');
+        self.layer = self.addCom2GRoot('Layer');
+        self.dlg = self.addCom2GRoot('Dlg');
+        self.msg = self.addCom2GRoot('Msg');
     }
 
     /**
