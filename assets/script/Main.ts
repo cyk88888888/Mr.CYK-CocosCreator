@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, instantiate } from 'cc';
+import { _decorator, Component, Node, instantiate, resources, Prefab } from 'cc';
 import { LayerMgr } from './framework/mgr/LayerMgr';
 const { ccclass, property } = _decorator;
 
@@ -6,7 +6,10 @@ const { ccclass, property } = _decorator;
 export class Main extends Component {
     onLoad() {
         LayerMgr.inst.init();
-        // instantiate()
+        resources.load("prefabs/ListTest", Prefab, (err, prefab) => {
+            const newNode = instantiate(prefab);
+            newNode.setParent(LayerMgr.inst.layer.node)
+        });
     }
 
     update(deltaTime: number) {

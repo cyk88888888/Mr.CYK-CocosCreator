@@ -14,9 +14,15 @@ export class Comp extends Component {
         self.ctor_a();
 
     }
-    
-    start() {
-        this.addToLayer();
+
+    onLoad() {
+        let self = this;
+        console.log("self.__className: " + self.__className);
+        self.addToLayer();
+        self.addBtnCLickListener();
+        self.onEnter_b();
+        if (self["onEnter"]) self["onEnter"]();
+        self.onEnter_a();
     }
 
     protected ctor_b() { }
