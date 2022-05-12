@@ -5,7 +5,7 @@ const { ccclass, property } = _decorator;
 @ccclass('Main')
 export class Main extends Component {
     onLoad() {
-        SceneMgr.inst.pushScene('ListTestScene');
+        SceneMgr.inst.pushScene('LoadingScene');
     }
 
 }

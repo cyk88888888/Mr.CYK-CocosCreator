@@ -688,13 +688,13 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 240,
-      "height": 250
+      "width": 960,
+      "height": 640
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
       "x": 0.5,
-      "y": 1
+      "y": 0.5
     },
     "_id": ""
   },
@@ -716,7 +716,7 @@
     "listV": {
       "__id__": 27
     },
-    "_id": "5ez7pewlpNKprViA1ekh9J"
+    "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",

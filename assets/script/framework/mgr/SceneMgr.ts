@@ -26,6 +26,10 @@ export class SceneMgr {
     }
 
     public pushScene(sceneName: string) {
+        if(this.curScene){
+            this.curScene.node.destroyAllChildren();
+            this.curScene.node.destroy();
+        }
         this.curScene = this.addCom2GRoot(sceneName, true);
         this.initLayer();
         this.curScene.node.addComponent(sceneName);
