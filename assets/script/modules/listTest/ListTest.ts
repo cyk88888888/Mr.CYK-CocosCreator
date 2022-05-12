@@ -1,10 +1,10 @@
 import { _decorator } from 'cc';
-import { Layer } from '../../framework/lib/Layer';
+import { UILayer } from '../../framework/lib/UILayer';
 import List from '../../framework/uiComp/list/List';
 const { ccclass, property } = _decorator;
 
 @ccclass('ListTest')
-export class ListTest extends Layer {
+export class ListTest extends UILayer {
     //垂直列表
     @property(List)
     listV: List = null;
@@ -19,7 +19,6 @@ export class ListTest extends Layer {
     }
 
     update(deltaTime: number) {
-
     }
 }
 

@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "ListTest",
+    "_name": "ListTestLayer",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": null,
@@ -716,7 +716,7 @@
     "listV": {
       "__id__": 27
     },
-    "_id": ""
+    "_id": "5ez7pewlpNKprViA1ekh9J"
   },
   {
     "__type__": "cc.CompPrefabInfo",

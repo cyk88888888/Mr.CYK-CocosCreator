@@ -2,8 +2,8 @@ import { _decorator, Component, Node } from 'cc';
 import { emmiter } from './Emmiter';
 const { ccclass, property } = _decorator;
 
-@ccclass('Comp')
-export class Comp extends Component {
+@ccclass('UIComp')
+export class UIComp extends Component {
     private _emmitMap: { [event: string]: Function };//已注册的监听事件列表
     private _objTapMap: { [objName: string]: Function };//已添加的显示对象点击事件的记录
     constructor() {
@@ -57,18 +57,17 @@ export class Comp extends Component {
 
     public get __className(): string {
         let self = this;
-        let name = self.name.split('<')[1].split('>')[0];
-        return name;
+        return self.node.name;
     }
 
     /**添加按钮点击事件监听**/
     private addBtnCLickListener() {
         let self = this;
         self._objTapMap = {};
+        self.node.children;
         for (let objName in self) {
             let obj = self[objName];
             if (obj instanceof Node) {
-                obj.name = objName;
                 if (self["_tap_" + objName]) {
                     let tapFunc = self["_tap_" + objName];
                     self._objTapMap[objName] = tapFunc;
@@ -76,6 +75,13 @@ export class Comp extends Component {
                 }
             }
         }
+    }
+
+    /**
+     * 销毁节点
+     */
+    public close(){
+        this.node.destroy();
     }
 
     private dispose() {
