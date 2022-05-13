@@ -5,6 +5,7 @@ const { ccclass, property } = _decorator;
 
 @ccclass('ListTestLayer')
 export class ListTestLayer extends UILayer {
+    private listV: List; 
     //数据数组（所有List共用）
     data: number[] = [];
     private onEnter() {
