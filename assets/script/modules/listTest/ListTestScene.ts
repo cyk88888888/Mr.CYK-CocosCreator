@@ -9,6 +9,8 @@ export class ListTestScene extends UIScene {
     async onLoad() {
         let prefab = await ResMgr.inst.loadPrefab('listTest/ListTestLayer');
         const newNode = instantiate(prefab);
+        let script = newNode.addComponent('ListTestLayer');
+        // script['newNode'] = newNode;
         newNode.setParent(SceneMgr.inst.layer.node);
         
     }

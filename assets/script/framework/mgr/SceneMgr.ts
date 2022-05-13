@@ -7,6 +7,7 @@ export class SceneMgr {
     public msg: Component;
     public curScene: Component;
     private _canvas: Scene;
+    private _popArr: string[];
     public static get inst() {
         if (!this._inst) {
             this._inst = new SceneMgr();
@@ -15,24 +16,28 @@ export class SceneMgr {
     }
 
     /**
-     * 
-     * @returns 获取当前场景的canvas
+     * 获取当前场景的canvas
+     * @returns 
      */
-    public getCanvas() {
+    public getCanvas(): Scene {
         if (!this._canvas) {
             this._canvas = director.getScene().getChildByName('Canvas');
         }
         return this._canvas;
     }
 
-    public pushScene(sceneName: string) {
-        if(this.curScene){
+    public pushScene(sceneName: string, data?: any) {
+        if (!this._popArr) {
+            this._popArr = [];
+        }
+        if (this.curScene) {//销毁上个场景
             this.curScene.node.destroyAllChildren();
             this.curScene.node.destroy();
         }
         this.curScene = this.addCom2GRoot(sceneName, true);
         this.initLayer();
-        this.curScene.node.addComponent(sceneName);
+        let newScene = this.curScene.node.addComponent(sceneName);
+        newScene['data'] = data;
     }
 
     private initLayer() {

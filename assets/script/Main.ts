@@ -5,7 +5,7 @@ const { ccclass, property } = _decorator;
 @ccclass('Main')
 export class Main extends Component {
     onLoad() {
-        SceneMgr.inst.pushScene('LoadingScene');
+        SceneMgr.inst.pushScene('LoadingScene',{name:'红红火火恍恍惚惚'});
     }
 
 }

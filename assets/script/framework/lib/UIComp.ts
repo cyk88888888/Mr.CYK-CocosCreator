@@ -12,7 +12,6 @@ export class UIComp extends Component {
         self.ctor_b();
         if (self["ctor"]) self["ctor"]();
         self.ctor_a();
-
     }
 
     onLoad() {
