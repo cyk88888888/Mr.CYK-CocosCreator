@@ -14,7 +14,7 @@ export class LoadingLayer extends UILayer {
 
     update(deltaTime: number) {
         this.progressBar.progress += 0.005;
-        if(!this._isChanging && this.progressBar.progress >= 100){
+        if(!this._isChanging && this.progressBar.progress >= 1){
             this._isChanging = true;
             SceneMgr.inst.pushScene('ListTestScene');
         }
