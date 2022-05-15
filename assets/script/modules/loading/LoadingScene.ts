@@ -9,6 +9,7 @@ export class LoadingScene extends UIScene {
     async onLoad() {
         let prefab = await ResMgr.inst.loadPrefab('loading/LoadingLayer');
         const newNode = instantiate(prefab);
+        // newNode.addComponent(Node);
         let script = newNode.addComponent('LoadingLayer');
         // script['newNode'] = newNode;
         newNode.setParent(SceneMgr.inst.layer.node);

@@ -14,6 +14,4 @@ export class ListTestScene extends UIScene {
         newNode.setParent(SceneMgr.inst.layer.node);
         
     }
-
-    
 }

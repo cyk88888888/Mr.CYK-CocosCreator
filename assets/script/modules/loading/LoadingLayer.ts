@@ -8,7 +8,6 @@ export class LoadingLayer extends UILayer {
     private progressBar: ProgressBar;
     private _isChanging: boolean;
     private onEnter(){
-        console.log('进入loading页面');
         this.progressBar = this.node.getChildByName("ProgressBar").getComponent(ProgressBar);
     }
 

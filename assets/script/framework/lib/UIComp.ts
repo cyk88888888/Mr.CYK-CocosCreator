@@ -17,6 +17,7 @@ export class UIComp extends Component {
     onLoad() {
         let self = this;
         console.log("self.__className: " + self.__className);
+        console.log('进入' + self.__className + '页面');
         self.addToLayer();
         self.addBtnCLickListener();
         self.onEnter_b();
@@ -79,7 +80,7 @@ export class UIComp extends Component {
     /**
      * 销毁节点
      */
-    public close(){
+    public close() {
         this.node.destroy();
     }
 

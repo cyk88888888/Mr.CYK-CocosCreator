@@ -40,6 +40,9 @@ export class SceneMgr {
         newScene['data'] = data;
     }
 
+    /**
+     * 初始化场景层级容器
+     */
     private initLayer() {
         let self = this;
         self.layer = self.addCom2GRoot('UILayer');
