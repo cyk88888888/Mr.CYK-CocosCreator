@@ -6,12 +6,12 @@ const { ccclass, property } = _decorator;
 @ccclass('ListTestScene')
 export class ListTestScene extends UIScene {
     
-    async onLoad() {
+    private async onEnter() {
         let prefab = await ResMgr.inst.loadPrefab('listTest/ListTestLayer');
         const newNode = instantiate(prefab);
+        newNode.setParent(SceneMgr.inst.layer.node);
         let script = newNode.addComponent('ListTestLayer');
         // script['newNode'] = newNode;
-        newNode.setParent(SceneMgr.inst.layer.node);
         
     }
 }

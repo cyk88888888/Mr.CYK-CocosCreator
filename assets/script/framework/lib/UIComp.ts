@@ -16,8 +16,7 @@ export class UIComp extends Component {
 
     onLoad() {
         let self = this;
-        console.log("self.__className: " + self.__className);
-        console.log('进入' + self.__className + '页面');
+        console.log('进入---' + self.__className + '---页面');
         self.addToLayer();
         self.addBtnCLickListener();
         self.onEnter_b();

@@ -14,18 +14,31 @@ export class ResMgr {
      * @param path 预制体路径
      * @returns 
      */
-    public async loadPrefab(path: string): Promise<Prefab>{
-        return new Promise((resolve,reject)=>{
-            resources.load('prefabs/' + path, Prefab, (err, prefab) => {
-                if(!err){
+    public async loadPrefab(prefabPath: string): Promise<Prefab> {
+        return new Promise((resolve, reject) => {
+            resources.load('prefabs/' + prefabPath, Prefab, (err, prefab) => {
+                if (!err) {
                     resolve(prefab);
-                }else{
+                } else {
                     console.error(err);
-                    reject(err); 
+                    reject(err);
                 }
-               
+
             });
         })
-       
+
+    }
+
+    public async load(resPath: string): Promise<any> {
+        return new Promise((resolve, reject) => {
+            resources.load(resPath, (err, data) => {
+                if (!err) {
+                    resolve(data);
+                } else {
+                    console.error(err);
+                    reject(err);
+                }
+            })
+        })
     }
 }
