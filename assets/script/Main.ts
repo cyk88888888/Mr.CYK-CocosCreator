@@ -21,7 +21,7 @@ export class Main extends Component {
         scaleMode.designHeight_min = 1030;
         scaleMode.designHeight_max = 1280;
 
-        SceneMgr.inst.push('LoadingScene', { name: '红红火火恍恍惚惚' });
+        SceneMgr.inst.run('LoadingScene', { name: '红红火火恍恍惚惚' });
     }
 
 }
