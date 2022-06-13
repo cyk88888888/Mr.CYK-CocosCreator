@@ -72,11 +72,10 @@ export class SceneMgr {
             this.checkDestoryLastScene(!toPush);
         }
         let sceneName = moduleInfo.name;
-        let newNode = BaseUT.newNode(sceneName);
+        let newNode = BaseUT.newUINode(sceneName);
         let script = this.curScene = newNode.addComponent(sceneName) as UIScene;
         script.setData(data);
         script.addToGRoot();
-        BaseUT.setFitSize(newNode);
     }
 
     /**判断销毁上个场景并释放资源 */

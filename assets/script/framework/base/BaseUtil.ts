@@ -3,7 +3,7 @@
  * @Author: CYK
  * @Date: 2022-05-19 11:39:05
  */
-import { Node, screen, Size, UIOpacity, UITransform, view } from "cc";
+import { Layers, Node, screen, Size, UIOpacity, UITransform, view } from "cc";
 import { scaleMode } from "./ScaleMode";
 export namespace BaseUT {
     /** 获取宽度适配下屏幕的视图宽高*/
@@ -26,10 +26,11 @@ export namespace BaseUT {
         return new Size(windowSize.width, designHeight);
     }
 
-    export function newNode(name?: string) {
+    export function newUINode(name?: string) {
         let newNode = new Node(name);
         newNode.addComponent(UITransform);
         newNode.addComponent(UIOpacity);
+        newNode.layer = Layers.Enum.UI_2D;
         return newNode;
     }
 }

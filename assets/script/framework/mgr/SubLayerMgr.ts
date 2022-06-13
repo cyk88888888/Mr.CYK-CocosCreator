@@ -34,7 +34,7 @@ export class SubLayerMgr {
         this._show(LayerNameOrClass, data, true);
     }
 
-    private _show(LayerNameOrClass: string | typeof UILayer, data?: any, toPush?: boolean) {
+    private async _show(LayerNameOrClass: string | typeof UILayer, data?: any, toPush?: boolean) {
         let script: any = typeof LayerNameOrClass === 'string' ? js.getClassByName(LayerNameOrClass) : LayerNameOrClass;
         let layerName = script.name;
         let registerLayer = this._classMap[layerName];
@@ -55,7 +55,7 @@ export class SubLayerMgr {
             return;
         }
 
-        this.curLayer = script.show(data);
+        this.curLayer = await script.show(data);
         if (this._classMap[layerName]) {
             this._classMap[layerName] = this.curLayer;
         }

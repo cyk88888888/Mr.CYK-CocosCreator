@@ -8,7 +8,7 @@ import { SubLayerMgr } from '../mgr/SubLayerMgr';
 import { UILayer } from './UILayer';
 import { emmiter } from '../base/Emmiter';
 import { BaseUT } from '../base/BaseUtil';
-import { Component, Node, UIOpacity, UITransform } from 'cc';
+import { Component, Layers, Node, UIOpacity, UITransform } from 'cc';
 import { SceneMgr } from '../mgr/SceneMgr';
 
 export class UIScene extends Component{
@@ -28,6 +28,7 @@ export class UIScene extends Component{
         self.ctor_b();
         if (self["ctor"]) self["ctor"]();
         self.ctor_a();
+        BaseUT.setFitSize(this.node);
     }
 
     protected ctor_b() { }
@@ -90,7 +91,7 @@ export class UIScene extends Component{
     * @returns 
     */
     private addGCom2GRoot(name: string, isScene?: boolean): Node {
-        let newNode = BaseUT.newNode(name);
+        let newNode = BaseUT.newUINode(name);
         newNode.setParent(this.node);
         BaseUT.setFitSize(newNode);
         return newNode;
@@ -181,7 +182,7 @@ export class UIScene extends Component{
         this._dispose();
         this.subLayerMgr.dispose();
         this.subLayerMgr = null;
-        this.destory();
+        super.destroy();
     }
 }
 

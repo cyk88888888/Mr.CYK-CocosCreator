@@ -3,7 +3,7 @@
  * @Author: CYK
  * @Date: 2022-05-12 09:23:41
  */
-import { _decorator, Component, Node, instantiate } from 'cc';
+import { _decorator, Component, Node, instantiate, Layers } from 'cc';
 import { BaseUT } from '../base/BaseUtil';
 import { ResMgr } from '../mgr/ResMgr';
 import { SceneMgr } from '../mgr/SceneMgr';
@@ -16,6 +16,7 @@ export class UILayer extends UIComp {
     public static async show(data?: any) {
         let prefab = await ResMgr.inst.loadPrefab(this.prefabUrl);
         const newNode = instantiate(prefab);
+        newNode.layer = Layers.Enum.UI_2D;
         let script = newNode.addComponent(this.name) as UILayer;
         BaseUT.setFitSize(script.node);
         script.setData(data);

@@ -30,17 +30,22 @@ export class ResMgr {
      */
     public async loadPrefab(prefabPath: string): Promise<Prefab> {
         return new Promise((resolve, reject) => {
-            resources.load('prefab/' + prefabPath, Prefab, (err, prefab) => {
-                if (!err) {
-                    resolve(prefab);
-                } else {
-                    console.error(err);
-                    reject(err);
-                }
-
-            });
+            let cachePrefab = this.get('prefab/' + prefabPath);
+            if(cachePrefab){   
+                console.log('resName: ' + prefabPath + '加载完毕(缓存已有)');
+                return resolve(cachePrefab as Prefab);
+            }else{
+                resources.load('prefab/' + prefabPath, Prefab, (err, prefab) => {
+                    if (!err) {
+                        console.log('resName: ' + prefabPath + '加载完毕');
+                        resolve(prefab);
+                    } else {
+                        console.log('resName: ' + prefabPath + '加载失败');
+                        reject(err);
+                    }
+                });
+            }
         })
-
     }
 
     /**
