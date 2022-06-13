@@ -1,13 +1,22 @@
-import { Component, director, Layers, Node, Scene, UIOpacity, UITransform, view } from "cc";
+/*
+ * @Descripttion: 场景管理器
+ * @Author: CYK
+ * @Date: 2022-05-16 09:18:45
+ */
+import { AudioSource, Component, director, js, Layers, Node, Scene, UIOpacity, UITransform, view } from "cc";
+import { ModuleCfgInfo } from "../base/ModuleCfgInfo";
+import { UIComp } from "../ui/UIComp";
+import { UIScene } from "../ui/UIScene";
+import { moduleInfoMap } from "./ModuleMgr";
+import { ResMgr } from "./ResMgr";
 
 export class SceneMgr {
     private static _inst: SceneMgr;
-    public layer: Component;
-    public dlg: Component;
-    public msg: Component;
-    public curScene: Component;
+    public curScene: UIScene;
+    /** 主场景名称*/
+    public mainScene: string;
+    private _popArr: UIScene[];
     private _canvas: Scene;
-    private _popArr: string[];
     public static get inst() {
         if (!this._inst) {
             this._inst = new SceneMgr();
@@ -26,47 +35,93 @@ export class SceneMgr {
         return this._canvas;
     }
 
-    public pushScene(sceneName: string, data?: any) {
-        if (!this._popArr) {
-            this._popArr = [];
-        }
-        if (this.curScene) {//销毁上个场景
-            this.curScene.node.destroyAllChildren();
-            this.curScene.node.destroy();
-        }
-        this.curScene = this.addCom2GRoot(sceneName, true);
-        this.initLayer();
-        let newScene = this.curScene.node.addComponent(sceneName);
-        newScene['data'] = data;
+    public run(scene: string | typeof UIScene, data?: any) {
+        this.showScene(scene, data);
     }
 
-    /**
-     * 初始化场景层级容器
-     */
-    private initLayer() {
+    public push(scene: string | typeof UIScene, data?: any) {
+        this.showScene(scene, data, true);
+    }
+
+    private showScene(scene: string | typeof UIScene, data?: any, toPush?: boolean) {
+        let sceneName = typeof scene === 'string' ? scene : scene.name;
+        if (this.curScene && this.curScene.className == sceneName) return;//相同场景
+        let moduleInfo = moduleInfoMap[sceneName];
+        if (!moduleInfo) {
+            console.error('未注册模块：' + sceneName)
+            return;
+        }
+        ResMgr.inst.load(moduleInfo.preResList, this.onUILoaded.bind(this, moduleInfo, data, toPush));
+    }
+
+    private onUILoaded(moduleInfo: ModuleCfgInfo, data: any, toPush: boolean) {
+        if (toPush && this.curScene) {
+            this._popArr.push(this.curScene);
+            this.onExit(this.curScene);
+            this.curScene.removeFromParent();
+        } else {
+            this.checkDestoryLastScene(!toPush);
+        }
+
+        let sceneName = moduleInfo.name;
+        let scriptClass = js.getClassByName(sceneName);//是否有对应脚本类
+        this.curScene = new scriptClass() as UIScene;
+        this.curScene._init_(sceneName, data);
+    }
+
+    /**判断销毁上个场景并释放资源 */
+    private checkDestoryLastScene(destory?: boolean) {
+        if (this.curScene) {
+            let lastModuleInfo = moduleInfoMap[this.curScene.node.name];
+            if (destory && !lastModuleInfo.cacheEnabled) {//销毁上个场景
+                ResMgr.inst.releaseRes(lastModuleInfo.preResList);
+            }
+
+            this.onExit(this.curScene, destory);
+        }
+    }
+
+    /** 返回到上个场景*/
+    public pop() {
         let self = this;
-        self.layer = self.addCom2GRoot('UILayer');
-        self.dlg = self.addCom2GRoot('UIDlg');
-        self.msg = self.addCom2GRoot('UIMsg');
+        if (self._popArr.length <= 0) {
+            console.error('已经pop到底了！！！！！！！');
+            return;
+        }
+        self.checkDestoryLastScene(true);
+
+        self.curScene = self._popArr.pop();
+        self.onEnter(self.curScene);
+        self.curScene.addToGRoot();
     }
 
-    /**
-     * 添加层级容器到GRoot
-     * @param name 节点名称
-     * @param isScene 是否为场景
-     * @returns 
-     */
-    private addCom2GRoot(name: string, isScene?: boolean): Component {
-        let newCom = new Component();
-        newCom.node = new Node(name);
-        newCom.node.layer = Layers.Enum.UI_2D;
-        let _uiTrans = newCom.node.addComponent(UITransform);
-        let parent = isScene ? this.getCanvas() : this.curScene.node;
-        let parentTransform = parent.getComponent(UITransform);
-        newCom.node.addComponent(UIOpacity);
-        _uiTrans.setContentSize(parentTransform.width, parentTransform.height);
-        parent.addChild(newCom.node);
-        return newCom;
+    private onExit(scene: UIScene, destory?: boolean) {
+        let self = this;
+        let script = scene;
+        self.eachChildComp(script.layer, false, destory);
+        self.eachChildComp(script.menuLayer, false, destory);
+        self.eachChildComp(script.dlg, false, destory);
+        self.eachChildComp(script.msg, false, destory);
+        destory ? script.destory() : script.exitOnPush();
+    }
+
+    private onEnter(scene: UIScene) {
+        let self = this;
+        let script = scene;
+        script.enterOnPop();
+        self.eachChildComp(script.layer, true);
+        self.eachChildComp(script.menuLayer, true);
+        self.eachChildComp(script.dlg, true);
+        self.eachChildComp(script.msg, true);
+    }
+
+    private eachChildComp(comp: Node, isEnter?: boolean, destory?: boolean) {
+        let children = comp.children;
+        for (let i = 0; i < children.length; i++) {
+            let childNode = children[i];
+            let script = childNode.getComponent(childNode.name) as UIComp;
+            isEnter ? script.enterOnPop() : destory ? script.destory() : script.exitOnPush();
+        }
     }
 
 }

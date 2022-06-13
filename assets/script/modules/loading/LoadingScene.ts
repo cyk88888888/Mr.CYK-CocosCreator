@@ -1,27 +1,28 @@
-import { _decorator, Component, Node, instantiate, assetManager } from 'cc';
-import { UIScene } from '../../framework/lib/UIScene';
-import { ResMgr } from '../../framework/mgr/ResMgr';
-import { SceneMgr } from '../../framework/mgr/SceneMgr';
+/*
+ * @Descripttion: 说明
+ * @Author: CYK
+ * @Date: 2022-05-16 09:18:45
+ */
+import { _decorator } from 'cc';
+import { UIScene } from '../../framework/ui/UIScene';
 import { LoadingLayer } from './LoadingLayer';
+import { registerModule } from '../../framework/mgr/ModuleMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('LoadingScene')
 export class LoadingScene extends UIScene {
     private ctor() {
-        this._mainLayerClass = LoadingLayer;
+        let self = this;
+        self.mainClassLayer = LoadingLayer;
+        let subLayerMgr = self.subLayerMgr;
+        let classList = [];
+        for (let i = 0; i < classList.length; i++) {
+            subLayerMgr.register(classList[i]);
+        }
     }
 
     private async onEnter() {
-        let prefab = await ResMgr.inst.loadPrefab('loading/LoadingLayer');
-        const newNode = instantiate(prefab);
-        newNode.setParent(SceneMgr.inst.layer.node);
-        let script = newNode.addComponent('LoadingLayer');
-       // script['newNode'] = newNode;
-       assetManager.loadBundle
-        
-    }
-    start() {
-        this;
+
     }
 }
-
+registerModule(LoadingScene, []);
