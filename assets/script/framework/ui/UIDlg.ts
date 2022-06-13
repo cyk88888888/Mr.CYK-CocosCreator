@@ -13,7 +13,6 @@ const { ccclass, property } = _decorator;
 @ccclass('UIDlg')
 export class UIDlg extends UILayer {
     protected addToLayer(){
-        BaseUT.setFitSize(this.node);
         this.node.setParent(SceneMgr.inst.curScene.dlg);
     }
 }

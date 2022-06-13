@@ -102,9 +102,9 @@ export class UIScene {
     private addGCom2GRoot(name: string, isScene?: boolean): Node {
         let newNode = new Node(name);
         newNode.addComponent(UITransform);
-        BaseUT.setFitSize(newNode);
         let parent = isScene ? SceneMgr.inst.getCanvas() : this.entity;
         parent.addChild(newNode);
+        BaseUT.setFitSize(newNode);
         return newNode;
     }
 

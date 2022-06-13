@@ -29,13 +29,10 @@
     "_components": [
       {
         "__id__": 38
-      },
-      {
-        "__id__": 40
       }
     ],
     "_prefab": {
-      "__id__": 42
+      "__id__": 40
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -131,7 +128,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 640,
-      "height": 1280
+      "height": 1400
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -202,12 +199,12 @@
     "__prefab": {
       "__id__": 8
     },
-    "_alignFlags": 45,
+    "_alignFlags": 21,
     "_target": null,
     "_left": 0,
     "_right": 0,
-    "_top": 0,
-    "_bottom": 0,
+    "_top": -60,
+    "_bottom": -60,
     "_horizontalCenter": 0,
     "_verticalCenter": 0,
     "_isAbsLeft": true,
@@ -216,8 +213,8 @@
     "_isAbsBottom": true,
     "_isAbsHorizontalCenter": true,
     "_isAbsVerticalCenter": true,
-    "_originalWidth": 960,
-    "_originalHeight": 640,
+    "_originalWidth": 640,
+    "_originalHeight": 1400,
     "_alignMode": 2,
     "_lockFlags": 0,
     "_id": ""
@@ -362,7 +359,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 350,
+      "width": 0,
       "height": 15
     },
     "_anchorPoint": {
@@ -783,7 +780,7 @@
     },
     "_mode": 0,
     "_totalLength": 500,
-    "_progress": 0.7,
+    "_progress": 0,
     "_reverse": false,
     "_id": ""
   },
@@ -864,41 +861,6 @@
   {
     "__type__": "cc.CompPrefabInfo",
     "fileId": "3bn0CAr5pO2o43yH5K7CwC"
-  },
-  {
-    "__type__": "cc.Widget",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "__prefab": {
-      "__id__": 41
-    },
-    "_alignFlags": 45,
-    "_target": null,
-    "_left": 0,
-    "_right": 0,
-    "_top": 0,
-    "_bottom": 0,
-    "_horizontalCenter": 0,
-    "_verticalCenter": 0,
-    "_isAbsLeft": true,
-    "_isAbsRight": true,
-    "_isAbsTop": true,
-    "_isAbsBottom": true,
-    "_isAbsHorizontalCenter": true,
-    "_isAbsVerticalCenter": true,
-    "_originalWidth": 960,
-    "_originalHeight": 640,
-    "_alignMode": 2,
-    "_lockFlags": 0,
-    "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "02QmyCnaBNFq0rXs9A2IMi"
   },
   {
     "__type__": "cc.PrefabInfo",

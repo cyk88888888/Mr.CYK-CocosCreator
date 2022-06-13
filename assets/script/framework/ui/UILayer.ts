@@ -17,12 +17,13 @@ export class UILayer extends UIComp {
         let prefab = await ResMgr.inst.loadPrefab(this.prefabUrl);
         const newNode = instantiate(prefab);
         let script = newNode.addComponent(this.name) as UILayer;
+        BaseUT.setFitSize(script.node);
         script.setData(data);
+        script.addToLayer();
         return script;
     }
 
     protected addToLayer() {
-        BaseUT.setFitSize(this.node);
         this.node.setParent(SceneMgr.inst.curScene.layer);
     }
 }

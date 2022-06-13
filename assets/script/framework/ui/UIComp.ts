@@ -22,12 +22,8 @@ export class UIComp extends Component {
 
     __preload() {
         let self = this;
-        self.addToLayer();
         self.oldParent = self.node.parent;
         self.initView();
-        self.onEnter_b();
-        if (self["onEnter"]) self["onEnter"]();
-        self.onEnter_a();
     }
 
     protected onEnter_b() { }

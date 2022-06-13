@@ -20,6 +20,7 @@ export class SceneMgr {
     public static get inst() {
         if (!this._inst) {
             this._inst = new SceneMgr();
+            this._inst._popArr = [];
         }
         return this._inst;
     }
@@ -35,10 +36,12 @@ export class SceneMgr {
         return this._canvas;
     }
 
+    /**打开场景（替换模式） */
     public run(scene: string | typeof UIScene, data?: any) {
         this.showScene(scene, data);
     }
 
+    /**打开场景（入栈模式） */
     public push(scene: string | typeof UIScene, data?: any) {
         this.showScene(scene, data, true);
     }
@@ -51,7 +54,12 @@ export class SceneMgr {
             console.error('未注册模块：' + sceneName)
             return;
         }
-        ResMgr.inst.load(moduleInfo.preResList, this.onUILoaded.bind(this, moduleInfo, data, toPush));
+        if (moduleInfo.preResList && moduleInfo.preResList.length > 0) {
+            ResMgr.inst.load(moduleInfo.preResList, this.onUILoaded.bind(this, moduleInfo, data, toPush));
+        } else {
+            this.onUILoaded(moduleInfo, data, toPush);
+        }
+
     }
 
     private onUILoaded(moduleInfo: ModuleCfgInfo, data: any, toPush: boolean) {
