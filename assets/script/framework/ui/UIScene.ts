@@ -8,29 +8,28 @@ import { SubLayerMgr } from '../mgr/SubLayerMgr';
 import { UILayer } from './UILayer';
 import { emmiter } from '../base/Emmiter';
 import { BaseUT } from '../base/BaseUtil';
-import { Node, UITransform } from 'cc';
+import { Component, Node, UIOpacity, UITransform } from 'cc';
 import { SceneMgr } from '../mgr/SceneMgr';
 
-export class UIScene {
+export class UIScene extends Component{
     protected mainClassLayer: typeof UILayer;
     protected subLayerMgr: SubLayerMgr;
     public layer: Node;
     public dlg: Node;
     public msg: Node;
     public menuLayer: Node;
-    private _sceneName: string;
 
     private _moduleParam: any;
     private _isFirstEnter: boolean = true;
     private _emmitMap: { [event: string]: Function };//已注册的监听事件列表
-    public entity: Node;//场景实体
-    constructor() {
+    __preload() {
         let self = this;
         self.subLayerMgr = new SubLayerMgr();
         self.ctor_b();
         if (self["ctor"]) self["ctor"]();
         self.ctor_a();
     }
+
     protected ctor_b() { }
 
     protected ctor_a() { }
@@ -60,30 +59,21 @@ export class UIScene {
     }
 
     public get className() {
-        return this.constructor.name;
+        return this.node.name;
     }
-
-    /**场景初始化 */
-    public _init_(sceneName: string, data?: any) {
+    
+    onLoad(){
         let self = this;
-        self._sceneName = sceneName;
-        self.createEntityAndLayer(sceneName, data);
-        self.__doEnter();
-        if (self.mainClassLayer) {
-            self.subLayerMgr.register(self.mainClassLayer);
-            self.push(self.mainClassLayer, { str: '我叫' + self.mainClassLayer.name });
-        }
-    }
-
-    /**创建实体和子layer层 */
-    private createEntityAndLayer(sceneName: string, data: any) {
-        this.entity = this.addGCom2GRoot(sceneName, true);
         this.initLayer();
         this.layer = this.layer;
         this.dlg = this.dlg;
         this.msg = this.msg;
         this.menuLayer = this.menuLayer;
-        this.setData(data);
+        self.__doEnter();
+        if (self.mainClassLayer) {
+            self.subLayerMgr.register(self.mainClassLayer);
+            self.push(self.mainClassLayer, { str: '我叫' + self.mainClassLayer.name });
+        }
     }
 
     private initLayer() {
@@ -100,17 +90,15 @@ export class UIScene {
     * @returns 
     */
     private addGCom2GRoot(name: string, isScene?: boolean): Node {
-        let newNode = new Node(name);
-        newNode.addComponent(UITransform);
-        let parent = isScene ? SceneMgr.inst.getCanvas() : this.entity;
-        parent.addChild(newNode);
+        let newNode = BaseUT.newNode(name);
+        newNode.setParent(this.node);
         BaseUT.setFitSize(newNode);
         return newNode;
     }
 
     private __doEnter(){
         let self = this;
-        console.log('进入' + self._sceneName);
+        console.log('进入' + self.node.name);
         self.onEnter_b();
         if (self['onEnter']) self['onEnter']();
         if (self._isFirstEnter) {
@@ -156,16 +144,13 @@ export class UIScene {
         this.subLayerMgr.pop();
     }
 
-    public get node() {
-        return this.entity;
-    }
-
+    /**将场景添加到canvas根节点 */
     public addToGRoot() {
-        SceneMgr.inst.getCanvas().addChild(this.entity);
+        SceneMgr.inst.getCanvas().addChild(this.node);
     }
 
     public removeFromParent() {
-        this.entity.removeFromParent();
+        this.node.removeFromParent();
     }
 
     /**清除所有layer */
@@ -186,7 +171,7 @@ export class UIScene {
             }
             self._emmitMap = null;
         }
-        console.log('退出' + self._sceneName);
+        console.log('退出' + self.node.name);
         this.onExit_b();
         if (self["onExit"]) self["onExit"]();
         this.onExit_a();
@@ -196,7 +181,7 @@ export class UIScene {
         this._dispose();
         this.subLayerMgr.dispose();
         this.subLayerMgr = null;
-        this.entity.destroy();
+        this.destory();
     }
 }
 

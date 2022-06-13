@@ -12,10 +12,11 @@ const { ccclass, property } = _decorator;
 export class LoadingLayer extends UILayer {
     /** 预制体路径 */
     public static prefabUrl: string = 'loading/LoadingLayer';
+    private loadingBar: Node;
     private progressBar: ProgressBar;
     private _isChanging: boolean;
     private onEnter() {
-        this.progressBar = this.node.getChildByName("ProgressBar").getComponent(ProgressBar);
+        this.progressBar = this.loadingBar.getComponent(ProgressBar);
     }
 
     update(deltaTime: number) {

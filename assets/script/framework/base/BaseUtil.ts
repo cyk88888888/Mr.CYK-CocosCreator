@@ -3,11 +3,11 @@
  * @Author: CYK
  * @Date: 2022-05-19 11:39:05
  */
-import { Node, screen, Size, UITransform, view } from "cc";
+import { Node, screen, Size, UIOpacity, UITransform, view } from "cc";
 import { scaleMode } from "./ScaleMode";
-export namespace BaseUT{
+export namespace BaseUT {
     /** 获取宽度适配下屏幕的视图宽高*/
-    export function getWindowSize(){
+    export function getWindowSize() {
         let size = screen.windowSize;
         size.width /= view.getScaleX();
         size.height /= view.getScaleY();
@@ -18,7 +18,7 @@ export namespace BaseUT{
      * @param comp 
      * @returns 
      */
-    export function setFitSize(node: Node): Size{
+    export function setFitSize(node: Node): Size {
         let windowSize = this.getWindowSize();
         let designHeight = windowSize.height < scaleMode.designHeight_max ? windowSize.height : scaleMode.designHeight_max;
         let uiTransform = node.getComponent(UITransform);
@@ -26,4 +26,10 @@ export namespace BaseUT{
         return new Size(windowSize.width, designHeight);
     }
 
+    export function newNode(name?: string) {
+        let newNode = new Node(name);
+        newNode.addComponent(UITransform);
+        newNode.addComponent(UIOpacity);
+        return newNode;
+    }
 }

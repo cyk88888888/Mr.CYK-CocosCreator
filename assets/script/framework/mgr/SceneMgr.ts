@@ -3,7 +3,8 @@
  * @Author: CYK
  * @Date: 2022-05-16 09:18:45
  */
-import { AudioSource, Component, director, js, Layers, Node, Scene, UIOpacity, UITransform, view } from "cc";
+import { director, Node, Scene, UIOpacity, UITransform } from "cc";
+import { BaseUT } from "../base/BaseUtil";
 import { ModuleCfgInfo } from "../base/ModuleCfgInfo";
 import { UIComp } from "../ui/UIComp";
 import { UIScene } from "../ui/UIScene";
@@ -70,11 +71,12 @@ export class SceneMgr {
         } else {
             this.checkDestoryLastScene(!toPush);
         }
-
         let sceneName = moduleInfo.name;
-        let scriptClass = js.getClassByName(sceneName);//是否有对应脚本类
-        this.curScene = new scriptClass() as UIScene;
-        this.curScene._init_(sceneName, data);
+        let newNode = BaseUT.newNode(sceneName);
+        let script = this.curScene = newNode.addComponent(sceneName) as UIScene;
+        script.setData(data);
+        script.addToGRoot();
+        BaseUT.setFitSize(newNode);
     }
 
     /**判断销毁上个场景并释放资源 */
