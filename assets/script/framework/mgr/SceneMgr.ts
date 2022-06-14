@@ -13,7 +13,10 @@ import { ResMgr } from "./ResMgr";
 
 export class SceneMgr {
     private static _inst: SceneMgr;
+    /**当前场景**/
     public curScene: UIScene;
+    /**当前场景名称 */
+    public curSceneName: string;
     /** 主场景名称*/
     public mainScene: string;
     private _popArr: UIScene[];
@@ -55,6 +58,7 @@ export class SceneMgr {
             console.error('未注册模块：' + sceneName)
             return;
         }
+        this.curSceneName = sceneName;
         if (moduleInfo.preResList && moduleInfo.preResList.length > 0) {
             ResMgr.inst.load(moduleInfo.preResList, this.onUILoaded.bind(this, moduleInfo, data, toPush));
         } else {
@@ -81,12 +85,12 @@ export class SceneMgr {
     /**判断销毁上个场景并释放资源 */
     private checkDestoryLastScene(destory?: boolean) {
         if (this.curScene) {
-            let lastModuleInfo = moduleInfoMap[this.curScene.node.name];
-            if (destory && !lastModuleInfo.cacheEnabled) {//销毁上个场景
-                ResMgr.inst.releaseRes(lastModuleInfo.preResList);
-            }
-
             this.onExit(this.curScene, destory);
+            
+            let lastModuleInfo = moduleInfoMap[this.curScene.className];
+            if (destory && !lastModuleInfo.cacheEnabled) {//销毁上个场景
+                ResMgr.inst.releaseResModule(this.curScene.className);//释放场景资源
+            }
         }
     }
 
@@ -100,6 +104,7 @@ export class SceneMgr {
         self.checkDestoryLastScene(true);
 
         self.curScene = self._popArr.pop();
+        self.curSceneName = self.curScene.className;
         self.onEnter(self.curScene);
         self.curScene.addToGRoot();
     }

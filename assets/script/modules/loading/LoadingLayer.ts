@@ -25,7 +25,7 @@ export class LoadingLayer extends UILayer {
         self._preResList = ['prefab/home/HomeLayer'];
         let curDownLoadNum: number = 0;//当前已下载个数
         let initPercent = self._toPercent = 0.4;//默认加载到40%
-        ResMgr.inst.loadWithItor(self._preResList, () => {
+        ResMgr.inst.loadToWithItor('HomeScene', self._preResList, () => {
             curDownLoadNum++;
             self._toPercent = initPercent + (curDownLoadNum / self._preResList.length) * 0.6;
         });

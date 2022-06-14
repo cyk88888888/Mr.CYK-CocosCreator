@@ -60,7 +60,10 @@ export class UIScene extends Component{
     }
 
     public get className() {
-        return this.node.name;
+        let self = this;
+        let str = self.name;
+        str = str.match(/<(\S*)>/)[1];
+        return str;
     }
     
     onLoad(){

@@ -43,7 +43,7 @@ export class SoundMgr {
         self.curBgMusic = url;
         let mainNode = director.getScene().getChildByName('Main');
         let audioSource = mainNode.getComponent(AudioSource);
-        ResMgr.inst.loadWithoutJuHua(url, () => {
+        ResMgr.inst.loadToWithoutJuHua('global', url, () => {
             let audioClip = ResMgr.inst.get(url) as AudioClip;
             if (self.curBgMusic != url || !audioClip) return;//加载完成的不是最后一次赋值的值
             audioSource.stop();
@@ -78,7 +78,7 @@ export class SoundMgr {
     }
 
     /**检测释放音效资源 */
-    private checkRealseMusic(){
+    private checkRealseMusic() {
         let self = this;
         if (self.musicCachePool.length > self.musicCacheMaxCount) {
             let shiftUrl = self.musicCachePool.shift();

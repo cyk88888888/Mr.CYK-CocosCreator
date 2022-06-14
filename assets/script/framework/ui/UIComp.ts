@@ -4,7 +4,7 @@ const { ccclass, property } = _decorator;
 
 @ccclass('UIComp')
 export class UIComp extends Component {
-    protected oldParent: Node;
+    private _oldParent: Node;
     private _emmitMap: { [event: string]: Function };//已注册的监听事件列表
     private _objTapMap: { [objName: string]: any };//已添加的显示对象点击事件的记录
     private _tweenTargetList: any[];//已添加缓动的对象列表
@@ -22,7 +22,7 @@ export class UIComp extends Component {
 
     __preload() {
         let self = this;
-        self.oldParent = self.node.parent;
+        self._oldParent = self.node.parent;
         self.initView();
     }
 
@@ -65,7 +65,9 @@ export class UIComp extends Component {
 
     public get className(): string {
         let self = this;
-        return self.node.name;
+        let str = self.name;
+        str = str.match(/<(\S*)>/)[1];
+        return str;
     }
 
     public setData(data: any) {
@@ -223,7 +225,7 @@ export class UIComp extends Component {
 
     public addSelf() {
         this.initView();
-        this.node.setParent(this.oldParent);
+        this.node.setParent(this._oldParent);
     }
 
     public removeSelf() {

@@ -4,6 +4,7 @@
  * @Date: 2022-05-16 09:18:45
  */
 import { _decorator, Component, Node, ProgressBar } from 'cc';
+import { ResMgr } from '../../framework/mgr/ResMgr';
 import { UILayer } from '../../framework/ui/UILayer';
 const { ccclass, property } = _decorator;
 
@@ -12,7 +13,6 @@ export class HomeLayer extends UILayer {
     /** 预制体路径 */
     public static prefabUrl: string = 'home/HomeLayer';
     private onEnter() {
-
     }
 
     update(deltaTime: number) {

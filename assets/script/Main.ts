@@ -12,9 +12,9 @@ const { ccclass, property } = _decorator;
 @ccclass('Main')
 export class Main extends Component {
     onLoad() {
-        SoundMgr.inst.defaultBgMusic = "sound/bg00";//设置默认背景音乐
+        SoundMgr.inst.defaultBgMusic = "dy/sound/bg00";//设置默认背景音乐
         SceneMgr.inst.mainScene = 'HomeScene';//设置主场景
-        SoundMgr.inst.buttonSound = "sound/click";//设置全局按钮点击音效
+        SoundMgr.inst.buttonSound = "dy/sound/click";//设置全局按钮点击音效
 
         scaleMode.designWidth = 640;
         scaleMode.designHeight = 1280;
