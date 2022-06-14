@@ -20,4 +20,4 @@ export class ListTestScene extends UIScene {
         }
     }
 }
-registerModule(ListTestScene, []);
+registerModule(ListTestScene, [ListTestLayer.prefabUrl]);
