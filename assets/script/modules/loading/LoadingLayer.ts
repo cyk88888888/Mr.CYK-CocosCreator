@@ -3,10 +3,11 @@
  * @Author: CYK
  * @Date: 2022-05-16 09:18:45
  */
-import { _decorator, Component, Node, ProgressBar } from 'cc';
+import { _decorator, Node, ProgressBar } from 'cc';
 import { UILayer } from '../../framework/ui/UILayer';
 import { SceneMgr } from '../../framework/mgr/SceneMgr';
 import { ResMgr } from '../../framework/mgr/ResMgr';
+import { HomeLayer } from '../home/HomeLayer';
 const { ccclass, property } = _decorator;
 
 @ccclass('LoadingLayer')
@@ -22,7 +23,7 @@ export class LoadingLayer extends UILayer {
     private onEnter() {
         let self = this;
         this.progressBar = this.loadingBar.getComponent(ProgressBar);
-        self._preResList = ['prefab/home/HomeLayer'];
+        self._preResList = [HomeLayer.prefabUrl];
         let curDownLoadNum: number = 0;//当前已下载个数
         let initPercent = self._toPercent = 0.4;//默认加载到40%
         ResMgr.inst.loadToWithItor('HomeScene', self._preResList, () => {
