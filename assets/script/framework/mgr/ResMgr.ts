@@ -3,7 +3,7 @@
  * @Author: CYK
  * @Date: 2022-05-12 16:15:52
  */
-import { Asset, Prefab, resources } from "cc";
+import { Asset, assetManager, Prefab, resources } from "cc";
 import { JuHuaDlg } from "../../modules/common/JuHuaDlg";
 import { moduleInfoMap } from "./ModuleMgr";
 import { SceneMgr } from "./SceneMgr";
@@ -35,17 +35,16 @@ export class ResMgr {
      */
     public async loadPrefab(prefabPath: string): Promise<Prefab> {
         return new Promise((resolve, reject) => {
-            let prefabFullUrl = 'prefab/' + prefabPath;
-            let cachePrefab = this.get(prefabFullUrl);
+            let cachePrefab = this.get(prefabPath);
             if (cachePrefab) {
                 console.log('resName: ' + prefabPath + '加载完毕(缓存已有)');
-                this.pushResNametoMap(prefabFullUrl);
+                this.pushResNametoMap(prefabPath);
                 return resolve(cachePrefab as Prefab);
             } else {
-                resources.load(prefabFullUrl, Prefab, (err, prefab) => {
+                resources.load(prefabPath, Prefab, (err, prefab) => {
                     if (!err) {
                         console.log('resName: ' + prefabPath + '加载完毕');
-                        this.pushResNametoMap(prefabFullUrl);
+                        this.pushResNametoMap(prefabPath);
                         resolve(prefab);
                     } else {
                         console.log('resName: ' + prefabPath + '加载失败');
@@ -172,7 +171,8 @@ export class ResMgr {
         let resList = typeof res === 'string' ? [res] : res;
         for (let i = 0; i < resList.length; i++) {
             let resName = resList[i];
-            if(!this.get(resName)) continue;
+            let cahceAsset = this.get(resName);
+            if(!cahceAsset) continue;
             resources.release(resName);
             console.log('释放资源: ' + resName);
         }

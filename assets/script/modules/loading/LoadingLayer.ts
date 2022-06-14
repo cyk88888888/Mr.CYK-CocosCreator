@@ -12,7 +12,7 @@ const { ccclass, property } = _decorator;
 @ccclass('LoadingLayer')
 export class LoadingLayer extends UILayer {
     /** 预制体路径 */
-    public static prefabUrl: string = 'loading/LoadingLayer';
+    public static prefabUrl: string = 'prefab/loading/LoadingLayer';
     private loadingBar: Node;
     private progressBar: ProgressBar;
     private _isLoadingHome: boolean;

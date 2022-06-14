@@ -185,7 +185,7 @@ export class UIScene extends Component{
         this._dispose();
         this.subLayerMgr.dispose();
         this.subLayerMgr = null;
-        super.destroy();
+        this.node.destroy();
     }
 }
 

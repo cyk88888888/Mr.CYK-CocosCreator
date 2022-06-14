@@ -10,7 +10,7 @@ const { ccclass, property } = _decorator;
 @ccclass('TopUsrInfoLayer')
 export class TopUsrInfoLayer extends UIMenu {
     /** 预制体路径 */
-    public static prefabUrl: string = 'home/TopUsrInfoLayer';
+    public static prefabUrl: string = 'prefab/home/TopUsrInfoLayer';
     private onEnter() {
 
     }

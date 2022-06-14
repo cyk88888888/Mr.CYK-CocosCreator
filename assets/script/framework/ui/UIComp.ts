@@ -114,7 +114,6 @@ export class UIComp extends Component {
             let childNode = children[key];
             let childName = childNode.name;
             self[childName] = childNode;
-            // if (childNode.name.indexOf(childNode.name) == -1) childNode.name = obj.name + ':  ' + obj.node.name;
             let scriptClass = js.getClassByName(childName);//是否有对应脚本类
             if (scriptClass) {
                 let oldScript = self.getComponent(childName) as UIComp;
@@ -130,15 +129,14 @@ export class UIComp extends Component {
         let self = this;
         self._objTapMap = {};
         let children = self.node.children;
-        for (let objName in children) {
-            let obj = self[objName];
-            if (obj instanceof Node) {
-                let eventFuncName = "_tap_" + objName;
-                if (self[eventFuncName]) {
-                    let eventName = Node.EventType.TOUCH_END;
-                    obj.on(eventName, self[eventFuncName], self);
-                    self._objTapMap[eventFuncName + '&' + eventName] = obj;
-                }
+        for (let key in children) {
+            let childNode = children[key];
+            let objName = childNode.name;
+            let eventFuncName = "_tap_" + objName;
+            if (self[eventFuncName]) {
+                let eventName = Node.EventType.TOUCH_END;
+                childNode.on(eventName, self[eventFuncName], self);
+                self._objTapMap[eventFuncName + '&' + eventName] = childNode;
             }
         }
     }
@@ -240,7 +238,7 @@ export class UIComp extends Component {
         self._dispose();
         self.chilidCompClassMap = null;
         self._allList = null;
-        super.destroy();
+        this.node.destroy();
         self.hasDestory = true;
     }
 

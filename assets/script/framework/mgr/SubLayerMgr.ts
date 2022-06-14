@@ -5,7 +5,6 @@
  */
 import { js } from "cc";
 import { UILayer } from "../ui/UILayer";
-import { SceneMgr } from "./SceneMgr";
 export class SubLayerMgr {
     private _classMap: any;
     public curLayer: UILayer;
