@@ -10,11 +10,13 @@ import { registerModule } from '../../framework/mgr/ModuleMgr';
 import { TopUsrInfoLayer } from './TopUsrInfoLayer';
 import { UILayer } from '../../framework/ui/UILayer';
 import { UIMenu } from '../../framework/ui/UIMenu';
+import { BottomTabLayer } from './BottomTabLayer';
 const { ccclass, property } = _decorator;
 
 @ccclass('HomeScene')
 export class HomeScene extends UIScene {
     private _topUsrInfo: any;
+    private _bottomTab: any;
     private ctor() {
         let self = this;
         self.mainClassLayer = HomeLayer;
@@ -28,6 +30,7 @@ export class HomeScene extends UIScene {
     private async onEnter() {
         let self = this;
         if(!self._topUsrInfo) self._topUsrInfo = TopUsrInfoLayer.show();
+        if(!self._bottomTab) self._bottomTab = BottomTabLayer.show();
     }
 }
 registerModule(HomeScene, []);

@@ -26,6 +26,29 @@ export class UIComp extends Component {
         self.initView();
     }
 
+    onLoad(){
+        console.log('onLoad: ' + this.node.name);
+    }
+
+    start(){
+        console.log('onStart: ' + this.node.name);
+    }
+
+    onEnable(){
+        this.node.active;
+        this.enabled;
+        console.log('onEnable: ' + this.node.name);
+    }
+
+    onDisable(){
+        this.node.active;
+        this.enabled;
+        console.log('onDisable: ' + this.node.name);
+    }
+    onDestroy(){
+        console.log('onDestroy: ' + this.node.name);
+    }
+
     protected onEnter_b() { }
 
     protected onEnter_a() { }
