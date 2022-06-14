@@ -3,7 +3,8 @@
  * @Author: CYK
  * @Date: 2022-05-16 09:18:45
  */
-import { _decorator } from 'cc';
+import { Label, Node, _decorator } from 'cc';
+import { SceneMgr } from '../../framework/mgr/SceneMgr';
 import { UIMenu } from '../../framework/ui/UIMenu';
 const { ccclass, property } = _decorator;
 
@@ -11,11 +12,19 @@ const { ccclass, property } = _decorator;
 export class TopUsrInfoLayer extends UIMenu {
     /** 预制体路径 */
     public static prefabUrl: string = 'prefab/home/TopUsrInfoLayer';
+    @property({type: Node, tooltip:'哈哈哈'})
+    private grp_head: Node;
+    @property({ type: Label })
+    private lbl_name: Label;
     private onEnter() {
 
     }
 
     update(deltaTime: number) {
+    }
+
+    private _tap_grp_head() {
+        SceneMgr.inst.push('ListTestScene')
     }
 }
 

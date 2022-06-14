@@ -3,7 +3,7 @@
  * @Author: CYK
  * @Date: 2022-05-16 09:18:45
  */
-import { _decorator, Component, Node, ProgressBar } from 'cc';
+import { _decorator, Component, Node, ProgressBar, Button, Label } from 'cc';
 import { UILayer } from '../../framework/ui/UILayer';
 const { ccclass, property } = _decorator;
 
@@ -11,6 +11,8 @@ const { ccclass, property } = _decorator;
 export class HomeLayer extends UILayer {
     /** 预制体路径 */
     public static prefabUrl: string = 'prefab/home/HomeLayer';
+    @property({ tooltip: "哈哈哈", type: Button })
+    btn_test: Button;
     private onEnter() {
 
     }
@@ -18,7 +20,7 @@ export class HomeLayer extends UILayer {
     update(deltaTime: number) {
     }
 
-    private _tap_btn_test(){
+    private _tap_btn_test(evt) {
         console.log('点击测试~~~~~~');
     }
 }

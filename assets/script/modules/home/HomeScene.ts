@@ -27,10 +27,7 @@ export class HomeScene extends UIScene {
 
     private async onEnter() {
         let self = this;
-        self._topUsrInfo =  TopUsrInfoLayer.show();
-
-
-        
+        if(!self._topUsrInfo) self._topUsrInfo = TopUsrInfoLayer.show();
     }
 }
 registerModule(HomeScene, []);

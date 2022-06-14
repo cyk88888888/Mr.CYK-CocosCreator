@@ -6,7 +6,7 @@ const { ccclass, property } = _decorator;
 export class UIComp extends Component {
     private _oldParent: Node;
     private _emmitMap: { [event: string]: Function };//已注册的监听事件列表
-    private _objTapMap: { [objName: string]: any };//已添加的显示对象点击事件的记录
+    private _objTapMap: { [objName: string]: Node };//已添加的显示对象点击事件的记录
     private _tweenTargetList: any[];//已添加缓动的对象列表
     private chilidCompClassMap: { [className: string]: UIComp };//子组件的控制脚本类
     public data: any;
@@ -91,7 +91,7 @@ export class UIComp extends Component {
     private initView() {
         let self = this;
         if (self.hasDestory) return;
-        this.initViewProperty();
+        // this.initViewProperty();
         self.addListener();
         console.log('进入' + self.className);
         self.onEnter_b();
@@ -114,10 +114,11 @@ export class UIComp extends Component {
             let childNode = children[key];
             let childName = childNode.name;
             self[childName] = childNode;
+
             let scriptClass = js.getClassByName(childName);//是否有对应脚本类
             if (scriptClass) {
-                let oldScript = self.getComponent(childName) as UIComp;
-                let script = oldScript ? oldScript : self.node.addComponent(childName) as UIComp;
+                let oldScript = childNode.getComponent(childName) as UIComp;
+                let script = oldScript ? oldScript : childNode.addComponent(childName) as UIComp;
                 if (!oldScript) self.chilidCompClassMap[childName] = script;
                 script.initView();
             }
@@ -128,15 +129,15 @@ export class UIComp extends Component {
     private addListener() {
         let self = this;
         self._objTapMap = {};
-        let children = self.node.children;
-        for (let key in children) {
-            let childNode = children[key];
-            let objName = childNode.name;
+        for (let objName in self) {
+            let obj = self[objName];
+            if (!obj) continue;
             let eventFuncName = "_tap_" + objName;
-            if (self[eventFuncName]) {
+            if (self[eventFuncName] && (obj instanceof Component || obj instanceof Node)) {
                 let eventName = Node.EventType.TOUCH_END;
-                childNode.on(eventName, self[eventFuncName], self);
-                self._objTapMap[eventFuncName + '&' + eventName] = childNode;
+                let node = obj instanceof Component ? obj.node : obj;
+                node.on(eventName, self[eventFuncName], self);
+                self._objTapMap[eventFuncName + '&' + eventName] = node;
             }
         }
     }
@@ -257,9 +258,7 @@ export class UIComp extends Component {
                 let eventFuncName = splitKey[0];
                 let eventName = splitKey[1];
                 let obj = self._objTapMap[key];
-                if (obj.node.isValid) {
-                    obj.off(eventName, self[eventFuncName], self);
-                }
+                obj.off(eventName, self[eventFuncName], self);
             }
             self._objTapMap = null;
         }

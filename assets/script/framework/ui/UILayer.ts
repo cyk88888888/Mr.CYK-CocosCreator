@@ -17,7 +17,8 @@ export class UILayer extends UIComp {
         let prefab = await ResMgr.inst.loadPrefab(this.prefabUrl);
         const newNode = instantiate(prefab);
         newNode.layer = Layers.Enum.UI_2D;
-        let script = newNode.addComponent(this.name) as UILayer;
+        let script = newNode.getComponent(this.name) as UILayer;
+        if(!script) script = newNode.addComponent(this.name) as UILayer;
         BaseUT.setFitSize(script.node);
         script.setData(data);
         script.addToLayer();

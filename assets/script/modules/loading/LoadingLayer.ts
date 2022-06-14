@@ -14,7 +14,7 @@ const { ccclass, property } = _decorator;
 export class LoadingLayer extends UILayer {
     /** 预制体路径 */
     public static prefabUrl: string = 'prefab/loading/LoadingLayer';
-    private loadingBar: Node;
+    @property({type: ProgressBar})
     private progressBar: ProgressBar;
     private _isLoadingHome: boolean;
 
@@ -22,7 +22,6 @@ export class LoadingLayer extends UILayer {
     private _toPercent: number;
     private onEnter() {
         let self = this;
-        this.progressBar = this.loadingBar.getComponent(ProgressBar);
         self._preResList = [HomeLayer.prefabUrl];
         let curDownLoadNum: number = 0;//当前已下载个数
         let initPercent = self._toPercent = 0.4;//默认加载到40%
