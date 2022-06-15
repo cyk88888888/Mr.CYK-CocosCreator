@@ -20,14 +20,11 @@ export class UIComp extends Component {
     private _allList: Node[];
     protected needRefreshListOnEnter: boolean = true;
 
-    __preload() {
+    onLoad(){
+        console.log('onLoad: ' + this.node.name);
         let self = this;
         self._oldParent = self.node.parent;
         self.initView();
-    }
-
-    onLoad(){
-        console.log('onLoad: ' + this.node.name);
     }
 
     start(){

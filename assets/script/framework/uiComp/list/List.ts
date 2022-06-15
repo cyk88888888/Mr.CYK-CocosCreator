@@ -447,7 +447,7 @@ export default class List extends Component {
     }
     //初始化各种..
     _init() {
-        let t: any = this;
+        let t = this;
         if (t._inited)
             return;
 
@@ -485,7 +485,7 @@ export default class List extends Component {
         // 特定的滑动模式处理
         if (t._slideMode == SlideType.ADHERING || t._slideMode == SlideType.PAGE) {
             t._scrollView.inertia = false;
-            t._scrollView._onMouseWheel = function () {
+            t._scrollView['_onMouseWheel'] = function () {
                 return;
             };
         }
@@ -502,8 +502,8 @@ export default class List extends Component {
         t.curPageNum = 0;               //当前页数
 
         if (t.cyclic || 0) {
-            t._scrollView._processAutoScrolling = this._processAutoScrolling.bind(t);
-            t._scrollView._startBounceBackIfNeeded = function () {
+            t._scrollView['_processAutoScrolling'] = this._processAutoScrolling.bind(t);
+            t._scrollView['_startBounceBackIfNeeded'] = function () {
                 return false;
             }
         }
@@ -643,7 +643,7 @@ export default class List extends Component {
     setTemplateItem(item: any) {
         if (!item)
             return;
-        let t: any = this;
+        let t = this;
         t._itemTmp = item;
         t._itemTmpUt = item.getComponent(UITransform);
 
@@ -1660,7 +1660,7 @@ export default class List extends Component {
      * @param {Boolean} bool 值，如果为null的话，则直接用args覆盖
      */
     setMultSelected(args: any, bool: boolean) {
-        let t: any = this;
+        let t = this;
         if (!t.checkInited())
             return;
         if (!Array.isArray(args)) {
@@ -1798,7 +1798,7 @@ export default class List extends Component {
      * 一定要在回调函数里重新设置新的numItems进行刷新，毕竟本List是靠数据驱动的。
      */
     aniDelItem(listId: number, callFunc: Function, aniType: number) {
-        let t: any = this;
+        let t = this;
 
         if (!t.checkInited() || t.cyclic || !t._virtual)
             return console.error('This function is not allowed to be called!');
@@ -2005,7 +2005,7 @@ export default class List extends Component {
      * 计算当前滚动窗最近的Item
      */
     _calcNearestItem() {
-        let t: any = this;
+        let t = this;
         t.nearestListId = null;
         let data: any, center: number;
 
@@ -2100,7 +2100,7 @@ export default class List extends Component {
     }
     //跳转到第几页
     skipPage(pageNum: number, timeInSecond: number) {
-        let t: any = this;
+        let t = this;
         if (!t.checkInited())
             return;
         if (t._slideMode != SlideType.PAGE)
@@ -2118,7 +2118,7 @@ export default class List extends Component {
     }
     //计算 CustomSize（这个函数还是保留吧，某些罕见的情况的确还是需要手动计算customSize的）
     calcCustomSize(numItems: number) {
-        let t: any = this;
+        let t = this;
         if (!t.checkInited())
             return;
         if (!t._itemTmp)
@@ -2126,7 +2126,7 @@ export default class List extends Component {
         if (!t.renderEvent)
             return console.error('Unset Render-Event!');
         t._customSize = {};
-        let temp: any = instantiate(t._itemTmp);
+        let temp = instantiate(t._itemTmp);
         let ut: UITransform = temp.getComponent(UITransform);
         t.content.addChild(temp);
         for (let n: number = 0; n < numItems; n++) {

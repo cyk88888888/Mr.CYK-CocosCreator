@@ -8,9 +8,12 @@ import { UIScene } from '../../framework/ui/UIScene';
 import { HomeLayer } from './HomeLayer';
 import { registerModule } from '../../framework/mgr/ModuleMgr';
 import { TopUsrInfoLayer } from './TopUsrInfoLayer';
-import { UILayer } from '../../framework/ui/UILayer';
-import { UIMenu } from '../../framework/ui/UIMenu';
 import { BottomTabLayer } from './BottomTabLayer';
+import { SoundMgr } from '../../framework/mgr/SoundMgr';
+import { EquipLayer } from './EquipLayer';
+import { SettingLayer } from './SettingLayer';
+import { ShopLayer } from './ShopLayer';
+import { SkillLayer } from './SkillLayer';
 const { ccclass, property } = _decorator;
 
 @ccclass('HomeScene')
@@ -21,7 +24,7 @@ export class HomeScene extends UIScene {
         let self = this;
         self.mainClassLayer = HomeLayer;
         let subLayerMgr = self.subLayerMgr;
-        let classList = [];
+        let classList = [ SettingLayer, EquipLayer, ShopLayer, SkillLayer];
         for (let i = 0; i < classList.length; i++) {
             subLayerMgr.register(classList[i]);
         }
@@ -29,8 +32,22 @@ export class HomeScene extends UIScene {
 
     private async onEnter() {
         let self = this;
+        self.onEmitter('jumpToLayer', self.jumpToLayer);
         if(!self._topUsrInfo) self._topUsrInfo = TopUsrInfoLayer.show();
         if(!self._bottomTab) self._bottomTab = BottomTabLayer.show();
+    }
+
+    private jumpToLayer(data: any) {
+        let self = this;
+        if (!data) {
+            console.error('跳转数据为null');
+            return;
+        }
+        self.run(data.layerName);
+    }
+
+    private onExit() {
+        SoundMgr.inst.playMainBg();
     }
 }
 registerModule(HomeScene, []);

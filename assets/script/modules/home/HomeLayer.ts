@@ -3,7 +3,7 @@
  * @Author: CYK
  * @Date: 2022-05-16 09:18:45
  */
-import { _decorator, Component, Node, ProgressBar, Button, Label } from 'cc';
+import { _decorator, Button } from 'cc';
 import { UILayer } from '../../framework/ui/UILayer';
 const { ccclass, property } = _decorator;
 
