@@ -13,17 +13,22 @@ export namespace BaseUT {
         size.height /= view.getScaleY();
         return size;
     }
+
+    export function getLayerScaleSize(){
+        let windowSize = BaseUT.getWindowSize();
+        let designHeight = windowSize.height < scaleMode.designHeight_max ? windowSize.height : scaleMode.designHeight_max;
+        return new Size(windowSize.width, designHeight);
+    }
     /**
      * 根据屏幕宽高自适应设置comp大小
      * @param comp 
      * @returns 
      */
-    export function setFitSize(node: Node): Size {
-        let windowSize = this.getWindowSize();
-        let designHeight = windowSize.height < scaleMode.designHeight_max ? windowSize.height : scaleMode.designHeight_max;
+    export function setFitSize(node: Node) {
+        let scaleSize = BaseUT.getLayerScaleSize();
         let uiTransform = node.getComponent(UITransform);
-        uiTransform.setContentSize(scaleMode.designWidth, designHeight);
-        return new Size(windowSize.width, designHeight);
+        uiTransform.setContentSize(scaleSize.width,scaleSize.height);
+        return scaleSize;
     }
 
     export function newUINode(name?: string) {

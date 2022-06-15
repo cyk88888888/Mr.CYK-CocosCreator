@@ -1,12 +1,12 @@
 
-import { _decorator, Component, Node } from 'cc';
+import { _decorator } from 'cc';
 import { Grid } from './Grid';
 import { Nodes } from './Nodes';
 const { ccclass, property } = _decorator;
 
 
 @ccclass('AStar')
-export class AStar extends Component {
+export class AStar {
     
     private _open: Nodes[];//开放列表
     private _closed: Nodes[];//封闭列表

@@ -1,6 +1,8 @@
 
-import { _decorator, Component, Node, Graphics, UITransform, EventTouch, Label, director, Prefab, instantiate, Vec3 } from 'cc';
+import { _decorator, Component, Node, Graphics, UITransform, EventTouch, Label, Prefab, instantiate, Vec3, Widget } from 'cc';
+import { BaseUT } from '../../framework/base/BaseUtil';
 import { UIComp } from '../../framework/ui/UIComp';
+import { MessageTip } from '../common/message/MessageTip';
 import { AStar } from './AStar';
 import { Grid } from './Grid';
 import { Nodes } from './Nodes';
@@ -12,6 +14,8 @@ const { ccclass, property } = _decorator;
  */
 @ccclass('TestAStar')
 export class TestAStar extends UIComp {
+    @property({type:Node})
+    public grp_container: Node;
     @property({ type: Graphics })
     public graphicsGrid: Graphics;
     @property({ type: Graphics })
@@ -22,24 +26,27 @@ export class TestAStar extends UIComp {
     public graphicsPlayer: Graphics;
     @property({ type: Label })
     public lbl_cost: Label;
-    @property({ type: Prefab })
-    public messageitem: Prefab;
+    @property({type:Node})
+    public groundParent: Node;
     @property({type:Prefab})
     public ground: Prefab;
+    @property({type:Node})
+    public wallParent: Node;
     @property({type:Prefab})
     public wall: Prefab;
 
+    private _widget: Widget;
     private _cellSize: number;
     private _grid: Grid;
     private _index: number;
     private _path: Nodes[];
     private _startFrame: boolean;
     private _speed: number;//人物移动速度、
-    start() {
+    private onFirstEnter() {
         let self = this;
-        self._cellSize = 30;
+        self._cellSize = 40;
         self._speed = 1;
-        self.node.on(Node.EventType.TOUCH_END, this._tap_grp_container, this);
+        self._widget = self.getComponent(Widget);
         self.initGrid();
         self.onReset();
     }
@@ -49,18 +56,17 @@ export class TestAStar extends UIComp {
         let screenWh = self.screenWh;
         let width = screenWh[0];
         let height = screenWh[1];
-        let numCols = Math.ceil(width / self._cellSize);
-        let numRows = Math.ceil(height / self._cellSize);
+        let numCols = Math.floor(width / self._cellSize);
+        let numRows = Math.floor(height / self._cellSize);
 
         self._grid = new Grid();
         self._grid.init(numCols, numRows);
 
         let lineGraphics = self.graphicsGrid;
         lineGraphics.clear();
-        lineGraphics.lineWidth = 2;
+        lineGraphics.lineWidth = 3;
         for (let i = 0; i < numCols + 1; i++)//画竖线
         {
-
             lineGraphics.moveTo(i * self._cellSize, 0);
             lineGraphics.lineTo(i * self._cellSize, numRows * self._cellSize);
         }
@@ -72,12 +78,11 @@ export class TestAStar extends UIComp {
             lineGraphics.lineTo(numCols * self._cellSize, i * self._cellSize);
         }
         lineGraphics.stroke();
-        let groundParent = this.node.getChildByName('ground');
         let len = numCols * numRows;
         for (let i = 0; i < len; i++)
         {
             let ground = instantiate(this.ground);
-            groundParent.addChild(ground);
+            this.groundParent.addChild(ground);
         }
     }
 
@@ -85,7 +90,7 @@ export class TestAStar extends UIComp {
         let self = this;
         let blockGraphics = self.graphicsBlock;
         blockGraphics.clear();
-        let wallParent = this.node.getChildByName('wall');
+        let wallParent = this.wallParent;
         wallParent.removeAllChildren();
         let bolckCount = Math.floor((self._grid.numCols * self._grid.numRows) / 4);
         for (let i = 0; i < bolckCount; i++) {
@@ -117,17 +122,18 @@ export class TestAStar extends UIComp {
         self.graphicsPlayer.node.setPosition(_x, _y);
     }
 
-    private _tap_grp_container(event: EventTouch) {
+     tap_grp_container(event: EventTouch) {
         let self = this;
         let point = event.getUILocation();
+       
         console.log('getUILocation: ' + event.getUILocation());
         console.log('getLocationInView: ' + event.getLocationInView());
         console.log('getLocation: ' + event.getLocation());
         console.log('getPreviousLocation: ' + event.getPreviousLocation());
         console.log('getStartLocation: ' + event.getStartLocation());
         console.log('getUIStartLocation: ' + event.getUIStartLocation());
-
-
+        point.y -= (BaseUT.getWindowSize().height - BaseUT.getLayerScaleSize().height)/2 +  self._widget.bottom;
+        
         self.graphicsPath.clear();
         let xPos = Math.floor(point.x / self._cellSize);
         let yPos = Math.floor(point.y / self._cellSize);
@@ -157,11 +163,7 @@ export class TestAStar extends UIComp {
             self._index = 0;
             self._startFrame = true;
         } else {
-            // let messageitem = instantiate(self.messageitem);
-            // let msgScript = messageitem.getComponent(MessageItem);
-            // msgScript.setContent('没找到最佳节点，无路可走!');
-            // self.node.parent.addChild(messageitem);
-            console.log('没找到最佳节点，无路可走!');
+            MessageTip.show({msg:'没找到最佳节点，无路可走!'});
         }
     }
 
@@ -214,7 +216,7 @@ export class TestAStar extends UIComp {
 
     private get screenWh() {
         let self = this;
-        let transform = self.node.getComponent(UITransform);
+        let transform = self.grp_container.getComponent(UITransform);
         return [transform.contentSize.width, transform.contentSize.height];
     }
 
@@ -230,14 +232,8 @@ export class TestAStar extends UIComp {
         return '#ffffff';
     }
 
-    private onTranslate() {
-        director.loadScene('testAStar2');
-        this.destroy();
-    }
-
     private onExit(){
         let self = this;
-        self.node.off(Node.EventType.TOUCH_END, self._tap_grp_container, self);
     }
 }
 

@@ -1,9 +1,9 @@
 
-import { _decorator, Component, Node } from 'cc';
+import { _decorator } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('Nodes')
-export class Nodes extends Component {
+export class Nodes {
 
     public x: number;
     public y: number;

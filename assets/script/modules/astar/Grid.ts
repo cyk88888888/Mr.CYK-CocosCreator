@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node } from 'cc';
+import { _decorator } from 'cc';
 import { Nodes } from './Nodes';
 const { ccclass, property } = _decorator;
 
@@ -16,7 +16,7 @@ const { ccclass, property } = _decorator;
  */
  
 @ccclass('Grid')
-export class Grid extends Component {
+export class Grid {
 
     private _startNode: Nodes;//开始节点
     private _endNode: Nodes;//目标节点
