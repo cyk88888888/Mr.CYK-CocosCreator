@@ -5,8 +5,9 @@
  */
 import { Label, Node, _decorator } from 'cc';
 import { UIMenu } from '../../framework/ui/UIMenu';
-import List from '../../framework/uiComp/list/List';
-import ListItem from '../../framework/uiComp/list/ListItem';
+import { ImgLoader } from '../../framework/uiComp/ImgLoader';
+import List from '../../framework/uiComp/List';
+import ListItem from '../../framework/uiComp/ListItem';
 const { ccclass, property } = _decorator;
 
 @ccclass('BottomTabLayer')
@@ -20,13 +21,13 @@ export class BottomTabLayer extends UIMenu {
     private onEnter() {
         let self = this;
         self._layerInfos = [
-            { layer: 'EquipLayer' },
-            { layer: 'ShopLayer' },
-            { layer: 'HomeLayer' },
-            { layer: 'SkillLayer' },
-            { layer: 'SettingLayer' },
+            { layer: 'EquipLayer', icon: 'ico_zhuangbei' },
+            { layer: 'ShopLayer', icon: 'ico_shandian' },
+            { layer: 'HomeLayer', icon: 'ico_shijie' },
+            { layer: 'SkillLayer', icon: 'ico_tianfu' },
+            { layer: 'SettingLayer', icon: 'ico_shezhi' },
         ];
-      
+
     }
 
     private onFirstEnter() {
@@ -37,7 +38,7 @@ export class BottomTabLayer extends UIMenu {
 
     //水平列表渲染器
     onListHRender(item: Node, idx: number) {
-        console.log(item.name + ': ' + idx);
+        item.getChildByName('icon').getComponent(ImgLoader).url = 'ui/home/' + this._layerInfos[idx].icon;
     }
 
     //当列表项被选择...

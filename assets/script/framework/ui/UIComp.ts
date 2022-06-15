@@ -24,23 +24,22 @@ export class UIComp extends Component {
         console.log('onLoad: ' + this.node.name);
         let self = this;
         self._oldParent = self.node.parent;
-        self.initView();
-    }
-
-    start(){
-        console.log('onStart: ' + this.node.name);
     }
 
     onEnable(){
+        let self = this;
         this.node.active;
         this.enabled;
         console.log('onEnable: ' + this.node.name);
+        self.initView();
     }
 
     onDisable(){
+        let self = this;
         this.node.active;
         this.enabled;
         console.log('onDisable: ' + this.node.name);
+        self._dispose();
     }
     onDestroy(){
         console.log('onDestroy: ' + this.node.name);
@@ -243,20 +242,17 @@ export class UIComp extends Component {
     }
 
     public addSelf() {
-        this.initView();
         this.node.setParent(this._oldParent);
     }
 
     public removeSelf() {
         let self = this;
-        self._dispose();
         self.node.removeFromParent();
     }
 
     public destory() {
         let self = this;
         if (self.hasDestory) return;
-        self._dispose();
         self.chilidCompClassMap = null;
         self._allList = null;
         this.node.destroy();

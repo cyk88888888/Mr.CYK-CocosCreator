@@ -4,6 +4,7 @@
  * @Date: 2022-05-16 09:18:45
  */
 import { _decorator, Button } from 'cc';
+import { SoundMgr } from '../../framework/mgr/SoundMgr';
 import { UILayer } from '../../framework/ui/UILayer';
 const { ccclass, property } = _decorator;
 
@@ -14,7 +15,7 @@ export class HomeLayer extends UILayer {
     @property({ tooltip: "哈哈哈", type: Button })
     btn_test: Button;
     private onEnter() {
-
+        SoundMgr.inst.playMainBg();
     }
 
     update(deltaTime: number) {

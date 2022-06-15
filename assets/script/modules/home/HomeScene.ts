@@ -10,10 +10,10 @@ import { registerModule } from '../../framework/mgr/ModuleMgr';
 import { TopUsrInfoLayer } from './TopUsrInfoLayer';
 import { BottomTabLayer } from './BottomTabLayer';
 import { SoundMgr } from '../../framework/mgr/SoundMgr';
-import { EquipLayer } from './EquipLayer';
-import { SettingLayer } from './SettingLayer';
-import { ShopLayer } from './ShopLayer';
-import { SkillLayer } from './SkillLayer';
+import { EquipLayer } from './equip/EquipLayer';
+import { SettingLayer } from './setting/SettingLayer';
+import { ShopLayer } from './shop/ShopLayer';
+import { SkillLayer } from './skill/SkillLayer';
 const { ccclass, property } = _decorator;
 
 @ccclass('HomeScene')

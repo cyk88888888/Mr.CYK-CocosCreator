@@ -73,7 +73,7 @@ export class UIScene extends Component{
         this.dlg = this.dlg;
         this.msg = this.msg;
         this.menuLayer = this.menuLayer;
-        self.__doEnter();
+       
         if (self.mainClassLayer) {
             self.subLayerMgr.register(self.mainClassLayer);
             self.push(self.mainClassLayer, { str: '我叫' + self.mainClassLayer.name });
@@ -116,13 +116,15 @@ export class UIScene extends Component{
         this._moduleParam = data;
     }
 
-    public enterOnPop() {
+    onEnable(){
         let self = this;
+        console.log('onEnable: ' + this.node.name);
         self.__doEnter();
     }
 
-    public exitOnPush() {
+    onDisable(){
         let self = this;
+        console.log('onDisable: ' + this.node.name);
         self._dispose();
     }
 
@@ -186,6 +188,10 @@ export class UIScene extends Component{
         this.subLayerMgr.dispose();
         this.subLayerMgr = null;
         this.node.destroy();
+    }
+    
+    onDestroy(){
+        console.log('onDestroy: ' + this.node.name);
     }
 }
 

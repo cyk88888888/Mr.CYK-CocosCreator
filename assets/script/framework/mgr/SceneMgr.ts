@@ -70,7 +70,6 @@ export class SceneMgr {
     private onUILoaded(moduleInfo: ModuleCfgInfo, data: any, toPush: boolean) {
         if (toPush && this.curScene) {
             this._popArr.push(this.curScene);
-            this.onExit(this.curScene);
             this.curScene.removeFromParent();
         } else {
             this.checkDestoryLastScene(!toPush);
@@ -85,8 +84,7 @@ export class SceneMgr {
     /**判断销毁上个场景并释放资源 */
     private checkDestoryLastScene(destory?: boolean) {
         if (this.curScene) {
-            this.onExit(this.curScene, destory);
-            
+            if(destory) this.curScene.destory();
             let lastModuleInfo = moduleInfoMap[this.curScene.className];
             if (destory && !lastModuleInfo.cacheEnabled) {//销毁上个场景
                 ResMgr.inst.releaseResModule(this.curScene.className);//释放场景资源
@@ -105,39 +103,8 @@ export class SceneMgr {
 
         self.curScene = self._popArr.pop();
         self.curSceneName = self.curScene.className;
-        self.onEnter(self.curScene);
         self.curScene.addToGRoot();
     }
-
-    private onExit(scene: UIScene, destory?: boolean) {
-        let self = this;
-        let script = scene;
-        self.eachChildComp(script.layer, false, destory);
-        self.eachChildComp(script.menuLayer, false, destory);
-        self.eachChildComp(script.dlg, false, destory);
-        self.eachChildComp(script.msg, false, destory);
-        destory ? script.destory() : script.exitOnPush();
-    }
-
-    private onEnter(scene: UIScene) {
-        let self = this;
-        let script = scene;
-        script.enterOnPop();
-        self.eachChildComp(script.layer, true);
-        self.eachChildComp(script.menuLayer, true);
-        self.eachChildComp(script.dlg, true);
-        self.eachChildComp(script.msg, true);
-    }
-
-    private eachChildComp(comp: Node, isEnter?: boolean, destory?: boolean) {
-        let children = comp.children;
-        for (let i = 0; i < children.length; i++) {
-            let childNode = children[i];
-            let script = childNode.getComponent(childNode.name) as UIComp;
-            isEnter ? script.enterOnPop() : destory ? script.destory() : script.exitOnPush();
-        }
-    }
-
 }
 
 
