@@ -11,6 +11,9 @@ const { ccclass, property } = _decorator;
 
 @ccclass('UIDlg')
 export class UIDlg extends UILayer {
+    private dlgMaskName = '__bgMask';//弹窗底部灰色rect名称
+    /**灰色遮罩是否可点击 */
+    private _clickBgMask: boolean;
     private _bgMaskNode: Node;
     protected addToLayer() {
         let self = this;
@@ -18,12 +21,11 @@ export class UIDlg extends UILayer {
         let bg = bgMaskNode.addComponent(Graphics);
         let stageSize = BaseUT.getStageSize();
         let modalLayerColor: Color = new Color(0x00, 0x00, 0x00, 255 * 0.4);
-        bg.fillColor = modalLayerColor;//.fromHEX('#000000');
+        bg.fillColor = modalLayerColor;
         bg.rect(-stageSize.width / 2, -stageSize.height / 2, stageSize.width, stageSize.height);
         bg.fill();
-        // BaseUT.setAlpha(bgMaskNode, 0.4);
         BaseUT.setSize(bgMaskNode, stageSize.width, stageSize.height);
-        bgMaskNode.on(Node.EventType.TOUCH_END, self.close, self);
+        self.clickBgMask = true;
         bgMaskNode.setParent(SceneMgr.inst.curScene.dlg);
 
         BaseUT.setPivot(self.node, 0.5, 0.5);
@@ -53,5 +55,21 @@ export class UIDlg extends UILayer {
         cb.call(this);
     }
 
+    /**灰色遮罩是否可点击 */
+    protected set clickBgMask(value: boolean) {
+        let self = this;
+        if (self._clickBgMask == value) return;
+        self._clickBgMask = value;
+        if (value) {
+            self._bgMaskNode.on(Node.EventType.TOUCH_END, self.close, self);
+        } else {
+            self.offBgMaskClick();
+        }
+    }
+
+    private offBgMaskClick() {
+        let self = this;
+        self._bgMaskNode.off(Node.EventType.TOUCH_END, self.close, self);
+    }
 }
 

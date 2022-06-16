@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, js, Tween } from 'cc';
+import { _decorator, Component, Node, Tween, tween } from 'cc';
 import { emmiter } from '../base/Emmiter';
 const { ccclass, property } = _decorator;
 
@@ -13,9 +13,6 @@ export class UIComp extends Component {
     private isFirstEnter: boolean = true;
     /** 预制体路径 */
     public static prefabUrl: string = '';
-    /**打开弹窗时是否需要动画 */
-    protected needAnimation: boolean = true;
-    protected dlgMaskName = '__bgMask';//弹窗底部灰色rect名称
     public hasDestory: boolean;//是否已被销毁
     private _allList: Node[];
     protected needRefreshListOnEnter: boolean = true;
@@ -146,7 +143,7 @@ export class UIComp extends Component {
             this._tweenTargetList = [];
         }
         if (this._tweenTargetList.indexOf(target) == -1) this._tweenTargetList.push(target);
-        return new Tween(this.node);
+        return tween(this.node);
     }
 
     /**清除指定对象的缓动Tweener */
@@ -251,8 +248,7 @@ export class UIComp extends Component {
             self._objTapMap = null;
         }
 
-        let bgMask = this.node.getChildByName(self.dlgMaskName);
-        if (bgMask) bgMask.off(Node.EventType.TOUCH_END, self.close, self);
+        if(self['offBgMaskClick']) self['offBgMaskClick']();//清除背景灰色遮罩点击事件
 
         self.clearAllTimeoutOrInterval();
         self.rmAllTweens();

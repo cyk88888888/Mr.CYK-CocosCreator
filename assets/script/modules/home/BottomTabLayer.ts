@@ -27,11 +27,11 @@ export class BottomTabLayer extends UIMenu {
     private onEnter() {
         let self = this;
         self._layerInfos = [
-            { layer: EquipLayer.__className, icon: 'ico_zhuangbei', preRes: [EquipLayer.prefabUrl] },
-            { layer: ShopLayer.__className, icon: 'ico_shandian', preRes: [ShopLayer.prefabUrl] },
-            { layer: HomeLayer.__className, icon: 'ico_shijie', preRes: [HomeLayer.prefabUrl] },
-            { layer: SkillLayer.__className, icon: 'ico_tianfu', preRes: [SkillLayer.prefabUrl] },
-            { layer: SettingLayer.__className, icon: 'ico_shezhi', preRes: [SettingLayer.prefabUrl] },
+            { layer: EquipLayer.__className, icon: 'ui/home/ico_zhuangbei', preRes: [EquipLayer.prefabUrl] },
+            { layer: ShopLayer.__className, icon: 'ui/home/ico_shandian', preRes: [ShopLayer.prefabUrl] },
+            { layer: HomeLayer.__className, icon: 'ui/home/ico_shijie', preRes: [HomeLayer.prefabUrl] },
+            { layer: SkillLayer.__className, icon: 'ui/home/ico_tianfu', preRes: [SkillLayer.prefabUrl] },
+            { layer: SettingLayer.__className, icon: 'ui/home/ico_shezhi', preRes: [SettingLayer.prefabUrl] },
         ];
 
     }
@@ -44,7 +44,7 @@ export class BottomTabLayer extends UIMenu {
 
     //水平列表渲染器
     onListHRender(item: Node, idx: number) {
-        item.getChildByName('icon').getComponent(ImgLoader).url = 'ui/home/' + this._layerInfos[idx].icon;
+        item.getChildByName('icon').getComponent(ImgLoader).url = this._layerInfos[idx].icon;
     }
 
     //当列表项被选择...
