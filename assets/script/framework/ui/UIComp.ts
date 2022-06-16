@@ -15,7 +15,7 @@ export class UIComp extends Component {
     public static prefabUrl: string = '';
     /**打开弹窗时是否需要动画 */
     protected needAnimation: boolean = true;
-    protected dlgMaskName = '__mask: GGraph';//弹窗底部灰色rect名称
+    protected dlgMaskName = '__bgMask';//弹窗底部灰色rect名称
     public hasDestory: boolean;//是否已被销毁
     private _allList: Node[];
     protected needRefreshListOnEnter: boolean = true;
@@ -28,17 +28,11 @@ export class UIComp extends Component {
 
     onEnable(){
         let self = this;
-        this.node.active;
-        this.enabled;
-        console.log('onEnable: ' + this.node.name);
         self.initView();
     }
 
     onDisable(){
         let self = this;
-        this.node.active;
-        this.enabled;
-        console.log('onDisable: ' + this.node.name);
         self._dispose();
     }
     onDestroy(){
@@ -110,7 +104,6 @@ export class UIComp extends Component {
     private initView() {
         let self = this;
         if (self.hasDestory) return;
-        // this.initViewProperty();
         self.addListener();
         console.log('进入' + self.className);
         self.onEnter_b();
@@ -121,27 +114,6 @@ export class UIComp extends Component {
         }
         self.onEnter_a();
         self.refreshAllList();
-    }
-
-    /** 初始化属性 */
-    private initViewProperty() {
-        let self = this;
-        let children = self.node.children;
-        if (!self.chilidCompClassMap) self.chilidCompClassMap = {};
-        if (!self._allList) self._allList = [];
-        for (let key in children) {
-            let childNode = children[key];
-            let childName = childNode.name;
-            self[childName] = childNode;
-
-            let scriptClass = js.getClassByName(childName);//是否有对应脚本类
-            if (scriptClass) {
-                let oldScript = childNode.getComponent(childName) as UIComp;
-                let script = oldScript ? oldScript : childNode.addComponent(childName) as UIComp;
-                if (!oldScript) self.chilidCompClassMap[childName] = script;
-                script.initView();
-            }
-        }
     }
 
     /**添加事件监听**/
@@ -174,12 +146,12 @@ export class UIComp extends Component {
             this._tweenTargetList = [];
         }
         if (this._tweenTargetList.indexOf(target) == -1) this._tweenTargetList.push(target);
-
+        return new Tween(this.node);
     }
 
     /**清除指定对象的缓动Tweener */
-    protected rmTween(target: any, complete?: boolean, propType?: any) {
-
+    protected rmTween(target: Node) {
+        Tween.stopAllByTarget(target);
     }
 
     /**清除所有对象的缓动 */

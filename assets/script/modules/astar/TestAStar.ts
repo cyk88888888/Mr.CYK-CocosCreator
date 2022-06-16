@@ -1,6 +1,7 @@
 
 import { _decorator, Component, Node, Graphics, UITransform, EventTouch, Label, Prefab, instantiate, Vec3, Widget } from 'cc';
 import { BaseUT } from '../../framework/base/BaseUtil';
+import { TickMgr } from '../../framework/mgr/TickMgr';
 import { UIComp } from '../../framework/ui/UIComp';
 import { MessageTip } from '../common/message/MessageTip';
 import { AStar } from './AStar';
@@ -14,7 +15,7 @@ const { ccclass, property } = _decorator;
  */
 @ccclass('TestAStar')
 export class TestAStar extends UIComp {
-    @property({type:Node})
+    @property({ type: Node })
     public grp_container: Node;
     @property({ type: Graphics })
     public graphicsGrid: Graphics;
@@ -26,13 +27,13 @@ export class TestAStar extends UIComp {
     public graphicsPlayer: Graphics;
     @property({ type: Label })
     public lbl_cost: Label;
-    @property({type:Node})
+    @property({ type: Node })
     public groundParent: Node;
-    @property({type:Prefab})
+    @property({ type: Prefab })
     public ground: Prefab;
-    @property({type:Node})
+    @property({ type: Node })
     public wallParent: Node;
-    @property({type:Prefab})
+    @property({ type: Prefab })
     public wall: Prefab;
 
     private _widget: Widget;
@@ -41,14 +42,16 @@ export class TestAStar extends UIComp {
     private _index: number;
     private _path: Nodes[];
     private _startFrame: boolean;
-    private _speed: number;//人物移动速度、
+    private _speed: number;//人物移动速度
     private onFirstEnter() {
         let self = this;
         self._cellSize = 40;
         self._speed = 1;
         self._widget = self.getComponent(Widget);
-        self.initGrid();
-        self.onReset();
+        TickMgr.inst.nextTick(() => {
+            self.initGrid();
+            self.onReset();
+        }, this)
     }
 
     private initGrid() {
@@ -79,8 +82,7 @@ export class TestAStar extends UIComp {
         }
         lineGraphics.stroke();
         let len = numCols * numRows;
-        for (let i = 0; i < len; i++)
-        {
+        for (let i = 0; i < len; i++) {
             let ground = instantiate(this.ground);
             this.groundParent.addChild(ground);
         }
@@ -122,18 +124,18 @@ export class TestAStar extends UIComp {
         self.graphicsPlayer.node.setPosition(_x, _y);
     }
 
-     tap_grp_container(event: EventTouch) {
+    tap_grp_container(event: EventTouch) {
         let self = this;
         let point = event.getUILocation();
-       
+
         console.log('getUILocation: ' + event.getUILocation());
         console.log('getLocationInView: ' + event.getLocationInView());
         console.log('getLocation: ' + event.getLocation());
         console.log('getPreviousLocation: ' + event.getPreviousLocation());
         console.log('getStartLocation: ' + event.getStartLocation());
         console.log('getUIStartLocation: ' + event.getUIStartLocation());
-        point.y -= (BaseUT.getWindowSize().height - BaseUT.getLayerScaleSize().height)/2 +  self._widget.bottom;
-        
+        point.y -= (BaseUT.getStageSize().height - BaseUT.getLayerScaleSize().height) / 2 + self._widget.bottom;
+
         self.graphicsPath.clear();
         let xPos = Math.floor(point.x / self._cellSize);
         let yPos = Math.floor(point.y / self._cellSize);
@@ -163,7 +165,7 @@ export class TestAStar extends UIComp {
             self._index = 0;
             self._startFrame = true;
         } else {
-            MessageTip.show({msg:'没找到最佳节点，无路可走!'});
+            MessageTip.show({ msg: '没找到最佳节点，无路可走!' });
         }
     }
 
@@ -207,11 +209,11 @@ export class TestAStar extends UIComp {
         self.makePlayer();
     }
 
-    private showGrid(){
+    private showGrid() {
         let self = this;
         self.graphicsGrid.node.active = !self.graphicsGrid.node.active;
         self.graphicsBlock.node.active = !self.graphicsBlock.node.active;
-        
+
     }
 
     private get screenWh() {
@@ -232,7 +234,7 @@ export class TestAStar extends UIComp {
         return '#ffffff';
     }
 
-    private onExit(){
+    private onExit() {
         let self = this;
     }
 }

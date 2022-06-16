@@ -36,6 +36,9 @@ export class SubLayerMgr {
     private async _show(LayerNameOrClass: string | typeof UILayer, data?: any, toPush?: boolean) {
         let script: any = typeof LayerNameOrClass === 'string' ? js.getClassByName(LayerNameOrClass) : LayerNameOrClass;
         let layerName = script.name;
+
+        if (this.curLayer && this.curLayer.className == layerName) return;//打开同个界面
+        
         let registerLayer = this._classMap[layerName];
         let needDestory = !registerLayer && !toPush;//未注册  && 非入栈模式
 
@@ -85,7 +88,7 @@ export class SubLayerMgr {
         this.checkDestoryLastLayer(true);
         for (let i = 0; i < self._popArr.length; i++) {
             let layer = this._popArr[i];
-            if(!layer.hasDestory) layer.close();
+            if (!layer.hasDestory) layer.close();
         }
 
         for (let key in this._classMap) {

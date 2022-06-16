@@ -50,4 +50,4 @@ export class HomeScene extends UIScene {
         SoundMgr.inst.playMainBg();
     }
 }
-registerModule(HomeScene, []);
+registerModule(HomeScene, [HomeLayer.prefabUrl]);

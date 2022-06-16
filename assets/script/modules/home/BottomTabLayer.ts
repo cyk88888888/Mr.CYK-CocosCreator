@@ -1,13 +1,18 @@
 /*
- * @Descripttion: 主界面
+ * @Descripttion: 主界面底部选中页签
  * @Author: CYK
  * @Date: 2022-05-16 09:18:45
  */
-import { Label, Node, _decorator } from 'cc';
+import { Node, _decorator } from 'cc';
+import { ResMgr } from '../../framework/mgr/ResMgr';
 import { UIMenu } from '../../framework/ui/UIMenu';
 import { ImgLoader } from '../../framework/uiComp/ImgLoader';
 import List from '../../framework/uiComp/List';
-import ListItem from '../../framework/uiComp/ListItem';
+import { EquipLayer } from './equip/EquipLayer';
+import { HomeLayer } from './HomeLayer';
+import { SettingLayer } from './setting/SettingLayer';
+import { ShopLayer } from './shop/ShopLayer';
+import { SkillLayer } from './skill/SkillLayer';
 const { ccclass, property } = _decorator;
 
 @ccclass('BottomTabLayer')
@@ -18,14 +23,15 @@ export class BottomTabLayer extends UIMenu {
     private list_tab: List = null;
 
     private _layerInfos: any[];
+    private _toLayer: string;
     private onEnter() {
         let self = this;
         self._layerInfos = [
-            { layer: 'EquipLayer', icon: 'ico_zhuangbei' },
-            { layer: 'ShopLayer', icon: 'ico_shandian' },
-            { layer: 'HomeLayer', icon: 'ico_shijie' },
-            { layer: 'SkillLayer', icon: 'ico_tianfu' },
-            { layer: 'SettingLayer', icon: 'ico_shezhi' },
+            { layer: EquipLayer.__className, icon: 'ico_zhuangbei', preRes: [EquipLayer.prefabUrl] },
+            { layer: ShopLayer.__className, icon: 'ico_shandian', preRes: [ShopLayer.prefabUrl] },
+            { layer: HomeLayer.__className, icon: 'ico_shijie', preRes: [HomeLayer.prefabUrl] },
+            { layer: SkillLayer.__className, icon: 'ico_tianfu', preRes: [SkillLayer.prefabUrl] },
+            { layer: SettingLayer.__className, icon: 'ico_shezhi', preRes: [SettingLayer.prefabUrl] },
         ];
 
     }
@@ -46,7 +52,12 @@ export class BottomTabLayer extends UIMenu {
         let self = this;
         let layerInfo = self._layerInfos[selectedIdx];
         let layerName = layerInfo.layer;
-        self.emit('jumpToLayer', { layerName: layerName });
+        self._toLayer = layerName;
+        ResMgr.inst.loadWithoutJuHua(layerInfo.preRes, function () {
+            if (self._toLayer != layerName) return;
+            self.emit('jumpToLayer', { layerName: layerName });
+        }, self);
+
     }
 }
 

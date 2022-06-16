@@ -118,13 +118,11 @@ export class UIScene extends Component{
 
     onEnable(){
         let self = this;
-        console.log('onEnable: ' + this.node.name);
         self.__doEnter();
     }
 
     onDisable(){
         let self = this;
-        console.log('onDisable: ' + this.node.name);
         self._dispose();
     }
 
