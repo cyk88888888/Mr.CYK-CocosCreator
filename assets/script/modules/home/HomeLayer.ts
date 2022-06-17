@@ -6,7 +6,6 @@
 import { _decorator, Button } from 'cc';
 import { SoundMgr } from '../../framework/mgr/SoundMgr';
 import { UILayer } from '../../framework/ui/UILayer';
-import { JuHuaDlg } from '../common/JuHuaDlg';
 const { ccclass, property } = _decorator;
 
 @ccclass('HomeLayer')

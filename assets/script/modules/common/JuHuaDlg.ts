@@ -19,14 +19,14 @@ export class JuHuaDlg extends UIMsg {
         self.img_maskBg.active = false;
         self.setTimeout(() => {
             self.img_maskBg.active = true;
-            let img_Wait = self.img_maskBg.getChildByName('img_Wait');
-            let quat: Quat = new Quat();
-            Quat.fromEuler(quat, 0, 0, 360);
-            self.getTween(img_Wait)
+            let img_wait = self.img_maskBg.getChildByName('img_wait');
+            self.getTween(img_wait)
                 .to(1, {
-                    rotation: quat
-                }                                 // 旋转缓动
-                )
+                    angle: 360,
+                })
+                .set({ angle: 0 })
+                .union()
+                .repeatForever()
                 .start();
         }, 4000);
     }

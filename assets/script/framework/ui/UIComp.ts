@@ -151,7 +151,7 @@ export class UIComp extends Component {
             this._tweenTargetList = [];
         }
         if (this._tweenTargetList.indexOf(target) == -1) this._tweenTargetList.push(target);
-        return tween(this.node);
+        return tween(target);
     }
 
     /**清除指定对象的缓动Tweener */
