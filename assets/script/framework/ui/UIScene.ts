@@ -3,12 +3,11 @@
  * @Author: CYK
  * @Date: 2022-05-20 09:53:17
  */
-import { UIComp } from './UIComp';
 import { SubLayerMgr } from '../mgr/SubLayerMgr';
 import { UILayer } from './UILayer';
 import { emmiter } from '../base/Emmiter';
 import { BaseUT } from '../base/BaseUtil';
-import { Component, Layers, Node, UIOpacity, UITransform } from 'cc';
+import { Component, Node } from 'cc';
 import { SceneMgr } from '../mgr/SceneMgr';
 
 export class UIScene extends Component{
