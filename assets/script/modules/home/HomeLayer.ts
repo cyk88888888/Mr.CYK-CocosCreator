@@ -6,6 +6,7 @@
 import { _decorator, Button } from 'cc';
 import { SoundMgr } from '../../framework/mgr/SoundMgr';
 import { UILayer } from '../../framework/ui/UILayer';
+import { JuHuaDlg } from '../common/JuHuaDlg';
 const { ccclass, property } = _decorator;
 
 @ccclass('HomeLayer')
@@ -14,7 +15,7 @@ export class HomeLayer extends UILayer {
     public static prefabUrl: string = 'prefab/home/HomeLayer';
     @property({ tooltip: "哈哈哈", type: Button })
     btn_test: Button;
-    private onEnter() {
+    protected onEnter() {
         SoundMgr.inst.playMainBg();
     }
 

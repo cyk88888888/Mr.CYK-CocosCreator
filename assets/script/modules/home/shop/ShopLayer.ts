@@ -12,7 +12,7 @@ const { ccclass, property } = _decorator;
 export class ShopLayer extends UILayer {
     /** 预制体路径 */
     public static prefabUrl: string = 'prefab/home/ShopLayer';
-    private onEnter() {
+    protected onEnter() {
         SoundMgr.inst.playBg('dy/sound/bg03');
     }
 

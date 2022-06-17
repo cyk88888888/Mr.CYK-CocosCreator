@@ -24,7 +24,7 @@ export class BottomTabLayer extends UIMenu {
 
     private _layerInfos: any[];
     private _toLayer: string;
-    private onEnter() {
+    protected onEnter() {
         let self = this;
         self._layerInfos = [
             { layer: EquipLayer.__className, icon: 'ui/home/ico_zhuangbei', preRes: [EquipLayer.prefabUrl] },
@@ -36,7 +36,7 @@ export class BottomTabLayer extends UIMenu {
 
     }
 
-    private onFirstEnter() {
+    protected onFirstEnter() {
         let self = this;
         this.list_tab.numItems = self._layerInfos.length;
         this.list_tab.selectedId = 2;

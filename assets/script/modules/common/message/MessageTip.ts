@@ -17,7 +17,7 @@ export class MessageTip extends UIMsg {
     public lbl_msg: Label;
     @property({ type: Label })
     public lbl_msg1: Label;
-    private dchg() {
+    protected dchg() {
         let self = this;
         let data = self.data;
         self.lbl_msg.string = self.lbl_msg1.string = data.msg;

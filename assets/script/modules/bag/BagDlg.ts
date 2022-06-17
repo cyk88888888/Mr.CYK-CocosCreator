@@ -26,7 +26,7 @@ export class BagDlg extends UIDlg {
     private totalItemNum: number = 90;  //总Item数
     private pagePreNum: number = 15;    //每页Item数量
     private pageTotalNum: number;       //总页数
-    private onEnter() {
+    protected onEnter() {
         let self = this;
         self._bagDataList = [];
         for (let i = 0; i < self.totalItemNum; i++) {

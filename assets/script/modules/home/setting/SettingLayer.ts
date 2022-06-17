@@ -16,7 +16,7 @@ export class SettingLayer extends UILayer {
 
     @property(Button)
     private btn_bag: Button;
-    private onEnter() {
+    protected onEnter() {
         SoundMgr.inst.playBg('dy/sound/bg02');
     }
 

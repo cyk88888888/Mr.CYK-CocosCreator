@@ -5,6 +5,7 @@
  */
 import { Asset, assetManager, Prefab, resources } from "cc";
 import { JuHuaDlg } from "../../modules/common/JuHuaDlg";
+import { LoadingScene } from "../../modules/loading/LoadingScene";
 import { moduleInfoMap } from "./ModuleMgr";
 import { SceneMgr } from "./SceneMgr";
 
@@ -20,7 +21,7 @@ export class ResMgr {
 
     /**模块资源列表map */
     public moduleResMap: { [sceneName: string]: string[] }
-    private _juHuaDlg: JuHuaDlg;
+    private _juHuaDlg: any;
     private closeJuHuaDlg() {
         if (this._juHuaDlg) {
             this._juHuaDlg.close();
@@ -55,7 +56,7 @@ export class ResMgr {
         })
     }
 
-    private _loadWithItor(res: string[] | string, itorCb?: Function, cb?: Function, ctx?: any, needJuHua: boolean = true, sceneName?: string) {
+    private async _loadWithItor(res: string[] | string, itorCb?: Function, cb?: Function, ctx?: any, needJuHua: boolean = true, sceneName?: string) {
         let resList = typeof res === 'string' ? [res] : res;
         let totLen = resList.length;//待下载总个数
         let hasLoadResCount: number = 0;//已下载个数
@@ -68,8 +69,8 @@ export class ResMgr {
                     break;
                 }
             }
-            if (!isAllLoaded && !this._juHuaDlg) {
-                // this._juHuaDlg = JuHuaDlg.show() as JuHuaDlg;
+            if (!isAllLoaded && !this._juHuaDlg && SceneMgr.inst.curSceneName != LoadingScene.name) {
+                this._juHuaDlg = await JuHuaDlg.show();
             }
         }
 

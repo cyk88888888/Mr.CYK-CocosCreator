@@ -1,13 +1,14 @@
 /*
- * @Descripttion: 说明
+ * @Descripttion: 主入口
  * @Author: CYK
  * @Date: 2022-05-13 09:40:14
  */
-import { _decorator, Component, Node, resources, Prefab } from 'cc';
+import { _decorator, Component} from 'cc';
 import { scaleMode } from './framework/base/ScaleMode';
 import { SceneMgr } from './framework/mgr/SceneMgr';
 import { SoundMgr } from './framework/mgr/SoundMgr';
 import { TickMgr } from './framework/mgr/TickMgr';
+import { LoadingScene } from './modules/loading/LoadingScene';
 const { ccclass, property } = _decorator;
 
 @ccclass('Main')
@@ -23,7 +24,7 @@ export class Main extends Component {
         scaleMode.designHeight_min = 1030;
         scaleMode.designHeight_max = 1280;
 
-        SceneMgr.inst.run('LoadingScene', { name: '红红火火恍恍惚惚' });
+        SceneMgr.inst.run(LoadingScene, { name: '红红火火恍恍惚惚' });
     }
 
     update(dt: number){

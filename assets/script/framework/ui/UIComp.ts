@@ -17,30 +17,38 @@ export class UIComp extends Component {
     private _allList: Node[];
     protected needRefreshListOnEnter: boolean = true;
 
-    onLoad(){
+    onLoad() {
         console.log('onLoad: ' + this.node.name);
         let self = this;
         self._oldParent = self.node.parent;
     }
 
-    onEnable(){
+    onEnable() {
         let self = this;
         self.initView();
     }
 
-    onDisable(){
+    onDisable() {
         let self = this;
         self._dispose();
     }
-    onDestroy(){
+    onDestroy() {
         console.log('onDestroy: ' + this.node.name);
     }
 
     protected onEnter_b() { }
 
+    protected onEnter() { }
+
+    protected onFirstEnter() { }
+
     protected onEnter_a() { }
 
+    protected dchg() { }
+
     protected onExit_b() { }
+
+    protected onExit() { }
 
     protected onExit_a() { }
 
@@ -82,7 +90,7 @@ export class UIComp extends Component {
 
     public setData(data: any) {
         this.data = data;
-        if (data && this['dchg']) this['dchg']();
+        if (data) this.dchg();
     }
 
     public enterOnPop() {
@@ -104,10 +112,10 @@ export class UIComp extends Component {
         self.addListener();
         console.log('进入' + self.className);
         self.onEnter_b();
-        if (self['onEnter']) self['onEnter']();
+        self.onEnter();
         if (self.isFirstEnter) {
             self.isFirstEnter = false;
-            if (self["onFirstEnter"]) self["onFirstEnter"]();
+            self.onFirstEnter();
         }
         self.onEnter_a();
         self.refreshAllList();
@@ -248,7 +256,7 @@ export class UIComp extends Component {
             self._objTapMap = null;
         }
 
-        if(self['offBgMaskClick']) self['offBgMaskClick']();//清除背景灰色遮罩点击事件
+        if (self['offBgMaskClick']) self['offBgMaskClick']();//清除背景灰色遮罩点击事件
 
         self.clearAllTimeoutOrInterval();
         self.rmAllTweens();
@@ -259,10 +267,10 @@ export class UIComp extends Component {
             script._dispose();
         }
 
-        console.log('退出' + this.className);
-        this.onExit_b();
-        if (self["onExit"]) self["onExit"]();
-        this.onExit_a();
+        console.log('退出' + self.className);
+        self.onExit_b();
+        self.onExit();
+        self.onExit_a();
     }
 }
 

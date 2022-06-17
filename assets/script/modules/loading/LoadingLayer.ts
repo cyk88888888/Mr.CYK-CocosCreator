@@ -8,6 +8,7 @@ import { UILayer } from '../../framework/ui/UILayer';
 import { SceneMgr } from '../../framework/mgr/SceneMgr';
 import { ResMgr } from '../../framework/mgr/ResMgr';
 import { HomeLayer } from '../home/HomeLayer';
+import { HomeScene } from '../home/HomeScene';
 const { ccclass, property } = _decorator;
 
 @ccclass('LoadingLayer')
@@ -20,7 +21,7 @@ export class LoadingLayer extends UILayer {
 
     private _preResList: string[];
     private _toPercent: number;
-    private onEnter() {
+    protected onEnter() {
         let self = this;
         self._preResList = [HomeLayer.prefabUrl];
         let curDownLoadNum: number = 0;//当前已下载个数
@@ -37,7 +38,7 @@ export class LoadingLayer extends UILayer {
             self.progressBar.progress += 0.005;
             if (!self._isLoadingHome && self.progressBar.progress >= 1) {
                 self._isLoadingHome = true;
-                SceneMgr.inst.run('HomeScene');
+                SceneMgr.inst.run(HomeScene);
             }
         }
     }

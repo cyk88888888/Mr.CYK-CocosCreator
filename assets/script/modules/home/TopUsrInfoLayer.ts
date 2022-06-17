@@ -6,6 +6,7 @@
 import { Label, Node, _decorator } from 'cc';
 import { SceneMgr } from '../../framework/mgr/SceneMgr';
 import { UIMenu } from '../../framework/ui/UIMenu';
+import { ListTestScene } from '../listTest/ListTestScene';
 const { ccclass, property } = _decorator;
 
 @ccclass('TopUsrInfoLayer')
@@ -24,7 +25,7 @@ export class TopUsrInfoLayer extends UIMenu {
     }
 
     private _tap_grp_head() {
-        SceneMgr.inst.push('ListTestScene')
+        SceneMgr.inst.push(ListTestScene)
     }
 }
 
