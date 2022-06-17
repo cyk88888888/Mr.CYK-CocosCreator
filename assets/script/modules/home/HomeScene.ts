@@ -33,8 +33,8 @@ export class HomeScene extends UIScene {
     private async onEnter() {
         let self = this;
         self.onEmitter('jumpToLayer', self.jumpToLayer);
-        if(!self._topUsrInfo) self._topUsrInfo = TopUsrInfoLayer.show();
-        if(!self._bottomTab) self._bottomTab = BottomTabLayer.show();
+        if(!self._topUsrInfo) self._topUsrInfo = await TopUsrInfoLayer.show();
+        if(!self._bottomTab) self._bottomTab = await BottomTabLayer.show();
     }
 
     private jumpToLayer(data: any) {
