@@ -55,6 +55,20 @@ export class SoundMgr {
         }, self)
     }
 
+    /**停止背景音乐 */
+    public stopBg(){
+        let mainNode = director.getScene().getChildByName('Main');
+        let audioSource = mainNode.getComponent(AudioSource);
+        audioSource.pause();
+    }
+
+    /**恢复背景音乐 */
+    public recoverBg(){
+        let mainNode = director.getScene().getChildByName('Main');
+        let audioSource = mainNode.getComponent(AudioSource);
+        audioSource.play();
+    }
+
     /**场景音效节点 */
     public subSoundNode: Node;
     /**
