@@ -41,8 +41,7 @@ export class SoundMgr {
         let self = this;
         if (self.curBgMusic == url) return;
         self.curBgMusic = url;
-        let mainNode = director.getScene().getChildByName('Main');
-        let audioSource = mainNode.getComponent(AudioSource);
+        let audioSource = this.bgAudioSource;
         ResMgr.inst.loadToWithoutJuHua('global', url, () => {
             let audioClip = ResMgr.inst.get(url) as AudioClip;
             if (self.curBgMusic != url || !audioClip) return;//加载完成的不是最后一次赋值的值
@@ -56,17 +55,27 @@ export class SoundMgr {
     }
 
     /**停止背景音乐 */
-    public stopBg(){
-        let mainNode = director.getScene().getChildByName('Main');
-        let audioSource = mainNode.getComponent(AudioSource);
-        audioSource.pause();
+    public stopBg() {
+        this.bgAudioSource.stop();
+    }
+
+    /**暂停背景音乐 */
+    public pauseBg() {
+        this.bgAudioSource.pause();
     }
 
     /**恢复背景音乐 */
-    public recoverBg(){
-        let mainNode = director.getScene().getChildByName('Main');
-        let audioSource = mainNode.getComponent(AudioSource);
-        audioSource.play();
+    public recoverBg() {
+        this.bgAudioSource.play();
+    }
+
+    private _audioSource: AudioSource;
+    public get bgAudioSource() {
+        if (!this._audioSource) {
+            let mainNode = director.getScene().getChildByName('Main');
+            this._audioSource = mainNode.getComponent(AudioSource);
+        }
+        return this._audioSource;
     }
 
     /**场景音效节点 */

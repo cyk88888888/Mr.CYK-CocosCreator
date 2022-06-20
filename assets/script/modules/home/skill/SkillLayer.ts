@@ -15,7 +15,7 @@ export class SkillLayer extends UILayer {
     @property({ type: VideoPlayer })
     public videoPlayer: VideoPlayer;
     protected onEnter() {
-        SoundMgr.inst.stopBg();
+        SoundMgr.inst.pauseBg();
         this.videoPlayer.play();
     }
 
