@@ -32,7 +32,6 @@ export class BagDlg extends UIDlg {
         for (let i = 0; i < self.totalItemNum; i++) {
             self._bagDataList.push({ icon: "dy/icon/i" + Math.floor(Math.random() * 10), count: Math.floor(Math.random() * 100) })
         }
-        let bi = instantiate(this.bagItem);
         this.pageTotalNum = Math.ceil(this.totalItemNum / this.pagePreNum);//总页数
         this.list_bag.numItems = this.pageTotalNum;
         this.onPageChange();
