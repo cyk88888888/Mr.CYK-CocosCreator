@@ -13,7 +13,7 @@ export namespace BaseUT {
         size.height /= view.getScaleY();
         return size;
     }
-
+    /** 获取宽度适配下，layer容器宽高 */
     export function getLayerScaleSize() {
         let windowSize = BaseUT.getStageSize();
         let designHeight = windowSize.height < scaleMode.designHeight_max ? windowSize.height : scaleMode.designHeight_max;
@@ -26,7 +26,7 @@ export namespace BaseUT {
      */
     export function setFitSize(node: Node) {
         let scaleSize = BaseUT.getLayerScaleSize();
-        BaseUT.setSize(node,scaleSize.width, scaleSize.height);
+        BaseUT.setSize(node, scaleSize.width, scaleSize.height);
         return scaleSize;
     }
 
@@ -52,9 +52,14 @@ export namespace BaseUT {
         tranform.anchorY = yv;
     }
 
-      /**设置node宽高 */
-      export function setSize(node: Node, width: number, height: number) {
+    /**设置node宽高 */
+    export function setSize(node: Node, width: number, height: number) {
         let uiTransform = node.getComponent(UITransform);
         uiTransform.setContentSize(width, height);
+    }
+
+    export function getFitY(min: number, max: number) {
+        let windowSize = BaseUT.getLayerScaleSize();
+        return min + (max - min) * (windowSize.height - 1068) / (1280 - 1068);
     }
 }

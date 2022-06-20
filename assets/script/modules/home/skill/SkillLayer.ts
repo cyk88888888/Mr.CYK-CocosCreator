@@ -3,7 +3,8 @@
  * @Author: CYK
  * @Date: 2022-05-16 09:18:45
  */
-import { _decorator, Component, Node, ProgressBar, Button, Label, VideoPlayer } from 'cc';
+import { _decorator, Component, Node, ProgressBar, Button, Label, VideoPlayer, Vec3 } from 'cc';
+import { BaseUT } from '../../../framework/base/BaseUtil';
 import { SoundMgr } from '../../../framework/mgr/SoundMgr';
 import { UILayer } from '../../../framework/ui/UILayer';
 const { ccclass, property } = _decorator;
@@ -16,13 +17,15 @@ export class SkillLayer extends UILayer {
     public videoPlayer: VideoPlayer;
     protected onEnter() {
         SoundMgr.inst.pauseBg();
+        let scale = BaseUT.getFitY(0.6, 0.8);
+        this.videoPlayer.node.setScale(new Vec3(scale, scale, 1));
         this.videoPlayer.play();
     }
 
     update(deltaTime: number) {
     }
 
-    protected onExit(){
+    protected onExit() {
         SoundMgr.inst.recoverBg();
         this.videoPlayer.pause();
     }
