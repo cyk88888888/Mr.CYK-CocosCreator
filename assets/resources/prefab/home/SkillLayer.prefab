@@ -288,7 +288,7 @@
       "__expectedType__": "cc.VideoClip"
     },
     "_playOnAwake": false,
-    "_volume": 1,
+    "_volume": 0.5,
     "_mute": false,
     "_playbackRate": 1,
     "_loop": true,

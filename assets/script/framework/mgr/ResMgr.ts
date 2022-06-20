@@ -3,7 +3,7 @@
  * @Author: CYK
  * @Date: 2022-05-12 16:15:52
  */
-import { Asset, assetManager, Prefab, resources } from "cc";
+import { Asset, assetManager, Prefab, resources, SpriteAtlas } from "cc";
 import { JuHuaDlg } from "../../modules/common/JuHuaDlg";
 import { LoadingScene } from "../../modules/loading/LoadingScene";
 import { moduleInfoMap } from "./ModuleMgr";
@@ -15,12 +15,15 @@ export class ResMgr {
         if (!this._inst) {
             this._inst = new ResMgr();
             this._inst.moduleResMap = {};
+            this._inst._cacheUIAtlas = {};
         }
         return this._inst;
     }
 
     /**模块资源列表map */
-    public moduleResMap: { [sceneName: string]: string[] }
+    public moduleResMap: { [sceneName: string]: string[] };
+    /**ui合图的图集缓存map */
+    private _cacheUIAtlas: { [resUrl: string]: SpriteAtlas };
     private _juHuaDlg: any;
     private closeJuHuaDlg() {
         if (this._juHuaDlg) {
@@ -90,13 +93,25 @@ export class ResMgr {
             if (this.get(resName)) {//缓存已有
                 loadSucc(resName, true);
             } else {
-                resources.load(resName, Asset, (err: Error | null, asset: Asset) => {
-                    if (!err) {
-                        loadSucc(resName);
-                    } else {
-                        console.error(err);
-                    }
-                })
+                if (resName.startsWith('ui/')) {//atlas图集资源必须指定加载类型为SpriteAtlas并缓存，因为.plist和.png的名称是一样的，会优先加载.png文件导致取出来的是ImageAsset，而不是SpriteAtlas
+                    resources.load(resName, SpriteAtlas, (err: Error | null, asset: SpriteAtlas) => {
+                        this._cacheUIAtlas[resName] = asset;
+                        if (!err) {
+                            loadSucc(resName);
+                        } else {
+                            console.error(err);
+                        }
+                    })
+                } else {
+                    resources.load(resName, Asset, (err: Error | null, asset: Asset) => {
+                        if (!err) {
+                            loadSucc(resName);
+                        } else {
+                            console.error(err);
+                        }
+                    })
+                }
+
             }
         }
     }
@@ -162,6 +177,7 @@ export class ResMgr {
 
     /**获取已加载缓存的资源 */
     public get(resName: string) {
+        if (resName.startsWith('ui/')) return this._cacheUIAtlas[resName];
         return resources.get(resName);
     }
     /**
@@ -173,8 +189,9 @@ export class ResMgr {
         for (let i = 0; i < resList.length; i++) {
             let resName = resList[i];
             let cahceAsset = this.get(resName);
-            if(!cahceAsset) continue;
+            if (!cahceAsset) continue;
             resources.release(resName);
+            if (resName.startsWith('ui/')) delete this._cacheUIAtlas[resName];
             console.log('释放资源: ' + resName);
         }
     }
