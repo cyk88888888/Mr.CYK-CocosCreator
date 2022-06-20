@@ -3,8 +3,9 @@
  * @Author: CYK
  * @Date: 2022-05-16 09:18:45
  */
-import { _decorator, Component, Node, ProgressBar, Button, Label, VideoPlayer, Vec3 } from 'cc';
+import { _decorator, Component, Node, ProgressBar, Button, Label, VideoPlayer, Vec3, ImageAsset, SpriteAtlas, resources } from 'cc';
 import { BaseUT } from '../../../framework/base/BaseUtil';
+import { ResMgr } from '../../../framework/mgr/ResMgr';
 import { SoundMgr } from '../../../framework/mgr/SoundMgr';
 import { UILayer } from '../../../framework/ui/UILayer';
 const { ccclass, property } = _decorator;

@@ -94,7 +94,7 @@ export class ResMgr {
                     if (!err) {
                         loadSucc(resName);
                     } else {
-                        console.error('resName: ' + resName + '加载失败');
+                        console.error(err);
                     }
                 })
             }

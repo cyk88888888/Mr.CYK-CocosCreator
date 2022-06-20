@@ -24,7 +24,7 @@ export class HomeScene extends UIScene {
         let self = this;
         self.mainClassLayer = HomeLayer;
         let subLayerMgr = self.subLayerMgr;
-        let classList = [ SettingLayer, EquipLayer, ShopLayer, SkillLayer];
+        let classList = [SettingLayer, EquipLayer, ShopLayer, SkillLayer];
         for (let i = 0; i < classList.length; i++) {
             subLayerMgr.register(classList[i]);
         }
@@ -33,8 +33,8 @@ export class HomeScene extends UIScene {
     private async onEnter() {
         let self = this;
         self.onEmitter('jumpToLayer', self.jumpToLayer);
-        if(!self._topUsrInfo) self._topUsrInfo = await TopUsrInfoLayer.show();
-        if(!self._bottomTab) self._bottomTab = await BottomTabLayer.show();
+        if (!self._topUsrInfo) self._topUsrInfo = await TopUsrInfoLayer.show();
+        if (!self._bottomTab) self._bottomTab = await BottomTabLayer.show();
     }
 
     private jumpToLayer(data: any) {
@@ -50,4 +50,4 @@ export class HomeScene extends UIScene {
         SoundMgr.inst.playMainBg();
     }
 }
-registerModule(HomeScene, [HomeLayer.prefabUrl]);
+registerModule(HomeScene, ['ui/home']);

@@ -23,7 +23,7 @@ export class LoadingLayer extends UILayer {
     private _toPercent: number;
     protected onEnter() {
         let self = this;
-        self._preResList = [HomeLayer.prefabUrl];
+        self._preResList = ['ui/common', HomeLayer.prefabUrl];
         let curDownLoadNum: number = 0;//当前已下载个数
         let initPercent = self._toPercent = 0.4;//默认加载到40%
         ResMgr.inst.loadToWithItor('HomeScene', self._preResList, () => {

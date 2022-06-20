@@ -3,7 +3,7 @@
  * @Author: CYK
  * @Date: 2022-06-15 17:01:50
  */
-import { _decorator, Component, Node, Sprite, SpriteFrame } from 'cc';
+import { _decorator, Component, Node, Sprite, SpriteFrame, SpriteAtlas, ImageAsset, resources } from 'cc';
 import { ResMgr } from '../mgr/ResMgr';
 const { ccclass, property } = _decorator;
 
@@ -14,22 +14,38 @@ export class ImgLoader extends Component {
 
     private _sprite: Sprite;
     private _url: string;
-    onLoad(){
+    onLoad() {
         let self = this;
         self._sprite = this.node.getComponent(Sprite);
-        if(!self._sprite) self._sprite = this.node.addComponent(Sprite);
+        if (!self._sprite) self._sprite = this.node.addComponent(Sprite);
     }
 
-    public set url(value: string){
+    public set url(value: string) {
         let self = this;
-        if(self._url == value) return;
+        if (self._url == value) return;
         self._url = value;
-        let spriteFrameUrl = value + '/spriteFrame';
-        ResMgr.inst.loadWithoutJuHua(spriteFrameUrl, function(){
-            let spriteFrame = <SpriteFrame>ResMgr.inst.get(spriteFrameUrl);
-            if(spriteFrame) self._sprite.spriteFrame = spriteFrame;
-        }, self)
-       
+        if (value.startsWith('ui/')) {
+            let atlassUrl = value.slice(0, value.lastIndexOf('/'));
+            let splitUrl = value.split('/');
+            let iconUrl = splitUrl[splitUrl.length - 1];
+            let spriteAtlas = <SpriteAtlas>ResMgr.inst.get(atlassUrl);
+            let spriteFrame = ResMgr.inst.get(value);
+            if (!spriteAtlas) {
+                ResMgr.inst.loadWithoutJuHua(atlassUrl, function () {
+                    self._sprite.spriteFrame = spriteAtlas.getSpriteFrame(iconUrl);
+                }, self);
+            } else {
+                self._sprite.spriteFrame = spriteAtlas.getSpriteFrame(iconUrl);
+            }
+        } else {
+            let spriteFrameUrl = value + '/spriteFrame';
+            ResMgr.inst.loadWithoutJuHua(spriteFrameUrl, function () {
+                let spriteFrame = <SpriteFrame>ResMgr.inst.get(spriteFrameUrl);
+                if (spriteFrame) self._sprite.spriteFrame = spriteFrame;
+            }, self)
+        }
+
+
     }
 }
 

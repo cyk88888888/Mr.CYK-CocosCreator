@@ -12,8 +12,6 @@ const { ccclass, property } = _decorator;
 export class HomeLayer extends UILayer {
     /** 预制体路径 */
     public static prefabUrl: string = 'prefab/home/HomeLayer';
-    @property({ tooltip: "哈哈哈", type: Button })
-    btn_test: Button;
     protected onEnter() {
         SoundMgr.inst.playMainBg();
     }
@@ -21,8 +19,5 @@ export class HomeLayer extends UILayer {
     update(deltaTime: number) {
     }
 
-    private _tap_btn_test(evt) {
-        console.log('点击测试~~~~~~');
-    }
 }
 
