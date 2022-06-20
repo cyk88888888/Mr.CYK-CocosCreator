@@ -9,9 +9,6 @@ const { ccclass, property } = _decorator;
 
 @ccclass('ImgLoader')
 export class ImgLoader extends Component {
-    // @property({type: String, tooltip:'图片url地址'})
-    // public url: string = '';
-
     private _sprite: Sprite;
     private _url: string;
     onLoad() {
