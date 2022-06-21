@@ -17,7 +17,7 @@ export class SkillLayer extends UILayer {
     @property({ type: VideoPlayer })
     public videoPlayer: VideoPlayer;
     protected onEnter() {
-        SoundMgr.inst.pauseBg();
+        SoundMgr.inst.stopBg();
         let scale = BaseUT.getFitY(0.6, 0.8);
         this.videoPlayer.node.setScale(new Vec3(scale, scale, 1));
         this.videoPlayer.play();

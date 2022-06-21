@@ -9,13 +9,15 @@ import { SceneMgr } from '../../framework/mgr/SceneMgr';
 import { ResMgr } from '../../framework/mgr/ResMgr';
 import { HomeLayer } from '../home/HomeLayer';
 import { HomeScene } from '../home/HomeScene';
+import { TopUsrInfoLayer } from '../home/TopUsrInfoLayer';
+import { BottomTabLayer } from '../home/BottomTabLayer';
 const { ccclass, property } = _decorator;
 
 @ccclass('LoadingLayer')
 export class LoadingLayer extends UILayer {
     /** 预制体路径 */
     public static prefabUrl: string = 'prefab/loading/LoadingLayer';
-    @property({type: ProgressBar})
+    @property({ type: ProgressBar })
     private progressBar: ProgressBar;
     private _isLoadingHome: boolean;
 
@@ -23,7 +25,7 @@ export class LoadingLayer extends UILayer {
     private _toPercent: number;
     protected onEnter() {
         let self = this;
-        self._preResList = ['ui/common', HomeLayer.prefabUrl];
+        self._preResList = ['ui/common', HomeLayer.prefabUrl, TopUsrInfoLayer.prefabUrl, BottomTabLayer.prefabUrl];
         let curDownLoadNum: number = 0;//当前已下载个数
         let initPercent = self._toPercent = 0.4;//默认加载到40%
         ResMgr.inst.loadToWithItor('HomeScene', self._preResList, () => {

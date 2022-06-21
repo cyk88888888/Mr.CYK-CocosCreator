@@ -17,7 +17,7 @@ export class TopUsrInfoLayer extends UIMenu {
     private grp_head: Node;
     @property({ type: Label })
     private lbl_name: Label;
-    private onEnter() {
+    protected onEnter() {
 
     }
 
