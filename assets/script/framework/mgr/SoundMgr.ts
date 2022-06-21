@@ -109,5 +109,14 @@ export class SoundMgr {
             ResMgr.inst.releaseRes(shiftUrl);
         }
     }
+
+    /**播放点击音效 */
+    public playClickSound(){
+        if(!this.buttonSound){
+            console.warn('请先设置buttonSound点击音效资源路径');
+            return;
+        }
+        this.playSound(this.buttonSound);
+    }
 }
 

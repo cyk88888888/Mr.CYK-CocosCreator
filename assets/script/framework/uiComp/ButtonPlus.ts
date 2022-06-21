@@ -14,7 +14,7 @@ export class ButtonPlus extends Button {
     }
 
     public playClickSound() {
-        SoundMgr.inst.playSound('dy/sound/click');
+        SoundMgr.inst.playClickSound();
     }
 }
 

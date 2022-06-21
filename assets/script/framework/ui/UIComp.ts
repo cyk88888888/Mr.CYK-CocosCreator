@@ -141,7 +141,7 @@ export class UIComp extends Component {
 
     private onNodeClick(event: EventTouch) {
         let self = this;
-        SoundMgr.inst.playSound('dy/sound/click');
+        SoundMgr.inst.playClickSound();
         let eventFuncName = "_tap_" + event.currentTarget.name;
         self[eventFuncName](event);
     }
