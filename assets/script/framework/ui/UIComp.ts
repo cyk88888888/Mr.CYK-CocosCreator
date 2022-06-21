@@ -1,5 +1,6 @@
-import { _decorator, Component, Node, Tween, tween } from 'cc';
+import { _decorator, Component, Node, Tween, tween, EventTouch } from 'cc';
 import { emmiter } from '../base/Emmiter';
+import { SoundMgr } from '../mgr/SoundMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('UIComp')
@@ -132,10 +133,17 @@ export class UIComp extends Component {
             if (self[eventFuncName] && (obj instanceof Component || obj instanceof Node)) {
                 let eventName = Node.EventType.TOUCH_END;
                 let node = obj instanceof Component ? obj.node : obj;
-                node.on(eventName, self[eventFuncName], self);
+                node.on(eventName, self.onNodeClick, self);
                 self._objTapMap[eventFuncName + '&' + eventName] = node;
             }
         }
+    }
+
+    private onNodeClick(event: EventTouch) {
+        let self = this;
+        SoundMgr.inst.playSound('dy/sound/click');
+        let eventFuncName = "_tap_" + event.currentTarget.name;
+        self[eventFuncName](event);
     }
 
     /**刷新所有列表 */
@@ -251,7 +259,7 @@ export class UIComp extends Component {
                 let eventFuncName = splitKey[0];
                 let eventName = splitKey[1];
                 let obj = self._objTapMap[key];
-                obj.off(eventName, self[eventFuncName], self);
+                obj.off(eventName, self.onNodeClick, self);
             }
             self._objTapMap = null;
         }

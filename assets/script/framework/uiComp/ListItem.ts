@@ -9,6 +9,7 @@
  const { ccclass, property, disallowMultiple, menu, executionOrder } = _decorator;
  import { Node, Component, Enum, Sprite, SpriteFrame, tween, _decorator, EventHandler, Tween, Button, UITransform, Vec3 } from 'cc';
  import { DEV } from 'cc/env';
+import { ButtonPlus } from './ButtonPlus';
  import List from './List';
  
  enum SelectedType {
@@ -76,10 +77,10 @@
          return this._selected;
      }
      //按钮组件
-     private _btnCom: any;
+     private _btnCom: Button;
      get btnCom() {
          if (!this._btnCom)
-             this._btnCom = this.node.getComponent(Button);
+             this._btnCom = this.node.getComponent(Button) || this.node.getComponent(ButtonPlus);
          return this._btnCom;
      }
      //依赖的List组件

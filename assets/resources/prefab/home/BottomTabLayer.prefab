@@ -1512,6 +1512,9 @@
       },
       {
         "__id__": 125
+      },
+      {
+        "__id__": 128
       }
     ],
     "nestedPrefabInstanceRoots": [
@@ -1676,6 +1679,36 @@
     "__type__": "cc.TargetInfo",
     "localID": [
       "b8OtzCc/1IvKNo3/ripDM7"
+    ]
+  },
+  {
+    "__type__": "cc.TargetInfo",
+    "localID": [
+      "25BOUnqFZFMatcP+j2PFXr"
+    ]
+  },
+  {
+    "__type__": "cc.TargetOverrideInfo",
+    "source": {
+      "__id__": 3
+    },
+    "sourceInfo": {
+      "__id__": 129
+    },
+    "propertyPath": [
+      "selectedFlag"
+    ],
+    "target": {
+      "__id__": 3
+    },
+    "targetInfo": {
+      "__id__": 130
+    }
+  },
+  {
+    "__type__": "cc.TargetInfo",
+    "localID": [
+      "cc03ED2ptDVJ0R0fi/mdrC"
     ]
   },
   {

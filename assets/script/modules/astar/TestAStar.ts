@@ -43,7 +43,7 @@ export class TestAStar extends UIComp {
     private _path: Nodes[];
     private _startFrame: boolean;
     private _speed: number;//人物移动速度
-    private onFirstEnter() {
+    protected onFirstEnter() {
         let self = this;
         self._cellSize = 40;
         self._speed = 1;
@@ -124,7 +124,7 @@ export class TestAStar extends UIComp {
         self.graphicsPlayer.node.setPosition(_x, _y);
     }
 
-    tap_grp_container(event: EventTouch) {
+    private _tap_grp_container(event: EventTouch) {
         let self = this;
         let point = event.getUILocation();
 
@@ -234,7 +234,7 @@ export class TestAStar extends UIComp {
         return '#ffffff';
     }
 
-    private onExit() {
+    protected onExit() {
         let self = this;
     }
 }

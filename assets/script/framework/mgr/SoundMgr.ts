@@ -17,7 +17,7 @@ export class SoundMgr {
     /**按钮点击音效 */
     public buttonSound: string;
     /**音乐缓存最大个数 */
-    public musicCacheMaxCount: number = 4;
+    public musicCacheMaxCount: number = 5;
     public musicCachePool: string[] = [];
     private _defaultBgMusic: string;
     public get defaultBgMusic() {
@@ -78,8 +78,6 @@ export class SoundMgr {
         return this._audioSource;
     }
 
-    /**场景音效节点 */
-    public subSoundNode: Node;
     /**
      * 播放音效
      * @param url 音效资源路径
@@ -87,8 +85,11 @@ export class SoundMgr {
      */
     public playSound(url: string, loop?: boolean) {
         let self = this;
-        if (!self.subSoundNode) return;
-        let audioSource = self.subSoundNode.getComponent(AudioSource);
+        let canvas = SceneMgr.inst.getCanvas();
+        let audioSource = canvas.getComponent(AudioSource);
+        if(!canvas.getComponent(AudioSource)){
+            audioSource = <AudioSource>canvas.addComponent(AudioSource);
+        }
         ResMgr.inst.loadWithoutJuHua(url, () => {
             let audioClip = ResMgr.inst.get(url) as AudioClip;
             if (!audioClip) throw '音效资源不存在: ' + url;

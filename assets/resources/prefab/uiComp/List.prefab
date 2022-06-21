@@ -258,10 +258,9 @@
     "fileId": "cc0cqkW/BJj57FD9rYJOwH"
   },
   {
-    "__type__": "cc.Button",
+    "__type__": "668dcQo8b9L7bzcNhn/f/X6",
     "_name": "",
     "_objFlags": 0,
-    "__editorExtras__": {},
     "node": {
       "__id__": 4
     },
@@ -311,7 +310,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "7dczmQSPtDkZiHGFCsGldc"
+    "fileId": "eagDQQN/dLXqp64RZs7VE8"
   },
   {
     "__type__": "dbedcTlseZDMaAxug16qFYi",
@@ -334,7 +333,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "b8OtzCc/1IvKNo3/ripDM7"
+    "fileId": "cc03ED2ptDVJ0R0fi/mdrC"
   },
   {
     "__type__": "cc.PrefabInfo",
