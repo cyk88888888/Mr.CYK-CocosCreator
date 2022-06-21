@@ -32,7 +32,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "444a81fe-fe1c-4dd7-9f70-d13d906303a1@6c48a",
+        "imageUuidOrDatabaseUri": "ee0384b5-f4de-4608-926e-5f02422c5b8c@6c48a",
         "atlasUuid": "a2ce7859-6a07-4587-9b06-91dd2c35b314"
       },
       "ver": "1.0.9",
@@ -66,7 +66,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "444a81fe-fe1c-4dd7-9f70-d13d906303a1@6c48a",
+        "imageUuidOrDatabaseUri": "ee0384b5-f4de-4608-926e-5f02422c5b8c@6c48a",
         "atlasUuid": "a2ce7859-6a07-4587-9b06-91dd2c35b314"
       },
       "ver": "1.0.9",
@@ -78,9 +78,9 @@
     }
   },
   "userData": {
-    "atlasTextureName": "astar.png",
+    "atlasTextureName": "astar_atlas.png",
     "format": 3,
     "uuid": "a2ce7859-6a07-4587-9b06-91dd2c35b314",
-    "textureUuid": "444a81fe-fe1c-4dd7-9f70-d13d906303a1@6c48a"
+    "textureUuid": "ee0384b5-f4de-4608-926e-5f02422c5b8c@6c48a"
   }
 }

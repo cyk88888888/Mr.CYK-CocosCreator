@@ -104,13 +104,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>bag.png</string>
+            <string>bag_atlas.png</string>
             <key>size</key>
             <string>{617,499}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:a531e09918b2209b49f0488204b781dd:d5dffcd980108e40066e617e2e721bec:b3f8c49958a0fb927b02d9c3b1fdbc5b$</string>
+            <string>$TexturePacker:SmartUpdate:d2f9111be55a67e76e3051abe6ae95b3:d5dffcd980108e40066e617e2e721bec:81dfd10986d9ec7d8e9a9b90974a28f5$</string>
             <key>textureFileName</key>
-            <string>bag.png</string>
+            <string>bag_atlas.png</string>
         </dict>
     </dict>
 </plist>

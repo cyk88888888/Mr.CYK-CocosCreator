@@ -23,16 +23,13 @@ export class ImgLoader extends Component {
         self._url = value;
         if (value.startsWith('ui/')) {
             let atlassUrl = value.slice(0, value.lastIndexOf('/'));
-            let splitUrl = value.split('/');
-            let iconUrl = splitUrl[splitUrl.length - 1];
             let spriteAtlas = <SpriteAtlas>ResMgr.inst.get(atlassUrl);
-            let spriteFrame = ResMgr.inst.get(value);
             if (!spriteAtlas) {
                 ResMgr.inst.loadWithoutJuHua(atlassUrl, function () {
-                    self._sprite.spriteFrame = spriteAtlas.getSpriteFrame(iconUrl);
+                    self._sprite.spriteFrame = <SpriteFrame>ResMgr.inst.get(value);
                 }, self);
             } else {
-                self._sprite.spriteFrame = spriteAtlas.getSpriteFrame(iconUrl);
+                self._sprite.spriteFrame = <SpriteFrame>ResMgr.inst.get(value);
             }
         } else {
             let spriteFrameUrl = value + '/spriteFrame';

@@ -33,7 +33,6 @@ export class BottomTabLayer extends UIMenu {
             { layer: SkillLayer.__className, icon: 'ui/home/ico_tianfu', preRes: [SkillLayer.prefabUrl] },
             { layer: SettingLayer.__className, icon: 'ui/home/ico_shezhi', preRes: [SettingLayer.prefabUrl] },
         ];
-
     }
 
     protected onFirstEnter() {

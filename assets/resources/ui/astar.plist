@@ -44,13 +44,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>astar.png</string>
+            <string>astar_atlas.png</string>
             <key>size</key>
             <string>{32,71}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:ead19a8e32f1b38e14efdf7c86da9df4:3c4e6051601c78ae352f8cb425ac4ef7:cf760f138954ff6e20f563b2c8b8324b$</string>
+            <string>$TexturePacker:SmartUpdate:9acf6bb87c3c73e59893b032cc3e6d4e:3c4e6051601c78ae352f8cb425ac4ef7:c94cee15bd32a741148df8b79c0975a6$</string>
             <key>textureFileName</key>
-            <string>astar.png</string>
+            <string>astar_atlas.png</string>
         </dict>
     </dict>
 </plist>

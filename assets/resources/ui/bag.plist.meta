@@ -32,7 +32,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "5f03d624-878d-4c22-b9d0-a1dffb5f3204@6c48a",
+        "imageUuidOrDatabaseUri": "856e1289-2b94-42c4-a463-b4de971c0c43@6c48a",
         "atlasUuid": "4d7c3352-6717-4706-b952-1a38e2177c0e"
       },
       "ver": "1.0.9",
@@ -66,7 +66,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "5f03d624-878d-4c22-b9d0-a1dffb5f3204@6c48a",
+        "imageUuidOrDatabaseUri": "856e1289-2b94-42c4-a463-b4de971c0c43@6c48a",
         "atlasUuid": "4d7c3352-6717-4706-b952-1a38e2177c0e"
       },
       "ver": "1.0.9",
@@ -100,7 +100,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "5f03d624-878d-4c22-b9d0-a1dffb5f3204@6c48a",
+        "imageUuidOrDatabaseUri": "856e1289-2b94-42c4-a463-b4de971c0c43@6c48a",
         "atlasUuid": "4d7c3352-6717-4706-b952-1a38e2177c0e"
       },
       "ver": "1.0.9",
@@ -134,7 +134,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "5f03d624-878d-4c22-b9d0-a1dffb5f3204@6c48a",
+        "imageUuidOrDatabaseUri": "856e1289-2b94-42c4-a463-b4de971c0c43@6c48a",
         "atlasUuid": "4d7c3352-6717-4706-b952-1a38e2177c0e"
       },
       "ver": "1.0.9",
@@ -168,7 +168,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "5f03d624-878d-4c22-b9d0-a1dffb5f3204@6c48a",
+        "imageUuidOrDatabaseUri": "856e1289-2b94-42c4-a463-b4de971c0c43@6c48a",
         "atlasUuid": "4d7c3352-6717-4706-b952-1a38e2177c0e"
       },
       "ver": "1.0.9",
@@ -202,7 +202,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "5f03d624-878d-4c22-b9d0-a1dffb5f3204@6c48a",
+        "imageUuidOrDatabaseUri": "856e1289-2b94-42c4-a463-b4de971c0c43@6c48a",
         "atlasUuid": "4d7c3352-6717-4706-b952-1a38e2177c0e"
       },
       "ver": "1.0.9",
@@ -214,9 +214,9 @@
     }
   },
   "userData": {
-    "atlasTextureName": "bag.png",
+    "atlasTextureName": "bag_atlas.png",
     "format": 3,
     "uuid": "4d7c3352-6717-4706-b952-1a38e2177c0e",
-    "textureUuid": "5f03d624-878d-4c22-b9d0-a1dffb5f3204@6c48a"
+    "textureUuid": "856e1289-2b94-42c4-a463-b4de971c0c43@6c48a"
   }
 }

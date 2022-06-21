@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "5f03d624-878d-4c22-b9d0-a1dffb5f3204",
+  "uuid": "56a1a2f2-46af-44c9-8663-c70944c7a70c",
   "files": [
     ".png",
     ".json"
@@ -10,8 +10,8 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "5f03d624-878d-4c22-b9d0-a1dffb5f3204@6c48a",
-      "displayName": "bag",
+      "uuid": "56a1a2f2-46af-44c9-8663-c70944c7a70c@6c48a",
+      "displayName": "common_atlas",
       "id": "6c48a",
       "name": "texture",
       "userData": {
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "5f03d624-878d-4c22-b9d0-a1dffb5f3204"
+        "imageUuidOrDatabaseUri": "56a1a2f2-46af-44c9-8663-c70944c7a70c"
       },
       "ver": "1.0.21",
       "imported": true,
@@ -36,6 +36,6 @@
     "type": "texture",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "5f03d624-878d-4c22-b9d0-a1dffb5f3204@6c48a"
+    "redirect": "56a1a2f2-46af-44c9-8663-c70944c7a70c@6c48a"
   }
 }

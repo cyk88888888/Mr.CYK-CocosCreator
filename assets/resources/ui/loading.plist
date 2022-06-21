@@ -74,13 +74,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>loading.png</string>
+            <string>loading_atlas.png</string>
             <key>size</key>
             <string>{103,222}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:3bdc981c14ba7be27f2fd39ad43fe8e1:3f2e64b79f9828fc3a84637da6f94e35:e75714c0871c497b76d71a94e9da90fb$</string>
+            <string>$TexturePacker:SmartUpdate:110de1e77b89af7207f18b102fcf3621:3f2e64b79f9828fc3a84637da6f94e35:6527943677b6592b370a9b81a87e3ee9$</string>
             <key>textureFileName</key>
-            <string>loading.png</string>
+            <string>loading_atlas.png</string>
         </dict>
     </dict>
 </plist>
