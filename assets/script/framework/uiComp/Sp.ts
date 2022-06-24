@@ -58,6 +58,8 @@ export class Sp extends Component {
     public play(count: number = -1) {
         let self = this;
         if (!self._url) return;
+        self._playCount = 0;
+        self._curPlayFrame = 0;
         self.playCount = count;
         self._isStop = false;
         let spriteAtlas = <SpriteAtlas>ResMgr.inst.get(self._url);
@@ -86,12 +88,12 @@ export class Sp extends Component {
         let self = this;
         if (self._isStop || !self._loadCompleted || (self.playCount != -1 && self.playCount == self._playCount)) return;
         if (self._curPlayFrame % self._perFrame == 0) {
-            if (self._curPlayFrame == self.frameRate) {
-                self._curPlayFrame = 0;
-                if (self.playCount != -1) self._playCount++;
-            }
             let totSpriteFrameLen = self._spriteFrames.length;
             let idx = self._curPlayFrame / self._perFrame;
+            if (idx == totSpriteFrameLen - 1) {//全部播放结束一次
+                self._curPlayFrame = -1;
+                if (self.playCount != -1) self._playCount++;
+            }
             if (self._sprite) self._sprite.spriteFrame = self._spriteFrames[idx];
         }
 

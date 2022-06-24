@@ -34,14 +34,14 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 38
+        "__id__": 39
       },
       {
-        "__id__": 40
+        "__id__": 41
       }
     ],
     "_prefab": {
-      "__id__": 42
+      "__id__": 43
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -706,6 +706,9 @@
       },
       {
         "__id__": 36
+      },
+      {
+        "__id__": 38
       }
     ],
     "removedComponents": []
@@ -789,6 +792,16 @@
     ]
   },
   {
+    "__type__": "CCPropertyOverrideInfo",
+    "targetInfo": {
+      "__id__": 37
+    },
+    "propertyPath": [
+      "frameRate"
+    ],
+    "value": 120
+  },
+  {
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
@@ -798,7 +811,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 39
+      "__id__": 40
     },
     "_contentSize": {
       "__type__": "cc.Size",
@@ -826,7 +839,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 41
+      "__id__": 42
     },
     "btn_bag": {
       "__id__": 25
