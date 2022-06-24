@@ -25,4 +25,4 @@ export class LoadingScene extends UIScene {
 
     }
 }
-registerModule(LoadingScene, []);
+registerModule(LoadingScene, ['dy/sp/pet']);

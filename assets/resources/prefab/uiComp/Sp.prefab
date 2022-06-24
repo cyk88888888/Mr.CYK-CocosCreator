@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "ImgLoader",
+    "_name": "Sp",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": null,
@@ -74,8 +74,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 80,
-      "height": 80
+      "width": 50,
+      "height": 50
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -113,7 +113,7 @@
     "_spriteFrame": null,
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 0,
+    "_sizeMode": 1,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -128,10 +128,10 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "d72/DhLxZKPJnNfdms8INN"
+    "fileId": "6fr2Ux1fNHIplPZqlTnJiB"
   },
   {
-    "__type__": "bd5ffXtU0JG9LgAlbDlBRyw",
+    "__type__": "23b5fG1JTNG37FwQDevRbsf",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -141,11 +141,15 @@
     "__prefab": {
       "__id__": 7
     },
+    "autoPlay": true,
+    "frameRate": 24,
+    "playCount": -1,
+    "url": "",
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "dbk1qjL7tEJYeE+kO1LGpj"
+    "fileId": "fcc1shdbVFaLNalzOZz/rw"
   },
   {
     "__type__": "cc.PrefabInfo",
