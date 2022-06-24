@@ -94,6 +94,7 @@ export class Sp extends Component {
                 self._curPlayFrame = -1;
                 if (self.playCount != -1) self._playCount++;
             }
+            console.log('self._spriteFrames[idx]:' + self._spriteFrames[idx].name);
             if (self._sprite) self._sprite.spriteFrame = self._spriteFrames[idx];
         }
 
