@@ -3,6 +3,7 @@ import { _decorator, Component, Node, Graphics, UITransform, EventTouch, Label, 
 import { BaseUT } from '../../framework/base/BaseUtil';
 import { TickMgr } from '../../framework/mgr/TickMgr';
 import { UIComp } from '../../framework/ui/UIComp';
+import { Sp } from '../../framework/uiComp/Sp';
 import { MessageTip } from '../common/message/MessageTip';
 import { AStar } from './AStar';
 import { Grid } from './Grid';
@@ -25,6 +26,8 @@ export class TestAStar extends UIComp {
     public graphicsPath: Graphics;
     @property({ type: Graphics })
     public graphicsPlayer: Graphics;
+    @property({ type: Sp })
+    public sp_player: Sp;
     @property({ type: Label })
     public lbl_cost: Label;
     @property({ type: Node })
@@ -46,7 +49,7 @@ export class TestAStar extends UIComp {
     protected onFirstEnter() {
         let self = this;
         self._cellSize = 40;
-        self._speed = 1;
+        self._speed = 0.5;
         self._widget = self.getComponent(Widget);
         TickMgr.inst.nextTick(() => {
             self.initGrid();
@@ -122,6 +125,7 @@ export class TestAStar extends UIComp {
         let _x = ranDomStaryPos.x * self._cellSize + self._cellSize / 2;
         let _y = ranDomStaryPos.y * self._cellSize + self._cellSize / 2;
         self.graphicsPlayer.node.setPosition(_x, _y);
+        self.sp_player.node.setPosition(self.graphicsPlayer.node.position);
     }
 
     private _tap_grp_container(event: EventTouch) {
@@ -194,7 +198,12 @@ export class TestAStar extends UIComp {
                 this._startFrame = false;
             }
         } else {
-            self.graphicsPlayer.node.setPosition(playerPos.x + dx * self._speed, playerPos.y + dy * self._speed);
+            let oldPos = [self.graphicsPlayer.node.position.x, self.graphicsPlayer.node.position.y];
+            let newPos = [playerPos.x + dx * self._speed, playerPos.y + dy * self._speed];
+            let dir = newPos[0] > oldPos[0] ? 1 : -1;
+            self.graphicsPlayer.node.setPosition(newPos[0], newPos[1]);
+            self.sp_player.node.setPosition(self.graphicsPlayer.node.position);
+            self.sp_player.node.setScale(Math.abs(self.sp_player.node.scale.x) * dir, self.sp_player.node.scale.y);
         }
     }
 
@@ -213,7 +222,8 @@ export class TestAStar extends UIComp {
         let self = this;
         self.graphicsGrid.node.active = !self.graphicsGrid.node.active;
         self.graphicsBlock.node.active = !self.graphicsBlock.node.active;
-
+        self.graphicsPlayer.node.active = !self.graphicsPlayer.node.active;
+        self.graphicsPath.node.active = !self.graphicsPath.node.active;
     }
 
     private get screenWh() {
