@@ -3,31 +3,70 @@
  * @Author: CYK
  * @Date: 2022-05-13 09:40:14
  */
-import { _decorator, Component} from 'cc';
+import { _decorator, Component, Prefab, Node, EventTouch, instantiate, director } from 'cc';
+import { BaseEnum } from './framework/base/BaseEnum';
+import { BaseUT } from './framework/base/BaseUtil';
 import { scaleMode } from './framework/base/ScaleMode';
 import { SceneMgr } from './framework/mgr/SceneMgr';
 import { SoundMgr } from './framework/mgr/SoundMgr';
 import { TickMgr } from './framework/mgr/TickMgr';
+import { Sp } from './framework/uiComp/Sp';
 import { LoadingScene } from './modules/loading/LoadingScene';
 const { ccclass, property } = _decorator;
 
 @ccclass('Main')
 export class Main extends Component {
+    @property({ type: Prefab, tooltip: '点击特效' })
+    clickEff: Prefab;
     onLoad() {
         SoundMgr.inst.defaultBgMusic = "dy/sound/bg00";//设置默认背景音乐
         SceneMgr.inst.mainScene = 'HomeScene';//设置主场景
         SoundMgr.inst.buttonSound = "dy/sound/click";//设置全局按钮点击音效
         TickMgr.inst.mainNode = this;
-        
+
         scaleMode.designWidth = 640;
         scaleMode.designHeight = 1280;
         scaleMode.designHeight_min = 1030;
         scaleMode.designHeight_max = 1280;
 
+        this.initClickEffContainer();
         SceneMgr.inst.run(LoadingScene, { name: '红红火火恍恍惚惚' });
     }
 
-    update(dt: number){
+    private initClickEffContainer() {
+        let self = this;
+        let newNode = BaseUT.newUINode('ClickEff');
+        newNode.on(Node.EventType.TOUCH_START, self.touchBeginHandler, this);
+        newNode.on(Node.EventType.TOUCH_END, self.onStageCLick, self);
+        // let _touchListener = newNode.eventProcessor.touchListener;
+        // (newNode as any)._touchListener.setSwallowTouches(false);
+        let windowSize = BaseUT.getStageSize();
+        BaseUT.setSize(newNode, windowSize.width, windowSize.height);
+        SceneMgr.inst.getCanvas().addChild(newNode);
+    }
+
+    private touchBeginHandler(e: EventTouch){
+        e.preventSwallow = true;
+    }
+
+    private onStageCLick(event: EventTouch) {
+        event.preventSwallow = true;
+        let point = event.getUILocation();
+        let eff = instantiate(this.clickEff);
+        let sp = eff.getComponent(Sp);
+        sp.node.on(BaseEnum.onSpPlayEnd, () => {
+            sp.node.destroy();
+        }, this);
+        sp.url = 'dy/sp/click';
+        sp.playCount = 1;
+        sp.frameRate = 40;
+        let parent = SceneMgr.inst.getCanvas().getChildByName('ClickEff');
+        let parnetSize = BaseUT.getSize(parent);
+        eff.setPosition(point.x - parnetSize.width / 2, point.y - parnetSize.height / 2);
+        parent.addChild(eff);
+    }
+
+    update(dt: number) {
         TickMgr.inst.onTick(dt);
     }
 }

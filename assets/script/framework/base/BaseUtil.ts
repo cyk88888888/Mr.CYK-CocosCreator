@@ -3,7 +3,7 @@
  * @Author: CYK
  * @Date: 2022-05-19 11:39:05
  */
-import { Layers, Node, screen, Size, UIOpacity, UITransform, view } from "cc";
+import { Layers, Node, Scene, screen, Size, UIOpacity, UITransform, view } from "cc";
 import { scaleMode } from "./ScaleMode";
 export namespace BaseUT {
     /** 获取宽度适配下屏幕的视图宽高*/
@@ -56,6 +56,12 @@ export namespace BaseUT {
     export function setSize(node: Node, width: number, height: number) {
         let uiTransform = node.getComponent(UITransform);
         uiTransform.setContentSize(width, height);
+    }
+
+    /**获取node宽高 */
+    export function getSize(node: Node | Scene) {
+        let uiTransform = node.getComponent(UITransform);
+        return new Size(uiTransform.width,uiTransform.height);
     }
 
     export function getFitY(min: number, max: number) {

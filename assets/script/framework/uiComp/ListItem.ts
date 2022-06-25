@@ -58,7 +58,6 @@ import { ButtonPlus } from './ButtonPlus';
      _selected: boolean = false;
      set selected(val: boolean) {
          this._selected = val;
-         Tween
          if (!this.selectedFlag)
              return;
          switch (this.selectedMode) {

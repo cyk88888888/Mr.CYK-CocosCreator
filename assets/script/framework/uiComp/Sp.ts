@@ -4,6 +4,8 @@
  * @Date: 2022-06-24 14:49:32
  */
 import { _decorator, Component, Sprite, SpriteFrame, SpriteAtlas, CCInteger, CCString } from 'cc';
+import { BaseEnum } from '../base/BaseEnum';
+import { emmiter } from '../base/Emmiter';
 import { ResMgr } from '../mgr/ResMgr';
 const { ccclass, property } = _decorator;
 
@@ -96,14 +98,16 @@ export class Sp extends Component {
         self._intervalTime = setInterval(() => {
             onInterVal();
         }, time);
-
         function onInterVal() {
             if (self.checkClearInterval()) return;
             let totSpriteFrameLen = self._spriteFrames.length;
             let idx = self._curPlayFrame;
             if (idx == totSpriteFrameLen - 1) {//全部播放结束一次
                 self._curPlayFrame = -1;
-                if (self.playCount != -1) self._playCount++;
+                if (self.playCount != -1) {
+                    self._playCount++;
+                    if(self._playCount == self.playCount) self.node.emit(BaseEnum.onSpPlayEnd);
+                }
             }
             // console.log('self._spriteFrames[idx]:' + self._spriteFrames[idx].name);
             if (self._sprite) self._sprite.spriteFrame = self._spriteFrames[idx];

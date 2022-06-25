@@ -149,7 +149,7 @@ export class UIScene extends Component{
 
     /**将场景添加到canvas根节点 */
     public addToGRoot() {
-        SceneMgr.inst.getCanvas().addChild(this.node);
+        SceneMgr.inst.getCanvas().insertChild(this.node, 1);
     }
 
     public removeFromParent() {
