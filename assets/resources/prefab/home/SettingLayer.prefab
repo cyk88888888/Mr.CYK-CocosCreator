@@ -34,14 +34,14 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 39
+        "__id__": 40
       },
       {
-        "__id__": 41
+        "__id__": 42
       }
     ],
     "_prefab": {
-      "__id__": 43
+      "__id__": 44
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -709,6 +709,9 @@
       },
       {
         "__id__": 38
+      },
+      {
+        "__id__": 39
       }
     ],
     "removedComponents": []
@@ -799,7 +802,17 @@
     "propertyPath": [
       "frameRate"
     ],
-    "value": 120
+    "value": 12
+  },
+  {
+    "__type__": "CCPropertyOverrideInfo",
+    "targetInfo": {
+      "__id__": 37
+    },
+    "propertyPath": [
+      "playCount"
+    ],
+    "value": -1
   },
   {
     "__type__": "cc.UITransform",
@@ -811,7 +824,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 40
+      "__id__": 41
     },
     "_contentSize": {
       "__type__": "cc.Size",
@@ -839,7 +852,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 42
+      "__id__": 43
     },
     "btn_bag": {
       "__id__": 25

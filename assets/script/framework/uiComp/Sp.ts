@@ -13,15 +13,13 @@ export class Sp extends Component {
     public autoPlay: boolean = true;
     @property({ tooltip: '播放帧频', type: CCInteger })
     public frameRate: number = 24;
-    @property({ tooltip: '播放次数', type: CCInteger })
+    @property({ tooltip: '播放次数,-1表示循环播放', type: CCInteger })
     public playCount: number = -1;
     @property({ tooltip: '资源路径', type: CCString })
     public url: string = '';
     private _sprite: Sprite;
     private _url: string;
     private _spriteFrames: SpriteFrame[];
-    /**每几帧替换一次图片 */
-    private _perFrame: number;
     /**当前播放的持续帧数 */
     private _curPlayFrame: number = 0;
     /**当前已播放次数 */
@@ -30,6 +28,8 @@ export class Sp extends Component {
     private _isStop: boolean;
     /**是否加载完毕 */
     private _loadCompleted: boolean;
+
+    private _intervalTime: number;
     onLoad() {
         let self = this;
         self._sprite = self.node.getComponent(Sprite);
@@ -57,7 +57,10 @@ export class Sp extends Component {
      */
     public play(count: number = -1) {
         let self = this;
-        if (!self._url) return;
+        if (!self._url) {
+            console.error('请先设置资源路径！！！');
+            return;
+        }
         self._playCount = 0;
         self._curPlayFrame = 0;
         self.playCount = count;
@@ -74,8 +77,8 @@ export class Sp extends Component {
         function loadComplete() {
             let spriteAtlas = <SpriteAtlas>ResMgr.inst.get(self._url);
             self._spriteFrames = spriteAtlas.getSpriteFrames();
-            self._perFrame = Math.floor(self.frameRate / spriteAtlas.getSpriteFrames().length);
             self._loadCompleted = true;
+            self.doInterval();
         }
     }
 
@@ -84,21 +87,53 @@ export class Sp extends Component {
         self._isStop = true;
     }
 
-    update(dt: number) {
+    private doInterval() {
         let self = this;
-        if (self._isStop || !self._loadCompleted || (self.playCount != -1 && self.playCount == self._playCount)) return;
-        if (self._curPlayFrame % self._perFrame == 0) {
+        clearInterval(self._intervalTime);
+        if (self.checkClearInterval()) return;
+        let time = 1000 / self.frameRate;
+        onInterVal();
+        self._intervalTime = setInterval(() => {
+            onInterVal();
+        }, time);
+
+        function onInterVal() {
+            if (self.checkClearInterval()) return;
             let totSpriteFrameLen = self._spriteFrames.length;
-            let idx = self._curPlayFrame / self._perFrame;
+            let idx = self._curPlayFrame;
             if (idx == totSpriteFrameLen - 1) {//全部播放结束一次
                 self._curPlayFrame = -1;
                 if (self.playCount != -1) self._playCount++;
             }
-            console.log('self._spriteFrames[idx]:' + self._spriteFrames[idx].name);
+            // console.log('self._spriteFrames[idx]:' + self._spriteFrames[idx].name);
             if (self._sprite) self._sprite.spriteFrame = self._spriteFrames[idx];
-        }
 
-        self._curPlayFrame++;
+            self._curPlayFrame++;
+        }
+    }
+
+    private checkClearInterval() {
+        let self = this;
+        if (!self.node || self._isStop || !self._loadCompleted || (self.playCount != -1 && self.playCount == self._playCount)) {
+            clearInterval(self._intervalTime);
+            return true;
+        }
+        return false;
+    }
+
+    onEnable() {
+        let self = this;
+        self.doInterval();
+    }
+
+    onDisable() {
+        let self = this;
+        clearInterval(self._intervalTime);
+    }
+
+    onDestroy() {
+        let self = this;
+        clearInterval(self._intervalTime);
     }
 }
 
