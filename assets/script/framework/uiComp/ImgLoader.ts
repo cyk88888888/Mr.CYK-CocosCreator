@@ -32,6 +32,10 @@ export class ImgLoader extends Component {
                 self._sprite.spriteFrame = <SpriteFrame>ResMgr.inst.get(value);
             }
         } else {
+            if (self._url == '' || self._url == null || self._url == undefined) {
+                self._sprite.spriteFrame = null;
+                return;
+            }
             let spriteFrameUrl = value + '/spriteFrame';
             ResMgr.inst.loadWithoutJuHua(spriteFrameUrl, function () {
                 let spriteFrame = <SpriteFrame>ResMgr.inst.get(spriteFrameUrl);

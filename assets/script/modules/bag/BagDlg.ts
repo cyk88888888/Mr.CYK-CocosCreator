@@ -3,7 +3,7 @@
  * @Author: CYK
  * @Date: 2022-05-12 09:23:41
  */
-import { Button, instantiate, Label, Node, Prefab, _decorator } from 'cc';
+import { Button, instantiate, Label, Node, Prefab, Vec3, _decorator } from 'cc';
 import { UIDlg } from '../../framework/ui/UIDlg';
 import { ImgLoader } from '../../framework/uiComp/ImgLoader';
 import List from '../../framework/uiComp/List';
@@ -24,7 +24,7 @@ export class BagDlg extends UIDlg {
 
     private _bagDataList: any[];
     private totalItemNum: number = 90;  //总Item数
-    private pagePreNum: number = 15;    //每页Item数量
+    private pagePreNum: number = 12;    //每页Item数量
     private pageTotalNum: number;       //总页数
     protected onEnter() {
         let self = this;
@@ -44,7 +44,7 @@ export class BagDlg extends UIDlg {
             for (let n = 0; n < item.children.length; n++) {
                 let bi: any = item.children[n];
                 let exactIdx = (idx * this.pagePreNum) + n;
-                bi.getChildByName('icon').getComponent(ImgLoader).url = this._bagDataList[exactIdx - 1].icon;
+                bi.getChildByName('icon').getComponent(ImgLoader).url = exactIdx < this.totalItemNum ? this._bagDataList[exactIdx].icon : '';
             }
         } else {
             // 我这里就不考虑性能了，直接实例化。
@@ -56,6 +56,9 @@ export class BagDlg extends UIDlg {
                 bi.getChildByName('icon').getComponent(ImgLoader).url = this._bagDataList[exactIdx].icon;
             }
         }
+
+        let pos: Vec3 = item.getPosition();
+        item.setPosition(new Vec3(pos.x, 156));
     }
 
     //当列表项被选择...
