@@ -466,6 +466,10 @@
     },
     "_enabled": true,
     "__prefab": null,
+    "clickEff": {
+      "__uuid__": "0166a54b-313e-41d8-b785-78733f5eeb4f",
+      "__expectedType__": "cc.Prefab"
+    },
     "_id": "11lpNc6X5D+7XqYjcylR2p"
   },
   {

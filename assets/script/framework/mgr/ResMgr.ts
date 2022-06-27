@@ -183,21 +183,26 @@ export class ResMgr {
     /**释放模块资源 */
     public releaseResModule(scenename: string) {
         let allResList = [];
-        let moduleInfo = moduleInfoMap[scenename];
-        allResList = allResList.concat(moduleInfo.preResList);
-
         let resList = this.moduleResMap[scenename];
         if (resList) {
             delete this.moduleResMap[scenename];
             allResList = allResList.concat(resList);
         }
-
         this.releaseRes(allResList);
     }
 
     private pushResNametoMap(resName: string, sceneName?: string) {
         let moduleName = sceneName ? sceneName : SceneMgr.inst.curSceneName;
+        let globalRes = this.moduleResMap['global'] || [];
         let resList = this.moduleResMap[moduleName] = this.moduleResMap[moduleName] || [];
-        if (resList.indexOf(resName) == -1) resList.push(resName);
+        if (globalRes.indexOf(resName) == -1 && resList.indexOf(resName) == -1) resList.push(resName);
     }
+
+    /**设置对应资源为全局资源，避免被释放 */
+    public setGlobal(...args: string[]) {
+        for (let i = 0; i < args.length; i++) {
+            this.pushResNametoMap(args[i], 'global');
+        }
+    }
+
 }

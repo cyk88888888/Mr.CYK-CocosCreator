@@ -7,6 +7,7 @@ import { _decorator, Component, Prefab, Node, EventTouch, instantiate, director 
 import { BaseEnum } from './framework/base/BaseEnum';
 import { BaseUT } from './framework/base/BaseUtil';
 import { scaleMode } from './framework/base/ScaleMode';
+import { ResMgr } from './framework/mgr/ResMgr';
 import { SceneMgr } from './framework/mgr/SceneMgr';
 import { SoundMgr } from './framework/mgr/SoundMgr';
 import { TickMgr } from './framework/mgr/TickMgr';
@@ -23,7 +24,11 @@ export class Main extends Component {
         SceneMgr.inst.mainScene = 'HomeScene';//设置主场景
         SoundMgr.inst.buttonSound = "dy/sound/click";//设置全局按钮点击音效
         TickMgr.inst.mainNode = this;
-
+        ResMgr.inst.setGlobal(
+            'dy/sp/click',
+            'dy/sound/click',
+            'ui/common'
+        )
         scaleMode.designWidth = 640;
         scaleMode.designHeight = 1280;
         scaleMode.designHeight_min = 1030;
@@ -36,16 +41,15 @@ export class Main extends Component {
     private initClickEffContainer() {
         let self = this;
         let newNode = BaseUT.newUINode('ClickEff');
-        newNode.on(Node.EventType.TOUCH_START, self.touchBeginHandler, this);
+        newNode.on(Node.EventType.TOUCH_START, self.touchHandler, self);
+        newNode.on(Node.EventType.TOUCH_MOVE, self.touchHandler, self);
         newNode.on(Node.EventType.TOUCH_END, self.onStageCLick, self);
-        // let _touchListener = newNode.eventProcessor.touchListener;
-        // (newNode as any)._touchListener.setSwallowTouches(false);
         let windowSize = BaseUT.getStageSize();
         BaseUT.setSize(newNode, windowSize.width, windowSize.height);
         SceneMgr.inst.getCanvas().addChild(newNode);
     }
 
-    private touchBeginHandler(e: EventTouch){
+    private touchHandler(e: EventTouch){
         e.preventSwallow = true;
     }
 

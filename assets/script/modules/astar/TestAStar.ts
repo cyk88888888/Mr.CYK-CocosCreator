@@ -212,6 +212,7 @@ export class TestAStar extends UIComp {
      */
     private onReset() {
         let self = this;
+        self._startFrame = false;
         self.graphicsPath.clear();
         self._grid.resetWalkable();
         self.makeBlock();
