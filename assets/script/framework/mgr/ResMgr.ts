@@ -6,7 +6,6 @@
 import { Asset, assetManager, Prefab, resources, SpriteAtlas } from "cc";
 import { JuHuaDlg } from "../../modules/common/JuHuaDlg";
 import { LoadingScene } from "../../modules/loading/LoadingScene";
-import { moduleInfoMap } from "./ModuleMgr";
 import { SceneMgr } from "./SceneMgr";
 
 export class ResMgr {
