@@ -49,7 +49,7 @@ export class TestAStar extends UIComp {
     protected onFirstEnter() {
         let self = this;
         self._cellSize = 40;
-        self._speed = 0.1;
+        self._speed = 0.15;
         self._widget = self.getComponent(Widget);
         TickMgr.inst.nextTick(() => {
             self.initGrid();
