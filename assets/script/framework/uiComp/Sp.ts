@@ -106,7 +106,7 @@ export class Sp extends Component {
                 self._curPlayFrame = -1;
                 if (self.playCount != -1) {
                     self._playCount++;
-                    if(self._playCount == self.playCount) self.node.emit(BaseEnum.onSpPlayEnd);
+                    if(self._playCount == self.playCount) self.node.emit(BaseEnum.Game.onSpPlayEnd);
                 }
             }
             // console.log('self._spriteFrames[idx]:' + self._spriteFrames[idx].name);

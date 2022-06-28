@@ -58,7 +58,7 @@ export class Main extends Component {
         let point = event.getUILocation();
         let eff = instantiate(this.clickEff);
         let sp = eff.getComponent(Sp);
-        sp.node.on(BaseEnum.onSpPlayEnd, () => {
+        sp.node.on(BaseEnum.Game.onSpPlayEnd, () => {
             sp.node.destroy();
         }, this);
         sp.url = 'dy/sp/click';
