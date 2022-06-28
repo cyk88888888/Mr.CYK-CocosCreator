@@ -3,7 +3,7 @@
  * @Author: CYK
  * @Date: 2022-05-13 09:40:14
  */
-import { _decorator, Component, Prefab, Node, EventTouch, instantiate, director } from 'cc';
+import { _decorator, Component, Prefab, Node, EventTouch, instantiate, setDisplayStats } from 'cc';
 import { BaseEnum } from './framework/base/BaseEnum';
 import { BaseUT } from './framework/base/BaseUtil';
 import { scaleMode } from './framework/base/ScaleMode';
@@ -25,7 +25,7 @@ export class Main extends Component {
         SoundMgr.inst.buttonSound = "dy/sound/click";//设置全局按钮点击音效
         TickMgr.inst.mainNode = this;
         ResMgr.inst.setGlobal(
-            'dy/sp/click',
+            'dy/sp/click',  
             'dy/sound/click',
             'ui/common'
         )
@@ -34,6 +34,7 @@ export class Main extends Component {
         scaleMode.designHeight_min = 1030;
         scaleMode.designHeight_max = 1280;
 
+        setDisplayStats(false);
         this.initClickEffContainer();
         SceneMgr.inst.run(LoadingScene, { name: '红红火火恍恍惚惚' });
     }

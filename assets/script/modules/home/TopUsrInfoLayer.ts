@@ -3,9 +3,10 @@
  * @Author: CYK
  * @Date: 2022-05-16 09:18:45
  */
-import { Label, Node, _decorator } from 'cc';
+import { isDisplayStats, Label, Node, setDisplayStats, _decorator } from 'cc';
 import { SceneMgr } from '../../framework/mgr/SceneMgr';
 import { UIMenu } from '../../framework/ui/UIMenu';
+import { ButtonPlus } from '../../framework/uiComp/ButtonPlus';
 import { ListTestScene } from '../listTest/ListTestScene';
 const { ccclass, property } = _decorator;
 
@@ -17,6 +18,8 @@ export class TopUsrInfoLayer extends UIMenu {
     private grp_head: Node;
     @property({ type: Label })
     private lbl_name: Label;
+    @property({ type: ButtonPlus })
+    private btn_debug: Label;
     protected onEnter() {
 
     }
@@ -26,6 +29,10 @@ export class TopUsrInfoLayer extends UIMenu {
 
     private _tap_grp_head() {
         SceneMgr.inst.push(ListTestScene)
+    }
+
+    private _tap_btn_debug(){
+        setDisplayStats(!isDisplayStats());
     }
 }
 
