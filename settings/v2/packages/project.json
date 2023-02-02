@@ -1,9 +1,10 @@
 {
-  "__version__": "1.0.2",
+  "__version__": "1.0.4",
   "general": {
     "designResolution": {
       "width": 640,
       "height": 1280
     }
-  }
+  },
+  "custom_joint_texture_layouts": []
 }
