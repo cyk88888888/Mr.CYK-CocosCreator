@@ -17,7 +17,7 @@ export class Sp extends Component {
     public frameRate: number = 24;
     @property({ tooltip: '播放次数,-1表示循环播放', type: CCInteger })
     public playCount: number = -1;
-    @property({ tooltip: '资源路径', type: CCString })
+    @property({ tooltip: '资源路径'})
     public url: string = '';
     private _sprite: Sprite;
     private _url: string;
