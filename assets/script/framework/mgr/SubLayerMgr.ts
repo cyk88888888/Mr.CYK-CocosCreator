@@ -74,7 +74,7 @@ export class SubLayerMgr {
     public pop() {
         let self = this;
         if (self._popArr.length <= 0) {
-            console.error('已经pop到底了！！！！！！！');
+            console.error('已经pop到底了!');
             return;
         }
         self.checkDestoryLastLayer(true);

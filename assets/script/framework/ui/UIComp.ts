@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Tween, tween, EventTouch } from 'cc';
+import { _decorator, Component, Node, Tween, tween, EventTouch, js } from 'cc';
 import { emmiter } from '../base/Emmiter';
 import { SoundMgr } from '../mgr/SoundMgr';
 const { ccclass, property } = _decorator;
@@ -9,7 +9,6 @@ export class UIComp extends Component {
     private _emmitMap: { [event: string]: Function };//已注册的监听事件列表
     private _objTapMap: { [objName: string]: Node };//已添加的显示对象点击事件的记录
     private _tweenTargetList: any[];//已添加缓动的对象列表
-    private chilidCompClassMap: { [className: string]: UIComp };//子组件的控制脚本类
     public data: any;
     private isFirstEnter: boolean = true;
     /** 预制体路径 */
@@ -33,6 +32,7 @@ export class UIComp extends Component {
         let self = this;
         self._dispose();
     }
+
     onDestroy() {
         console.log('onDestroy: ' + this.node.name);
     }
@@ -52,15 +52,6 @@ export class UIComp extends Component {
     protected onExit() { }
 
     protected onExit_a() { }
-
-    protected addToLayer() { }
-
-    /**打开页面时的动画 */
-    protected onOpenAnimation() { }
-    /**关闭页面时的动画 */
-    protected onCloseAnimation(callback?: Function) {
-        if (callback) callback.call(this);
-    }
 
     protected onEmitter(event: string, listener: any) {
         let self = this;
@@ -84,24 +75,12 @@ export class UIComp extends Component {
 
     public get className(): string {
         let self = this;
-        let str = self.name;
-        str = str.match(/<(\S*)>/)[1];
-        return str;
+        return self.node.name;
     }
 
     public setData(data: any) {
         this.data = data;
         if (data) this.dchg();
-    }
-
-    public enterOnPop() {
-        let self = this;
-        self.initView();
-    }
-
-    public exitOnPush() {
-        let self = this;
-        self._dispose();
     }
 
     /**
@@ -219,12 +198,6 @@ export class UIComp extends Component {
         }
     }
 
-    public close() {
-        let self = this;
-        self.onCloseAnimation(() => {
-            self.destory();
-        });
-    }
 
     public addSelf() {
         this.node.setParent(this._oldParent);
@@ -235,10 +208,9 @@ export class UIComp extends Component {
         self.node.removeFromParent();
     }
 
-    public destory() {
+    protected destory() {
         let self = this;
         if (self.hasDestory) return;
-        self.chilidCompClassMap = null;
         self._allList = null;
         this.node.destroy();
         self.hasDestory = true;
@@ -268,12 +240,6 @@ export class UIComp extends Component {
 
         self.clearAllTimeoutOrInterval();
         self.rmAllTweens();
-
-        //子组件退出
-        for (let key in self.chilidCompClassMap) {
-            let script = self.chilidCompClassMap[key];
-            script._dispose();
-        }
 
         console.log('退出' + self.className);
         self.onExit_b();

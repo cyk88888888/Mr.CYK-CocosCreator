@@ -1,4 +1,3 @@
-
 import { _decorator, Component, Node, Graphics, UITransform, EventTouch, Label, Prefab, instantiate, Vec3, Widget } from 'cc';
 import { BaseUT } from '../../framework/base/BaseUtil';
 import { TickMgr } from '../../framework/mgr/TickMgr';

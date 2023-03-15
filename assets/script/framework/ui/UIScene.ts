@@ -60,9 +60,7 @@ export class UIScene extends Component{
 
     public get className() {
         let self = this;
-        let str = self.name;
-        str = str.match(/<(\S*)>/)[1];
-        return str;
+        return self.node.name;
     }
     
     onLoad(){
@@ -101,7 +99,7 @@ export class UIScene extends Component{
 
     private __doEnter(){
         let self = this;
-        console.log('进入' + self.node.name);
+        console.log('进入' + self.className);
         self.onEnter_b();
         if (self['onEnter']) self['onEnter']();
         if (self._isFirstEnter) {
@@ -174,7 +172,7 @@ export class UIScene extends Component{
             }
             self._emmitMap = null;
         }
-        console.log('退出' + self.node.name);
+        console.log('退出' + self.className);
         this.onExit_b();
         if (self["onExit"]) self["onExit"]();
         this.onExit_a();
@@ -188,7 +186,7 @@ export class UIScene extends Component{
     }
     
     onDestroy(){
-        console.log('onDestroy: ' + this.node.name);
+        console.log('onDestroy: ' + this.className);
     }
 }
 

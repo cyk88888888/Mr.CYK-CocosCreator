@@ -16,9 +16,9 @@ export class UILayer extends UIComp {
     public static async show(data?: any) {
         let prefab = await ResMgr.inst.loadPrefab(this.prefabUrl);
         const newNode = instantiate(prefab);
-        newNode.layer = Layers.Enum.UI_2D;
+        // newNode.layer = Layers.Enum.UI_2D;
         let script = newNode.getComponent(this.name) as UILayer;
-        if(!script) script = newNode.addComponent(this.name) as UILayer;
+        if (!script) script = newNode.addComponent(this.name) as UILayer;
         BaseUT.setFitSize(script.node);
         script.setData(data);
         script.addToLayer();
@@ -27,6 +27,20 @@ export class UILayer extends UIComp {
 
     protected addToLayer() {
         this.node.setParent(SceneMgr.inst.curScene.layer);
+    }
+
+    /**打开页面时的动画 */
+    protected onOpenAnimation() { }
+    /**关闭页面时的动画 */
+    protected onCloseAnimation(callback?: Function) {
+        if (callback) callback.call(this);
+    }
+
+    public close() {
+        let self = this;
+        self.onCloseAnimation(() => {
+            self.destory();
+        });
     }
 }
 
