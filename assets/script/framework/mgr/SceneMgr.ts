@@ -20,7 +20,7 @@ export class SceneMgr {
     /** 主场景名称*/
     public mainScene: string;
     private _popArr: UIScene[];
-    private _canvas: Scene;
+    private _canvas: Node;
     public static get inst() {
         if (!this._inst) {
             this._inst = new SceneMgr();
@@ -33,7 +33,7 @@ export class SceneMgr {
      * 获取当前场景的canvas
      * @returns 
      */
-    public getCanvas(): Scene {
+    public getCanvas(): Node {
         if (!this._canvas) {
             this._canvas = director.getScene().getChildByName('Canvas');
         }
