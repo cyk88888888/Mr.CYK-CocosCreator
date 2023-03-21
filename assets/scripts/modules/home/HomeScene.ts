@@ -10,7 +10,7 @@ import { registerModule } from '../../framework/mgr/ModuleMgr';
 import { TopUsrInfoLayer } from './TopUsrInfoLayer';
 import { BottomTabLayer } from './BottomTabLayer';
 import { SoundMgr } from '../../framework/mgr/SoundMgr';
-import { EquipLayer } from './equip/EquipLayer';
+import { XiaoXiaoLeLayer } from './xiaoxiaole/XiaoXiaoLeLayer';
 import { SettingLayer } from './setting/SettingLayer';
 import { ShopLayer } from './shop/ShopLayer';
 import { SkillLayer } from './skill/SkillLayer';
@@ -24,7 +24,7 @@ export class HomeScene extends UIScene {
         let self = this;
         self.mainClassLayer = HomeLayer;
         let subLayerMgr = self.subLayerMgr;
-        let classList = [SettingLayer, EquipLayer, ShopLayer, SkillLayer];
+        let classList = [SettingLayer, XiaoXiaoLeLayer, ShopLayer, SkillLayer];
         for (let i = 0; i < classList.length; i++) {
             subLayerMgr.register(classList[i]);
         }

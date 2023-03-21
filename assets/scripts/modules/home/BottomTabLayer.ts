@@ -8,7 +8,7 @@ import { ResMgr } from '../../framework/mgr/ResMgr';
 import { UIMenu } from '../../framework/ui/UIMenu';
 import { ImgLoader } from '../../framework/uiComp/ImgLoader';
 import List from '../../framework/uiComp/List';
-import { EquipLayer } from './equip/EquipLayer';
+import { XiaoXiaoLeLayer } from './xiaoxiaole/XiaoXiaoLeLayer';
 import { HomeLayer } from './HomeLayer';
 import { SettingLayer } from './setting/SettingLayer';
 import { ShopLayer } from './shop/ShopLayer';
@@ -27,7 +27,7 @@ export class BottomTabLayer extends UIMenu {
     protected onEnter() {
         let self = this;
         self._layerInfos = [
-            { layer: EquipLayer.__className, icon: 'ui/home/ico_zhuangbei', preRes: [EquipLayer.prefabUrl] },
+            { layer: XiaoXiaoLeLayer.__className, icon: 'ui/home/ico_zhuangbei', preRes: [XiaoXiaoLeLayer.prefabUrl] },
             { layer: ShopLayer.__className, icon: 'ui/home/ico_shandian', preRes: [ShopLayer.prefabUrl] },
             { layer: HomeLayer.__className, icon: 'ui/home/ico_shijie', preRes: [HomeLayer.prefabUrl] },
             { layer: SkillLayer.__className, icon: 'ui/home/ico_tianfu', preRes: [SkillLayer.prefabUrl] },

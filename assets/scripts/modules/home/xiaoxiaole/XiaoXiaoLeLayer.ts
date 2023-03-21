@@ -8,10 +8,10 @@ import { SoundMgr } from '../../../framework/mgr/SoundMgr';
 import { UILayer } from '../../../framework/ui/UILayer';
 const { ccclass, property } = _decorator;
 
-@ccclass('EquipLayer')
-export class EquipLayer extends UILayer {
+@ccclass('XiaoXiaoLeLayer')
+export class XiaoXiaoLeLayer extends UILayer {
     /** 预制体路径 */
-    public static prefabUrl: string = 'prefab/home/EquipLayer';
+    public static prefabUrl: string = 'prefab/home/XiaoXiaoLeLayer';
     protected onEnter() {
         SoundMgr.inst.playBg('dy/sound/bg01');
     }
