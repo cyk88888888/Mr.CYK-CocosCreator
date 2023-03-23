@@ -16,14 +16,34 @@ export class SkillLayer extends UILayer {
     public static prefabUrl: string = 'prefab/home/SkillLayer';
     @property({ type: VideoPlayer })
     public videoPlayer: VideoPlayer;
+    @property({type: Button})
+    public btn_play: Button;
+    @property({type: Button})
+    public btn_stop: Button;
+    @property({type: Button})
+    public btn_replay: Button;
     protected onEnter() {
         SoundMgr.inst.stopBg();
-        let scale = BaseUT.getFitY(0.6, 0.8);
+        let scale = BaseUT.getFitY(0.5, 0.7);
         this.videoPlayer.node.setScale(new Vec3(scale, scale, 1));
-        this.videoPlayer.play();
     }
 
-    update(deltaTime: number) {
+    update(deltaTime: number) {}
+
+    private _tap_btn_play(){
+        let self = this;
+        self.videoPlayer.resume();
+    }
+
+    private _tap_btn_stop(){
+        let self = this;
+        this.videoPlayer.pause();
+    }
+
+    private _tap_btn_replay(){
+        let self = this;
+        self.videoPlayer.stop();
+        self.videoPlayer.play();
     }
 
     protected onExit() {

@@ -13,7 +13,7 @@ export class XiaoXiaoLeLayer extends UILayer {
     /** 预制体路径 */
     public static prefabUrl: string = 'prefab/home/XiaoXiaoLeLayer';
     protected onEnter() {
-        SoundMgr.inst.playBg('dy/sound/bg01');
+        SoundMgr.inst.playBg('dy/sound/anime_05_loop');
     }
 
     update(deltaTime: number) {

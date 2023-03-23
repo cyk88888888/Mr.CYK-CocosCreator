@@ -29,7 +29,7 @@ export class SoundMgr {
         this.playMainBg();
     }
     public curBgMusic: string;
-
+    private _isStopBg:boolean;
     /**播放默认背景音乐 */
     public playMainBg() {
         if (!this.defaultBgMusic) return;
@@ -40,6 +40,7 @@ export class SoundMgr {
     public playBg(url: string) {
         let self = this;
         if (self.curBgMusic == url) return;
+        self._isStopBg = false;
         self.curBgMusic = url;
         let audioSource = this.bgAudioSource;
         ResMgr.inst.loadToWithoutJuHua('global', url, () => {
@@ -48,7 +49,7 @@ export class SoundMgr {
             audioSource.stop();
             audioSource.clip = audioClip;
             audioSource.loop = true;
-            audioSource.play();
+            if(!self._isStopBg) audioSource.play();
             if (self.musicCachePool.indexOf(url) == -1) self.musicCachePool.push(url);
             self.checkRealseMusic();
         }, self)
@@ -56,16 +57,19 @@ export class SoundMgr {
 
     /**停止背景音乐 */
     public stopBg() {
+        this._isStopBg = true;
         this.bgAudioSource.stop();
     }
 
     /**暂停背景音乐 */
     public pauseBg() {
+        this._isStopBg = true;
         this.bgAudioSource.pause();
     }
 
     /**恢复背景音乐 */
     public recoverBg() {
+        this._isStopBg = false;
         this.bgAudioSource.play();
     }
 
