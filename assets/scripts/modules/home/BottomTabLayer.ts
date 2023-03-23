@@ -27,11 +27,11 @@ export class BottomTabLayer extends UIMenu {
     protected onEnter() {
         let self = this;
         self._layerInfos = [
-            { layer: XiaoXiaoLeLayer.__className, icon: 'ui/home/ico_zhuangbei', preRes: [XiaoXiaoLeLayer.prefabUrl] },
-            { layer: ShopLayer.__className, icon: 'ui/home/ico_shandian', preRes: [ShopLayer.prefabUrl] },
-            { layer: HomeLayer.__className, icon: 'ui/home/ico_shijie', preRes: [HomeLayer.prefabUrl] },
-            { layer: SkillLayer.__className, icon: 'ui/home/ico_tianfu', preRes: [SkillLayer.prefabUrl] },
-            { layer: SettingLayer.__className, icon: 'ui/home/ico_shezhi', preRes: [SettingLayer.prefabUrl] },
+            { layer: XiaoXiaoLeLayer.__className, icon: 'dy/xiaoxiaole/sweets/Blue', preRes: [XiaoXiaoLeLayer.prefabUrl] },
+            { layer: ShopLayer.__className, icon: 'dy/xiaoxiaole/sweets/Red', preRes: [ShopLayer.prefabUrl] },
+            { layer: HomeLayer.__className, icon: 'dy/xiaoxiaole/sweets/Colors', preRes: [HomeLayer.prefabUrl] },
+            { layer: SkillLayer.__className, icon: 'dy/xiaoxiaole/sweets/Green', preRes: [SkillLayer.prefabUrl] },
+            { layer: SettingLayer.__className, icon: 'dy/xiaoxiaole/sweets/Purple', preRes: [SettingLayer.prefabUrl] },
         ];
     }
 
