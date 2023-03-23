@@ -40,7 +40,7 @@ export class XiaoXiaoLeLayer extends UILayer {
             for (let j = 0; j < numCols; j++) {
                 let grid = instantiate(self.gridPrefab);
                 grid.setParent(self.grp_grid);
-                grid.setPosition(new Vec3(-320 + (j+1)*gridW/2 + j * gridW / 2, 394 - (i+1)*gridH/2 - i * gridH / 2));
+                grid.setPosition(new Vec3(-320 + (j+1)*gridW/2 + j * gridW / 2, 436 - (i+1)*gridH/2 - i * gridH / 2));
             }
         }
     }
