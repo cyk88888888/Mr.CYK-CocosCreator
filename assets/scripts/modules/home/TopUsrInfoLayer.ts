@@ -3,7 +3,7 @@
  * @Author: CYK
  * @Date: 2022-05-16 09:18:45
  */
-import { isDisplayStats, Label, Node, setDisplayStats, _decorator } from 'cc';
+import { isDisplayStats, Label, Node, profiler, setDisplayStats, _decorator } from 'cc';
 import { SceneMgr } from '../../framework/mgr/SceneMgr';
 import { UIMenu } from '../../framework/ui/UIMenu';
 import { ButtonPlus } from '../../framework/uiComp/ButtonPlus';
@@ -32,7 +32,7 @@ export class TopUsrInfoLayer extends UIMenu {
     }
 
     private _tap_btn_debug(){
-        setDisplayStats(!isDisplayStats());
+        profiler.isShowingStats() ?  profiler.hideStats() :  profiler.showStats();
     }
 }
 
