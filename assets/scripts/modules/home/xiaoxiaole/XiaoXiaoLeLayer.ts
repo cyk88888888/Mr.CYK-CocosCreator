@@ -54,7 +54,6 @@ export class XiaoXiaoLeLayer extends UILayer {
         let width = screenWh[0];
         let height = screenWh[1];
         let gridW = 80, gridH = 78;
-        let sweetW = 73, sweetH = 76;
         let numCols = Math.floor(width / gridW);
         let numRows = Math.floor(height / gridH);
         for (let i = 0; i < numCols; i++) {
