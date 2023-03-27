@@ -1,11 +1,10 @@
-import { _decorator, Component, Node, Tween, tween, EventTouch, js } from 'cc';
+import { _decorator, Component, Node, Tween, tween, EventTouch, js} from 'cc';
 import { emmiter } from '../base/Emmiter';
 import { SoundMgr } from '../mgr/SoundMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('UIComp')
 export class UIComp extends Component {
-    private _oldParent: Node;
     private _emmitMap: { [event: string]: Function };//已注册的监听事件列表
     private _objTapMap: { [objName: string]: Node };//已添加的显示对象点击事件的记录
     private _tweenTargetList: any[];//已添加缓动的对象列表
@@ -18,9 +17,7 @@ export class UIComp extends Component {
     protected needRefreshListOnEnter: boolean = true;
 
     onLoad() {
-        console.log('onLoad: ' + this.node.name);
-        let self = this;
-        self._oldParent = self.node.parent;
+        console.log('onLoad: ' + this.className);
     }
 
     onEnable() {
@@ -34,7 +31,7 @@ export class UIComp extends Component {
     }
 
     onDestroy() {
-        console.log('onDestroy: ' + this.node.name);
+        console.log('onDestroy: ' + this.className);
     }
 
     protected onEnter_b() { }
@@ -196,16 +193,6 @@ export class UIComp extends Component {
             self.intervalIdArr = null;
             console.log('清除intervalIdArr: ' + self.node.name);
         }
-    }
-
-
-    public addSelf() {
-        this.node.setParent(this._oldParent);
-    }
-
-    public removeSelf() {
-        let self = this;
-        self.node.removeFromParent();
     }
 
     protected destory() {

@@ -7,7 +7,7 @@ import { SubLayerMgr } from '../mgr/SubLayerMgr';
 import { UILayer } from './UILayer';
 import { emmiter } from '../base/Emmiter';
 import { BaseUT } from '../base/BaseUtil';
-import { Component, Node } from 'cc';
+import { Component, Node} from 'cc';
 import { SceneMgr } from '../mgr/SceneMgr';
 
 export class UIScene extends Component{
@@ -65,12 +65,7 @@ export class UIScene extends Component{
     
     onLoad(){
         let self = this;
-        this.initLayer();
-        this.layer = this.layer;
-        this.dlg = this.dlg;
-        this.msg = this.msg;
-        this.menuLayer = this.menuLayer;
-       
+        self.initLayer();
         if (self.mainClassLayer) {
             self.subLayerMgr.register(self.mainClassLayer);
             self.push(self.mainClassLayer, { str: '我叫' + self.mainClassLayer.name });
@@ -186,6 +181,7 @@ export class UIScene extends Component{
     }
     
     onDestroy(){
+        let self = this;
         console.log('onDestroy: ' + this.className);
     }
 }
