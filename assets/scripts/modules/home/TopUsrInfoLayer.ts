@@ -28,7 +28,7 @@ export class TopUsrInfoLayer extends UIMenu {
     }
 
     private _tap_grp_head() {
-        SceneMgr.inst.push(ListTestScene)
+        SceneMgr.inst.push(ListTestScene);
     }
 
     private _tap_btn_debug(){

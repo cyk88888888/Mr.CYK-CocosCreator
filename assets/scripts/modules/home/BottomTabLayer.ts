@@ -8,11 +8,11 @@ import { ResMgr } from '../../framework/mgr/ResMgr';
 import { UIMenu } from '../../framework/ui/UIMenu';
 import { ImgLoader } from '../../framework/uiComp/ImgLoader';
 import List from '../../framework/uiComp/List';
-import { XiaoXiaoLeLayer } from './xiaoxiaole/XiaoXiaoLeLayer';
+import { EntranceLayer } from './entrance/EntranceLayer';
 import { HomeLayer } from './HomeLayer';
 import { SettingLayer } from './setting/SettingLayer';
-import { ShopLayer } from './shop/ShopLayer';
 import { SkillLayer } from './skill/SkillLayer';
+import { SweetLayer } from './sweet/SweetLayer';
 const { ccclass, property } = _decorator;
 
 @ccclass('BottomTabLayer')
@@ -27,8 +27,8 @@ export class BottomTabLayer extends UIMenu {
     protected onEnter() {
         let self = this;
         self._layerInfos = [
-            { layer: XiaoXiaoLeLayer.__className, icon: 'dy/xiaoxiaole/sweets/Blue', preRes: [XiaoXiaoLeLayer.prefabUrl] },
-            { layer: ShopLayer.__className, icon: 'dy/xiaoxiaole/sweets/Red', preRes: [ShopLayer.prefabUrl] },
+            { layer: SweetLayer.__className, icon: 'dy/xiaoxiaole/sweets/Blue', preRes: [SweetLayer.prefabUrl] },
+            { layer: EntranceLayer.__className, icon: 'dy/xiaoxiaole/sweets/Red', preRes: [EntranceLayer.prefabUrl] },
             { layer: HomeLayer.__className, icon: 'dy/xiaoxiaole/sweets/Colors', preRes: [HomeLayer.prefabUrl] },
             { layer: SkillLayer.__className, icon: 'dy/xiaoxiaole/sweets/Green', preRes: [SkillLayer.prefabUrl] },
             { layer: SettingLayer.__className, icon: 'dy/xiaoxiaole/sweets/Purple', preRes: [SettingLayer.prefabUrl] },

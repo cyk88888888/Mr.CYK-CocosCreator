@@ -10,10 +10,10 @@ import { registerModule } from '../../framework/mgr/ModuleMgr';
 import { TopUsrInfoLayer } from './TopUsrInfoLayer';
 import { BottomTabLayer } from './BottomTabLayer';
 import { SoundMgr } from '../../framework/mgr/SoundMgr';
-import { XiaoXiaoLeLayer } from './xiaoxiaole/XiaoXiaoLeLayer';
 import { SettingLayer } from './setting/SettingLayer';
-import { ShopLayer } from './shop/ShopLayer';
 import { SkillLayer } from './skill/SkillLayer';
+import { EntranceLayer } from './entrance/EntranceLayer';
+import { SweetLayer } from './sweet/SweetLayer';
 const { ccclass, property } = _decorator;
 
 @ccclass('HomeScene')
@@ -24,7 +24,7 @@ export class HomeScene extends UIScene {
         let self = this;
         self.mainClassLayer = HomeLayer;
         let subLayerMgr = self.subLayerMgr;
-        let classList = [SettingLayer, XiaoXiaoLeLayer, ShopLayer, SkillLayer];
+        let classList = [SettingLayer, EntranceLayer, SweetLayer, SkillLayer];
         for (let i = 0; i < classList.length; i++) {
             subLayerMgr.register(classList[i]);
         }
