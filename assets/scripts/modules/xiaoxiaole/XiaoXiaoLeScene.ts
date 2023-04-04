@@ -6,22 +6,23 @@
 import { _decorator } from "cc";
 import { UIScene } from "../../framework/ui/UIScene";
 import { registerModule } from "../../framework/mgr/ModuleMgr";
-import { XiaoXiaoLeLayer } from "./XiaoXiaoLeLayer";
+import { XiaoXiaoLeStartLayer } from "./XiaoXiaoLeStartLayer";
 import { SoundMgr } from "../../framework/mgr/SoundMgr";
+import { XiaoXiaoLeLayer } from "./XiaoXiaoLeLayer";
 const { ccclass, property } = _decorator;
 @ccclass('XiaoXiaoLeScene')
 export class XiaoXiaoLeScene extends UIScene {
-    private ctor() {
+    protected ctor() {
         let self = this;
-        self.mainClassLayer = XiaoXiaoLeLayer;
+        self.mainClassLayer = XiaoXiaoLeStartLayer;
         let subLayerMgr = self.subLayerMgr;
         let classList = [];
         for (let i = 0; i < classList.length; i++) {
             subLayerMgr.register(classList[i]);
         }
     }
-    private onEnter(): void {
-        SoundMgr.inst.playBg('dy/sound/xiaoxiaole/worldscenebgm');
-    }
 }
-registerModule(XiaoXiaoLeScene, [XiaoXiaoLeLayer.prefabUrl]);
+registerModule(XiaoXiaoLeScene, [
+    XiaoXiaoLeStartLayer.prefabUrl,
+    XiaoXiaoLeLayer.prefabUrl,
+]);

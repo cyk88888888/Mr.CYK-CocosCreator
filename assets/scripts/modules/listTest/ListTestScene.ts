@@ -10,7 +10,7 @@ import { ListTestLayer } from "./ListTestLayer";
 const { ccclass, property } = _decorator;
 @ccclass('ListTestScene')
 export class ListTestScene extends UIScene {
-    private ctor() {
+    protected ctor() {
         let self = this;
         self.mainClassLayer = ListTestLayer;
         let subLayerMgr = self.subLayerMgr;

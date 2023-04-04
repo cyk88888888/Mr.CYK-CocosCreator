@@ -11,7 +11,7 @@ const { ccclass, property } = _decorator;
 
 @ccclass('LoadingScene')
 export class LoadingScene extends UIScene {
-    private ctor() {
+    protected ctor() {
         let self = this;
         self.mainClassLayer = LoadingLayer;
         let subLayerMgr = self.subLayerMgr;
@@ -21,7 +21,7 @@ export class LoadingScene extends UIScene {
         }
     }
 
-    private async onEnter() {
+    protected onEnter() {
 
     }
 }

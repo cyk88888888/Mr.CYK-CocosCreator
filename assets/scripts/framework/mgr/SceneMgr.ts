@@ -6,7 +6,6 @@
 import { director, Node, Scene, UIOpacity, UITransform } from "cc";
 import { BaseUT } from "../base/BaseUtil";
 import { ModuleCfgInfo } from "../base/ModuleCfgInfo";
-import { UIComp } from "../ui/UIComp";
 import { UIScene } from "../ui/UIScene";
 import { moduleInfoMap } from "./ModuleMgr";
 import { ResMgr } from "./ResMgr";

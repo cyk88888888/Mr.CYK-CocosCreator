@@ -10,7 +10,7 @@ import { UICompTestLayer } from "./UICompTestLayer";
 const { ccclass } = _decorator;
 @ccclass('UICompTestScene')
 export class UICompTestScene extends UIScene {
-    private ctor() {
+    protected ctor() {
         let self = this;
         self.mainClassLayer = UICompTestLayer;
         let subLayerMgr = self.subLayerMgr;

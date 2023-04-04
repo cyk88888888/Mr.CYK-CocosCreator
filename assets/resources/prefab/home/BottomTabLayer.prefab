@@ -1739,7 +1739,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "99yUovZO9Pl5zsU+qma0Eg"
+    "fileId": "d3AZBtMldBgq85kcNbxOMM"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -2263,8 +2263,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 130,
-      "height": 130
+      "width": 114,
+      "height": 114
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -2300,7 +2300,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "6b21b746-3347-402a-b8d3-4916fac5877e@f9941",
+      "__uuid__": "19b5193e-879e-4694-ad08-4103256cb023@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 1,

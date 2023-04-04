@@ -6,27 +6,29 @@ import { UILayer } from '../../framework/ui/UILayer';
 const { ccclass, property } = _decorator;
 
 /*
- * @Descripttion: 开心消消乐界面
+ * @Descripttion: 开心消消乐开始界面
  * @Author: CYK
  * @Date: 2023-04-3 23:45:45
  */
-@ccclass('XiaoXiaoLeLayer')
-export class XiaoXiaoLeLayer extends UILayer {
+@ccclass('XiaoXiaoLeStartLayer')
+export class XiaoXiaoLeStartLayer extends UILayer {
     /** 预制体路径 */
-    public static prefabUrl: string = 'prefab/xiaoxiaole/XiaoXiaoLeLayer';
+    public static prefabUrl: string = 'prefab/xiaoxiaole/XiaoXiaoLeStartLayer';
+    
+    @property({ type: Button })
+    private btn_start: Button;
     @property({ type: Button })
     private btn_back: Button;
     protected onEnter() {
-        SoundMgr.inst.playBg('dy/sound/xiaoxiaole/gamescenebgm');
+        SoundMgr.inst.playBg('dy/sound/xiaoxiaole/worldscenebgm');
     }
 
-    protected onFirstEnter() {
-        let self = this;
-     
+    private _tap_btn_start() {
+        SceneMgr.inst.curScene.push('XiaoXiaoLeLayer');
     }
 
     private _tap_btn_back() {
-        SceneMgr.inst.curScene.pop();
+        SceneMgr.inst.pop();
     }
 
 }

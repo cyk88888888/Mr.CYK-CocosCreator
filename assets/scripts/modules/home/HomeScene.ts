@@ -20,7 +20,7 @@ const { ccclass, property } = _decorator;
 export class HomeScene extends UIScene {
     private _topUsrInfo: any;
     private _bottomTab: any;
-    private ctor() {
+    protected ctor() {
         let self = this;
         self.mainClassLayer = HomeLayer;
         let subLayerMgr = self.subLayerMgr;
@@ -30,7 +30,7 @@ export class HomeScene extends UIScene {
         }
     }
 
-    private async onEnter() {
+    protected async onEnter() {
         let self = this;
         SoundMgr.inst.playMainBg();
         self.onEmitter('jumpToLayer', self.jumpToLayer);
@@ -47,7 +47,7 @@ export class HomeScene extends UIScene {
         self.run(data.layerName);
     }
 
-    private onExit() {
+    protected onExit() {
         
     }
 }

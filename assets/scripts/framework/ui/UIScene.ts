@@ -32,13 +32,21 @@ export class UIScene extends Component{
 
     protected ctor_b() { }
 
+    protected ctor() { }
+
     protected ctor_a() { }
 
     protected onEnter_b() { }
 
+    protected onEnter() { }
+
+    protected onFirstEnter() { }
+
     protected onEnter_a() { }
 
     protected onExit_b() { }
+
+    protected onExit() { }
 
     protected onExit_a() { }
 
@@ -96,10 +104,10 @@ export class UIScene extends Component{
         let self = this;
         console.log('进入' + self.className);
         self.onEnter_b();
-        if (self['onEnter']) self['onEnter']();
+        self.onEnter();
         if (self._isFirstEnter) {
             self._isFirstEnter = false;
-            if (self["onFirstEnter"]) self["onFirstEnter"]();
+            self.onFirstEnter();
         }
         self.onEnter_a();
     }
@@ -169,7 +177,7 @@ export class UIScene extends Component{
         }
         console.log('退出' + self.className);
         this.onExit_b();
-        if (self["onExit"]) self["onExit"]();
+        self.onExit();
         this.onExit_a();
     }
 
