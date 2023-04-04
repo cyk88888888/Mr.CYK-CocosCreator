@@ -20,7 +20,7 @@ export class Main extends Component {
     @property({ type: Prefab, tooltip: '点击特效' })
     clickEff: Prefab;
     onLoad() {
-        SoundMgr.inst.defaultBgMusic = "dy/sound/bg00";//设置默认背景音乐
+        SoundMgr.inst.defaultBgMusic = "dy/sound/bg03";//设置默认背景音乐
         SceneMgr.inst.mainScene = 'HomeScene';//设置主场景
         SoundMgr.inst.buttonSound = "dy/sound/click";//设置全局按钮点击音效
         TickMgr.inst.mainNode = this;

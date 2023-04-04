@@ -20,7 +20,6 @@ export class EntranceLayer extends UILayer {
     @property({type: Node})
     public btn_uiComp:Node;
     protected onEnter() {
-        SoundMgr.inst.playBg('dy/sound/bg03');
     }
 
     

@@ -13,10 +13,6 @@ export class HomeLayer extends UILayer {
     /** 预制体路径 */
     public static prefabUrl: string = 'prefab/home/HomeLayer';
     protected onEnter() {
-        SoundMgr.inst.playMainBg();
-    }
-
-    update(deltaTime: number) {
     }
 
 }

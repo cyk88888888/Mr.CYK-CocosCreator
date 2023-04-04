@@ -17,10 +17,6 @@ export class SettingLayer extends UILayer {
     @property(Button)
     private btn_bag: Button;
     protected onEnter() {
-        SoundMgr.inst.playBg('dy/sound/bg02');
-    }
-
-    update(deltaTime: number) {
     }
 
     private _tap_btn_bag(){

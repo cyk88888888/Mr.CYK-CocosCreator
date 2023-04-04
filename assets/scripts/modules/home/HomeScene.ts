@@ -32,6 +32,7 @@ export class HomeScene extends UIScene {
 
     private async onEnter() {
         let self = this;
+        SoundMgr.inst.playMainBg();
         self.onEmitter('jumpToLayer', self.jumpToLayer);
         if (!self._topUsrInfo) self._topUsrInfo = await TopUsrInfoLayer.show();
         if (!self._bottomTab) self._bottomTab = await BottomTabLayer.show();
@@ -47,7 +48,7 @@ export class HomeScene extends UIScene {
     }
 
     private onExit() {
-        SoundMgr.inst.playMainBg();
+        
     }
 }
 registerModule(HomeScene, ['ui/home']);

@@ -81,5 +81,8 @@ export class SweetLayer extends UILayer {
         return [transform.contentSize.width, transform.contentSize.height];
     }
 
+    protected onExit(): void {
+        SoundMgr.inst.playMainBg();
+    }
 }
 

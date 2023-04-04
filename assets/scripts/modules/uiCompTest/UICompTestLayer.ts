@@ -16,7 +16,6 @@ export class UICompTestLayer extends UILayer {
     @property({ type: Button })
     private btn_back: Button;
     protected onEnter() {
-        SoundMgr.inst.playBg('dy/sound/bg03');
     }
 
     private _tap_btn_back() {

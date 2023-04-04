@@ -17,7 +17,7 @@ export class XiaoXiaoLeLayer extends UILayer {
     @property({ type: Button })
     private btn_back: Button;
     protected onEnter() {
-        SoundMgr.inst.playBg('dy/sound/xiaoxiaole/worldscenebgm');
+        
     }
 
     protected onFirstEnter() {

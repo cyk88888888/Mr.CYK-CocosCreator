@@ -7,6 +7,7 @@ import { _decorator } from "cc";
 import { UIScene } from "../../framework/ui/UIScene";
 import { registerModule } from "../../framework/mgr/ModuleMgr";
 import { XiaoXiaoLeLayer } from "./XiaoXiaoLeLayer";
+import { SoundMgr } from "../../framework/mgr/SoundMgr";
 const { ccclass, property } = _decorator;
 @ccclass('XiaoXiaoLeScene')
 export class XiaoXiaoLeScene extends UIScene {
@@ -18,6 +19,9 @@ export class XiaoXiaoLeScene extends UIScene {
         for (let i = 0; i < classList.length; i++) {
             subLayerMgr.register(classList[i]);
         }
+    }
+    private onEnter(): void {
+        SoundMgr.inst.playBg('dy/sound/xiaoxiaole/worldscenebgm');
     }
 }
 registerModule(XiaoXiaoLeScene, [XiaoXiaoLeLayer.prefabUrl]);
