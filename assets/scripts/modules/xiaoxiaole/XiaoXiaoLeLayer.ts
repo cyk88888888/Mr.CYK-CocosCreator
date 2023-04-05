@@ -1,5 +1,5 @@
 
-import { AudioSource, Button, _decorator } from 'cc';
+import { AudioSource, Button, Node, _decorator } from 'cc';
 import { SceneMgr } from '../../framework/mgr/SceneMgr';
 import { SoundMgr } from '../../framework/mgr/SoundMgr';
 import { UILayer } from '../../framework/ui/UILayer';
@@ -15,16 +15,14 @@ export class XiaoXiaoLeLayer extends UILayer {
     /** 预制体路径 */
     public static prefabUrl: string = 'prefab/xiaoxiaole/XiaoXiaoLeLayer';
     @property({ type: Button })
-    private btn_back: Button;
+    btn_back: Button;
     @property({ type: Button })
-    private btn_music: Button;
+    btn_music: Button;
+    @property({type: Node})
+    grid: Node;
+
     protected onEnter() {
         SoundMgr.inst.playBg('dy/sound/xiaoxiaole/gamescenebgm');
-    }
-
-    protected onFirstEnter() {
-        let self = this;
-     
     }
 
     private _tap_btn_music() {

@@ -2,12 +2,12 @@
   "ver": "1.1.43",
   "importer": "prefab",
   "imported": true,
-  "uuid": "37e36ef0-e383-4b08-9936-8b3bb075fa07",
+  "uuid": "3fea4acc-a894-482a-a4e3-0d78f2a11ca2",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "BombWhite"
+    "syncNodeName": "Cat"
   }
 }

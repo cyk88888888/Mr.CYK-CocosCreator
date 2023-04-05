@@ -13,11 +13,14 @@ export class UIComp extends Component {
     /** 预制体路径 */
     public static prefabUrl: string = '';
     public hasDestory: boolean;//是否已被销毁
+    /** 脚本类名**/
+    protected scriptName: string;
     private _allList: Node[];
     protected needRefreshListOnEnter: boolean = true;
 
     onLoad() {
-        console.log('onLoad: ' + this.className);
+        this.scriptName = this.name.match(/<(\S*)>/)[1]; 
+        console.log('onLoad: ' + this.scriptName);
     }
 
     onEnable() {
@@ -31,7 +34,7 @@ export class UIComp extends Component {
     }
 
     onDestroy() {
-        console.log('onDestroy: ' + this.className);
+        console.log('onDestroy: ' + this.scriptName);
     }
 
     protected onEnter_b() { }
@@ -70,11 +73,6 @@ export class UIComp extends Component {
         return this.name;
     }
 
-    public get className(): string {
-        let self = this;
-        return self.node.name;
-    }
-
     public setData(data: any) {
         this.data = data;
         if (data) this.dchg();
@@ -87,7 +85,7 @@ export class UIComp extends Component {
         let self = this;
         if (self.hasDestory) return;
         self.addListener();
-        console.log('进入' + self.className);
+        console.log('进入' + self.scriptName);
         self.onEnter_b();
         self.onEnter();
         if (self.isFirstEnter) {
@@ -183,7 +181,7 @@ export class UIComp extends Component {
                 clearTimeout(self.timeoutIdArr[i]);
             }
             self.timeoutIdArr = null;
-            console.log('清除timeoutIdArr: ' + self.node.name);
+            console.log('清除timeoutIdArr: ' + self.scriptName);
         }
 
         if (self.intervalIdArr) {
@@ -191,7 +189,7 @@ export class UIComp extends Component {
                 clearInterval(self.intervalIdArr[i]);
             }
             self.intervalIdArr = null;
-            console.log('清除intervalIdArr: ' + self.node.name);
+            console.log('清除intervalIdArr: ' + self.scriptName);
         }
     }
 
@@ -228,7 +226,7 @@ export class UIComp extends Component {
         self.clearAllTimeoutOrInterval();
         self.rmAllTweens();
 
-        console.log('退出' + self.className);
+        console.log('退出' + self.scriptName);
         self.onExit_b();
         self.onExit();
         self.onExit_a();

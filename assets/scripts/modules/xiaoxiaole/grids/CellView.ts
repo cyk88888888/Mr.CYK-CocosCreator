@@ -19,7 +19,7 @@ export class CellView extends UIComp {
         this.model = model;
         var x = model.startX;
         var y = model.startY;
-        this.node.setPosition(new Vec3(CONST.Cell.CELL_WIDTH * (x - 0.5), CONST.Cell.CELL_HEIGHT * (y - 0.5) ))
+        this.node.setPosition(new Vec3(CONST.CELL_WIDTH * (x - 0.5), CONST.CELL_HEIGHT * (y - 0.5) ))
         var animation  = this.node.getComponent(Animation);
         if (model.status == CONST.CELL_STATUS.COMMON){
             animation.stop();
@@ -43,8 +43,8 @@ export class CellView extends UIComp {
         //         actionArray.push(delay);
         //     }
         //     if(cmd[i].action == "moveTo"){
-        //         var x = (cmd[i].pos.x - 0.5) * CONST.Cell.CELL_WIDTH;
-        //         var y = (cmd[i].pos.y - 0.5) * CONST.Cell.CELL_HEIGHT;
+        //         var x = (cmd[i].pos.x - 0.5) * CONST.CELL_WIDTH;
+        //         var y = (cmd[i].pos.y - 0.5) * CONST.CELL_HEIGHT;
         //         var move = cc.moveTo(ANITIME.TOUCH_MOVE, cc.v2(x,y));
         //         actionArray.push(move);
         //     }

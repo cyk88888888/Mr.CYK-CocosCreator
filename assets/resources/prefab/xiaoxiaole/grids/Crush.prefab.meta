@@ -2,12 +2,12 @@
   "ver": "1.1.43",
   "importer": "prefab",
   "imported": true,
-  "uuid": "37e36ef0-e383-4b08-9936-8b3bb075fa07",
+  "uuid": "000baed7-083c-4081-b389-30290f1d146e",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "BombWhite"
+    "syncNodeName": "Crush"
   }
 }
