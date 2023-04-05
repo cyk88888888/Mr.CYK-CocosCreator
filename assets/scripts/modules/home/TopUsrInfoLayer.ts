@@ -7,7 +7,7 @@ import { isDisplayStats, Label, Node, profiler, setDisplayStats, _decorator } fr
 import { SceneMgr } from '../../framework/mgr/SceneMgr';
 import { UIMenu } from '../../framework/ui/UIMenu';
 import { ButtonPlus } from '../../framework/uiComp/ButtonPlus';
-import { ListTestScene } from '../listTest/ListTestScene';
+import { FileTestScene } from '../fileTest/FileTestScene';
 const { ccclass, property } = _decorator;
 
 @ccclass('TopUsrInfoLayer')
@@ -28,7 +28,7 @@ export class TopUsrInfoLayer extends UIMenu {
     }
 
     private _tap_grp_head() {
-        SceneMgr.inst.push(ListTestScene);
+        SceneMgr.inst.push(FileTestScene);
     }
 
     private _tap_btn_debug(){

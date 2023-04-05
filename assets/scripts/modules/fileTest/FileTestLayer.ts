@@ -11,10 +11,10 @@ import { UILayer } from '../../framework/ui/UILayer';
 import { ButtonPlus } from '../../framework/uiComp/ButtonPlus';
 const { ccclass, property } = _decorator;
 
-@ccclass('ListTestLayer')
-export class ListTestLayer extends UILayer {
+@ccclass('FileTestLayer')
+export class FileTestLayer extends UILayer {
     /** 预制体路径 */
-    public static prefabUrl: string = 'prefab/listTest/ListTestLayer';
+    public static prefabUrl: string = 'prefab/fileTest/FileTestLayer';
     @property({ type: Button })
     private btn_back: Button;
     @property({ type: ButtonPlus })
