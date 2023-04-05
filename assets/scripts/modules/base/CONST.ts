@@ -15,4 +15,18 @@ export namespace CONST{
         RAINBOWCANDY,
         COUNT
     }
+
+    export enum Cell{
+        CELL_WIDTH = 70,
+        CELL_HEIGHT = 70,
+    }
+
+    export enum CELL_STATUS{
+        COMMON = 0,
+        CLICK = "click",
+        LINE = "line",
+        COLUMN = "column",
+        WRAP = "wrap",
+        BIRD = "bird"
+    }
 }

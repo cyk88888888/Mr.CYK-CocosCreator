@@ -83,17 +83,25 @@ export class SoundMgr {
     }
 
     /**
+     * 获取音效播放器
+     */
+    public get soundAudioSource():AudioSource{
+        let canvas = SceneMgr.inst.getCanvas();
+        let audioSource = canvas.getComponent(AudioSource);
+        if(!canvas.getComponent(AudioSource)){
+            audioSource = <AudioSource>canvas.addComponent(AudioSource);
+        }
+        return audioSource;
+    }
+
+    /**
      * 播放音效
      * @param url 音效资源路径
      * @param isLoop 是否循环 
      */
     public playSound(url: string, loop?: boolean) {
         let self = this;
-        let canvas = SceneMgr.inst.getCanvas();
-        let audioSource = canvas.getComponent(AudioSource);
-        if(!canvas.getComponent(AudioSource)){
-            audioSource = <AudioSource>canvas.addComponent(AudioSource);
-        }
+        let audioSource = self.soundAudioSource;
         ResMgr.inst.loadWithoutJuHua(url, () => {
             let audioClip = ResMgr.inst.get(url) as AudioClip;
             if (!audioClip) throw '音效资源不存在: ' + url;
@@ -121,6 +129,23 @@ export class SoundMgr {
             return;
         }
         this.playSound(this.buttonSound);
+    }
+
+    /**
+     * 通过传入的音频资源播放音效
+     * @param audioClip 音频资源
+     * @param loop 是否循坏
+     * @returns 
+     */
+    public playSoundByAudioClip(audioClip: AudioClip, loop?:boolean){
+        let self = this;
+        if(!audioClip){
+            console.warn('音频资源为空！！');
+            return;
+        }
+        let audioSource = self.soundAudioSource;
+        audioSource.clip = audioClip;
+        loop ? audioSource.play() : audioSource.playOneShot(audioClip);
     }
 }
 

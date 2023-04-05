@@ -19,6 +19,10 @@ export class Sp extends Component {
     public playCount: number = -1;
     @property({ tooltip: '资源路径'})
     public url: string = '';
+    @property({ tooltip: '开始帧'})
+    public startFrame: number = 0;
+    @property({ tooltip: '结束帧'})
+    public endFrame: number = 0;
     private _sprite: Sprite;
     private _url: string;
     private _spriteFrames: SpriteFrame[];
@@ -55,17 +59,17 @@ export class Sp extends Component {
 
     /**
      * 播放序列帧图片
-     * @param count 播放次数：-1表示循环播放
+     * @param playCount 播放次数：-1表示循环播放
      */
-    public play(count: number = -1) {
+    public play(playCount: number = -1) {
         let self = this;
         if (!self._url) {
             console.error('请先设置资源路径！！！');
             return;
         }
         self._playCount = 0;
-        self._curPlayFrame = 0;
-        self.playCount = count;
+        self._curPlayFrame = self.startFrame;
+        self.playCount = playCount;
         self._isStop = false;
         let spriteAtlas = <SpriteAtlas>ResMgr.inst.get(self._url);
         if (!spriteAtlas) {
@@ -100,17 +104,20 @@ export class Sp extends Component {
         }, time);
         function onInterVal() {
             if (self.checkClearInterval()) return;
-            let totSpriteFrameLen = self._spriteFrames.length;
-            let idx = self._curPlayFrame;
-            if (idx == totSpriteFrameLen - 1) {//全部播放结束一次
-                self._curPlayFrame = -1;
+            let totSpriteFrameLen = self.endFrame ? self.endFrame : self._spriteFrames.length;
+            let curFrame = self._curPlayFrame;
+            if (curFrame == totSpriteFrameLen - 1) {//全部播放结束一次
+                self._curPlayFrame = self.startFrame - 1;
                 if (self.playCount != -1) {
                     self._playCount++;
-                    if(self._playCount == self.playCount) self.node.emit(BaseEnum.Game.onSpPlayEnd);
+                    if(self._playCount == self.playCount) {
+                        self.node.emit(BaseEnum.Game.onSpPlayEnd);
+                        self._isStop = true;
+                    };
                 }
             }
             // console.log('self._spriteFrames[idx]:' + self._spriteFrames[idx].name);
-            if (self._sprite) self._sprite.spriteFrame = self._spriteFrames[idx];
+            if (self._sprite) self._sprite.spriteFrame = self._spriteFrames[curFrame];
 
             self._curPlayFrame++;
         }

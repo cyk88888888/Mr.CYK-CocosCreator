@@ -2,12 +2,12 @@
   "ver": "2.0.3",
   "importer": "animation-clip",
   "imported": true,
-  "uuid": "40b498a4-2599-46bf-b20f-cd01a955c9cb",
+  "uuid": "7d46a093-b023-48da-8608-505940234a9c",
   "files": [
     ".cconb"
   ],
   "subMetas": {},
   "userData": {
-    "name": "animation"
+    "name": "wrap"
   }
 }

@@ -189,7 +189,7 @@ export class TestAStar extends UIComp {
         let playerPos = self.graphicsPlayer.node.position;
         let dx = targetX - playerPos.x;
         let dy = targetY - playerPos.y;
-        let dist: Number = Math.sqrt(dx * dx + dy * dy);
+        let dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < 1) {
             self._index++;//索引加1，即取一个路径节点
             if (self._index >= self._path.length)//达到最后一个节点时，移除ENTER_FRAME监听

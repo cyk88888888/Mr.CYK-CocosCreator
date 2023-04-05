@@ -1,5 +1,5 @@
 
-import { Button, _decorator } from 'cc';
+import { AudioSource, Button, _decorator } from 'cc';
 import { SceneMgr } from '../../framework/mgr/SceneMgr';
 import { SoundMgr } from '../../framework/mgr/SoundMgr';
 import { UILayer } from '../../framework/ui/UILayer';
@@ -16,6 +16,8 @@ export class XiaoXiaoLeLayer extends UILayer {
     public static prefabUrl: string = 'prefab/xiaoxiaole/XiaoXiaoLeLayer';
     @property({ type: Button })
     private btn_back: Button;
+    @property({ type: Button })
+    private btn_music: Button;
     protected onEnter() {
         SoundMgr.inst.playBg('dy/sound/xiaoxiaole/gamescenebgm');
     }
@@ -23,6 +25,10 @@ export class XiaoXiaoLeLayer extends UILayer {
     protected onFirstEnter() {
         let self = this;
      
+    }
+
+    private _tap_btn_music() {
+        SoundMgr.inst.bgAudioSource.state == AudioSource.AudioState.PLAYING ? SoundMgr.inst.pauseBg() : SoundMgr.inst.recoverBg();
     }
 
     private _tap_btn_back() {

@@ -27,17 +27,17 @@ export class LoadingLayer extends UILayer {
         let self = this;
         self._preResList = ['ui/common', HomeLayer.prefabUrl, TopUsrInfoLayer.prefabUrl, BottomTabLayer.prefabUrl];
         let curDownLoadNum: number = 0;//当前已下载个数
-        let initPercent = self._toPercent = 0.4;//默认加载到40%
+        let initPercent = self._toPercent = 0.5;//默认加载到50%
         ResMgr.inst.loadToWithItor('HomeScene', self._preResList, () => {
             curDownLoadNum++;
-            self._toPercent = initPercent + (curDownLoadNum / self._preResList.length) * 0.6;
+            self._toPercent = initPercent + (curDownLoadNum / self._preResList.length) * 0.5;
         });
     }
 
     update(dt: number) {
         let self = this;
         if (self.progressBar && self.progressBar.progress < self._toPercent) {
-            self.progressBar.progress += 0.005;
+            self.progressBar.progress += 0.009;
             if (!self._isLoadingHome && self.progressBar.progress >= 1) {
                 self._isLoadingHome = true;
                 SceneMgr.inst.run(HomeScene);
