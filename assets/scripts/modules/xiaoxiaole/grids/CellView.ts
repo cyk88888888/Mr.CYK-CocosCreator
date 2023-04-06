@@ -97,6 +97,7 @@ export class CellView extends UIComp {
             curTime = cmd[i].playTime + cmd[i].keepTime;
         }
 
+        //todo...
         for (let i = 0; i < actionArray.length; i++) {
             await actionArray[i];
         }
