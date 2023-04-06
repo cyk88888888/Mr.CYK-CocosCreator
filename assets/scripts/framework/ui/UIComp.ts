@@ -14,7 +14,7 @@ export class UIComp extends Component {
     public static prefabUrl: string = '';
     public hasDestory: boolean;//是否已被销毁
     /** 脚本类名**/
-    protected scriptName: string;
+    public scriptName: string;
     private _allList: Node[];
     protected needRefreshListOnEnter: boolean = true;
 
@@ -128,7 +128,7 @@ export class UIComp extends Component {
     }
 
     /**获取指定对象的缓动Tweener */
-    protected getTween(target: Node) {
+    protected getTween(target: Node):Tween<Node> {
         if (!this._tweenTargetList) {
             this._tweenTargetList = [];
         }

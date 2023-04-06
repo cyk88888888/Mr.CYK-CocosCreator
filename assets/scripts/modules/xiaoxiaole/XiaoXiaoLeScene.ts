@@ -24,5 +24,4 @@ export class XiaoXiaoLeScene extends UIScene {
 }
 registerModule(XiaoXiaoLeScene, [
     XiaoXiaoLeStartLayer.prefabUrl,
-    XiaoXiaoLeLayer.prefabUrl,
 ]);

@@ -37,7 +37,7 @@ export class SubLayerMgr {
         let script: any = typeof LayerNameOrClass === 'string' ? js.getClassByName(LayerNameOrClass) : LayerNameOrClass;
         let layerName = script.name;
 
-        if (this.curLayer && this.curLayer.className == layerName) return;//打开同个界面
+        if (this.curLayer && this.curLayer.scriptName == layerName) return;//打开同个界面
         
         let registerLayer = this._classMap[layerName];
         let needDestory = !registerLayer && !toPush;//未注册  && 非入栈模式

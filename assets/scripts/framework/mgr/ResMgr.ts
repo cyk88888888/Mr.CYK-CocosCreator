@@ -100,6 +100,64 @@ export class ResMgr {
             }
         }
     }
+
+    private async _loadWithProgress(res: string, onProgress: (finished: number, total: number, item: any) => void, cb?: Function, ctx?: any, needJuHua: boolean = true, sceneName?: string) {
+        let resList = typeof res === 'string' ? [res] : res;
+        let totLen = resList.length;//待下载总个数
+        let hasLoadResCount: number = 0;//已下载个数
+        if (needJuHua) {
+            let isAllLoaded = true;
+            for (let i = 0; i < totLen; i++) {
+                let resName = resList[i];
+                if (!this.get(resName)) {
+                    isAllLoaded = false;
+                    break;
+                }
+            }
+            if (!isAllLoaded && !this._juHuaDlg) {
+                this._juHuaDlg = await JuHuaDlg.show();
+            }
+        }
+
+        let loadSucc = (resName: string, isFromCache?: boolean) => {
+            hasLoadResCount++;
+            console.log('resName: ' + resName + '加载完毕' + (isFromCache ? '(缓存已有)' : ''));
+            this.pushResNametoMap(resName, sceneName);
+            if (hasLoadResCount == totLen) {
+                this.closeJuHuaDlg();
+                if (cb) cb.call(ctx);
+            }
+        }
+
+        for (let i = 0; i < totLen; i++) {
+            let resName = resList[i];
+            if (this.get(resName)) {//缓存已有
+                loadSucc(resName, true);
+            } else {
+                resources.load(resName, (finished: number, total: number, item: any)=>{
+                    onProgress.call(ctx,finished,total,item)
+                },(err: Error | null, asset: Asset) => {
+                    if (!err) {
+                        loadSucc(resName);
+                    } else {
+                        console.error(err);
+                    }
+                })
+            }
+        }
+    }
+
+      /**
+     * 加载资源
+     * @param res 资源路径
+     * @param onProgress 加载进度
+     * @param cb 下载完成回调
+     * @param ctx 
+     */
+    public loadWithProgress(res: string, onProgress:(finished: number, total: number, item: any) => void, cb?: Function, ctx?: any, needJuHua: boolean = true) {
+        this._loadWithProgress(res, onProgress, cb, ctx, needJuHua);
+    }
+
     /**
      * 加载资源
      * @param res 资源列表

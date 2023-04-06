@@ -24,6 +24,7 @@ export class BottomTabLayer extends UIMenu {
 
     private _layerInfos: any[];
     private _toLayer: string;
+    private _curSelIdx: number;
     protected onEnter() {
         let self = this;
         self._layerInfos = [
@@ -37,8 +38,8 @@ export class BottomTabLayer extends UIMenu {
 
     protected onFirstEnter() {
         let self = this;
-        this.list_tab.numItems = self._layerInfos.length;
-        this.list_tab.selectedId = 2;
+        self.list_tab.numItems = self._layerInfos.length;
+        self.list_tab.selectedId = self._curSelIdx = 2;
     }
 
     //水平列表渲染器
@@ -49,6 +50,8 @@ export class BottomTabLayer extends UIMenu {
     //当列表项被选择...
     onListSelected(item: Node, selectedIdx: number, lastSelectedIdx: number, val: number) {
         let self = this;
+        if(self._curSelIdx == selectedIdx) return;
+        self._curSelIdx = selectedIdx;
         let layerInfo = self._layerInfos[selectedIdx];
         let layerName = layerInfo.layer;
         self._toLayer = layerName;
