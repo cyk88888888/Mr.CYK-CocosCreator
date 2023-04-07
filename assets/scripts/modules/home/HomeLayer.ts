@@ -21,8 +21,8 @@ export class HomeLayer extends UILayer {
             console.warn('缓动结束222！！！');
         });
 
-        let rotate = self.getTween(self.node).to(0.06, { eulerAngles: new Vec3(0, 0, 30) }).to(0.12, { eulerAngles: new Vec3(0, 0, -60) }).to(0.12, { eulerAngles: new Vec3(0, 0, 0) }).union().repeat(2);
-        actionArray.push(rotate);
+        // let rotate = self.getTween(self.node).to(0.06, { eulerAngles: new Vec3(0, 0, 30) }).to(0.12, { eulerAngles: new Vec3(0, 0, -60) }).to(0.12, { eulerAngles: new Vec3(0, 0, 0) }).union().repeat(2);
+        // actionArray.push(rotate);
         actionArray.push(call);
         actionArray.push(call2);
         if (actionArray.length == 1) {
