@@ -32,7 +32,7 @@ export namespace CONST {
         D = 4,
         E = 5,
         F = 6,
-        BIRD = 7
+        G = 7
     }
 
     export const CELL_BASENUM = 6;

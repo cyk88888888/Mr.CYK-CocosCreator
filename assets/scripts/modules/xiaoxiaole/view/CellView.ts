@@ -1,4 +1,4 @@
-import { _decorator, Animation, Component, Node, Sprite, SpriteFrame, UI, UIOpacity, Vec3 } from 'cc';
+import { _decorator, Animation, Component, Node, Sprite, SpriteFrame, Tween, UI, UIOpacity, Vec3 } from 'cc';
 import { UIComp } from '../../../framework/ui/UIComp';
 import { CONST } from '../../base/CONST';
 const { ccclass, property } = _decorator;
@@ -31,75 +31,57 @@ export class CellView extends UIComp {
     }
 
     // 执行移动动作
-    public async updateView() {
+    public updateView() {
         let self = this;
         let cmd = this.model.cmd;
         if (cmd.length <= 0) {
             return;
         }
-        let actionArray = [];
+        let actionArray: Tween<Node>[] = [];
         let curTime = 0;
         for (let i in cmd) {
             if (cmd[i].playTime > curTime) {
-                let delay = new Promise((resolve, reject) => {
-                    self.setTimeout(function () {
-                        resolve('delay complete!');
-                    }, (cmd[i].playTime - curTime) * 1000);
-                });
+                let delay = self.getTween(self.node).delay(cmd[i].playTime - curTime);
                 actionArray.push(delay);
             }
             if (cmd[i].action == "moveTo") {
                 let x = (cmd[i].pos.x - 0.5) * CONST.CELL_WIDTH;
                 let y = (cmd[i].pos.y - 0.5) * CONST.CELL_HEIGHT;
-                let move = new Promise((resolve, reject) => {
-                    self.getTween(self.node).to(CONST.ANITIME.TOUCH_MOVE, { position: new Vec3(x, y) }).call(() => {
-                        resolve("tween complete!");
-                    }).start();
-                });
+                let move = self.getTween(self.node).to(CONST.ANITIME.TOUCH_MOVE, { position: new Vec3(x, y) });
                 actionArray.push(move);
             }
             else if (cmd[i].action == "toDie") {
                 if (self.status == CONST.CELL_STATUS.BIRD) {
                     let animation = self.node.getComponent(Animation);
                     animation.play("effect");
-                    let delay = new Promise((resolve, reject) => {
-                        self.setTimeout(function () {
-                            this.node.destroy();
-                            resolve('delay effect complete!');
-                        }, CONST.ANITIME.BOMB_BIRD_DELAY * 1000);
+                    let delay = self.getTween(self.node).delay(CONST.ANITIME.BOMB_BIRD_DELAY).call(() => {
+                        self.node.destroy();
                     });
                     actionArray.push(delay);
                 }
             }
             else if (cmd[i].action == "setVisible") {
                 let isVisible = cmd[i].isVisible;
-                let call = new Promise((resolve, reject) => {
-                    self.setTimeout(function () {
-                        if (isVisible) {
-                            self.node.getComponent(UIOpacity).opacity = 255;
-                        }
-                        else {
-                            self.node.getComponent(UIOpacity).opacity = 0;
-                        }
-                        resolve('call effect complete!');
-                    }, CONST.ANITIME.BOMB_BIRD_DELAY * 1000);
+                let call = self.getTween(self.node).call(() => {
+                    if (isVisible) {
+                        self.node.getComponent(UIOpacity).opacity = 255;
+                    }
+                    else {
+                        self.node.getComponent(UIOpacity).opacity = 0;
+                    }
                 });
                 actionArray.push(call);
             }
             else if (cmd[i].action == "toShake") {
-                let rotate = new Promise((resolve, reject) => {
-                    self.getTween(self.node).to(0.06, { eulerAngles: new Vec3(0, 0, 30) }).to(0.12, { eulerAngles: new Vec3(0, 0, -60) }).union().repeat(2).call(() => {
-                        resolve("rotate complete!");
-                    })
-                });
+                let rotate = self.getTween(self.node).to(0.06, { eulerAngles: new Vec3(0, 0, 30) }).to(0.12, { eulerAngles: new Vec3(0, 0, -60) }).union().repeat(2);
                 actionArray.push(rotate);
             }
             curTime = cmd[i].playTime + cmd[i].keepTime;
         }
-
-        //todo...
-        for (let i = 0; i < actionArray.length; i++) {
-            await actionArray[i];
+        if(actionArray.length == 1){//队列只有一个的时候，不能用缓动队列sequence，会报错
+            actionArray[0].start();
+        }else{
+            self.getTween(self.node).sequence(...actionArray).start();
         }
     }
     public setSelect(flag: boolean) {

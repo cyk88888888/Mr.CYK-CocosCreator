@@ -1,4 +1,4 @@
-import { _decorator, Component, EventTouch, instantiate, Node, Prefab, Vec2 } from 'cc';
+import { _decorator, Camera, Component, EventTouch, instantiate, Node, Prefab, Vec2 } from 'cc';
 import { UIComp } from '../../../framework/ui/UIComp';
 import { AudioUtils } from '../util/AudioUtils';
 import { CellView } from './CellView';
@@ -6,6 +6,8 @@ import { CONST } from '../../base/CONST';
 import { UITransform } from 'cc';
 import { Vec3 } from 'cc';
 import { XiaoXiaoleEffectLayer } from '../XiaoXiaoleEffectLayer';
+import { XiaoXiaoLeLayer } from '../XiaoXiaoLeLayer';
+import { SceneMgr } from '../../../framework/mgr/SceneMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('GridView')
@@ -20,7 +22,7 @@ export class GridView extends UIComp {
     isCanMove: boolean;
     isInPlayAni: boolean;
     lastTouchPos: Vec2;
-    controller: any;
+    controller: XiaoXiaoLeLayer;
     cellViews: any[];
     protected onEnter(): void {
         let self = this;
@@ -30,12 +32,12 @@ export class GridView extends UIComp {
         self.isInPlayAni = false; // 是否在播放中
     }
 
-    setController(controller) {
+    public setController(controller: XiaoXiaoLeLayer) {
         let self = this;
         self.controller = controller;
     }
 
-    initWithCellModels(cellsModels) {
+    public initWithCellModels(cellsModels) {
         let self = this;
         self.cellViews = [];
         for (let i = 1; i <= 9; i++) {
@@ -51,12 +53,13 @@ export class GridView extends UIComp {
         }
     }
 
-    setListener() {
+    private setListener() {
         let self = this;
         self.node.on(Node.EventType.TOUCH_START, function (eventTouch: EventTouch) {
             if (self.isInPlayAni) {//播放动画中，不允许点击
                 return true;
             }
+            // 获取触点的位置，屏幕坐标
             let touchPos = eventTouch.getLocation();
             let cellPos = self.convertTouchPosToCell(touchPos);
             if (cellPos) {
@@ -90,10 +93,14 @@ export class GridView extends UIComp {
     }
 
     // 根据点击的像素位置，转换成网格中的位置
-    convertTouchPosToCell(pos): { x, y } {
+    convertTouchPosToCell(point): { x, y } {
         let self = this;
-        let nodePos = new Vec3();
-        self.node.getComponent(UITransform).convertToNodeSpaceAR(pos, nodePos);
+        // 屏幕坐标转为世界坐标
+        let camera = SceneMgr.inst.getUCamera().getComponent(Camera);
+        let world_point = camera.screenToWorld(new Vec3(point.x, point.y));
+        // 世界坐标转节点坐标
+        // 将一个点转换到节点 (局部) 空间坐标系，这个坐标系以锚点为原点。
+        let nodePos = self.node.getComponent(UITransform).convertToNodeSpaceAR(new Vec3(world_point.x, world_point.y));
         if (nodePos.x < 0 || nodePos.x >= CONST.GRID_PIXEL_WIDTH || nodePos.y < 0 || nodePos.y >= CONST.GRID_PIXEL_HEIGHT) {
             return null;
         }
@@ -202,33 +209,33 @@ export class GridView extends UIComp {
             return;
         }
         self.isInPlayAni = true;
-        self.setTimeout(function(){
+        self.setTimeout(function () {
             this.isInPlayAni = false;
             this.audioUtils.playContinuousMatch(step);
-        }, time*1000);
+        }, time * 1000);
     }
 
-        // 正常击中格子后的操作
-        selectCell(cellPos){
-            let result = this.controller.selectCell(cellPos); // 直接先丢给model处理数据逻辑
-            let changeModels = result[0]; // 有改变的cell，包含新生成的cell和生成马上摧毁的格子
-            let effectsQueue = result[1]; //各种特效
-            this.playEffect(effectsQueue);
-            this.disableTouch(this.getPlayAniTime(changeModels), this.getStep(effectsQueue));
-            this.updateView(changeModels);
-            this.controller.cleanCmd(); 
-            if(changeModels.length >= 2){
-                this.updateSelect(new Vec2(-1,-1));
-                this.audioUtils.playSwap();
-            }
-            else{
-                this.updateSelect(cellPos);
-                this.audioUtils.playClick();
-            }
-            return changeModels;
+    // 正常击中格子后的操作
+    selectCell(cellPos) {
+        let result = this.controller.selectCell(cellPos); // 直接先丢给model处理数据逻辑
+        let changeModels = result[0]; // 有改变的cell，包含新生成的cell和生成马上摧毁的格子
+        let effectsQueue = result[1]; //各种特效
+        this.playEffect(effectsQueue);
+        this.disableTouch(this.getPlayAniTime(changeModels), this.getStep(effectsQueue));
+        this.updateView(changeModels);
+        this.controller.cleanCmd();
+        if (changeModels.length >= 2) {
+            this.updateSelect(new Vec2(-1, -1));
+            this.audioUtils.playSwap();
         }
-        playEffect(effectsQueue){
-            this.effectLayer.getComponent(XiaoXiaoleEffectLayer).playEffects(effectsQueue);
+        else {
+            this.updateSelect(cellPos);
+            this.audioUtils.playClick();
         }
+        return changeModels;
+    }
+    playEffect(effectsQueue) {
+        this.effectLayer.getComponent(XiaoXiaoleEffectLayer).playEffects(effectsQueue);
+    }
 }
 

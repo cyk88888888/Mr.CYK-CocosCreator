@@ -39,6 +39,17 @@ export class SceneMgr {
         return this._canvas;
     }
 
+    /**
+ * 获取UI的Camera
+ * @returns 
+ */
+    public getUCamera(): Node {
+        if (!this._canvas) {
+            this._canvas = director.getScene().getChildByName('Canvas');
+        }
+        return this.getCanvas().getChildByName('UICamera');
+    }
+
     /**打开场景（替换模式） */
     public run(scene: string | typeof UIScene, data?: any) {
         this.showScene(scene, data);
@@ -83,7 +94,7 @@ export class SceneMgr {
     /**判断销毁上个场景并释放资源 */
     private checkDestoryLastScene(destory?: boolean) {
         if (this.curScene) {
-            if(destory) this.curScene.destory();
+            if (destory) this.curScene.destory();
             let lastModuleInfo = moduleInfoMap[this.curScene.className];
             if (destory && !lastModuleInfo.cacheEnabled) {//销毁上个场景
                 ResMgr.inst.releaseResModule(this.curScene.className);//释放场景资源

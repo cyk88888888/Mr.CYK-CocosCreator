@@ -3,7 +3,7 @@
  * @Author: CYK
  * @Date: 2022-05-16 09:18:45
  */
-import { _decorator, Button } from 'cc';
+import { _decorator, Button, Node, Tween, Vec3 } from 'cc';
 import { UILayer } from '../../framework/ui/UILayer';
 const { ccclass, property } = _decorator;
 
@@ -12,28 +12,24 @@ export class HomeLayer extends UILayer {
     /** 预制体路径 */
     public static prefabUrl: string = 'prefab/home/HomeLayer';
     protected onEnter() {
-        let task3 = new Promise(function (resolve, reject) {
-            console.warn(3);
-            resolve('3')
-
+        let self = this;
+        let actionArray: Tween<Node>[] = [];
+        let call = self.getTween(self.node).delay(2).call(() => {
+            console.warn('缓动结束！！！');
+        });
+        let call2 = self.getTween(self.node).call(() => {
+            console.warn('缓动结束222！！！');
         });
 
-        let task1 = new Promise(function (resolve, reject) {
-            self.setTimeout(() => {
-                console.warn(1);
-                resolve('1')
-            }, 3000);
-        });
-        let task2 = new Promise(function (resolve, reject) {
-            self.setTimeout(() => {
-                console.warn(2);
-                resolve('2')
-            }, 2000);
-        });
-
-        Promise.all([task1, task2, task3]).then(function (value) {
-            // console.warn(value);
-        });
+        let rotate = self.getTween(self.node).to(0.06, { eulerAngles: new Vec3(0, 0, 30) }).to(0.12, { eulerAngles: new Vec3(0, 0, -60) }).to(0.12, { eulerAngles: new Vec3(0, 0, 0) }).union().repeat(2);
+        actionArray.push(rotate);
+        actionArray.push(call);
+        actionArray.push(call2);
+        if (actionArray.length == 1) {
+            actionArray[0].start();
+        } else {
+            self.getTween(this.node).sequence(...actionArray).start();
+        }
     }
 
 }

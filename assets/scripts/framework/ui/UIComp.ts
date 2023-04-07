@@ -20,7 +20,7 @@ export class UIComp extends Component {
 
     onLoad() {
         this.scriptName = this.name.match(/<(\S*)>/)[1]; 
-        console.log('onLoad: ' + this.scriptName);
+        // console.log('onLoad: ' + this.scriptName);
     }
 
     onEnable() {
@@ -34,7 +34,7 @@ export class UIComp extends Component {
     }
 
     onDestroy() {
-        console.log('onDestroy: ' + this.scriptName);
+        // console.log('onDestroy: ' + this.scriptName);
     }
 
     protected onEnter_b() { }

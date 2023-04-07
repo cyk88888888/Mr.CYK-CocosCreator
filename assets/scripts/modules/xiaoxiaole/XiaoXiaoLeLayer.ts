@@ -3,6 +3,8 @@ import { AudioSource, Button, Node, _decorator } from 'cc';
 import { SceneMgr } from '../../framework/mgr/SceneMgr';
 import { SoundMgr } from '../../framework/mgr/SoundMgr';
 import { UILayer } from '../../framework/ui/UILayer';
+import { GameModel } from './model/GameModel';
+import { GridView } from './view/GridView';
 const { ccclass, property } = _decorator;
 
 /*
@@ -18,11 +20,25 @@ export class XiaoXiaoLeLayer extends UILayer {
     btn_back: Button;
     @property({ type: Button })
     btn_music: Button;
-    @property({type: Node})
+    @property({ type: Node })
     grid: Node;
 
+    private gameModel: GameModel;
     protected onEnter() {
         SoundMgr.inst.playBg('dy/sound/xiaoxiaole/gamescenebgm');
+        this.gameModel = new GameModel();
+        this.gameModel.init(4);
+        var gridScript = this.grid.getComponent(GridView);
+        gridScript.setController(this);
+        gridScript.initWithCellModels(this.gameModel.getCells());
+    }
+
+    public selectCell(pos) {
+        return this.gameModel.selectCell(pos);
+    }
+
+    public cleanCmd() {
+        this.gameModel.cleanCmd();
     }
 
     private _tap_btn_music() {
@@ -31,6 +47,11 @@ export class XiaoXiaoLeLayer extends UILayer {
 
     private _tap_btn_back() {
         SceneMgr.inst.curScene.pop();
+    }
+
+    protected onExit(): void {
+        let self = this;
+        self.cleanCmd();
     }
 
 }
