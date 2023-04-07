@@ -1,6 +1,6 @@
 import { _decorator, Component, instantiate, Node, Prefab } from 'cc';
 import { UIComp } from '../../framework/ui/UIComp';
-import { AudioUtils } from './UT/AudioUtils';
+import { AudioUtils } from './util/AudioUtils';
 import { CONST } from '../base/CONST';
 const { ccclass, property } = _decorator;
 

@@ -1,6 +1,6 @@
 import { _decorator, Component, EventTouch, instantiate, Node, Prefab, Vec2 } from 'cc';
 import { UIComp } from '../../../framework/ui/UIComp';
-import { AudioUtils } from '../UT/AudioUtils';
+import { AudioUtils } from '../util/AudioUtils';
 import { CellView } from './CellView';
 import { CONST } from '../../base/CONST';
 import { UITransform } from 'cc';
