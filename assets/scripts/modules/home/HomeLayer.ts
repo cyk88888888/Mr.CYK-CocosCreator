@@ -3,7 +3,7 @@
  * @Author: CYK
  * @Date: 2022-05-16 09:18:45
  */
-import { _decorator, Button, Node, Tween, Vec3 } from 'cc';
+import { _decorator, Animation, Button, instantiate, Node, Prefab, Tween, Vec3 } from 'cc';
 import { UILayer } from '../../framework/ui/UILayer';
 const { ccclass, property } = _decorator;
 
@@ -11,6 +11,8 @@ const { ccclass, property } = _decorator;
 export class HomeLayer extends UILayer {
     /** 预制体路径 */
     public static prefabUrl: string = 'prefab/home/HomeLayer';
+    @property({type:Prefab})
+    crushEffect: Prefab;
     protected onEnter() {
         let self = this;
         let actionArray: Tween<Node>[] = [];
@@ -30,6 +32,11 @@ export class HomeLayer extends UILayer {
         } else {
             self.getTween(this.node).sequence(...actionArray).start();
         }
+
+        let instantEffect = instantiate(self.crushEffect);
+        let animation = instantEffect.getComponent(Animation);
+        animation.play("effect");
+        instantEffect.setParent(self.node);
     }
 
 }

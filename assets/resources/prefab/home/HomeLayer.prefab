@@ -2028,6 +2028,10 @@
     "__prefab": {
       "__id__": 119
     },
+    "crushEffect": {
+      "__uuid__": "000baed7-083c-4081-b389-30290f1d146e",
+      "__expectedType__": "cc.Prefab"
+    },
     "_id": ""
   },
   {

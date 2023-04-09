@@ -54,11 +54,11 @@ export class CellView extends UIComp {
                 if (self.status == CONST.CELL_STATUS.BIRD) {
                     let animation = self.node.getComponent(Animation);
                     animation.play("effect");
-                    let delay = self.getTween(self.node).delay(CONST.ANITIME.BOMB_BIRD_DELAY).call(() => {
-                        self.node.destroy();
-                    });
+                    let delay = self.getTween(self.node).delay(CONST.ANITIME.BOMB_BIRD_DELAY);
                     actionArray.push(delay);
                 }
+                var callFunc = self.getTween(self.node).destroySelf();
+                actionArray.push(callFunc);
             }
             else if (cmd[i].action == "setVisible") {
                 let isVisible = cmd[i].isVisible;
