@@ -3,9 +3,13 @@ import { UIComp } from '../../framework/ui/UIComp';
 import { AudioUtils } from './util/AudioUtils';
 import { CONST } from '../base/CONST';
 const { ccclass, property } = _decorator;
-
-@ccclass('XiaoXiaoleEffectLayer')
-export class XiaoXiaoleEffectLayer extends UIComp {
+/*
+ * @Descripttion: 消消乐特效处理脚本
+ * @Author: CYK
+ * @Date: 2023-04-1 09:18:45
+ */
+@ccclass('XiaoXiaoleEffectCtrl')
+export class XiaoXiaoleEffectCtrl extends UIComp {
     @property({ type: Prefab })
     bombWhite: Prefab;
     @property({ type: Prefab })
@@ -26,6 +30,7 @@ export class XiaoXiaoleEffectLayer extends UIComp {
                 let animation: Animation = null;
                 if (cmd.action == "crush") {
                     instantEffect = instantiate(self.crushEffect);
+                    instantEffect.setParent(self.node);//一定要先设置parent，不然节点挂载的组件不会初始化
                     animation = instantEffect.getComponent(Animation);
                     animation.play("effect");
                     !soundMap["crush" + cmd.playTime] && self.audioUtils.playEliminate(cmd.step);
@@ -33,17 +38,17 @@ export class XiaoXiaoleEffectLayer extends UIComp {
                 }
                 else if (cmd.action == "rowBomb") { 
                     instantEffect = instantiate(self.bombWhite);
+                    instantEffect.setParent(self.node);
                     animation = instantEffect.getComponent(Animation);
                     animation.play("effect_line");
                 }
                 else if (cmd.action == "colBomb") {
                     instantEffect = instantiate(self.bombWhite);
+                    instantEffect.setParent(self.node);
                     animation = instantEffect.getComponent(Animation);
                     animation.play("effect_col");
                 }
                 instantEffect.setPosition(new Vec3(CONST.CELL_WIDTH * (cmd.pos.x - 0.5), CONST.CELL_WIDTH * (cmd.pos.y - 0.5)));
-                instantEffect.setParent(self.node);
-                instantEffect.parent = self.node;
                 animation.on(Animation.EventType.FINISHED, function () {
                     instantEffect.destroy();
                 }, self);

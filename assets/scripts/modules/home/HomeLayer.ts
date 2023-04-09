@@ -1,17 +1,17 @@
+import { _decorator, Animation, Button, instantiate, Node, Prefab, Tween, Vec3 } from 'cc';
+import { UILayer } from '../../framework/ui/UILayer';
+import { ResMgr } from '../../framework/mgr/ResMgr';
+const { ccclass, property } = _decorator;
 /*
  * @Descripttion: 主界面
  * @Author: CYK
  * @Date: 2022-05-16 09:18:45
  */
-import { _decorator, Animation, Button, instantiate, Node, Prefab, Tween, Vec3 } from 'cc';
-import { UILayer } from '../../framework/ui/UILayer';
-const { ccclass, property } = _decorator;
-
 @ccclass('HomeLayer')
 export class HomeLayer extends UILayer {
     /** 预制体路径 */
     public static prefabUrl: string = 'prefab/home/HomeLayer';
-    @property({type:Prefab})
+    @property({ type: Prefab })
     crushEffect: Prefab;
     protected onEnter() {
         let self = this;
@@ -34,9 +34,9 @@ export class HomeLayer extends UILayer {
         }
 
         let instantEffect = instantiate(self.crushEffect);
+        instantEffect.setParent(self.node);
         let animation = instantEffect.getComponent(Animation);
         animation.play("effect");
-        instantEffect.setParent(self.node);
     }
 
 }

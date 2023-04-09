@@ -5,7 +5,7 @@ import { CellView } from './CellView';
 import { CONST } from '../../base/CONST';
 import { UITransform } from 'cc';
 import { Vec3 } from 'cc';
-import { XiaoXiaoleEffectLayer } from '../XiaoXiaoleEffectLayer';
+import { XiaoXiaoleEffectCtrl } from '../XiaoXiaoleEffectCtrl';
 import { XiaoXiaoLeLayer } from '../XiaoXiaoLeLayer';
 import { SceneMgr } from '../../../framework/mgr/SceneMgr';
 const { ccclass, property } = _decorator;
@@ -234,7 +234,7 @@ export class GridView extends UIComp {
     }
 
     private playEffect(effectsQueue) {
-        this.effectLayer.getComponent(XiaoXiaoleEffectLayer).playEffects(effectsQueue);
+        this.effectLayer.getComponent(XiaoXiaoleEffectCtrl).playEffects(effectsQueue);
     }
 }
 
