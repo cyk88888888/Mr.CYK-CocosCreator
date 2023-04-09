@@ -19,15 +19,13 @@ export class GridView extends UIComp {
     @property({ type: AudioUtils })
     audioUtils: AudioUtils;
 
-    isCanMove: boolean;
-    isInPlayAni: boolean;
-    lastTouchPos: Vec2;
-    controller: XiaoXiaoLeLayer;
-    cellViews: any[];
+    private isCanMove: boolean;
+    private isInPlayAni: boolean;
+    private controller: XiaoXiaoLeLayer;
+    private cellViews: Node[][];
     protected onEnter(): void {
         let self = this;
         self.setListener();
-        self.lastTouchPos = new Vec2(-1, -1);
         self.isCanMove = true;
         self.isInPlayAni = false; // 是否在播放中
     }
@@ -40,9 +38,9 @@ export class GridView extends UIComp {
     public initWithCellModels(cellsModels) {
         let self = this;
         self.cellViews = [];
-        for (let i = 1; i <= 9; i++) {
+        for (let i = 1; i <= CONST.GRID_WIDTH; i++) {
             self.cellViews[i] = [];
-            for (let j = 1; j <= 9; j++) {
+            for (let j = 1; j <= CONST.GRID_HEIGHT; j++) {
                 let type = cellsModels[i][j].type;
                 let aniView = instantiate(self.aniPre[type]);
                 aniView.parent = self.node;
@@ -93,7 +91,7 @@ export class GridView extends UIComp {
     }
 
     // 根据点击的像素位置，转换成网格中的位置
-    convertTouchPosToCell(point): { x, y } {
+    convertTouchPosToCell(point): { x: number, y: number } {
         let self = this;
         // 屏幕坐标转为世界坐标
         let camera = SceneMgr.inst.getUCamera().getComponent(Camera);
@@ -149,8 +147,8 @@ export class GridView extends UIComp {
 
     // 显示选中的格子背景
     updateSelect(pos) {
-        for (let i = 1; i <= 9; i++) {
-            for (let j = 1; j <= 9; j++) {
+        for (let i = 1; i <= CONST.GRID_WIDTH; i++) {
+            for (let j = 1; j <= CONST.GRID_HEIGHT; j++) {
                 if (this.cellViews[i][j]) {
                     let cellScript = this.cellViews[i][j].getComponent(CellView);
                     if (pos.x == j && pos.y == i) {
@@ -159,15 +157,14 @@ export class GridView extends UIComp {
                     else {
                         cellScript.setSelect(false);
                     }
-
                 }
             }
         }
     }
     //根据cell的model返回对应的view
     findViewByModel(model) {
-        for (let i = 1; i <= 9; i++) {
-            for (let j = 1; j <= 9; j++) {
+        for (let i = 1; i <= CONST.GRID_WIDTH; i++) {
+            for (let j = 1; j <= CONST.GRID_HEIGHT; j++) {
                 if (this.cellViews[i][j] && this.cellViews[i][j].getComponent(CellView).model == model) {
                     return { view: this.cellViews[i][j], x: j, y: i };
                 }
@@ -203,38 +200,40 @@ export class GridView extends UIComp {
     }
 
     //一段时间内禁止操作
-    disableTouch(time, step) {
+    private disableTouch(time, step) {
         let self = this;
         if (time <= 0) {
             return;
         }
         self.isInPlayAni = true;
         self.setTimeout(function () {
-            this.isInPlayAni = false;
-            this.audioUtils.playContinuousMatch(step);
+            self.isInPlayAni = false;
+            self.audioUtils.playContinuousMatch(step);
         }, time * 1000);
     }
 
     // 正常击中格子后的操作
-    selectCell(cellPos) {
-        let result = this.controller.selectCell(cellPos); // 直接先丢给model处理数据逻辑
+    private selectCell(cellPos) {
+        let self = this;
+        let result = self.controller.selectCell(cellPos); // 直接先丢给model处理数据逻辑
         let changeModels = result[0]; // 有改变的cell，包含新生成的cell和生成马上摧毁的格子
         let effectsQueue = result[1]; //各种特效
-        this.playEffect(effectsQueue);
-        this.disableTouch(this.getPlayAniTime(changeModels), this.getStep(effectsQueue));
-        this.updateView(changeModels);
-        this.controller.cleanCmd();
+        self.playEffect(effectsQueue);
+        self.disableTouch(self.getPlayAniTime(changeModels), self.getStep(effectsQueue));
+        self.updateView(changeModels);
+        self.controller.cleanCmd();
         if (changeModels.length >= 2) {
-            this.updateSelect(new Vec2(-1, -1));
-            this.audioUtils.playSwap();
+            self.updateSelect(new Vec2(-1, -1));
+            self.audioUtils.playSwap();
         }
         else {
-            this.updateSelect(cellPos);
-            this.audioUtils.playClick();
+            self.updateSelect(cellPos);
+            self.audioUtils.playClick();
         }
         return changeModels;
     }
-    playEffect(effectsQueue) {
+
+    private playEffect(effectsQueue) {
         this.effectLayer.getComponent(XiaoXiaoleEffectLayer).playEffects(effectsQueue);
     }
 }

@@ -8,7 +8,7 @@ export class CellView extends UIComp {
     @property({ type: SpriteFrame })
     defaultFrame: SpriteFrame;
 
-    isSelect: boolean
+    private isSelect: boolean;
     model: any;
     status: CONST.CELL_STATUS;
     protected onEnter() {
