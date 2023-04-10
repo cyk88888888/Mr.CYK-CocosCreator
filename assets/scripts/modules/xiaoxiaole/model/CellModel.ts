@@ -2,15 +2,14 @@ import { Vec2 } from "cc";
 import { CONST } from "../../base/CONST";
 
 export class CellModel {
-    type: any;
-    status: CONST.CELL_STATUS;
-    x: number;
-    y: number;
-    startX: number;
-    startY: number;
-    cmd: any[];
-    isDeath: boolean;
-    objecCount: number;
+    public type: any;//CONST.CELL_TYPE;
+    public status: CONST.CELL_STATUS;
+    public x: number;
+    public y: number;
+    public startX: number;
+    public startY: number;
+    public cmd: any[];
+    public isDeath: boolean;
 
     constructor() {
         this.type = null;
@@ -21,35 +20,35 @@ export class CellModel {
         this.startY = 1;
         this.cmd = [];
         this.isDeath = false;
-        this.objecCount = Math.floor(Math.random() * 1000);
     }
 
-    init(type) {
+    public init(type:CONST.CELL_TYPE) {
         this.type = type;
     }
 
-    isEmpty() {
+    public isEmpty() {
         return this.type == CONST.CELL_TYPE.EMPTY;
     }
 
-    setEmpty() {
+    public setEmpty() {
         this.type = CONST.CELL_TYPE.EMPTY;
     }
-    setXY(x, y) {
+
+    public setXY(x:number, y:number) {
         this.x = x;
         this.y = y;
     }
 
-    setStartXY(x, y) {
+    public setStartXY(x:number, y:number) {
         this.startX = x;
         this.startY = y;
     }
 
-    setStatus(status) {
+    public setStatus(status:CONST.CELL_STATUS) {
         this.status = status;
     }
 
-    moveToAndBack(pos) {
+    public moveToAndBack(pos:Vec2) {
         var srcPos = new Vec2(this.x, this.y);
         this.cmd.push({
             action: "moveTo",
@@ -65,7 +64,7 @@ export class CellModel {
         });
     }
 
-    moveTo(pos, playTime) {
+    public moveTo(pos:Vec2, playTime:number) {
         this.cmd.push({
             action: "moveTo",
             keepTime: CONST.ANITIME.TOUCH_MOVE,
@@ -76,7 +75,7 @@ export class CellModel {
         this.y = pos.y;
     }
 
-    toDie(playTime) {
+    public toDie(playTime:number) {
         this.cmd.push({
             action: "toDie",
             playTime: playTime,
@@ -85,7 +84,7 @@ export class CellModel {
         this.isDeath = true;
     }
 
-    toShake(playTime) {
+    public toShake(playTime:number) {
         this.cmd.push({
             action: "toShake",
             playTime: playTime,
@@ -93,20 +92,12 @@ export class CellModel {
         });
     }
 
-    setVisible(playTime, isVisible) {
+    public setVisible(playTime:number, isVisible:boolean) {
         this.cmd.push({
             action: "setVisible",
             playTime: playTime,
             keepTime: 0,
             isVisible: isVisible
         });
-    }
-
-    moveToAndDie(pos) {
-
-    }
-
-    isBird() {
-        return this.type == CONST.CELL_TYPE.G;
     }
 }

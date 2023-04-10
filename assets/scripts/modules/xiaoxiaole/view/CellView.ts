@@ -1,6 +1,7 @@
 import { _decorator, Animation, Component, Node, Sprite, SpriteFrame, Tween, UI, UIOpacity, Vec3 } from 'cc';
 import { UIComp } from '../../../framework/ui/UIComp';
 import { CONST } from '../../base/CONST';
+import { CellModel } from '../model/CellModel';
 const { ccclass, property } = _decorator;
 
 @ccclass('CellView')
@@ -9,14 +10,14 @@ export class CellView extends UIComp {
     defaultFrame: SpriteFrame;
 
     private isSelect: boolean;
-    model: any;
-    status: CONST.CELL_STATUS;
+    public model: CellModel;
+    private status: CONST.CELL_STATUS;
     protected onEnter() {
         let self = this;
         self.isSelect = false;
     }
 
-    public initWithModel(model) {
+    public initWithModel(model:CellModel) {
         this.model = model;
         let x = model.startX;
         let y = model.startY;

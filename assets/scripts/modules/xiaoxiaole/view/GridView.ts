@@ -8,6 +8,7 @@ import { Vec3 } from 'cc';
 import { XiaoXiaoLeLayer } from '../XiaoXiaoLeLayer';
 import { SceneMgr } from '../../../framework/mgr/SceneMgr';
 import { XiaoXiaoleEffectCtrl } from '../model/XiaoXiaoleEffectCtrl';
+import { CellModel } from '../model/CellModel';
 const { ccclass, property } = _decorator;
 
 @ccclass('GridView')
@@ -35,7 +36,7 @@ export class GridView extends UIComp {
         self.controller = controller;
     }
 
-    public initWithCellModels(cellsModels) {
+    public initWithCellModels(cellsModels: CellModel[][]) {
         let self = this;
         self.cellViews = [];
         for (let i = 1; i <= CONST.GRID_WIDTH; i++) {
@@ -91,7 +92,7 @@ export class GridView extends UIComp {
     }
 
     // 根据点击的像素位置，转换成网格中的位置
-    convertTouchPosToCell(point): { x: number, y: number } {
+    private convertTouchPosToCell(point: Vec2): Vec2 {
         let self = this;
         // 屏幕坐标转为世界坐标
         let camera = SceneMgr.inst.getUCamera().getComponent(Camera);
@@ -104,11 +105,11 @@ export class GridView extends UIComp {
         }
         let x = Math.floor(nodePos.x / CONST.CELL_WIDTH) + 1;
         let y = Math.floor(nodePos.y / CONST.CELL_HEIGHT) + 1;
-        return { x: x, y: y };
+        return new Vec2(x, y);
     }
 
     // 移动格子
-    updateView(changeModels) {
+    private updateView(changeModels: CellModel[]) {
         let self = this;
         let newCellViewInfo = [];
         for (let i in changeModels) {
@@ -139,14 +140,14 @@ export class GridView extends UIComp {
             }
         }
         // 重新标记this.cellviews的信息
-        newCellViewInfo.forEach(function (ele) {
+        newCellViewInfo.forEach(function (ele:any) {
             let model = ele.model;
             self.cellViews[model.y][model.x] = ele.view;
         }, self);
     }
 
     // 显示选中的格子背景
-    updateSelect(pos) {
+    private updateSelect(pos: Vec2) {
         for (let i = 1; i <= CONST.GRID_WIDTH; i++) {
             for (let j = 1; j <= CONST.GRID_HEIGHT; j++) {
                 if (this.cellViews[i][j]) {
@@ -162,7 +163,7 @@ export class GridView extends UIComp {
         }
     }
     //根据cell的model返回对应的view
-    findViewByModel(model) {
+    private findViewByModel(model: CellModel) {
         for (let i = 1; i <= CONST.GRID_WIDTH; i++) {
             for (let j = 1; j <= CONST.GRID_HEIGHT; j++) {
                 if (this.cellViews[i][j] && this.cellViews[i][j].getComponent(CellView).model == model) {
@@ -173,7 +174,7 @@ export class GridView extends UIComp {
         return null;
     }
 
-    getPlayAniTime(changeModels) {
+    private getPlayAniTime(changeModels:CellModel[]) {
         let self = this;
         if (!changeModels) {
             return 0;
@@ -190,7 +191,7 @@ export class GridView extends UIComp {
     }
 
     // 获得爆炸次数， 同一个时间算一个
-    getStep(effectsQueue) {
+    private getStep(effectsQueue:any[]) {
         if (!effectsQueue) {
             return 0;
         }
@@ -200,7 +201,7 @@ export class GridView extends UIComp {
     }
 
     //一段时间内禁止操作
-    private disableTouch(time, step) {
+    private disableTouch(time:number, step:number) {
         let self = this;
         if (time <= 0) {
             return;
@@ -213,11 +214,11 @@ export class GridView extends UIComp {
     }
 
     // 正常击中格子后的操作
-    private selectCell(cellPos) {
+    private selectCell(cellPos: Vec2) {
         let self = this;
         let result = self.controller.selectCell(cellPos); // 直接先丢给model处理数据逻辑
-        let changeModels = result[0]; // 有改变的cell，包含新生成的cell和生成马上摧毁的格子
-        let effectsQueue = result[1]; //各种特效
+        let changeModels:CellModel[] = result[0]; // 有改变的cell，包含新生成的cell和生成马上摧毁的格子
+        let effectsQueue:any[] = result[1]; //各种特效
         self.playEffect(effectsQueue);
         self.disableTouch(self.getPlayAniTime(changeModels), self.getStep(effectsQueue));
         self.updateView(changeModels);
@@ -233,7 +234,7 @@ export class GridView extends UIComp {
         return changeModels;
     }
 
-    private playEffect(effectsQueue) {
+    private playEffect(effectsQueue:any[]) {
         this.effectLayer.getComponent(XiaoXiaoleEffectCtrl).playEffects(effectsQueue);
     }
 }

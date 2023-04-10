@@ -16,7 +16,8 @@ export namespace CONST {
     }
 
     export enum CELL_STATUS {
-        COMMON = 0,
+        EMPTY = "empty",
+        COMMON = "common",
         CLICK = "click",
         LINE = "line",
         COLUMN = "column",

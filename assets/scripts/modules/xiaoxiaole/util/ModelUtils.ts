@@ -26,7 +26,7 @@ export  function mergePointArray(rowPoints : Vec2[], colPoints: Vec2[]){
  * @param exclusivePoint
  */
 export function exclusivePoint(points: Vec2[], exclusivePoint: Vec2){
-    let result = new Array<Vec2>();
+    let result:Vec2[] = [];
     for(let point of points){
         if(!point.equals(exclusivePoint)){
             result.push(point);

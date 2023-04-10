@@ -1,5 +1,5 @@
 
-import { AudioSource, Button, Node, _decorator } from 'cc';
+import { AudioSource, Button, Node, Vec2, _decorator } from 'cc';
 import { SceneMgr } from '../../framework/mgr/SceneMgr';
 import { SoundMgr } from '../../framework/mgr/SoundMgr';
 import { UILayer } from '../../framework/ui/UILayer';
@@ -33,7 +33,7 @@ export class XiaoXiaoLeLayer extends UILayer {
         gridScript.initWithCellModels(this.gameModel.getCells());
     }
 
-    public selectCell(pos) {
+    public selectCell(pos: Vec2) {
         return this.gameModel.selectCell(pos);
     }
 
