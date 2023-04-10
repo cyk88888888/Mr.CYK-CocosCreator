@@ -5,9 +5,9 @@ import { CellView } from './CellView';
 import { CONST } from '../../base/CONST';
 import { UITransform } from 'cc';
 import { Vec3 } from 'cc';
-import { XiaoXiaoleEffectCtrl } from '../XiaoXiaoleEffectCtrl';
 import { XiaoXiaoLeLayer } from '../XiaoXiaoLeLayer';
 import { SceneMgr } from '../../../framework/mgr/SceneMgr';
+import { XiaoXiaoleEffectCtrl } from '../model/XiaoXiaoleEffectCtrl';
 const { ccclass, property } = _decorator;
 
 @ccclass('GridView')

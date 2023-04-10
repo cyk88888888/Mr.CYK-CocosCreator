@@ -11,8 +11,6 @@ const { ccclass, property } = _decorator;
 export class HomeLayer extends UILayer {
     /** 预制体路径 */
     public static prefabUrl: string = 'prefab/home/HomeLayer';
-    @property({ type: Prefab })
-    crushEffect: Prefab;
     protected onEnter() {
         let self = this;
         let actionArray: Tween<Node>[] = [];
@@ -32,11 +30,6 @@ export class HomeLayer extends UILayer {
         } else {
             self.getTween(this.node).sequence(...actionArray).start();
         }
-
-        let instantEffect = instantiate(self.crushEffect);
-        instantEffect.setParent(self.node);
-        let animation = instantEffect.getComponent(Animation);
-        animation.play("effect");
     }
 
 }

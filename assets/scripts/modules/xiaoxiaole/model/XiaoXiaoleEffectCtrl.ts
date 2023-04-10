@@ -1,7 +1,7 @@
 import { _decorator, Animation, Component, instantiate, Node, Prefab, Vec3 } from 'cc';
-import { UIComp } from '../../framework/ui/UIComp';
-import { AudioUtils } from './util/AudioUtils';
-import { CONST } from '../base/CONST';
+import { AudioUtils } from '../util/AudioUtils';
+import { UIComp } from '../../../framework/ui/UIComp';
+import { CONST } from '../../base/CONST';
 const { ccclass, property } = _decorator;
 /*
  * @Descripttion: 消消乐特效处理脚本
