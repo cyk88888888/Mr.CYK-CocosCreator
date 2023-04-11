@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "b98b9a0f-427d-409e-abb8-27069ec0d071",
+  "uuid": "d77807fb-e66e-4e1e-8037-71f13fbf3704",
   "files": [
     ".json",
     ".png"
@@ -10,8 +10,8 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "b98b9a0f-427d-409e-abb8-27069ec0d071@6c48a",
-      "displayName": "crush",
+      "uuid": "d77807fb-e66e-4e1e-8037-71f13fbf3704@6c48a",
+      "displayName": "crush_atlas",
       "id": "6c48a",
       "name": "texture",
       "userData": {
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "b98b9a0f-427d-409e-abb8-27069ec0d071",
+        "imageUuidOrDatabaseUri": "d77807fb-e66e-4e1e-8037-71f13fbf3704",
         "visible": true
       },
       "ver": "1.0.22",
@@ -37,6 +37,6 @@
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
     "type": "texture",
-    "redirect": "b98b9a0f-427d-409e-abb8-27069ec0d071@6c48a"
+    "redirect": "d77807fb-e66e-4e1e-8037-71f13fbf3704@6c48a"
   }
 }

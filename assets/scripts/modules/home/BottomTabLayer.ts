@@ -11,8 +11,8 @@ import List from '../../framework/uiComp/List';
 import { EntranceLayer } from './entrance/EntranceLayer';
 import { HomeLayer } from './HomeLayer';
 import { SettingLayer } from './setting/SettingLayer';
-import { SkillLayer } from './skill/SkillLayer';
 import { SweetLayer } from './sweet/SweetLayer';
+import { VideoLayer } from './video/VideoLayer';
 const { ccclass, property } = _decorator;
 
 @ccclass('BottomTabLayer')
@@ -31,7 +31,7 @@ export class BottomTabLayer extends UIMenu {
             { layer: SweetLayer.__className, icon: 'dy/xiaoxiaole/sweets/Blue', preRes: [SweetLayer.prefabUrl] },
             { layer: EntranceLayer.__className, icon: 'dy/xiaoxiaole/sweets/Red', preRes: [EntranceLayer.prefabUrl] },
             { layer: HomeLayer.__className, icon: 'dy/xiaoxiaole/sweets/Colors', preRes: [HomeLayer.prefabUrl] },
-            { layer: SkillLayer.__className, icon: 'dy/xiaoxiaole/sweets/Green', preRes: [SkillLayer.prefabUrl] },
+            { layer: VideoLayer.__className, icon: 'dy/xiaoxiaole/sweets/Green', preRes: [VideoLayer.prefabUrl] },
             { layer: SettingLayer.__className, icon: 'dy/xiaoxiaole/sweets/Purple', preRes: [SettingLayer.prefabUrl] },
         ];
     }

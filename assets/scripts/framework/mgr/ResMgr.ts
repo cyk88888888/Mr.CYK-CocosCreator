@@ -5,8 +5,8 @@
  */
 import { Asset, assetManager, Prefab, resources, SpriteAtlas } from "cc";
 import { JuHuaDlg } from "../../modules/common/JuHuaDlg";
-import { LoadingScene } from "../../modules/loading/LoadingScene";
 import { SceneMgr } from "./SceneMgr";
+import { IndexScene } from "../../modules/index/IndexScene";
 
 export class ResMgr {
     private static _inst: ResMgr;
@@ -68,7 +68,7 @@ export class ResMgr {
                     break;
                 }
             }
-            if (!isAllLoaded && !this._juHuaDlg && SceneMgr.inst.curSceneName != LoadingScene.name) {
+            if (!isAllLoaded && !this._juHuaDlg && SceneMgr.inst.curSceneName != IndexScene.name) {
                 this._juHuaDlg = await JuHuaDlg.show();
             }
         }

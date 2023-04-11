@@ -12,7 +12,7 @@ import { SceneMgr } from './framework/mgr/SceneMgr';
 import { SoundMgr } from './framework/mgr/SoundMgr';
 import { TickMgr } from './framework/mgr/TickMgr';
 import { Sp } from './framework/uiComp/Sp';
-import { LoadingScene } from './modules/loading/LoadingScene';
+import { IndexScene } from './modules/index/IndexScene';
 const { ccclass, property } = _decorator;
 
 @ccclass('Main')
@@ -35,7 +35,7 @@ export class Main extends Component {
         scaleMode.designHeight_max = 1280;
 
         this.initClickEffContainer();
-        SceneMgr.inst.run(LoadingScene, { name: '红红火火恍恍惚惚' });
+        SceneMgr.inst.run(IndexScene, { name: '红红火火恍恍惚惚' });
     }
 
     private initClickEffContainer() {

@@ -11,9 +11,9 @@ import { TopUsrInfoLayer } from './TopUsrInfoLayer';
 import { BottomTabLayer } from './BottomTabLayer';
 import { SoundMgr } from '../../framework/mgr/SoundMgr';
 import { SettingLayer } from './setting/SettingLayer';
-import { SkillLayer } from './skill/SkillLayer';
 import { EntranceLayer } from './entrance/EntranceLayer';
 import { SweetLayer } from './sweet/SweetLayer';
+import { VideoLayer } from './video/VideoLayer';
 const { ccclass, property } = _decorator;
 
 @ccclass('HomeScene')
@@ -24,7 +24,7 @@ export class HomeScene extends UIScene {
         let self = this;
         self.mainClassLayer = HomeLayer;
         let subLayerMgr = self.subLayerMgr;
-        let classList = [SettingLayer, EntranceLayer, SweetLayer, SkillLayer];
+        let classList = [SettingLayer, EntranceLayer, SweetLayer, VideoLayer];
         for (let i = 0; i < classList.length; i++) {
             subLayerMgr.register(classList[i]);
         }

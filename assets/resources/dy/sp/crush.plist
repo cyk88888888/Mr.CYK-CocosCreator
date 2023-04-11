@@ -104,13 +104,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>crush.png</string>
+            <string>crush_atlas.png</string>
             <key>size</key>
             <string>{93,378}</string>
             <key>smartupdate</key>
             <string>$TexturePacker:SmartUpdate:c50a755c242dcb87d09a213c4cbffbee:4669bbf2232a4c04fe1853856218e523:2129659acb93445568f81d9c7085bffa$</string>
             <key>textureFileName</key>
-            <string>crush.png</string>
+            <string>crush_atlas.png</string>
         </dict>
     </dict>
 </plist>

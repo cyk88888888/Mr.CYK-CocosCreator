@@ -13,10 +13,10 @@ import { TopUsrInfoLayer } from '../home/TopUsrInfoLayer';
 import { BottomTabLayer } from '../home/BottomTabLayer';
 const { ccclass, property } = _decorator;
 
-@ccclass('LoadingLayer')
-export class LoadingLayer extends UILayer {
+@ccclass('IndexLayer')
+export class IndexLayer extends UILayer {
     /** 预制体路径 */
-    public static prefabUrl: string = 'prefab/loading/LoadingLayer';
+    public static prefabUrl: string = 'prefab/index/IndexLayer';
     @property({ type: ProgressBar })
     private progressBar: ProgressBar;
     private _isLoadingHome: boolean;
