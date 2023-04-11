@@ -10,9 +10,9 @@ import { ImgLoader } from '../../framework/uiComp/ImgLoader';
 import List from '../../framework/uiComp/List';
 import { EntranceLayer } from './entrance/EntranceLayer';
 import { HomeLayer } from './HomeLayer';
-import { SettingLayer } from './setting/SettingLayer';
 import { SweetLayer } from './sweet/SweetLayer';
 import { VideoLayer } from './video/VideoLayer';
+import { SpLayer } from './sp/SpLayer';
 const { ccclass, property } = _decorator;
 
 @ccclass('BottomTabLayer')
@@ -32,7 +32,7 @@ export class BottomTabLayer extends UIMenu {
             { layer: EntranceLayer.__className, icon: 'dy/xiaoxiaole/sweets/Red', preRes: [EntranceLayer.prefabUrl] },
             { layer: HomeLayer.__className, icon: 'dy/xiaoxiaole/sweets/Colors', preRes: [HomeLayer.prefabUrl] },
             { layer: VideoLayer.__className, icon: 'dy/xiaoxiaole/sweets/Green', preRes: [VideoLayer.prefabUrl] },
-            { layer: SettingLayer.__className, icon: 'dy/xiaoxiaole/sweets/Purple', preRes: [SettingLayer.prefabUrl] },
+            { layer: SpLayer.__className, icon: 'dy/xiaoxiaole/sweets/Purple', preRes: [SpLayer.prefabUrl] },
         ];
     }
 

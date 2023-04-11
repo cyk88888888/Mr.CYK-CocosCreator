@@ -9,10 +9,10 @@ import { UILayer } from '../../../framework/ui/UILayer';
 import { BagDlg } from '../../bag/BagDlg';
 const { ccclass, property } = _decorator;
 
-@ccclass('SettingLayer')
-export class SettingLayer extends UILayer {
+@ccclass('SpLayer')
+export class SpLayer extends UILayer {
     /** 预制体路径 */
-    public static prefabUrl: string = 'prefab/home/SettingLayer';
+    public static prefabUrl: string = 'prefab/home/SpLayer';
 
     @property(Button)
     private btn_bag: Button;
