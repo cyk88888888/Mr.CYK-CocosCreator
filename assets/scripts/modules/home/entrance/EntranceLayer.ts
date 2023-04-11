@@ -9,6 +9,7 @@ import { SoundMgr } from '../../../framework/mgr/SoundMgr';
 import { UILayer } from '../../../framework/ui/UILayer';
 import { UICompTestScene } from '../../uiCompTest/UICompTestScene';
 import { XiaoXiaoLeScene } from '../../xiaoxiaole/XiaoXiaoLeScene';
+import { ChatScene } from '../../chat/ChatScene';
 const { ccclass, property } = _decorator;
 
 @ccclass('EntranceLayer')
@@ -19,6 +20,8 @@ export class EntranceLayer extends UILayer {
     public btn_xiaoxiaole:Node;
     @property({type: Node})
     public btn_uiComp:Node;
+    @property({type: Node})
+    public btn_chat:Node;
     protected onEnter() {
     }
 
@@ -29,6 +32,10 @@ export class EntranceLayer extends UILayer {
 
     private _tap_btn_uiComp(){
         SceneMgr.inst.push(UICompTestScene);
+    }
+
+    private _tap_btn_chat(){
+        SceneMgr.inst.push(ChatScene);
     }
 
 }
