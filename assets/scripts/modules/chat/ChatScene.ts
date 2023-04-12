@@ -1,7 +1,7 @@
 /*
- * @Descripttion: 文件测试场景类
+ * @Descripttion: 聊天列表测试场景类
  * @Author: CYK
- * @Date: 2022-05-16 09:18:45
+ * @Date: 2023-04-12 23:23:20
  */
 import { _decorator } from "cc";
 import { UIScene } from "../../framework/ui/UIScene";

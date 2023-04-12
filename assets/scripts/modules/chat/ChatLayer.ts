@@ -1,14 +1,11 @@
 /*
  * @Descripttion: 列表测试界面
  * @Author: CYK
- * @Date: 2022-05-12 09:23:41
+ * @Date: 2023-04-12 23:23:41
  */
 import { Button, Label, Layout, Node, RichText, Sprite, SpriteFrame, UITransform, Vec3, _decorator } from 'cc';
-import { BaseEnum } from '../../framework/base/BaseEnum';
-import { FileMgr } from '../../framework/mgr/FileMgr';
 import { SceneMgr } from '../../framework/mgr/SceneMgr';
 import { UILayer } from '../../framework/ui/UILayer';
-import { ButtonPlus } from '../../framework/uiComp/ButtonPlus';
 import List from '../../framework/uiComp/List';
 const { ccclass, property } = _decorator;
 
