@@ -127,6 +127,11 @@ export class UIComp extends Component {
         //todo...
     }
 
+    /** 刷新指定列表**/
+    protected refreshList(id: string){
+
+    }
+
     /**获取指定对象的缓动Tweener */
     protected getTween(target: Node):Tween<Node> {
         if (!this._tweenTargetList) {
