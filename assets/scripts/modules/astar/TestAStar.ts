@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Graphics, UITransform, EventTouch, Label, Prefab, instantiate, Vec3, Widget } from 'cc';
+import { _decorator, Component, Node, Graphics, UITransform, EventTouch, Label, Prefab, instantiate, Vec3, Widget, Vec2 } from 'cc';
 import { BaseUT } from '../../framework/base/BaseUtil';
 import { TickMgr } from '../../framework/mgr/TickMgr';
 import { UIComp } from '../../framework/ui/UIComp';
@@ -176,17 +176,16 @@ export class TestAStar extends UIComp {
         let self = this;
         if (!this._startFrame) return;
         let _cellSize = self._cellSize;
-        let targetX = self._path[self._index].x * _cellSize + _cellSize / 2;
-        let targetY = self._path[self._index].y * _cellSize + _cellSize / 2;
+        let passedNode = self._path[self._index];
+        let targetX = passedNode.x * _cellSize + _cellSize / 2;
+        let targetY = passedNode.y * _cellSize + _cellSize / 2;
 
         //把经过的点，涂上黄色
-        let passedNode = self._path[self._index];
-
         self.graphicsPath.fillColor.fromHEX('#ffff00');
         self.graphicsPath.rect(passedNode.x * _cellSize, passedNode.y * _cellSize, _cellSize, _cellSize);
         self.graphicsPath.fill();
 
-        let playerPos = self.graphicsPlayer.node.position;
+        let playerPos = self.sp_player.node.position;
         let dx = targetX - playerPos.x;
         let dy = targetY - playerPos.y;
         let dist = Math.sqrt(dx * dx + dy * dy);
@@ -197,11 +196,11 @@ export class TestAStar extends UIComp {
                 this._startFrame = false;
             }
         } else {
-            let oldPos = [self.graphicsPlayer.node.position.x, self.graphicsPlayer.node.position.y];
-            let newPos = [playerPos.x + dx * self._speed, playerPos.y + dy * self._speed];
-            let dir = newPos[0] > oldPos[0] ? 1 : -1;
-            self.graphicsPlayer.node.setPosition(newPos[0], newPos[1]);
-            self.sp_player.node.setPosition(self.graphicsPlayer.node.position);
+            let oldPos = new Vec3(playerPos.x, playerPos.y);
+            let newPos = new Vec3(playerPos.x + dx * self._speed, playerPos.y + dy * self._speed);
+            let dir = newPos.x > oldPos.x ? 1 : -1;
+            self.graphicsPlayer.node.setPosition(newPos);
+            self.sp_player.node.setPosition(newPos);
             self.sp_player.node.setScale(Math.abs(self.sp_player.node.scale.x) * dir, self.sp_player.node.scale.y);
         }
     }
