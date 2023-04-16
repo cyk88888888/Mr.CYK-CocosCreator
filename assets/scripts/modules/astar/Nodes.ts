@@ -12,7 +12,7 @@ export class Nodes {
     public h: number;
     public walkable: Boolean = true;//是否可穿越（通常把障碍物节点设置为false）
     public parent: Nodes;
-    public costMultiplier: number = 1.0;//代价因子
+    public costMultiplier: number = 1;//代价因子
 
     public init(x: number, y: number) {
         let self = this;

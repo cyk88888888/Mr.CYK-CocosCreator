@@ -7,36 +7,41 @@ const { ccclass, property } = _decorator;
 
 @ccclass('AStar')
 export class AStar {
-    
+
     private _open: Nodes[];//开放列表
     private _closed: Nodes[];//封闭列表
     private _grid: Grid;
     private _endNode: Nodes;//终点
     private _startNode: Nodes;//起点
     private _path: Nodes[];//最终的路径节点
-    // private _heuristic:Function = this.manhattan;
+    private _heuristic: Function = this.manhattan;
     // private _heuristic:Function = this.euclidian;
-    private _heuristic: Function = this.diagonal; //估计公式
-    private _straightCost: number = 1.0; //直线代价
-    private _diagCost: number = Math.SQRT2; //对角线代价
+    // private _heuristic: Function = this.diagonal; //估计公式
+    private _straightCost: number = 10; //直线代价
+    private _diagCost: number = 14;//对角线代价(不用Math.SQRT2，使用整数计算提高计算速度)
     private _startCalculateTime: number;//计算本次寻路的开始时间
     public costTotTime: number;//计算本次寻路的总耗时
+    private _size = 0;//角色大小，单位：圈（以指定格子为中心的圈）
 
-
-     //判断节点是否开放列表
-     private isOpen(node: Nodes): boolean {
+    /** 判断节点是否开放列表*/
+    private isOpen(node: Nodes): boolean {
         let self = this;
         return self._open.indexOf(node) > -1;
     }
 
-    //判断节点是否封闭列表
+    /**判断节点是否封闭列表*/
     private isClosed(node: Nodes): boolean {
         let self = this;
         return self._closed.indexOf(node) > -1;
     }
 
-    //对指定的网络寻找路径
-    public findPath(grid: Grid): boolean {
+    /**
+     * 对指定的网络寻找路径
+     * @param grid 格子数据
+     * @param size 角色大小，单位：圈（以指定格子为中心的圈）
+     * @returns 
+     */
+    public findPath(grid: Grid, size?: number): boolean {
         let self = this;
         self._grid = grid;
         self._open = [];
@@ -47,11 +52,12 @@ export class AStar {
         self._startNode.h = self._heuristic(self._startNode);
         self._startNode.f = self._startNode.g + self._startNode.h;
         self._startCalculateTime = self.getTime();
+        self._size = size;
         return self.search();
     }
 
-      //计算周围节点代价的关键处理函数
-      public search(): boolean {
+    /**计算周围节点代价的关键处理函数*/
+    public search(): boolean {
         let self = this;
         let _t: number = 1;
         let node: Nodes = self._startNode;
@@ -71,6 +77,8 @@ export class AStar {
                     if (test == node || !test.walkable || !self._grid.getNode(node.x, test.y).walkable || !self._grid.getNode(test.x, node.y).walkable) {
                         continue;
                     }
+
+                    if (!self.isNeighborOffsetAvailable(test)) continue;
 
                     let cost: number = self._straightCost;
                     //如果是对象线，则使用对角代价
@@ -129,7 +137,7 @@ export class AStar {
         return true;
     }
 
-    //根据父节点指向，从终点反向连接到起点
+    /** 根据父节点指向，从终点反向连接到起点*/
     private buildPath() {
         let self = this;
         self._path = [];
@@ -144,17 +152,37 @@ export class AStar {
         console.log("本次寻路计算总耗时: " + totTime + "秒");
     }
 
-    //获取当前时间(毫秒)
-    private getTime(){
+    /** 当前节点是否能容纳角色*/
+    private isNeighborOffsetAvailable(node: Nodes) {
+        let self = this;
+        if (!self._size) return true;
+        let startX = node.x - self._size;
+        let endX = node.x + self._size;
+        let startY = node.y - self._size;
+        let endY = node.y + self._size;
+        if (startX < 0 || endX > self._grid.numCols - self._size || startY < 0 || endY > self._grid.numRows - self._size) {//是否超出地图范围
+            return false;
+        }
+        for (let i = startX; i <= endX; i++) {
+            for (let j = startY; j <= endY; j++) {
+                let test: Nodes = self._grid.getNode(i, j);
+                if (!test.walkable) return false;
+            }
+        }
+        return true;
+    }
+
+    /** 获取当前时间(毫秒)*/
+    private getTime() {
         return new Date().getTime();
     }
-    //曼哈顿估价法
+    /** 曼哈顿估价法*/
     private manhattan(node: Nodes): number {
         let self = this;
         return Math.abs(node.x - self._endNode.x) * self._straightCost + Math.abs(node.y - self._endNode.y) * self._straightCost;
     }
 
-    //几何估价法
+    /** 几何估价法*/
     private euclidian(node: Nodes): number {
         let self = this;
         let dx: number = node.x - self._endNode.x;
@@ -162,7 +190,7 @@ export class AStar {
         return Math.sqrt(dx * dx + dy * dy) * self._straightCost;
     }
 
-    //对角线估价法
+    /** 对角线估价法*/
     private diagonal(node: Nodes): number {
         let self = this;
         let dx = Math.abs(node.x - self._endNode.x);
@@ -172,19 +200,19 @@ export class AStar {
         return self._diagCost * diag + self._straightCost * (straight - 2 * diag);
     }
 
-    //返回所有被计算过的节点(辅助函数)
+    /** 返回所有被计算过的节点(辅助函数)*/
     public get visited(): Nodes[] {
         let self = this;
         return self._closed.concat(self._open);
     }
 
-    //返回open数组
+    /** 返回open数组*/
     public get openArray(): Nodes[] {
         let self = this;
         return self._open;
     }
 
-    //返回close数组
+    /** 返回close数组*/
     public get closedArray(): Nodes[] {
         let self = this;
         return self._closed;
