@@ -21,6 +21,10 @@ export class XiaoXiaoLeScene extends UIScene {
             subLayerMgr.register(classList[i]);
         }
     }
+
+    protected onEnter(): void {
+        SoundMgr.inst.bgVolume = 1;
+    }
 }
 registerModule(XiaoXiaoLeScene, [
     XiaoXiaoLeStartLayer.prefabUrl,

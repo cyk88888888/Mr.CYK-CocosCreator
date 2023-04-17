@@ -1,6 +1,7 @@
-import { _decorator, Component, Node, Tween, tween, EventTouch, js} from 'cc';
+import { _decorator, Component, Node, Tween, tween, EventTouch, js } from 'cc';
 import { emmiter } from '../base/Emmiter';
 import { SoundMgr } from '../mgr/SoundMgr';
+import List from '../uiComp/List';
 const { ccclass, property } = _decorator;
 
 @ccclass('UIComp')
@@ -19,7 +20,7 @@ export class UIComp extends Component {
     protected needRefreshListOnEnter: boolean = true;
 
     onLoad() {
-        this.scriptName = this.name.match(/<(\S*)>/)[1]; 
+        this.scriptName = this.name.match(/<(\S*)>/)[1];
         // console.log('onLoad: ' + this.scriptName);
     }
 
@@ -127,13 +128,21 @@ export class UIComp extends Component {
         //todo...
     }
 
-    /** 刷新指定列表**/
-    protected refreshList(id: string){
-
+    /** 刷新指定列表*/
+    protected refreshList(id: string) {
+        let self = this;
+        let listNode:Node = self[id];
+        if (!listNode) {
+            console.warn(`找不到id为${id}的列表`);
+            return;
+        }
+        let list = listNode.getComponent(List);
+        if(!list) return console.warn(`列表${id}没有绑定List脚本`);
+        list.renderEvent.target
     }
 
     /**获取指定对象的缓动Tweener */
-    protected getTween(target: Node):Tween<Node> {
+    protected getTween(target: Node): Tween<Node> {
         if (!this._tweenTargetList) {
             this._tweenTargetList = [];
         }

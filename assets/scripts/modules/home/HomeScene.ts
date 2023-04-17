@@ -32,6 +32,7 @@ export class HomeScene extends UIScene {
 
     protected async onEnter() {
         let self = this;
+        SoundMgr.inst.bgVolume = 0.2;
         SoundMgr.inst.playMainBg();
         self.onEmitter('jumpToLayer', self.jumpToLayer);
         if (!self._topUsrInfo) self._topUsrInfo = await TopUsrInfoLayer.show();

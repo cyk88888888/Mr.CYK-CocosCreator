@@ -16,6 +16,8 @@ export class SoundMgr {
     }
     /**按钮点击音效 */
     public buttonSound: string;
+    /** 背景音乐音量大小(0.0~1.0)*/
+    public bgVolume = 1;
     /**音乐缓存最大个数 */
     public musicCacheMaxCount: number = 5;
     public musicCachePool: string[] = [];
@@ -26,7 +28,7 @@ export class SoundMgr {
     /**设置默认背景音乐 */
     public set defaultBgMusic(value: string) {
         this._defaultBgMusic = value;
-        this.playMainBg();
+        // this.playMainBg();
     }
     public curBgMusic: string;
     private _isStopBg:boolean;
@@ -49,6 +51,7 @@ export class SoundMgr {
             audioSource.stop();
             audioSource.clip = audioClip;
             audioSource.loop = true;
+            audioSource.volume = self.bgVolume;
             if(!self._isStopBg) audioSource.play();
             if (self.musicCachePool.indexOf(url) == -1) self.musicCachePool.push(url);
             self.checkRealseMusic();
