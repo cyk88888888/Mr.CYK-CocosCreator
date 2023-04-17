@@ -212,7 +212,6 @@ export class ChatLayer extends UILayer {
         ];
 
         self.list.numItems = self.chatList.length;
-        self.list.renderEvent.target
     }
 
     onListRender(item: any, idx: number) {

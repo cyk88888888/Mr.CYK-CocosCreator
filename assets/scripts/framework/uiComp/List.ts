@@ -26,9 +26,8 @@ enum SelectedType {
     MULT = 2,//多选
 }
 
-@ccclass
+@ccclass("List")
 @disallowMultiple()
-@menu('List')
 @requireComponent(ScrollView)
 //脚本生命周期回调的执行优先级。小于 0 的脚本将优先执行，大于 0 的脚本将最后执行。该优先级只对 onLoad, onEnable, start, update 和 lateUpdate 有效，对 onDisable 和 onDestroy 无效。
 @executionOrder(-5000)

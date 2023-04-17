@@ -7,10 +7,11 @@
  * @end
  ******************************************/
  const { ccclass, property, disallowMultiple, menu, executionOrder } = _decorator;
- import { Node, Component, Enum, Sprite, SpriteFrame, tween, _decorator, EventHandler, Tween, Button, UITransform, Vec3 } from 'cc';
+ import { Node, Component, Enum, Sprite, SpriteFrame, tween, _decorator, EventHandler, Tween, Button, UITransform, Vec3, UI } from 'cc';
  import { DEV } from 'cc/env';
 import { ButtonPlus } from './ButtonPlus';
  import List from './List';
+import { UIComp } from '../ui/UIComp';
  
  enum SelectedType {
      NONE = 0,
@@ -18,9 +19,8 @@ import { ButtonPlus } from './ButtonPlus';
      SWITCH = 2,
  }
  
- @ccclass
+ @ccclass("ListItem")
  @disallowMultiple()
- @menu('List Item')
  @executionOrder(-5001)          //先于List
  export default class ListItem extends Component {
      //图标
@@ -89,18 +89,35 @@ import { ButtonPlus } from './ButtonPlus';
      //序列id
      public listId: number;
  
-     onLoad() {
-         // //没有按钮组件的话，selectedFlag无效
+    //  protected onLoad_a(): void {
+    //     super.onLoad_a();
+    //        // //没有按钮组件的话，selectedFlag无效
+    //      // if (!this.btnCom)
+    //      //     this.selectedMode == SelectedType.NONE;
+    //      //有选择模式时，保存相应的东西
+    //      if (this.selectedMode == SelectedType.SWITCH) {
+    //         let com: Sprite = this.selectedFlag.getComponent(Sprite);
+    //         this._unselectedSpriteFrame = com.spriteFrame;
+    //     }
+    //  }
+ 
+    onLoad(): void {
+           // //没有按钮组件的话，selectedFlag无效
          // if (!this.btnCom)
          //     this.selectedMode == SelectedType.NONE;
          //有选择模式时，保存相应的东西
          if (this.selectedMode == SelectedType.SWITCH) {
-             let com: Sprite = this.selectedFlag.getComponent(Sprite);
-             this._unselectedSpriteFrame = com.spriteFrame;
-         }
+            let com: Sprite = this.selectedFlag.getComponent(Sprite);
+            this._unselectedSpriteFrame = com.spriteFrame;
+        }
      }
- 
-     onDestroy() {
+
+    //  protected onDestroy() {
+    //     super.onDestroy_a();
+    //      this.node.off(Node.EventType.SIZE_CHANGED, this._onSizeChange, this);
+    //  }
+
+    onDestroy() {
          this.node.off(Node.EventType.SIZE_CHANGED, this._onSizeChange, this);
      }
  

@@ -22,6 +22,7 @@ export class UIComp extends Component {
     onLoad() {
         this.scriptName = this.name.match(/<(\S*)>/)[1];
         // console.log('onLoad: ' + this.scriptName);
+        this.onLoad_a();
     }
 
     onEnable() {
@@ -38,6 +39,10 @@ export class UIComp extends Component {
         // console.log('onDestroy: ' + this.scriptName);
     }
 
+    protected onLoad_a(){ }
+
+    protected onDestroy_a(){ }
+
     protected onEnter_b() { }
 
     protected onEnter() { }
@@ -46,7 +51,11 @@ export class UIComp extends Component {
 
     protected onEnter_a() { }
 
+    protected dchg_b() { }
+
     protected dchg() { }
+
+    protected dchg_a() { }
 
     protected onExit_b() { }
 
@@ -76,7 +85,11 @@ export class UIComp extends Component {
 
     public setData(data: any) {
         this.data = data;
-        if (data) this.dchg();
+        if (data){
+            this.dchg_b();
+            this.dchg();
+            this.dchg_a();
+        } 
     }
 
     /**
@@ -132,13 +145,10 @@ export class UIComp extends Component {
     protected refreshList(id: string) {
         let self = this;
         let listNode:Node = self[id];
-        if (!listNode) {
-            console.warn(`找不到id为${id}的列表`);
-            return;
-        }
+        if (!listNode) return console.warn(`找不到id为${id}的列表`);
         let list = listNode.getComponent(List);
         if(!list) return console.warn(`列表${id}没有绑定List脚本`);
-        list.renderEvent.target
+        list.renderEvent.target //= list.tmpPrefab
     }
 
     /**获取指定对象的缓动Tweener */
