@@ -6,7 +6,7 @@
 import { Button, Label, Layout, Node, RichText, Sprite, SpriteFrame, UITransform, Vec3, _decorator } from 'cc';
 import { SceneMgr } from '../../framework/mgr/SceneMgr';
 import { UILayer } from '../../framework/ui/UILayer';
-import List from '../../framework/uiComp/List';
+import { List } from '../../framework/uiComp/List';
 const { ccclass, property } = _decorator;
 
 @ccclass('ChatLayer')
@@ -15,7 +15,7 @@ export class ChatLayer extends UILayer {
     public static prefabUrl: string = 'prefab/chat/ChatLayer';
     @property({ type: Button })
     private btn_back: Button;
-    @property(List)
+    @property({type: List})
     list: List = null;
     @property(SpriteFrame)
     avatar1SF: SpriteFrame = null;

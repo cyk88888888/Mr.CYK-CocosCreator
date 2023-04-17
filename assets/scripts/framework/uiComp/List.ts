@@ -7,7 +7,7 @@
 const { ccclass, property, disallowMultiple, menu, executionOrder, requireComponent } = _decorator;
 import { Node, Component, Enum, tween, _decorator, EventHandler, Tween, ScrollView, Prefab, Layout, Vec2, Size, NodePool, isValid, instantiate, Vec3, Widget, UITransform, CCFloat, CCBoolean, CCInteger } from 'cc';
 import { DEV } from 'cc/env';
-import ListItem from './ListItem';
+import { ListItem } from './ListItem';
 
 enum TemplateType {
     NODE = 1,
@@ -31,7 +31,7 @@ enum SelectedType {
 @requireComponent(ScrollView)
 //脚本生命周期回调的执行优先级。小于 0 的脚本将优先执行，大于 0 的脚本将最后执行。该优先级只对 onLoad, onEnable, start, update 和 lateUpdate 有效，对 onDisable 和 onDestroy 无效。
 @executionOrder(-5000)
-export default class List extends Component {
+export class List extends Component {
     //模板类型
     @property({ type: Enum(TemplateType), tooltip: DEV && '模板类型', })
     private templateType: TemplateType = TemplateType.PREFAB;

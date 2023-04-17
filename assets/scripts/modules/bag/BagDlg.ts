@@ -6,7 +6,7 @@
 import { Button, instantiate, Label, Node, Prefab, Vec3, _decorator } from 'cc';
 import { UIDlg } from '../../framework/ui/UIDlg';
 import { ImgLoader } from '../../framework/uiComp/ImgLoader';
-import List from '../../framework/uiComp/List';
+import { List } from '../../framework/uiComp/List';
 const { ccclass, property } = _decorator;
 
 @ccclass('BagDlg')
@@ -15,7 +15,7 @@ export class BagDlg extends UIDlg {
     public static prefabUrl: string = 'prefab/bag/BagDlg';
     @property({ type: Button })
     private btn_close: Button;
-    @property(List)
+    @property({type: List})
     private list_bag: List;
     @property(Prefab)
     private bagItem: Prefab;

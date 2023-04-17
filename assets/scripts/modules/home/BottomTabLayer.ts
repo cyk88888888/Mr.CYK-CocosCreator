@@ -7,19 +7,19 @@ import { Node, _decorator } from 'cc';
 import { ResMgr } from '../../framework/mgr/ResMgr';
 import { UIMenu } from '../../framework/ui/UIMenu';
 import { ImgLoader } from '../../framework/uiComp/ImgLoader';
-import List from '../../framework/uiComp/List';
 import { EntranceLayer } from './entrance/EntranceLayer';
 import { HomeLayer } from './HomeLayer';
 import { SweetLayer } from './sweet/SweetLayer';
 import { VideoLayer } from './video/VideoLayer';
 import { SpLayer } from './sp/SpLayer';
+import { List } from '../../framework/uiComp/List';
 const { ccclass, property } = _decorator;
 
 @ccclass('BottomTabLayer')
 export class BottomTabLayer extends UIMenu {
     /** 预制体路径 */
     public static prefabUrl: string = 'prefab/home/BottomTabLayer';
-    @property(List)
+    @property({type: List})
     private list_tab: List = null;
 
     private _layerInfos: any[];

@@ -1,7 +1,7 @@
 import { _decorator, Component, Node, Tween, tween, EventTouch, js } from 'cc';
 import { emmiter } from '../base/Emmiter';
 import { SoundMgr } from '../mgr/SoundMgr';
-import List from '../uiComp/List';
+import { List } from '../uiComp/List';
 const { ccclass, property } = _decorator;
 
 @ccclass('UIComp')
@@ -37,6 +37,7 @@ export class UIComp extends Component {
 
     onDestroy() {
         // console.log('onDestroy: ' + this.scriptName);
+        this.onDestroy_a();
     }
 
     protected onLoad_a(){ }

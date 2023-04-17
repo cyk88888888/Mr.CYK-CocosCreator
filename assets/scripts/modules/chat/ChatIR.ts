@@ -1,6 +1,6 @@
 import { _decorator, Component, Node } from 'cc';
 import { UIComp } from '../../framework/ui/UIComp';
-import ListItem from '../../framework/uiComp/ListItem';
+import { ListItem } from '../../framework/uiComp/ListItem';
 const { ccclass, property } = _decorator;
 
 @ccclass('ChatIR')
