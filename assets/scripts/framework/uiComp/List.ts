@@ -773,7 +773,7 @@ export class List extends Component {
             t._cyclicAllItemSize = t._allItemSize + (t._allItemSizeNoEdge * (t._cyclicNum - 1)) + (spacing * (t._cyclicNum - 1));
             t._cycilcAllItemSizeNoEdge = t._allItemSizeNoEdge * t._cyclicNum;
             t._cycilcAllItemSizeNoEdge += spacing * (t._cyclicNum - 1);
-            // cc.log('_cyclicNum ->', t._cyclicNum, t._allItemSizeNoEdge, t._allItemSize, t._cyclicPos1, t._cyclicPos2);
+            // console.log('_cyclicNum ->', t._cyclicNum, t._allItemSizeNoEdge, t._allItemSize, t._cyclicPos1, t._cyclicPos2);
         }
 
         t._lack = !t.cyclic && t._allItemSize < (t._sizeType ? t._thisNodeUt.height : t._thisNodeUt.width);
@@ -789,7 +789,7 @@ export class List extends Component {
             t._contentUt.width = targetWH;
         }
 
-        // cc.log('_resizeContent()  numItems =', t._numItems, '，content =', t.content);
+        // console.log('_resizeContent()  numItems =', t._numItems, '，content =', t.content);
     }
 
     //滚动进行时...
@@ -1015,7 +1015,7 @@ export class List extends Component {
                 } else {
                     //直接渲染
                     this._lastDisplayData = [];
-                    // cc.log('List Display Data II::', this.displayData);
+                    // console.log('List Display Data II::', this.displayData);
                     for (let c = 0; c < this.displayItemNum; c++) {
                         this._createOrUpdateItem(this.displayData[c]);
                     }
@@ -1036,7 +1036,7 @@ export class List extends Component {
                 this.viewRight = this.viewLeft + this._thisNodeUt.width;
                 this.elasticRight = this.viewRight > this._contentUt.width ? Math.abs(this.viewRight - this._contentUt.width) : 0;
                 this.viewRight += this.elasticRight;
-                // cc.log(this.elasticLeft, this.elasticRight, this.viewLeft, this.viewRight);
+                // console.log(this.elasticLeft, this.elasticRight, this.viewLeft, this.viewRight);
                 break;
             case 2://单行HORIZONTAL（RIGHT_TO_LEFT）、网格VERTICAL（RIGHT_TO_LEFT）
                 this.elasticRight = scrollPos.x < 0 ? -scrollPos.x : 0;
@@ -1044,7 +1044,7 @@ export class List extends Component {
                 this.viewLeft = this.viewRight - this._thisNodeUt.width;
                 this.elasticLeft = this.viewLeft < -this._contentUt.width ? Math.abs(this.viewLeft + this._contentUt.width) : 0;
                 this.viewLeft -= this.elasticLeft;
-                // cc.log(this.elasticLeft, this.elasticRight, this.viewLeft, this.viewRight);
+                // console.log(this.elasticLeft, this.elasticRight, this.viewLeft, this.viewRight);
                 break;
             case 3://单列VERTICAL（TOP_TO_BOTTOM）、网格HORIZONTAL（TOP_TO_BOTTOM）
                 this.elasticTop = scrollPos.y < 0 ? Math.abs(scrollPos.y) : 0;
@@ -1052,7 +1052,7 @@ export class List extends Component {
                 this.viewBottom = this.viewTop - this._thisNodeUt.height;
                 this.elasticBottom = this.viewBottom < -this._contentUt.height ? Math.abs(this.viewBottom + this._contentUt.height) : 0;
                 this.viewBottom += this.elasticBottom;
-                // cc.log(this.elasticTop, this.elasticBottom, this.viewTop, this.viewBottom);
+                // console.log(this.elasticTop, this.elasticBottom, this.viewTop, this.viewBottom);
                 break;
             case 4://单列VERTICAL（BOTTOM_TO_TOP）、网格HORIZONTAL（BOTTOM_TO_TOP）
                 this.elasticBottom = scrollPos.y > 0 ? Math.abs(scrollPos.y) : 0;
@@ -1060,7 +1060,7 @@ export class List extends Component {
                 this.viewTop = this.viewBottom + this._thisNodeUt.height;
                 this.elasticTop = this.viewTop > this._contentUt.height ? Math.abs(this.viewTop - this._contentUt.height) : 0;
                 this.viewTop -= this.elasticTop;
-                // cc.log(this.elasticTop, this.elasticBottom, this.viewTop, this.viewBottom);
+                // console.log(this.elasticTop, this.elasticBottom, this.viewTop, this.viewBottom);
                 break;
         }
     }
@@ -1331,7 +1331,7 @@ export class List extends Component {
         if (t._slideMode == SlideType.ADHERING &&
             !t.adhering
         ) {
-            //cc.log(t.adhering, t._scrollView.isAutoScrolling(), t._scrollView.isScrolling());
+            //console.log(t.adhering, t._scrollView.isAutoScrolling(), t._scrollView.isScrolling());
             t.adhere();
         } else if (t._slideMode == SlideType.PAGE) {
             if (t._beganPos != null && t._curScrollIsTouch) {
@@ -1439,10 +1439,10 @@ export class List extends Component {
                 case 4://单列VERTICAL（BOTTOM_TO_TOP）、网格HORIZONTAL（BOTTOM_TO_TOP）
                     if (t._beganPos > curPos) {
                         t.prePage(timeInSecond);
-                        // cc.log('_pageAdhere   PPPPPPPPPPPPPPP');
+                        // console.log('_pageAdhere   PPPPPPPPPPPPPPP');
                     } else {
                         t.nextPage(timeInSecond);
-                        // cc.log('_pageAdhere   NNNNNNNNNNNNNNN');
+                        // console.log('_pageAdhere   NNNNNNNNNNNNNNN');
                     }
                     break;
                 case 2://单行HORIZONTAL（RIGHT_TO_LEFT）、网格VERTICAL（RIGHT_TO_LEFT）
@@ -1476,7 +1476,7 @@ export class List extends Component {
     update() {
         if (this.frameByFrameRenderNum <= 0 || this._updateDone)
             return;
-        // cc.log(this.displayData.length, this._updateCounter, this.displayData[this._updateCounter]);
+        // console.log(this.displayData.length, this._updateCounter, this.displayData[this._updateCounter]);
         if (this._virtual) {
             let len: number = (this._updateCounter + this.frameByFrameRenderNum) > this.displayItemNum ? this.displayItemNum : (this._updateCounter + this.frameByFrameRenderNum);
             for (let n: number = this._updateCounter; n < len; n++) {
@@ -1528,10 +1528,10 @@ export class List extends Component {
             let canGet: boolean = this._pool.size() > 0;
             if (canGet) {
                 item = this._pool.get();
-                // cc.log('从池中取出::   旧id =', item['_listId'], '，新id =', data.id, item);
+                // console.log('从池中取出::   旧id =', item['_listId'], '，新id =', data.id, item);
             } else {
                 item = instantiate(this._itemTmp);
-                // cc.log('新建::', data.id, item);
+                // console.log('新建::', data.id, item);
             }
             if (!canGet || !isValid(item)) {
                 item = instantiate(this._itemTmp);
@@ -1565,7 +1565,7 @@ export class List extends Component {
         } else if (this._forceUpdate && this.renderEvent) { //强制更新
             item.setPosition(new Vec3(data.x, data.y, 0));
             this._resetItemSize(item);
-            // cc.log('ADD::', data.id, item);
+            // console.log('ADD::', data.id, item);
             if (this.renderEvent) {
                 EventHandler.emitEvents([this.renderEvent], item, data.id % this._actualNumItems);
             }
@@ -1777,7 +1777,7 @@ export class List extends Component {
                     }
                 }
             }
-            // cc.log('存入::', str, '    pool.length =', this._pool.length);
+            // console.log('存入::', str, '    pool.length =', this._pool.length);
         } else {
             while (this.content.children.length > this._numItems) {
                 this._delSingleItem(this.content.children[this.content.children.length - 1]);
@@ -1786,7 +1786,7 @@ export class List extends Component {
     }
     //删除单个Item
     _delSingleItem(item: any) {
-        // cc.log('DEL::', item['_listId'], item);
+        // console.log('DEL::', item['_listId'], item);
         item.removeFromParent();
         if (item.destroy)
             item.destroy();
@@ -1965,14 +1965,14 @@ export class List extends Component {
 
         let comparePos = t._sizeType ? pos.y : pos.x;
         let runScroll = Math.abs((t._scrollPos != null ? t._scrollPos : viewPos) - comparePos) > .5;
-        // cc.log(runScroll, t._scrollPos, viewPos, comparePos)
+        // console.log(runScroll, t._scrollPos, viewPos, comparePos)
 
         // t._scrollView.stopAutoScroll();
         if (runScroll) {
             t._scrollView.scrollToOffset(pos, timeInSecond);
             t._scrollToListId = listId;
             t._scrollToEndTime = ((new Date()).getTime() / 1000) + timeInSecond;
-            // cc.log(listId, t.content.width, t.content.getPosition(), pos);
+            // console.log(listId, t.content.width, t.content.getPosition(), pos);
             t._scrollToSo = t.scheduleOnce(() => {
                 if (!t._adheringBarrier) {
                     t.adhering = t._adheringBarrier = false;
@@ -1982,7 +1982,7 @@ export class List extends Component {
                     t._scrollToEndTime =
                     t._scrollToSo =
                     null;
-                //cc.log('2222222222', t._adheringBarrier)
+                //console.log('2222222222', t._adheringBarrier)
                 if (overStress) {
                     // t.scrollToListId = listId;
                     let item = t.getItemByListId(listId);
@@ -2081,18 +2081,18 @@ export class List extends Component {
                     break;
             }
         }
-        // cc.log('t.nearestListId =', t.nearestListId);
+        // console.log('t.nearestListId =', t.nearestListId);
     }
     //上一页
     prePage(timeInSecond: number = .5) {
-        // cc.log('👈');
+        // console.log('👈');
         if (!this.checkInited())
             return;
         this.skipPage(this.curPageNum - 1, timeInSecond);
     }
     //下一页
     nextPage(timeInSecond: number = .5) {
-        // cc.log('👉');
+        // console.log('👉');
         if (!this.checkInited())
             return;
         this.skipPage(this.curPageNum + 1, timeInSecond);
@@ -2108,7 +2108,7 @@ export class List extends Component {
             return;
         if (t.curPageNum == pageNum)
             return;
-        // cc.log(pageNum);
+        // console.log(pageNum);
         t.curPageNum = pageNum;
         if (t.pageChangeEvent) {
             EventHandler.emitEvents([t.pageChangeEvent], pageNum);
