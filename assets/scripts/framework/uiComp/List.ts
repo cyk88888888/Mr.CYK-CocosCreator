@@ -14,13 +14,13 @@ enum TemplateType {
     PREFAB = 2,
 }
 
-enum SlideType {
+export enum SlideType {
     NORMAL = 1,//普通
     ADHERING = 2,//粘附模式，将强制关闭滚动惯性
     PAGE = 3,//页面模式，将强制关闭滚动惯性
 }
 
-enum SelectedType {
+export enum SelectedType {
     NONE = 0,
     SINGLE = 1,//单选
     MULT = 2,//多选
@@ -164,7 +164,7 @@ export class List extends Component {
     @property({
         type: EventHandler,
         tooltip: DEV && '触发选择事件',
-        visible() { return this.selectedMode > SelectedType.NONE; }
+        visible() { return false}//this.selectedMode > SelectedType.NONE; }
     })
     public selectedEvent: EventHandler = new EventHandler();
     @property({

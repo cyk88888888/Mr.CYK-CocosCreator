@@ -6,7 +6,6 @@
 import { Node, _decorator } from 'cc';
 import { ResMgr } from '../../framework/mgr/ResMgr';
 import { UIMenu } from '../../framework/ui/UIMenu';
-import { ImgLoader } from '../../framework/uiComp/ImgLoader';
 import { EntranceLayer } from './entrance/EntranceLayer';
 import { HomeLayer } from './HomeLayer';
 import { SweetLayer } from './sweet/SweetLayer';
@@ -24,7 +23,6 @@ export class BottomTabLayer extends UIMenu {
 
     private _layerInfos: any[];
     private _toLayer: string;
-    private _curSelIdx: number;
     protected onEnter() {
         let self = this;
         self._layerInfos = [
@@ -39,27 +37,22 @@ export class BottomTabLayer extends UIMenu {
     protected onFirstEnter() {
         let self = this;
         self.list_tab.numItems = self._layerInfos.length;
-        self.list_tab.selectedId = self._curSelIdx = 2;
+        self.list_tab.selectedId = 2;
     }
 
-    //水平列表渲染器
-    onListHRender(item: Node, idx: number) {
-        item.getChildByName('icon').getComponent(ImgLoader).url = this._layerInfos[idx].icon;
-    }
-
-    //当列表项被选择...
-    onListSelected(item: Node, selectedIdx: number, lastSelectedIdx: number, val: number) {
+    private _data_list_tab(){
         let self = this;
-        if(self._curSelIdx == selectedIdx) return;
-        self._curSelIdx = selectedIdx;
-        let layerInfo = self._layerInfos[selectedIdx];
-        let layerName = layerInfo.layer;
+        return self._layerInfos;
+    }
+
+    private _select_list_tab(tabData:any, selectedIdx: number,lastSelectedIdx: number){
+        let self = this;
+        let layerName = tabData.layer;
         self._toLayer = layerName;
-        ResMgr.inst.loadWithoutJuHua(layerInfo.preRes, function () {
+        ResMgr.inst.loadWithoutJuHua(tabData.preRes, () => {
             if (self._toLayer != layerName) return;
             self.emit('jumpToLayer', { layerName: layerName });
-        }, self);
-
+        });
     }
 }
 

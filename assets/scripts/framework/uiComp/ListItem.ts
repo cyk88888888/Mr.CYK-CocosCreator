@@ -131,8 +131,8 @@ export class ListItem extends Component {
 
      public setData(data: any) {
         let self = this;
-        self.data = data;
-        if (data){
+        if (self.data != data){
+            self.data = data;
             self.dchg_b();
             self.dchg();
             self.dchg_a();

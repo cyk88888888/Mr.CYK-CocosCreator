@@ -1447,7 +1447,7 @@
       "y": 0,
       "z": 0
     },
-    "_id": "93LhvTv7lH7Jls6Q6YgZLc"
+    "_id": "2bOR7Kr9JMurkTnskABcSm"
   },
   {
     "__type__": "cc.Node",
@@ -1509,7 +1509,7 @@
       "y": 0,
       "z": 0
     },
-    "_id": "6cZ20YeO5IFIABIdnr2Ct/"
+    "_id": "ac2owH8EBITqburoZMoZXV"
   },
   {
     "__type__": "cc.Node",
@@ -1562,7 +1562,7 @@
       "y": 0,
       "z": 0
     },
-    "_id": "3bOP6plA9BWoEYVkjwX6bx"
+    "_id": "3eUrOTvMBKlrJMPn10v8i9"
   },
   {
     "__type__": "cc.Node",
@@ -1621,7 +1621,7 @@
       "y": 0,
       "z": 0
     },
-    "_id": "d865jfncxCsLXZ/S7HIEST"
+    "_id": "3253TDEihPmZG/PWprQDBu"
   },
   {
     "__type__": "cc.UITransform",
@@ -1645,7 +1645,7 @@
       "x": 0,
       "y": 0.5
     },
-    "_id": "c2k5P7jLVB0JisWBGXupc7"
+    "_id": "ef8vFxA9JAuIQxopgEKzrJ"
   },
   {
     "__type__": "cc.CompPrefabInfo",
@@ -1667,7 +1667,7 @@
     "_inverted": false,
     "_segments": 64,
     "_alphaThreshold": 0.1,
-    "_id": "56S++Ws2dMSr1NY6YhnCzd"
+    "_id": "7fRjAjfg9K3538UAYYVvTA"
   },
   {
     "__type__": "cc.CompPrefabInfo",
@@ -1702,7 +1702,7 @@
     "_originalHeight": 150,
     "_alignMode": 2,
     "_lockFlags": 0,
-    "_id": "4cK2Hv1kpKXYPM8kK8she0"
+    "_id": "173gWU+bNAKKrDsYqH7OED"
   },
   {
     "__type__": "cc.CompPrefabInfo",
@@ -1747,7 +1747,7 @@
       "a": 0
     },
     "_miterLimit": 10,
-    "_id": "13OTU/779BHprG2uxLDQWN"
+    "_id": "d0H0+jGo1IgYXYgUhuwWGQ"
   },
   {
     "__type__": "cc.CompPrefabInfo",
@@ -1789,7 +1789,7 @@
       "x": 0,
       "y": 0.5
     },
-    "_id": "c7jiERZJFKJ4t3AMJmtLvL"
+    "_id": "e9HRS+iWxN46DDSxdqdtAV"
   },
   {
     "__type__": "cc.CompPrefabInfo",
@@ -1827,7 +1827,7 @@
     "_constraintNum": 2,
     "_affectedByScale": false,
     "_isAlign": false,
-    "_id": "66eDBZBNhNhrcs6pRu2Qgs"
+    "_id": "27uN+Xo59Ps65mS7AJP3mK"
   },
   {
     "__type__": "cc.CompPrefabInfo",
@@ -1899,7 +1899,7 @@
       "y": 0,
       "z": 0
     },
-    "_id": "8bPOStlU1LV6NEthqrksH9"
+    "_id": "4dm8fe1HNG6pPYaWPvUHSv"
   },
   {
     "__type__": "cc.UITransform",
@@ -1923,7 +1923,7 @@
       "x": 0.5,
       "y": 0.5
     },
-    "_id": "54lcewOG5DSIw6ghWVc4G/"
+    "_id": "ffEftY0uJGqYPQbizud3ip"
   },
   {
     "__type__": "cc.CompPrefabInfo",
@@ -1968,7 +1968,7 @@
     "_isTrimmedMode": true,
     "_useGrayscale": false,
     "_atlas": null,
-    "_id": "eb/gn2g+dI4oMV1zz+aUIN"
+    "_id": "f79Sn1gV5McIMFyYigk7aU"
   },
   {
     "__type__": "cc.CompPrefabInfo",
@@ -2043,7 +2043,7 @@
       "y": 0,
       "z": 0
     },
-    "_id": "458GguJ0BJg4WDL9x9d+b2"
+    "_id": "1bqmswytpHkJ+LQNc2sMsD"
   },
   {
     "__type__": "cc.UITransform",
@@ -2066,7 +2066,7 @@
       "x": 0.5,
       "y": 0.5
     },
-    "_id": "db7EEzsSNIUY41Ct9yToZV"
+    "_id": "dcMwzqZNREwq+j6mYPP7j3"
   },
   {
     "__type__": "cc.CompPrefabInfo",
@@ -2107,7 +2107,7 @@
     "_isTrimmedMode": true,
     "_useGrayscale": false,
     "_atlas": null,
-    "_id": "b1ZkHY9AJF5LIM1DDj1L96"
+    "_id": "bcabRLC4tHM4X/aWcJuRzC"
   },
   {
     "__type__": "cc.CompPrefabInfo",
@@ -2124,7 +2124,7 @@
     "__prefab": {
       "__id__": 86
     },
-    "_id": "a9+wrGFl9GzZ3lg1YDxUbF"
+    "_id": "33jk2pfzJF+qf1kZS/gzIb"
   },
   {
     "__type__": "cc.CompPrefabInfo",
@@ -2166,7 +2166,7 @@
       "x": 0.5,
       "y": 0.5
     },
-    "_id": "085PrBOItIJbpFXpBwC+/3"
+    "_id": "33+N1CC2VNRpWw/ORP1oib"
   },
   {
     "__type__": "cc.CompPrefabInfo",
@@ -2221,7 +2221,7 @@
     "_duration": 0.1,
     "_zoomScale": 1.2,
     "_target": null,
-    "_id": "29sp5vKQZK6a1uEeeUaa7Y"
+    "_id": "714LXE3mBJv7t2xMumVS/u"
   },
   {
     "__type__": "cc.CompPrefabInfo",
@@ -2246,7 +2246,7 @@
     },
     "selectedSpriteFrame": null,
     "adaptiveSize": false,
-    "_id": "cadGbf4UdAvoKZY/NjZgHM"
+    "_id": "fcFsQFp6hJP5lvt9IrjLOq"
   },
   {
     "__type__": "cc.CompPrefabInfo",
@@ -2288,7 +2288,7 @@
       "x": 0.5,
       "y": 0.5
     },
-    "_id": "c7xGnkqgpEYbtsiRubE+YN"
+    "_id": "feOPYUqNFDELtGkA4htKmF"
   },
   {
     "__type__": "cc.CompPrefabInfo",
@@ -2333,7 +2333,7 @@
     "_isTrimmedMode": true,
     "_useGrayscale": false,
     "_atlas": null,
-    "_id": "15UF7CCiZMn5Uv6lnAGQrs"
+    "_id": "3ahyvK1cVBmoJ9rb8+VSpE"
   },
   {
     "__type__": "cc.CompPrefabInfo",
@@ -2793,9 +2793,7 @@
       "renderEvent",
       "target"
     ],
-    "value": {
-      "__id__": 1
-    }
+    "value": null
   },
   {
     "__type__": "cc.TargetInfo",
@@ -2862,9 +2860,7 @@
       "selectedEvent",
       "target"
     ],
-    "value": {
-      "__id__": 1
-    }
+    "value": null
   },
   {
     "__type__": "cc.TargetInfo",

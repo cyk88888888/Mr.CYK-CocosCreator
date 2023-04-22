@@ -1,7 +1,7 @@
 import { _decorator, Component, Node, Tween, tween, EventTouch, js } from 'cc';
 import { emmiter } from '../base/Emmiter';
 import { SoundMgr } from '../mgr/SoundMgr';
-import { List } from '../uiComp/List';
+import { List, SelectedType } from '../uiComp/List';
 import { ListItem } from '../uiComp/ListItem';
 const { ccclass, property } = _decorator;
 
@@ -157,13 +157,22 @@ export class UIComp extends Component {
         if (!listNode) return console.warn(`找不到id为${id}的列表`);
         let list = listNode.getComponent(List);
         if(!list) return console.warn(`列表${id}没有绑定List脚本`);
+        list['nodeName'] = id;
         list.renderEvent.target = self.node;
         list.renderEvent.component = self.scriptName;
         list.renderEvent.handler = '__onListRender';
+
+        if(list.selectedMode != SelectedType.NONE){
+            list.selectedEvent.target = self.node;
+            list.selectedEvent.component = self.scriptName;
+            list.selectedEvent.handler = '__onSelectEvent';
+        }
+
         let dataList = self['_data_' + id]();
         list.dataList = dataList || [];
     }
 
+    //列表项渲染
     private __onListRender(item: Node, idx: number) {
         let self = this;
         //刷新子项 todo...
@@ -172,6 +181,16 @@ export class UIComp extends Component {
         let itemData = list.dataList[idx];
         // console.log(itemData);
         listItem.setData(itemData);
+    }
+
+    //列表项被选中
+    private __onSelectEvent(item: Node, selectedIdx: number, lastSelectedIdx: number, val: number){
+        let self = this;
+        let listItem = item.getComponent(ListItem);
+        let listName = listItem.list['nodeName'];
+        if(self["_select_" + listName]){
+            self["_select_" + listName](listItem.data, selectedIdx, lastSelectedIdx);
+        }
     }
 
     /**获取指定对象的缓动Tweener */
