@@ -36,7 +36,6 @@ export class BottomTabLayer extends UIMenu {
 
     protected onFirstEnter() {
         let self = this;
-        self.list_tab.numItems = self._layerInfos.length;
         self.list_tab.selectedId = 2;
     }
 
