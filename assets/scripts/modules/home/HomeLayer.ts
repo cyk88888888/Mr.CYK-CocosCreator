@@ -15,10 +15,10 @@ export class HomeLayer extends UILayer {
         let self = this;
         let actionArray: Tween<Node>[] = [];
         let call = self.getTween(self.node).delay(2).call(() => {
-            console.warn('缓动结束！！！');
+            console.log('事件结束111！！！');
         });
         let call2 = self.getTween(self.node).call(() => {
-            console.warn('缓动结束222！！！');
+            console.log('事件结束222！！！');
         });
 
         // let rotate = self.getTween(self.node).to(0.06, { eulerAngles: new Vec3(0, 0, 30) }).to(0.12, { eulerAngles: new Vec3(0, 0, -60) }).to(0.12, { eulerAngles: new Vec3(0, 0, 0) }).union().repeat(2);
