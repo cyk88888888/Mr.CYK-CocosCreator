@@ -997,6 +997,22 @@
     "selectedFlag": null,
     "selectedSpriteFrame": null,
     "adaptiveSize": true,
+    "avatar1SF": {
+      "__uuid__": "93ffc9e0-3bf3-4fcc-8c52-d03764428b74@d593c",
+      "__expectedType__": "cc.SpriteFrame"
+    },
+    "avatar2SF": {
+      "__uuid__": "93ffc9e0-3bf3-4fcc-8c52-d03764428b74@bd1c1",
+      "__expectedType__": "cc.SpriteFrame"
+    },
+    "bubble1SF": {
+      "__uuid__": "93ffc9e0-3bf3-4fcc-8c52-d03764428b74@926f3",
+      "__expectedType__": "cc.SpriteFrame"
+    },
+    "bubble2SF": {
+      "__uuid__": "93ffc9e0-3bf3-4fcc-8c52-d03764428b74@9914c",
+      "__expectedType__": "cc.SpriteFrame"
+    },
     "_id": ""
   },
   {

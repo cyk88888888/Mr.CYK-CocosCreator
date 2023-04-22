@@ -254,53 +254,67 @@ export class List extends Component {
     @property({
         serializable: false
     })
+    private _dataList: any[];
+    /** 设置数据源*/
+    set dataList(val: any[]){
+        let self = this;
+        self._dataList = val;
+        if(val) self.numItems = val.length;
+        else console.warn('设置的列表数据为null');
+    }
+
+    get dataList(){
+        let self = this;
+        return self._dataList;
+    }
+
     private _numItems: number = 0;
     set numItems(val: number) {
-        let t = this;
-        if (!t.checkInited(false))
+        let self = this;
+        if (!self.checkInited(false))
             return;
         if (val == null || val < 0) {
             console.error('numItems set the wrong::', val);
             return;
         }
-        t._actualNumItems = t._numItems = val;
-        t._forceUpdate = true;
+        self._actualNumItems = self._numItems = val;
+        self._forceUpdate = true;
 
-        if (t._virtual) {
-            t._resizeContent();
-            if (t.cyclic) {
-                t._numItems = t._cyclicNum * t._numItems;
+        if (self._virtual) {
+            self._resizeContent();
+            if (self.cyclic) {
+                self._numItems = self._cyclicNum * self._numItems;
             }
-            t._onScrolling();
-            if (!t.frameByFrameRenderNum && t.slideMode == SlideType.PAGE)
-                t.curPageNum = t.nearestListId;
+            self._onScrolling();
+            if (!self.frameByFrameRenderNum && self.slideMode == SlideType.PAGE)
+            self.curPageNum = self.nearestListId;
         } else {
-            if (t.cyclic) {
-                t._resizeContent();
-                t._numItems = t._cyclicNum * t._numItems;
+            if (self.cyclic) {
+                self._resizeContent();
+                self._numItems = self._cyclicNum * self._numItems;
             }
-            let layout: Layout = t.content.getComponent(Layout);
+            let layout: Layout = self.content.getComponent(Layout);
             if (layout) {
                 layout.enabled = true;
             }
-            t._delRedundantItem();
+            self._delRedundantItem();
 
-            t.firstListId = 0;
-            if (t.frameByFrameRenderNum > 0) {
+            self.firstListId = 0;
+            if (self.frameByFrameRenderNum > 0) {
                 //先渲染几个出来
-                let len: number = t.frameByFrameRenderNum > t._numItems ? t._numItems : t.frameByFrameRenderNum;
+                let len: number = self.frameByFrameRenderNum > self._numItems ? self._numItems : self.frameByFrameRenderNum;
                 for (let n: number = 0; n < len; n++) {
-                    t._createOrUpdateItem2(n);
+                    self._createOrUpdateItem2(n);
                 }
-                if (t.frameByFrameRenderNum < t._numItems) {
-                    t._updateCounter = t.frameByFrameRenderNum;
-                    t._updateDone = false;
+                if (self.frameByFrameRenderNum < self._numItems) {
+                    self._updateCounter = self.frameByFrameRenderNum;
+                    self._updateDone = false;
                 }
             } else {
-                for (let n: number = 0; n < t._numItems; n++) {
-                    t._createOrUpdateItem2(n);
+                for (let n: number = 0; n < self._numItems; n++) {
+                    self._createOrUpdateItem2(n);
                 }
-                t.displayItemNum = t._numItems;
+                self.displayItemNum = self._numItems;
             }
         }
     }

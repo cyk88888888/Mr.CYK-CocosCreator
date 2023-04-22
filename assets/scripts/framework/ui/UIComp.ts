@@ -2,6 +2,7 @@ import { _decorator, Component, Node, Tween, tween, EventTouch, js } from 'cc';
 import { emmiter } from '../base/Emmiter';
 import { SoundMgr } from '../mgr/SoundMgr';
 import { List } from '../uiComp/List';
+import { ListItem } from '../uiComp/ListItem';
 const { ccclass, property } = _decorator;
 
 @ccclass('UIComp')
@@ -139,7 +140,14 @@ export class UIComp extends Component {
     private refreshAllList() {
         let self = this;
         if (!self.needRefreshListOnEnter) return;
-        //todo...
+        for (let objName in self) {
+            let obj = self[objName];
+            if (!obj) continue;
+            let dataFunc = "_data_" + objName;
+            if (self[dataFunc]) {
+                self.refreshList(objName);
+            }
+        }
     }
 
     /** 刷新指定列表*/
@@ -149,7 +157,21 @@ export class UIComp extends Component {
         if (!listNode) return console.warn(`找不到id为${id}的列表`);
         let list = listNode.getComponent(List);
         if(!list) return console.warn(`列表${id}没有绑定List脚本`);
-        list.renderEvent.target //= list.tmpPrefab
+        list.renderEvent.target = self.node;
+        list.renderEvent.component = self.scriptName;
+        list.renderEvent.handler = '__onListRender';
+        let dataList = self['_data_' + id]();
+        list.dataList = dataList || [];
+    }
+
+    private __onListRender(item: Node, idx: number) {
+        let self = this;
+        //刷新子项 todo...
+        let listItem = item.getComponent(ListItem);
+        let list = listItem.list;
+        let itemData = list.dataList[idx];
+        // console.log(itemData);
+        listItem.setData(itemData);
     }
 
     /**获取指定对象的缓动Tweener */
@@ -222,7 +244,7 @@ export class UIComp extends Component {
         let self = this;
         if (self.hasDestory) return;
         self._allList = null;
-        this.node.destroy();
+        self.node.destroy();
         self.hasDestory = true;
     }
 

@@ -54,6 +54,8 @@ export class ListItem extends Component {
         tooltip: DEV && '自适应尺寸（宽或高）',
     })
     adaptiveSize: boolean = false;
+
+    public data: any;
     //选择
     _selected: boolean = false;
     set selected(val: boolean) {
@@ -120,6 +122,22 @@ export class ListItem extends Component {
     onDestroy() {
          this.node.off(Node.EventType.SIZE_CHANGED, this._onSizeChange, this);
      }
+
+     protected dchg_b() { }
+
+     protected dchg() { }
+ 
+     protected dchg_a() { }
+
+     public setData(data: any) {
+        let self = this;
+        self.data = data;
+        if (data){
+            self.dchg_b();
+            self.dchg();
+            self.dchg_a();
+        } 
+    }
 
     _registerEvent() {
         if (!this._eventReg) {
