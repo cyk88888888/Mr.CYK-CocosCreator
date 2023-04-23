@@ -3,7 +3,7 @@
  * @Author: CYK
  * @Date: 2023-04-12 23:23:41
  */
-import { Button, Label, Layout, Node, RichText, Sprite, SpriteFrame, UITransform, Vec3, _decorator } from 'cc';
+import { Button,  _decorator } from 'cc';
 import { SceneMgr } from '../../framework/mgr/SceneMgr';
 import { UILayer } from '../../framework/ui/UILayer';
 import { List } from '../../framework/uiComp/List';
