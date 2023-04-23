@@ -1,7 +1,7 @@
 import { _decorator, Component, Node, Tween, tween, EventTouch, js } from 'cc';
 import { emmiter } from '../base/Emmiter';
 import { SoundMgr } from '../mgr/SoundMgr';
-import { List, SelectedType } from '../uiComp/List';
+import { List, SelectedType, SlideType } from '../uiComp/List';
 import { ListItem } from '../uiComp/ListItem';
 const { ccclass, property } = _decorator;
 
@@ -168,6 +168,12 @@ export class UIComp extends Component {
             list.selectedEvent.handler = '__onSelectEvent';
         }
 
+        if(list.slideMode == SlideType.PAGE){
+            list.pageChangeEvent.target = self.node;
+            list.pageChangeEvent.component = self.scriptName;
+            list.pageChangeEvent.handler = '__onPageChangeEvent';
+        }
+
         let dataList = self['_data_' + id]();
         list.dataList = dataList || [];
     }
@@ -190,6 +196,14 @@ export class UIComp extends Component {
         let listName = listItem.list['nodeName'];
         if(self["_select_" + listName]){
             self["_select_" + listName](listItem.data, selectedIdx, lastSelectedIdx);
+        }
+    }
+
+    private __onPageChangeEvent(list: List, pageNum: number){
+        let self = this;
+        let listName = list['nodeName'];
+        if(self["_pageChange_" + listName]){
+            self["_pageChange_" + listName](pageNum);
         }
     }
 

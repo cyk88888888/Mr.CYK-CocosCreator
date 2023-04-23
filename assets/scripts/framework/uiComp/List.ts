@@ -33,20 +33,20 @@ export enum SelectedType {
 @executionOrder(-5000)
 export class List extends Component {
     //模板类型
-    @property({ type: Enum(TemplateType), tooltip: DEV && '模板类型', })
+    @property({ type: Enum(TemplateType), tooltip: DEV && '模板类型', visible() { return false}})
     private templateType: TemplateType = TemplateType.PREFAB;
     //模板Item（Node）
     @property({
         type: Node,
         tooltip: DEV && '模板Item',
-        visible() { return this.templateType == TemplateType.NODE; }
+        visible() { return false}//this.templateType == TemplateType.NODE; }
     })
     tmpNode: Node = null;
     //模板Item（Prefab）
     @property({
         type: Prefab,
         tooltip: DEV && '模板Item',
-        visible() { return this.templateType == TemplateType.PREFAB; }
+        // visible() { return this.templateType == TemplateType.PREFAB; }
     })
     tmpPrefab: Prefab = null;
     //滑动模式
@@ -75,9 +75,9 @@ export class List extends Component {
     @property({
         type: EventHandler,
         tooltip: DEV && '页面改变事件',
-        visible() { return this._slideMode == SlideType.PAGE; }
+        visible() { return false;}//this._slideMode == SlideType.PAGE; }
     })
-    private pageChangeEvent: EventHandler = new EventHandler();
+    public pageChangeEvent: EventHandler = new EventHandler();
     //是否为虚拟列表（动态列表）
     @property({})
     private _virtual: boolean = true;
@@ -152,6 +152,7 @@ export class List extends Component {
     @property({
         type: EventHandler,
         tooltip: DEV && '渲染事件（渲染器）',
+        visible() { return false;}
     })
     public renderEvent: EventHandler = new EventHandler();
     //选择模式
@@ -2125,7 +2126,7 @@ export class List extends Component {
         // console.log(pageNum);
         t.curPageNum = pageNum;
         if (t.pageChangeEvent) {
-            EventHandler.emitEvents([t.pageChangeEvent], pageNum);
+            EventHandler.emitEvents([t.pageChangeEvent], t, pageNum);
         }
         t.scrollTo(pageNum, timeInSecond);
     }
