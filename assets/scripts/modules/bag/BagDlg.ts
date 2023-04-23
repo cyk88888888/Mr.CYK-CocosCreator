@@ -3,9 +3,8 @@
  * @Author: CYK
  * @Date: 2022-05-12 09:23:41
  */
-import { Button, instantiate, Label, Node, Prefab, Vec3, _decorator } from 'cc';
+import { Button, Label, _decorator } from 'cc';
 import { UIDlg } from '../../framework/ui/UIDlg';
-import { ImgLoader } from '../../framework/uiComp/ImgLoader';
 import { List } from '../../framework/uiComp/List';
 const { ccclass, property } = _decorator;
 
