@@ -21,6 +21,36 @@ export class SoundMgr {
     /**音乐缓存最大个数 */
     public musicCacheMaxCount: number = 5;
     public musicCachePool: string[] = [];
+
+    private _bgMusicEnable: boolean = true;
+    public get bgMusicEnable(){
+        let self = this;
+        return self._bgMusicEnable;
+    }
+    /** 背景音乐是否可播放开关*/
+    public set bgMusicEnable(value: boolean){
+        let self = this;
+        self._bgMusicEnable = value;
+        if(!value){
+            self.stopBg();
+        } else {
+            let url = self.curBgMusic;
+            self.curBgMusic = null;
+            self.playBg(url);
+        }
+    }
+
+    private _soundEffEnable: boolean = true;
+    public get soundEffEnable(){
+        let self = this;
+        return self._soundEffEnable;
+    }
+    /** 音效是否可播放开关*/
+    public set soundEffEnable(value: boolean){
+        let self = this;
+        self._soundEffEnable = value;
+    }
+
     private _defaultBgMusic: string;
     public get defaultBgMusic() {
         return this._defaultBgMusic;
@@ -41,6 +71,8 @@ export class SoundMgr {
     /**播放背景音乐 */
     public playBg(url: string) {
         let self = this;
+        if(!url) return;
+        if(!self.bgMusicEnable) return;
         if (self.curBgMusic == url) return;
         self._isStopBg = false;
         self.curBgMusic = url;
@@ -66,12 +98,16 @@ export class SoundMgr {
 
     /**暂停背景音乐 */
     public pauseBg() {
+        let self = this;
+        if(!self.bgMusicEnable) return;
         this._isStopBg = true;
         this.bgAudioSource.pause();
     }
 
     /**恢复背景音乐 */
     public recoverBg() {
+        let self = this;
+        if(!self.bgMusicEnable) return;
         this._isStopBg = false;
         this.bgAudioSource.play();
     }
@@ -104,6 +140,7 @@ export class SoundMgr {
      */
     public playSound(url: string, loop?: boolean) {
         let self = this;
+        if(!self.soundEffEnable) return;
         let audioSource = self.soundAudioSource;
         ResMgr.inst.loadWithoutJuHua(url, () => {
             let audioClip = ResMgr.inst.get(url) as AudioClip;
@@ -127,6 +164,8 @@ export class SoundMgr {
 
     /**播放点击音效 */
     public playClickSound(){
+        let self = this;
+        if(!self.soundEffEnable) return;
         if(!this.buttonSound){
             console.warn('请先设置buttonSound点击音效资源路径');
             return;
@@ -142,6 +181,7 @@ export class SoundMgr {
      */
     public playSoundByAudioClip(audioClip: AudioClip, loop?:boolean){
         let self = this;
+        if(!self.soundEffEnable) return;
         if(!audioClip){
             console.warn('音频资源为空！！');
             return;

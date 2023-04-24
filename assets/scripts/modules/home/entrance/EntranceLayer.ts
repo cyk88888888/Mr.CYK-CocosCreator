@@ -22,6 +22,11 @@ export class EntranceLayer extends UILayer {
     public btn_uiComp:Node;
     @property({type: Node})
     public btn_chat:Node;
+    @property({type: Node})
+    public btn_bgMusic:Node;
+    @property({type: Node})
+    public btn_soundEff:Node;
+    
     protected onEnter() {
     }
 
@@ -36,6 +41,14 @@ export class EntranceLayer extends UILayer {
 
     private _tap_btn_chat(){
         SceneMgr.inst.push(ChatScene);
+    }
+
+    private _tap_btn_bgMusic(){
+        SoundMgr.inst.bgMusicEnable = !SoundMgr.inst.bgMusicEnable;
+    }
+
+    private _tap_btn_soundEff(){
+        SoundMgr.inst.soundEffEnable = !SoundMgr.inst.soundEffEnable;
     }
 
 }
