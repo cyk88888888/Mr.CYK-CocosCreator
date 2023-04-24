@@ -6,14 +6,14 @@
  *      1、此组件须配合List组件使用。（配套的配套的..）
  * @end
  ******************************************/
-const { ccclass, property, disallowMultiple, menu, executionOrder } = _decorator;
-import { Node, Component, Enum, Sprite, SpriteFrame, tween, _decorator, EventHandler, Tween, Button, UITransform, Vec3, UI } from 'cc';
+
+import { Node, Component, Enum, Sprite, SpriteFrame, tween, _decorator, EventHandler, Tween, Button, UITransform, Vec3 } from 'cc';
 import { DEV } from 'cc/env';
 import { ButtonPlus } from './ButtonPlus';
 import { List } from './List';
-import { UIComp } from '../ui/UIComp';
+const { ccclass, property, disallowMultiple, executionOrder } = _decorator;
 
-enum SelectedType {
+export enum SelectedType {
     NONE = 0,
     TOGGLE = 1,
     SWITCH = 2,
@@ -23,7 +23,7 @@ enum SelectedType {
 @disallowMultiple()
 @executionOrder(-5001) //先于List
 export class ListItem extends Component {
-    //图标
+    //图标 
     @property({ type: Sprite, tooltip: DEV && '图标' })
     icon: Sprite = null;
     //标题
@@ -48,17 +48,16 @@ export class ListItem extends Component {
     })
     selectedSpriteFrame: SpriteFrame = null;
     //未被选择的SpriteFrame
-    _unselectedSpriteFrame: SpriteFrame = null;
+    private _unselectedSpriteFrame: SpriteFrame = null;
     //自适应尺寸
     @property({
         tooltip: DEV && '自适应尺寸（宽或高）',
     })
     adaptiveSize: boolean = false;
 
-    public data: any;
     //选择
-    _selected: boolean = false;
-    set selected(val: boolean) {
+    private _selected: boolean = false;
+    public set selected(val: boolean) {
         this._selected = val;
         if (!this.selectedFlag)
             return;
@@ -74,12 +73,12 @@ export class ListItem extends Component {
                 break;
         }
     }
-    get selected() {
+    public get selected() {
         return this._selected;
     }
     //按钮组件
     private _btnCom: Button;
-    get btnCom() {
+    public get btnCom() {
         if (!this._btnCom)
             this._btnCom = this.node.getComponent(Button) || this.node.getComponent(ButtonPlus);
         return this._btnCom;
@@ -91,67 +90,62 @@ export class ListItem extends Component {
     //序列id
     public listId: number;
 
-    // protected onLoad_a(): void {
-    //     super.onLoad_a();
-    //     // //没有按钮组件的话，selectedFlag无效
-    //     // if (!this.btnCom)
-    //     //     this.selectedMode == SelectedType.NONE;
-    //     //有选择模式时，保存相应的东西
-    //     if (this.selectedMode == SelectedType.SWITCH) {
-    //         let com: Sprite = this.selectedFlag.getComponent(Sprite);
-    //         this._unselectedSpriteFrame = com.spriteFrame;
-    //     }
-    // }
-
     onLoad(): void {
-           // //没有按钮组件的话，selectedFlag无效
-         // if (!this.btnCom)
-         //     this.selectedMode == SelectedType.NONE;
-         //有选择模式时，保存相应的东西
-         if (this.selectedMode == SelectedType.SWITCH) {
+        // //没有按钮组件的话，selectedFlag无效
+        // if (!this.btnCom)
+        //     this.selectedMode == SelectedType.NONE;
+        //有选择模式时，保存相应的东西
+        if (this.selectedMode == SelectedType.SWITCH) {
             let com: Sprite = this.selectedFlag.getComponent(Sprite);
             this._unselectedSpriteFrame = com.spriteFrame;
         }
-     }
+    }
 
-    // protected onDestroy_a() {
-    //     super.onDestroy_a();
-    //     this.node.off(Node.EventType.SIZE_CHANGED, this._onSizeChange, this);
-    // }
+    public data: any;
 
-    onDestroy() {
-         this.node.off(Node.EventType.SIZE_CHANGED, this._onSizeChange, this);
-     }
+    protected onEnter_b() { }
 
-     protected dchg_b() { }
+    protected onEnter() { }
 
-     protected dchg() { }
- 
-     protected dchg_a() { }
+    protected onFirstEnter() { }
 
-     public setData(data: any) {
+    protected onEnter_a() { }
+
+    protected dchg_b() { }
+
+    protected dchg() { }
+
+    protected dchg_a() { }
+
+    protected onExit_b() { }
+
+    protected onExit() { }
+
+    protected onExit_a() { }
+   
+    public setData(data: any) {
         let self = this;
-        if (self.data != data){
+        if (self.data != data) {
             self.data = data;
             self.dchg_b();
             self.dchg();
             self.dchg_a();
-        } 
+        }
     }
 
-    _registerEvent() {
+    public registerEvent() {
         if (!this._eventReg) {
             if (this.btnCom && this.list.selectedMode > 0) {
                 this.btnCom.clickEvents.unshift(this.createEvt(this, 'onClickThis'));
             }
             if (this.adaptiveSize) {
-                this.node.on(Node.EventType.SIZE_CHANGED, this._onSizeChange, this);
+                this.node.on(Node.EventType.SIZE_CHANGED, this.onSizeChange, this);
             }
             this._eventReg = true;
         }
     }
 
-    _onSizeChange() {
+    private onSizeChange() {
         this.list._onItemAdaptive(this.node);
     }
     /**
@@ -161,7 +155,7 @@ export class ListItem extends Component {
      * @param {cc.Node} node 组件所在node（不传的情况下取component.node）
      * @returns cc.Component.EventHandler
      */
-    createEvt(component: Component, handlerName: string, node: Node = null) {
+    private createEvt(component: Component, handlerName: string, node: Node = null) {
         if (!component.isValid)
             return;//有些异步加载的，节点以及销毁了。
         component['comName'] = component['comName'] || component.name.match(/\<(.*?)\>/g).pop().replace(/\<|>/g, '');
@@ -172,7 +166,7 @@ export class ListItem extends Component {
         return evt;
     }
 
-    showAni(aniType: number, callFunc: Function, del: boolean) {
+    public showAni(aniType: number, callFunc: Function, del: boolean) {
         let t: any = this;
         let twe: Tween<Node>;
         let ut: UITransform = t.node.getComponent(UITransform);
@@ -220,8 +214,12 @@ export class ListItem extends Component {
         twe.start();
     }
 
-    onClickThis() {
+    private onClickThis() {
         this.list.selectedId = this.listId;
+    }
+
+    onDestroy() {
+        this.node.off(Node.EventType.SIZE_CHANGED, this.onSizeChange, this);
     }
 
 }

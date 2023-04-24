@@ -29,7 +29,7 @@ export enum SelectedType {
 @ccclass("List")
 @disallowMultiple()
 @requireComponent(ScrollView)
-//脚本生命周期回调的执行优先级。小于 0 的脚本将优先执行，大于 0 的脚本将最后执行。该优先级只对 onLoad, onEnable, start, update 和 lateUpdate 有效，对 onDisable 和 onDestroy 无效。
+// 脚本生命周期回调的执行优先级。小于 0 的脚本将优先执行，大于 0 的脚本将最后执行。该优先级只对 onLoad, onEnable, start, update 和 lateUpdate 有效，对 onDisable 和 onDestroy 无效。
 @executionOrder(-5000)
 export class List extends Component {
     //模板类型
@@ -1572,7 +1572,7 @@ export class List extends Component {
             if (listItem) {
                 listItem.listId = data.id;
                 listItem.list = this;
-                listItem._registerEvent();
+                listItem.registerEvent();
             }
             if (this.renderEvent) {
                 EventHandler.emitEvents([this.renderEvent], item, data.id % this._actualNumItems);
@@ -1605,7 +1605,7 @@ export class List extends Component {
             if (listItem) {
                 listItem.listId = listId;
                 listItem.list = this;
-                listItem._registerEvent();
+                listItem.registerEvent();
             }
             if (this.renderEvent) {
                 EventHandler.emitEvents([this.renderEvent], item, listId % this._actualNumItems);

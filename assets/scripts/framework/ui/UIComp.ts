@@ -17,13 +17,11 @@ export class UIComp extends Component {
     public hasDestory: boolean;//是否已被销毁
     /** 脚本类名**/
     public scriptName: string;
-    private _allList: Node[];
     protected needRefreshListOnEnter: boolean = true;
 
     onLoad() {
         this.scriptName = this.name.match(/<(\S*)>/)[1];
         // console.log('onLoad: ' + this.scriptName);
-        this.onLoad_a();
     }
 
     onEnable() {
@@ -38,12 +36,7 @@ export class UIComp extends Component {
 
     onDestroy() {
         // console.log('onDestroy: ' + this.scriptName);
-        this.onDestroy_a();
     }
-
-    protected onLoad_a(){ }
-
-    protected onDestroy_a(){ }
 
     protected onEnter_b() { }
 
@@ -86,12 +79,13 @@ export class UIComp extends Component {
     }
 
     public setData(data: any) {
-        this.data = data;
-        if (data){
-            this.dchg_b();
-            this.dchg();
-            this.dchg_a();
-        } 
+        let self = this;
+        if (self.data != data) {
+            self.data = data;
+            self.dchg_b();
+            self.dchg();
+            self.dchg_a();
+        }
     }
 
     /**
@@ -153,22 +147,22 @@ export class UIComp extends Component {
     /** 刷新指定列表*/
     protected refreshList(id: string) {
         let self = this;
-        let listNode:Node = self[id];
+        let listNode: Node = self[id];
         if (!listNode) return console.warn(`找不到id为${id}的列表`);
         let list = listNode.getComponent(List);
-        if(!list) return console.warn(`列表${id}没有绑定List脚本`);
+        if (!list) return console.warn(`列表${id}没有绑定List脚本`);
         list['nodeName'] = id;
         list.renderEvent.target = self.node;
         list.renderEvent.component = self.scriptName;
         list.renderEvent.handler = '__onListRender';
 
-        if(list.selectedMode != SelectedType.NONE){
+        if (list.selectedMode != SelectedType.NONE) {
             list.selectedEvent.target = self.node;
             list.selectedEvent.component = self.scriptName;
             list.selectedEvent.handler = '__onSelectEvent';
         }
 
-        if(list.slideMode == SlideType.PAGE){
+        if (list.slideMode == SlideType.PAGE) {
             list.pageChangeEvent.target = self.node;
             list.pageChangeEvent.component = self.scriptName;
             list.pageChangeEvent.handler = '__onPageChangeEvent';
@@ -190,19 +184,19 @@ export class UIComp extends Component {
     }
 
     //列表项被选中
-    private __onSelectEvent(item: Node, selectedIdx: number, lastSelectedIdx: number, val: number){
+    private __onSelectEvent(item: Node, selectedIdx: number, lastSelectedIdx: number, val: number) {
         let self = this;
         let listItem = item.getComponent(ListItem);
         let listName = listItem.list['nodeName'];
-        if(self["_select_" + listName]){
+        if (self["_select_" + listName]) {
             self["_select_" + listName](listItem.data, selectedIdx, lastSelectedIdx);
         }
     }
 
-    private __onPageChangeEvent(list: List, pageNum: number){
+    private __onPageChangeEvent(list: List, pageNum: number) {
         let self = this;
         let listName = list['nodeName'];
-        if(self["_pageChange_" + listName]){
+        if (self["_pageChange_" + listName]) {
             self["_pageChange_" + listName](pageNum);
         }
     }
@@ -276,7 +270,6 @@ export class UIComp extends Component {
     protected destory() {
         let self = this;
         if (self.hasDestory) return;
-        self._allList = null;
         self.node.destroy();
         self.hasDestory = true;
     }
