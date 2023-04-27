@@ -3,13 +3,16 @@
  * @Author: CYK
  * @Date: 2022-05-20 09:53:17
  */
+import { _decorator } from 'cc';
 import { SubLayerMgr } from '../mgr/SubLayerMgr';
 import { UILayer } from './UILayer';
 import { emmiter } from '../base/Emmiter';
 import { BaseUT } from '../base/BaseUtil';
 import { Component, Node} from 'cc';
 import { SceneMgr } from '../mgr/SceneMgr';
+const { ccclass } = _decorator;
 
+@ccclass('UIScene')
 export class UIScene extends Component{
     protected mainClassLayer: typeof UILayer;
     protected subLayerMgr: SubLayerMgr;
@@ -25,7 +28,7 @@ export class UIScene extends Component{
         let self = this;
         self.subLayerMgr = new SubLayerMgr();
         self.ctor_b();
-        if (self["ctor"]) self["ctor"]();
+        self.ctor();
         self.ctor_a();
         BaseUT.setFitSize(this.node);
     }

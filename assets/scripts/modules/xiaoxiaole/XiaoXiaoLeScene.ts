@@ -8,7 +8,6 @@ import { UIScene } from "../../framework/ui/UIScene";
 import { registerModule } from "../../framework/mgr/ModuleMgr";
 import { XiaoXiaoLeStartLayer } from "./XiaoXiaoLeStartLayer";
 import { SoundMgr } from "../../framework/mgr/SoundMgr";
-import { XiaoXiaoLeLayer } from "./XiaoXiaoLeLayer";
 const { ccclass, property } = _decorator;
 @ccclass('XiaoXiaoLeScene')
 export class XiaoXiaoLeScene extends UIScene {

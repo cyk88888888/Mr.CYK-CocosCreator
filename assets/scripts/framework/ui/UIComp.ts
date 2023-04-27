@@ -19,6 +19,13 @@ export class UIComp extends Component {
     public scriptName: string;
     protected needRefreshListOnEnter: boolean = true;
 
+    __preload() {
+        let self = this;
+        self.ctor_b();
+        self.ctor();
+        self.ctor_a();
+    }
+
     onLoad() {
         this.scriptName = this.name.match(/<(\S*)>/)[1];
         // console.log('onLoad: ' + this.scriptName);
@@ -37,6 +44,12 @@ export class UIComp extends Component {
     onDestroy() {
         // console.log('onDestroy: ' + this.scriptName);
     }
+
+    protected ctor_b() { }
+
+    protected ctor() { }
+
+    protected ctor_a() { }
 
     protected onEnter_b() { }
 

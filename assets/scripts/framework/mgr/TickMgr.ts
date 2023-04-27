@@ -1,6 +1,6 @@
 import { Main } from "../../Main";
 /*
- * @Description: 帧管理器
+ * @Description: 自定义帧管理器
  * @Author: CYK
  * @Date: 2022-06-09 23:46:58
  */
