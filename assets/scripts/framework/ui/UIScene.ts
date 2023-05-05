@@ -193,7 +193,7 @@ export class UIScene extends Component{
     
     onDestroy(){
         let self = this;
-        console.log('onDestroy: ' + this.className);
+        // console.log('onDestroy: ' + this.className);
     }
 }
 

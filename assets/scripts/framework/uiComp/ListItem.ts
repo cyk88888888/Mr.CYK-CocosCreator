@@ -440,32 +440,32 @@ export class ListItem extends Component {
     }
 
     public showAni(aniType: number, callFunc: Function, del: boolean) {
-        let t: any = this;
+        let self = this;
         let twe: Tween<Node>;
-        let ut: UITransform = t.node.getComponent(UITransform);
+        let ut: UITransform = self.node.getComponent(UITransform);
         switch (aniType) {
             case 0: //向上消失
-                twe = tween(t.node)
+                twe = self.getTween(self.node)
                     .to(.2, { scale: new Vec3(.7, .7) })
                     .by(.3, { position: new Vec3(0, ut.height * 2) });
                 break;
             case 1: //向右消失
-                twe = tween(t.node)
+                twe = self.getTween(self.node)
                     .to(.2, { scale: new Vec3(.7, .7) })
                     .by(.3, { position: new Vec3(ut.width * 2, 0) });
                 break;
             case 2: //向下消失
-                twe = tween(t.node)
+                twe = self.getTween(self.node)
                     .to(.2, { scale: new Vec3(.7, .7) })
                     .by(.3, { position: new Vec3(0, ut.height * -2) });
                 break;
             case 3: //向左消失
-                twe = tween(t.node)
+                twe = self.getTween(self.node)
                     .to(.2, { scale: new Vec3(.7, .7) })
                     .by(.3, { position: new Vec3(ut.width * -2, 0) });
                 break;
             default: //默认：缩小消失
-                twe = tween(t.node)
+                twe = self.getTween(self.node)
                     .to(.3, { scale: new Vec3(.1, .1) });
                 break;
         }
@@ -473,10 +473,10 @@ export class ListItem extends Component {
         if (callFunc || del) {
             twe.call(() => {
                 if (del) {
-                    t.list._delSingleItem(t.node);
-                    for (let n: number = t.list.displayData.length - 1; n >= 0; n--) {
-                        if (t.list.displayData[n].id == t.listId) {
-                            t.list.displayData.splice(n, 1);
+                    self.list._delSingleItem(self.node);
+                    for (let n: number = self.list.displayData.length - 1; n >= 0; n--) {
+                        if (self.list.displayData[n].id == self.listId) {
+                            self.list.displayData.splice(n, 1);
                             break;
                         }
                     }
