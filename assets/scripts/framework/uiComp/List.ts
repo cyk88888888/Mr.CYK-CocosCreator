@@ -20,7 +20,7 @@ export enum SlideType {
     PAGE = 3,//页面模式，将强制关闭滚动惯性
 }
 
-export enum SelectedType {
+export enum SelectedType_List {
     NONE = 0,
     SINGLE = 1,//单选
     MULT = 2,//多选
@@ -157,10 +157,10 @@ export class List extends Component {
     public renderEvent: EventHandler = new EventHandler();
     //选择模式
     @property({
-        type: Enum(SelectedType),
+        type: Enum(SelectedType_List),
         tooltip: DEV && '选择模式'
     })
-    public selectedMode: SelectedType = SelectedType.NONE;
+    public selectedMode: SelectedType_List = SelectedType_List.NONE;
     //触发选择事件
     @property({
         type: EventHandler,
@@ -170,7 +170,7 @@ export class List extends Component {
     public selectedEvent: EventHandler = new EventHandler();
     @property({
         tooltip: DEV && '是否重复响应单选事件',
-        visible() { return this.selectedMode == SelectedType.SINGLE; }
+        visible() { return this.selectedMode == SelectedType_List.SINGLE; }
     })
     public repeatEventSingle: boolean = false;
 
@@ -182,7 +182,7 @@ export class List extends Component {
         let t: any = this;
         let item: any;
         switch (t.selectedMode) {
-            case SelectedType.SINGLE: {
+            case SelectedType_List.SINGLE: {
                 if (!t.repeatEventSingle && val == t._selectedId)
                     return;
                 item = t.getItemByListId(val);
@@ -209,7 +209,7 @@ export class List extends Component {
                 }
                 break;
             }
-            case SelectedType.MULT: {
+            case SelectedType_List.MULT: {
                 item = t.getItemByListId(val);
                 if (!item)
                     return;
@@ -679,13 +679,13 @@ export class List extends Component {
         //     }
         // }
         if (remove) {
-            t.selectedMode = SelectedType.NONE;
+            t.selectedMode = SelectedType_List.NONE;
         }
         com = item.getComponent(Widget);
         if (com && com.enabled) {
             t._needUpdateWidget = true;
         }
-        if (t.selectedMode == SelectedType.MULT)
+        if (t.selectedMode == SelectedType_List.MULT)
             t.multSelected = [];
 
         switch (t._align) {
@@ -1627,13 +1627,13 @@ export class List extends Component {
     _updateListItem(listItem: ListItem) {
         if (!listItem)
             return;
-        if (this.selectedMode > SelectedType.NONE) {
+        if (this.selectedMode > SelectedType_List.NONE) {
             let item: any = listItem.node;
             switch (this.selectedMode) {
-                case SelectedType.SINGLE:
+                case SelectedType_List.SINGLE:
                     listItem.selected = this.selectedId == item._listId;
                     break;
-                case SelectedType.MULT:
+                case SelectedType_List.MULT:
                     listItem.selected = this.multSelected.indexOf(item._listId) >= 0;
                     break;
             }
@@ -1853,13 +1853,13 @@ export class List extends Component {
                     t._createOrUpdateItem2(newId);
             } else
                 t._numItems--;
-            if (t.selectedMode == SelectedType.SINGLE) {
+            if (t.selectedMode == SelectedType_List.SINGLE) {
                 if (resetSelectedId) {
                     t._selectedId = -1;
                 } else if (t._selectedId - 1 >= 0) {
                     t._selectedId--;
                 }
-            } else if (t.selectedMode == SelectedType.MULT && t.multSelected.length) {
+            } else if (t.selectedMode == SelectedType_List.MULT && t.multSelected.length) {
                 let sub: number = t.multSelected.indexOf(listId);
                 if (sub >= 0) {
                     t.multSelected.splice(sub, 1);

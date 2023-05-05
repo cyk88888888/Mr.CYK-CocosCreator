@@ -1,7 +1,7 @@
 import { _decorator, Component, Node, Tween, tween, EventTouch, js } from 'cc';
 import { emmiter } from '../base/Emmiter';
 import { SoundMgr } from '../mgr/SoundMgr';
-import { List, SelectedType, SlideType } from '../uiComp/List';
+import { List, SelectedType_List, SlideType } from '../uiComp/List';
 import { ListItem } from '../uiComp/ListItem';
 const { ccclass, property } = _decorator;
 
@@ -33,12 +33,12 @@ export class UIComp extends Component {
 
     onEnable() {
         let self = this;
-        self.initView();
+        self.__doEnter();
     }
 
     onDisable() {
         let self = this;
-        self._dispose();
+        self.__dispose();
     }
 
     onDestroy() {
@@ -104,11 +104,11 @@ export class UIComp extends Component {
     /**
      * 初始化view
      */
-    private initView() {
+    private __doEnter() {
         let self = this;
         if (self.hasDestory) return;
         self.addListener();
-        console.log('进入' + self.scriptName);
+        // console.log('进入' + self.scriptName);
         self.onEnter_b();
         self.onEnter();
         if (self.isFirstEnter) {
@@ -169,7 +169,7 @@ export class UIComp extends Component {
         list.renderEvent.component = self.scriptName;
         list.renderEvent.handler = '__onListRender';
 
-        if (list.selectedMode != SelectedType.NONE) {
+        if (list.selectedMode != SelectedType_List.NONE) {
             list.selectedEvent.target = self.node;
             list.selectedEvent.component = self.scriptName;
             list.selectedEvent.handler = '__onSelectEvent';
@@ -188,7 +188,7 @@ export class UIComp extends Component {
     //列表项渲染
     private __onListRender(item: Node, idx: number) {
         let self = this;
-        //刷新子项 todo...
+        //刷新子项 
         let listItem = item.getComponent(ListItem);
         let list = listItem.list;
         let itemData = list.dataList[idx];
@@ -287,7 +287,7 @@ export class UIComp extends Component {
         self.hasDestory = true;
     }
 
-    private _dispose() {
+    private __dispose() {
         let self = this;
         if (self._emmitMap) {
             for (let event in self._emmitMap) {
@@ -312,7 +312,7 @@ export class UIComp extends Component {
         self.clearAllTimeoutOrInterval();
         self.rmAllTweens();
 
-        console.log('退出' + self.scriptName);
+        // console.log('退出' + self.scriptName);
         self.onExit_b();
         self.onExit();
         self.onExit_a();

@@ -105,7 +105,7 @@ export class UIScene extends Component{
 
     private __doEnter(){
         let self = this;
-        console.log('进入' + self.className);
+        // console.log('进入' + self.className);
         self.onEnter_b();
         self.onEnter();
         if (self._isFirstEnter) {
@@ -126,7 +126,7 @@ export class UIScene extends Component{
 
     onDisable(){
         let self = this;
-        self._dispose();
+        self.__dispose();
     }
 
     /**重置到主界面（会清掉当前堆栈中的所有界面） */
@@ -170,7 +170,7 @@ export class UIScene extends Component{
         this.subLayerMgr = null;
     }
 
-    public _dispose() {
+    private __dispose() {
         let self = this;
         if (self._emmitMap) {
             for (let event in self._emmitMap) {
@@ -178,14 +178,14 @@ export class UIScene extends Component{
             }
             self._emmitMap = null;
         }
-        console.log('退出' + self.className);
+        // console.log('退出' + self.className);
         this.onExit_b();
         self.onExit();
         this.onExit_a();
     }
 
     public destory() {
-        this._dispose();
+        this.__dispose();
         this.subLayerMgr.dispose();
         this.subLayerMgr = null;
         this.node.destroy();
