@@ -147,6 +147,7 @@ export class AStar {
             node = node.parent;
             self._path.unshift(node);
         }
+        self._path.shift();//第一个点是当前位置的，先移除
         let totTime = (self.getTime() - self._startCalculateTime) / 1000;
         self.costTotTime = totTime;
         console.log("本次寻路计算总耗时: " + totTime + "秒");
