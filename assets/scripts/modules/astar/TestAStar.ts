@@ -48,7 +48,7 @@ export class TestAStar extends UIComp {
     protected onFirstEnter() {
         let self = this;
         self._cellSize = 40;
-        self._speed = 0.15;
+        self._speed = 150;
         self._widget = self.getComponent(Widget);
         TickMgr.inst.nextTick(() => {
             self.initGrid();
@@ -186,11 +186,12 @@ export class TestAStar extends UIComp {
         self.graphicsPath.fill();
 
         let playerPos = self.sp_player.node.position;
-        let dx = targetX - playerPos.x;
-        let dy = targetY - playerPos.y;
-        let dist = Math.sqrt(dx * dx + dy * dy);
-        // let dist = Vec2.distance(new Vec2(targetX,targetY), new Vec2(playerPos.x,playerPos.y));
-        if (dist < 1) {
+        // let dx = targetX - playerPos.x;
+        // let dy = targetY - playerPos.y;
+        // let dist = Math.sqrt(dx * dx + dy * dy);
+        let moveNormalize = new Vec2(targetX - playerPos.x, targetY - playerPos.y).normalize();
+        let dist = Vec2.distance(new Vec2(targetX,targetY), new Vec2(playerPos.x,playerPos.y));
+        if (dist <= 1) {
             self._index++;//索引加1，即取一个路径节点
             if (self._index >= self._path.length)//达到最后一个节点时，移除ENTER_FRAME监听
             {
@@ -198,11 +199,14 @@ export class TestAStar extends UIComp {
             }
         } else {
             let oldPos = new Vec3(playerPos.x, playerPos.y);
-            let newPos = new Vec3(playerPos.x + dx * self._speed, playerPos.y + dy * self._speed);
-            let dir = newPos.x > oldPos.x ? 1 : -1;
+            let newPos = new Vec3(playerPos.x + deltaTime * moveNormalize.x * self._speed, playerPos.y + deltaTime * moveNormalize.y * self._speed);
+            
             self.graphicsPlayer.node.setPosition(newPos);
             self.sp_player.node.setPosition(newPos);
-            self.sp_player.node.setScale(Math.abs(self.sp_player.node.scale.x) * dir, self.sp_player.node.scale.y);
+            if(Math.abs(newPos.x - oldPos.x) > 1){//防止左右摇头
+                let dir = newPos.x > oldPos.x ? 1 : -1;
+                self.sp_player.node.setScale(Math.abs(self.sp_player.node.scale.x) * dir, self.sp_player.node.scale.y);
+            }
         }
     }
 
