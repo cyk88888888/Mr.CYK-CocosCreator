@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Graphics, UITransform, EventTouch, Label, Prefab, instantiate, Vec3, Widget, Vec2 } from 'cc';
+import { _decorator, Component, Node, Graphics, UITransform, EventTouch, Label, Prefab, instantiate, Vec3, Widget, Vec2, game } from 'cc';
 import { BaseUT } from '../../framework/base/BaseUtil';
 import { TickMgr } from '../../framework/mgr/TickMgr';
 import { UIComp } from '../../framework/ui/UIComp';
@@ -48,7 +48,7 @@ export class TestAStar extends UIComp {
     protected onFirstEnter() {
         let self = this;
         self._cellSize = 40;
-        self._speed = 150;
+        self._speed = 1000 / 60 * 0.1;
         self._widget = self.getComponent(Widget);
         TickMgr.inst.nextTick(() => {
             self.initGrid();
@@ -166,6 +166,14 @@ export class TestAStar extends UIComp {
             self.lbl_cost.string = "本次寻路总耗时: " + astar.costTotTime + "秒";
             self._path = astar.path;
             self._index = 0;
+            let len = self._path.length - 1;//最后一点显示红色终点
+            for (let i = 0; i < len; i++) {
+                //把经过的点，涂上黄色
+                let passedNode = self._path[i];
+                self.graphicsPath.fillColor.fromHEX('#ffff00');
+                self.graphicsPath.rect(passedNode.x * self._cellSize, passedNode.y * self._cellSize, self._cellSize, self._cellSize);
+                self.graphicsPath.fill();
+            }
             self._startFrame = true;
         } else {
             MessageTip.show({ msg: '没找到最佳节点，无路可走!' });
@@ -174,36 +182,28 @@ export class TestAStar extends UIComp {
 
     update(deltaTime: number) {
         let self = this;
-        if (!this._startFrame) return;
+        if (!this._startFrame || !self._path || !self._path.length) return;
         let _cellSize = self._cellSize;
         let passedNode = self._path[self._index];
         let targetX = passedNode.x * _cellSize + _cellSize / 2;
         let targetY = passedNode.y * _cellSize + _cellSize / 2;
-
-        //把经过的点，涂上黄色
-        self.graphicsPath.fillColor.fromHEX('#ffff00');
-        self.graphicsPath.rect(passedNode.x * _cellSize, passedNode.y * _cellSize, _cellSize, _cellSize);
-        self.graphicsPath.fill();
-
         let playerPos = self.sp_player.node.position;
-        // let dx = targetX - playerPos.x;
-        // let dy = targetY - playerPos.y;
-        // let dist = Math.sqrt(dx * dx + dy * dy);
-        let moveNormalize = new Vec2(targetX - playerPos.x, targetY - playerPos.y).normalize();
-        let dist = Vec2.distance(new Vec2(targetX,targetY), new Vec2(playerPos.x,playerPos.y));
-        if (dist <= 1) {
+        let dx = targetX - playerPos.x;
+        let dy = targetY - playerPos.y;
+        let dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 1) {
             self._index++;//索引加1，即取一个路径节点
-            if (self._index >= self._path.length)//达到最后一个节点时，移除ENTER_FRAME监听
-            {
+            if (self._index >= self._path.length) {//达到最后一个节点时，移除ENTER_FRAME监听
                 this._startFrame = false;
             }
         } else {
+            let moveNormalize = new Vec2(dx, dy).normalize();
             let oldPos = new Vec3(playerPos.x, playerPos.y);
-            let newPos = new Vec3(playerPos.x + deltaTime * moveNormalize.x * self._speed, playerPos.y + deltaTime * moveNormalize.y * self._speed);
-            
+            let newPos = new Vec3(playerPos.x + self._speed * moveNormalize.x, playerPos.y + self._speed * moveNormalize.y);
+
             self.graphicsPlayer.node.setPosition(newPos);
             self.sp_player.node.setPosition(newPos);
-            if(Math.abs(newPos.x - oldPos.x) > 0.5){//防止左右摇头
+            if (Math.abs(newPos.x - oldPos.x) > 0.5) {//防止左右摇头
                 let dir = newPos.x > oldPos.x ? 1 : -1;
                 self.sp_player.node.setScale(Math.abs(self.sp_player.node.scale.x) * dir, self.sp_player.node.scale.y);
             }
