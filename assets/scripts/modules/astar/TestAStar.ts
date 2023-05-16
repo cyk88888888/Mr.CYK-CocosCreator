@@ -203,7 +203,7 @@ export class TestAStar extends UIComp {
             
             self.graphicsPlayer.node.setPosition(newPos);
             self.sp_player.node.setPosition(newPos);
-            if(Math.abs(newPos.x - oldPos.x) > 1){//防止左右摇头
+            if(Math.abs(newPos.x - oldPos.x) > 0.5){//防止左右摇头
                 let dir = newPos.x > oldPos.x ? 1 : -1;
                 self.sp_player.node.setScale(Math.abs(self.sp_player.node.scale.x) * dir, self.sp_player.node.scale.y);
             }
