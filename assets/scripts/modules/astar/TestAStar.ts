@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Graphics, UITransform, EventTouch, Label, Prefab, instantiate, Vec3, Widget, Vec2, game } from 'cc';
+import { _decorator, Component, Node, Graphics, UITransform, EventTouch, Label, Prefab, instantiate, Vec3, Widget, Vec2 } from 'cc';
 import { BaseUT } from '../../framework/base/BaseUtil';
 import { TickMgr } from '../../framework/mgr/TickMgr';
 import { UIComp } from '../../framework/ui/UIComp';
