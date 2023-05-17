@@ -43,12 +43,14 @@ export class TestAStar extends UIComp {
     private _grid: Grid;
     private _index: number;
     private _path: Nodes[];
-    private _startFrame: boolean;
     private _speed: number;//人物移动速度
+    private _prePos: Vec2;
+    private _toDistance: number;
+    private _moveDir: Vec2;
     protected onFirstEnter() {
         let self = this;
         self._cellSize = 40;
-        self._speed = 1000 / 60 * 0.1;
+        self._speed = 300;
         self._widget = self.getComponent(Widget);
         TickMgr.inst.nextTick(() => {
             self.initGrid();
@@ -163,7 +165,7 @@ export class TestAStar extends UIComp {
         let self = this;
         let astar = new AStar();
         if (astar.findPath(self._grid)) {
-            self.lbl_cost.string = "本次寻路总耗时: " + astar.costTotTime + "秒";
+            self.lbl_cost.string = "本次寻路总耗时: " + astar.costTotTime + "ms";
             self._path = astar.path;
             self._index = 0;
             let len = self._path.length - 1;//最后一点显示红色终点
@@ -174,7 +176,7 @@ export class TestAStar extends UIComp {
                 self.graphicsPath.rect(passedNode.x * self._cellSize, passedNode.y * self._cellSize, self._cellSize, self._cellSize);
                 self.graphicsPath.fill();
             }
-            self._startFrame = true;
+            self.refMoveInfo();
         } else {
             MessageTip.show({ msg: '没找到最佳节点，无路可走!' });
         }
@@ -182,32 +184,38 @@ export class TestAStar extends UIComp {
 
     update(deltaTime: number) {
         let self = this;
-        if (!this._startFrame || !self._path || !self._path.length) return;
-        let _cellSize = self._cellSize;
-        let passedNode = self._path[self._index];
-        let targetX = passedNode.x * _cellSize + _cellSize / 2;
-        let targetY = passedNode.y * _cellSize + _cellSize / 2;
+        if (!self._path || !self._path.length || self._index >= self._path.length) return;
         let playerPos = self.sp_player.node.position;
-        let dx = targetX - playerPos.x;
-        let dy = targetY - playerPos.y;
-        let dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 1) {
-            self._index++;//索引加1，即取一个路径节点
-            if (self._index >= self._path.length) {//达到最后一个节点时，移除ENTER_FRAME监听
-                this._startFrame = false;
-            }
+        let dx = playerPos.x - self._prePos.x;
+        let dy = playerPos.y - self._prePos.y;
+        let moveDistance = Math.sqrt(dx * dx + dy * dy);//已走过多少距离
+        if (moveDistance >= self._toDistance) {
+            self._index++;//取一个路径节点
+            if (self._index < self._path.length) {//达到最后一个节点
+                self.refMoveInfo();
+            } 
         } else {
-            let moveNormalize = new Vec2(dx, dy).normalize();
             let oldPos = new Vec3(playerPos.x, playerPos.y);
-            let newPos = new Vec3(playerPos.x + self._speed * moveNormalize.x, playerPos.y + self._speed * moveNormalize.y);
-
+            let newPos = new Vec3(playerPos.x + deltaTime * self._speed * self._moveDir.x, playerPos.y + deltaTime * self._speed * self._moveDir.y);
             self.graphicsPlayer.node.setPosition(newPos);
             self.sp_player.node.setPosition(newPos);
-            if (Math.abs(newPos.x - oldPos.x) > 0.5) {//防止左右摇头
+            if (newPos.x != oldPos.x && Math.abs(newPos.x - oldPos.x) > 0.5) {//防止左右摇头
                 let dir = newPos.x > oldPos.x ? 1 : -1;
                 self.sp_player.node.setScale(Math.abs(self.sp_player.node.scale.x) * dir, self.sp_player.node.scale.y);
             }
         }
+    }
+
+    private refMoveInfo() {
+        let self = this;
+        let playerPos = self.sp_player.node.position;
+        self._prePos = new Vec2(playerPos.x, playerPos.y);
+        let passedNode = self._path[self._index];
+        let targetPos = new Vec2(passedNode.x * self._cellSize + self._cellSize / 2, passedNode.y * self._cellSize + self._cellSize / 2);
+        let dx = targetPos.x - self._prePos.x;
+        let dy = targetPos.y - self._prePos.y;
+        self._toDistance = Math.sqrt(dx * dx + dy * dy);
+        self._moveDir = new Vec2(dx, dy).normalize();
     }
 
     /**
@@ -215,7 +223,7 @@ export class TestAStar extends UIComp {
      */
     private onReset() {
         let self = this;
-        self._startFrame = false;
+        self._path = null;
         self.graphicsPath.clear();
         self._grid.resetWalkable();
         self.makeBlock();
