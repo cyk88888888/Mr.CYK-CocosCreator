@@ -1,12 +1,12 @@
+
+import { sys } from "cc";
+import { BaseEnum } from "../base/BaseEnum";
 /*
  * @Descripttion: 文件操作管理器
  * @Author: CYK
  * @Date: 2022-06-28 13:56:20
+ * 
  */
-
-import { sys } from "cc";
-import { BaseEnum } from "../base/BaseEnum";
-
 export class FileMgr {
     private static _inst: FileMgr;
     public static get inst() {
