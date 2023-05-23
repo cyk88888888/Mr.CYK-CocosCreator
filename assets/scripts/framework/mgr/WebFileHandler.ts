@@ -3,9 +3,9 @@ import { Texture2D } from "cc";
 export default class WebFileHandler{
     private _fileInput: HTMLInputElement;
     private loadComplete: Function;
-    private fileType: number;//文件类型，0图片，1文本
+    private fileType: number;//文件类型，0图片，1文本, 文件夹
     private file: File;
-    private _img: any;
+    private _img: HTMLImageElement;
     constructor(){
         this.loadComplete = null,
         this.file = null,
@@ -14,78 +14,106 @@ export default class WebFileHandler{
     }
 
     private init() {
-        var t = this;
-        this._fileInput = document.createElement("input"),
-        this._fileInput.id = "finput",
-        this._fileInput.type = "file",
-        this._fileInput.accept = "image/*",
-        this._fileInput.style.height = "0px",
-        this._fileInput.style.display = "block",
-        this._fileInput.style.overflow = "hidden",
-        document.body.insertBefore(this._fileInput, document.body.firstChild),
-        this._fileInput.addEventListener("change", function(e) {
-            t.onSelectFile(e)
-        }, !1)
+        let self = this;
+        self._fileInput = document.createElement("input"),
+        self._fileInput.id = "finput",
+        self._fileInput.accept =  ".*";
+        self._fileInput.style.height = "0px",
+        self._fileInput.style.display = "block",
+        self._fileInput.style.overflow = "hidden",
+        document.body.insertBefore(self._fileInput, document.body.firstChild),
+        self._fileInput.onchange = (e: Event) => {
+            self.onSelectFile(e);
+        }
+        self._fileInput.oncancel = (e: Event) => {
+            console.log(e);
+        }
+    }
+
+    //选中图片文件
+    public openImageWin(cb: Function) {
+        let self = this;
+        self.fileType = 0,
+        self._fileInput.type = "file",
+        self._fileInput.accept = "image/png,image/jpeg",//"image/*",
+        self.loadComplete = cb,
+        // setTimeout(() => {
+            self._fileInput.click();
+        // }, 100)
     }
     
-    public openImageWin(t) {
-        var e = this;
-        this.fileType = 0,
-        this._fileInput.accept = "image/png,image/jpeg",
-        this.loadComplete = t,
-        setTimeout(function() {
-            e._fileInput.click()
-        }, 100)
+    //选中文本文件
+    public openTextWin(cb: Function) {
+        let self = this;
+        self.fileType = 1;
+        self._fileInput.type = "file",
+        self._fileInput.accept = "application/json";
+        self.loadComplete = cb;
+        // setTimeout(() => {
+            self._fileInput.click();
+        // }, 100)
     }
-    
-    public openTextWin(t) {
-        var e = this;
-        this.fileType = 1,
-        this._fileInput.accept = "application/json",
-        this.loadComplete = t,
-        setTimeout(function() {
-            e._fileInput.click()
-        }, 100)
+
+    //选中目录文件夹
+    public openDirectoryWin(cb: Function) {
+        let self = this;
+        self.fileType = 3;
+        self._fileInput.type = "files",
+        self._fileInput.accept = ".*";
+        self.loadComplete = cb;
+        // setTimeout(() => {
+            self._fileInput.click();
+        // }, 100)
     }
     
     private onSelectFile(t:any) {
-        this.file = t.target.files[0]
-        if (0 == this.fileType) {
-            var e = this.createObjectURL(this.file);
-            this.loadLocalImg(e)
-        } else
-            1 == this.fileType && this.loadLocalText(this.file)
-    }
-    
-    private loadLocalImg(t) {
-        var e = this;
-        this._img || (this._img = document.getElementById("f_img"),
-        this._img || (this._img = document.createElement("img"),
-        this._img.id = "f_img"),
-        this._img.onload = function() {
-            var t = new Texture2D;
-            // t.initWithElement(e._img),
-            // t.handleLoadedTexture(),
-            e.loadComplete && e.loadComplete(t, e.file)
-        }
-        ),
-        this._img.src = t
-    }
-    
-    private loadLocalText(t) {
-        var e = this
-          , i = new FileReader;
-        i.readAsText(t, "utf-8"),
-        i.onprogress = function(t) {
-            console.log("pg =", t.loaded);
-        }
-        ,
-        i.onload = function() {
-            e.loadComplete && e.loadComplete(i.result, e.file)
+        let self = this;
+        self.file = t.target.files[0];
+        if (self.fileType == 0) {//图片
+            let url = self.createObjectURL(self.file);
+            if(url) self.loadLocalImg(url);
+        } else if(self.fileType == 1){//文本
+            self.loadLocalText(self.file);
+        }else{//文件夹目录
+            //todo...
         }
     }
     
-    private createObjectURL(t) {
-        return null != window.URL ? window.URL.createObjectURL(t) : window.webkitURL.createObjectURL(t)
+    private loadLocalImg(url: string) {
+        let self = this;
+        self._img = document.getElementById("f_img") as HTMLImageElement;
+        if(!self._img){
+            self._img = document.createElement("img");
+            self._img.id = "f_img";
+        }
+        self._img.onprogress = (e: ProgressEvent) => {
+            console.log("pg =", e.loaded); 
+        }
+        self._img.onload = (e: Event) => {
+            let texture = new Texture2D();
+            // texture.image = self._img;
+            // texture.initWithElement(self._img),
+            // texture.handleLoadedTexture(),
+            self.loadComplete && self.loadComplete(texture, self.file);
+        }
+        self._img.src = url;
+    }
+    
+    private loadLocalText(file: File) {
+        let self = this;
+        if(!file) return;
+        let reader = new FileReader();
+        reader.readAsText(file, "utf-8");
+        reader.onprogress = (e: ProgressEvent) => {
+            console.log("pg =", e.loaded);
+        }
+        reader.onload = function() {
+            self.loadComplete && self.loadComplete(reader.result, self.file);
+        }
+    }
+    
+    private createObjectURL(file: File) {
+        if(!file) return null;
+        return null != window.URL ? window.URL.createObjectURL(file) : window.webkitURL.createObjectURL(file);
     }
 }

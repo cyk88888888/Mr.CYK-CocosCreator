@@ -21,11 +21,17 @@ export class FileTestLayer extends UILayer {
     @property({ type: ButtonPlus })
     private btn_fileSelect: ButtonPlus;
     @property({ type: ButtonPlus })
+    private btn_fileSelectImg: ButtonPlus;
+    @property({ type: ButtonPlus })
+    private btn_fileSelectText: ButtonPlus;
+    @property({ type: ButtonPlus })
     private btn_fileSave: ButtonPlus;
     //数据数组（所有List共用）
     data: number[] = [];
+    private fileHander: WebFileHandler;
     protected onEnter() {
         this.data = [];
+        this.fileHander = new WebFileHandler();
     }
 
     private _tap_btn_back() {
@@ -42,17 +48,27 @@ export class FileTestLayer extends UILayer {
         //         console.log("file result", result)
         //     })
         // });
-        let aa = new WebFileHandler;
-        aa;
-        aa.openImageWin(function(e, i) {
-            e;
-            i;
+        
+        this.fileHander.openDirectoryWin(function(e, i) {
+            console.log(e, i);
+        })
+    }
+
+    private _tap_btn_fileSelectImg(){
+        this.fileHander.openImageWin(function(e, i) {
+            console.log(e, i);
             // t.bgTex = e;
             // var o = i.name.lastIndexOf(".");
             // t.bgName = i.name.slice(0, o),
             // t.bgPathTxt.string = i.name,
             // t.mapWidthTxt.string = "" + e.width,
             // t.mapHeightTxt.string = "" + e.height
+        })
+    }
+
+    private _tap_btn_fileSelectText(){
+        this.fileHander.openTextWin(function(e, i) {
+            console.log(e, i);
         })
     }
 
