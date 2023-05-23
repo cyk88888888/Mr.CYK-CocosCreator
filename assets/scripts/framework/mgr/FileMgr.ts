@@ -99,7 +99,7 @@ export class FileMgr {
      * @param {*} fileNameToSaveAs  要保存的文件名
      * @memberof FileMgr
      */
-    saveForBrowser(textToWrite, fileNameToSaveAs) {
+    saveForBrowser(textToWrite:BlobPart, fileNameToSaveAs:string) {
         if (sys.isBrowser) {
             console.log("浏览器");
             let textFileAsBlob = new Blob([textToWrite], { type: 'application/json' });
