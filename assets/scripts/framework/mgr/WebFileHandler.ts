@@ -1,27 +1,27 @@
 import { Texture2D } from "cc";
 
-export default class WebFileHandler{
+export default class WebFileHandler {
     private _fileInput: HTMLInputElement;
     private loadComplete: Function;
     private fileType: number;//文件类型，0图片，1文本, 文件夹
     private file: File;
     private _img: HTMLImageElement;
-    constructor(){
+    constructor() {
         this.loadComplete = null,
-        this.file = null,
-        this.fileType = 0,
-        this.init()
+            this.file = null,
+            this.fileType = 0,
+            this.init()
     }
 
     private init() {
         let self = this;
-        self._fileInput = document.createElement("input"),
-        self._fileInput.id = "finput",
-        self._fileInput.accept =  ".*";
-        self._fileInput.style.height = "0px",
-        self._fileInput.style.display = "block",
-        self._fileInput.style.overflow = "hidden",
-        document.body.insertBefore(self._fileInput, document.body.firstChild),
+        self._fileInput = document.createElement("input");
+        self._fileInput.id = "finput";
+        self._fileInput.accept = ".*";
+        self._fileInput.style.height = "0px";
+        self._fileInput.style.display = "block";
+        self._fileInput.style.overflow = "hidden";
+        document.body.insertBefore(self._fileInput, document.body.firstChild);
         self._fileInput.onchange = (e: Event) => {
             self.onSelectFile(e);
         }
@@ -33,61 +33,55 @@ export default class WebFileHandler{
     //选中图片文件
     public openImageWin(cb: Function) {
         let self = this;
-        self.fileType = 0,
-        self._fileInput.type = "file",
-        self._fileInput.accept = "image/png,image/jpeg",//"image/*",
-        self.loadComplete = cb,
-        // setTimeout(() => {
-            self._fileInput.click();
-        // }, 100)
+        self.fileType = 0;
+        self._fileInput.type = "file";
+        self._fileInput.accept = "image/png,image/jpeg";//"image/*"
+        self.loadComplete = cb;
+        self._fileInput.click();
     }
-    
+
     //选中文本文件
     public openTextWin(cb: Function) {
         let self = this;
         self.fileType = 1;
-        self._fileInput.type = "file",
+        self._fileInput.type = "file";
         self._fileInput.accept = "application/json";
         self.loadComplete = cb;
-        // setTimeout(() => {
-            self._fileInput.click();
-        // }, 100)
+        self._fileInput.click();
     }
 
     //选中目录文件夹
     public openDirectoryWin(cb: Function) {
         let self = this;
         self.fileType = 3;
-        self._fileInput.type = "files",
+        self._fileInput.type = "files";
         self._fileInput.accept = ".*";
         self.loadComplete = cb;
-        // setTimeout(() => {
-            self._fileInput.click();
-        // }, 100)
+        self._fileInput.click();
     }
-    
-    private onSelectFile(t:any) {
+
+    private onSelectFile(t: any) {
         let self = this;
         self.file = t.target.files[0];
         if (self.fileType == 0) {//图片
             let url = self.createObjectURL(self.file);
-            if(url) self.loadLocalImg(url);
-        } else if(self.fileType == 1){//文本
+            if (url) self.loadLocalImg(url);
+        } else if (self.fileType == 1) {//文本
             self.loadLocalText(self.file);
-        }else{//文件夹目录
+        } else {//文件夹目录
             //todo...
         }
     }
-    
+
     private loadLocalImg(url: string) {
         let self = this;
         self._img = document.getElementById("f_img") as HTMLImageElement;
-        if(!self._img){
+        if (!self._img) {
             self._img = document.createElement("img");
             self._img.id = "f_img";
         }
         self._img.onprogress = (e: ProgressEvent) => {
-            console.log("pg =", e.loaded); 
+            console.log("pg =", e.loaded);
         }
         self._img.onload = (e: Event) => {
             let texture = new Texture2D();
@@ -98,22 +92,22 @@ export default class WebFileHandler{
         }
         self._img.src = url;
     }
-    
+
     private loadLocalText(file: File) {
         let self = this;
-        if(!file) return;
+        if (!file) return;
         let reader = new FileReader();
         reader.readAsText(file, "utf-8");
         reader.onprogress = (e: ProgressEvent) => {
             console.log("pg =", e.loaded);
         }
-        reader.onload = function() {
+        reader.onload = function () {
             self.loadComplete && self.loadComplete(reader.result, self.file);
         }
     }
-    
+
     private createObjectURL(file: File) {
-        if(!file) return null;
+        if (!file) return null;
         return null != window.URL ? window.URL.createObjectURL(file) : window.webkitURL.createObjectURL(file);
     }
 }
