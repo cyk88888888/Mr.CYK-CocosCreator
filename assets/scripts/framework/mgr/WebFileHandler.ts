@@ -3,7 +3,7 @@ import { Texture2D } from "cc";
 export default class WebFileHandler {
     private _fileInput: HTMLInputElement;
     private loadComplete: Function;
-    private fileType: number;//文件类型，0图片，1文本, 文件夹
+    private fileType: number;//文件类型，0图片，1文本, 2文件夹
     private file: File;
     private _img: HTMLImageElement;
     constructor() {
