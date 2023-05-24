@@ -3,7 +3,7 @@
  * @Author: CYK
  * @Date: 2022-05-16 09:18:45
  */
-import { director, Node, Scene, UIOpacity, UITransform } from "cc";
+import { director, Node} from "cc";
 import { BaseUT } from "../base/BaseUtil";
 import { ModuleCfgInfo } from "../base/ModuleCfgInfo";
 import { UIScene } from "../ui/UIScene";
