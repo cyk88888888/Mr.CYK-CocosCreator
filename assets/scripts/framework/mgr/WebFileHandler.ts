@@ -1,11 +1,10 @@
-import { Texture2D } from "cc";
+import { ImageAsset, SpriteFrame, Texture2D, assetManager } from "cc";
 
 export default class WebFileHandler {
     private _fileInput: HTMLInputElement;
     private loadComplete: Function;
     private fileType: number;//文件类型，0图片，1文本, 2文件夹
     private file: File;
-    private _img: HTMLImageElement;
     constructor() {
         this.loadComplete = null;
         this.file = null;
@@ -75,22 +74,13 @@ export default class WebFileHandler {
 
     private loadLocalImg(url: string) {
         let self = this;
-        self._img = document.getElementById("f_img") as HTMLImageElement;
-        if (!self._img) {
-            self._img = document.createElement("img");
-            self._img.id = "f_img";
-        }
-        self._img.onprogress = (e: ProgressEvent) => {
-            console.log("pg =", e.loaded);
-        }
-        self._img.onload = (e: Event) => {
-            let texture = new Texture2D();
-            // texture.image = self._img;
-            // texture.initWithElement(self._img),
-            // texture.handleLoadedTexture(),
-            self.loadComplete && self.loadComplete(texture, self.file);
-        }
-        self._img.src = url;
+        assetManager.loadRemote<ImageAsset>(url, {ext: '.png'}, function (err, imageAsset) {
+            const spriteFrame = new SpriteFrame();
+            const texture = new Texture2D();
+            texture.image = imageAsset;
+            spriteFrame.texture = texture;
+            self.loadComplete && self.loadComplete(spriteFrame, self.file);
+        });
     }
 
     private loadLocalText(file: File) {
