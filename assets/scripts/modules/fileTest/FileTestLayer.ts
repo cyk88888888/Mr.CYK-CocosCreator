@@ -3,7 +3,7 @@
  * @Author: CYK
  * @Date: 2022-05-12 09:23:41
  */
-import { Button, Node, _decorator } from 'cc';
+import { Button, Node, Sprite, _decorator } from 'cc';
 import { BaseEnum } from '../../framework/base/BaseEnum';
 import { FileMgr } from '../../framework/mgr/FileMgr';
 import { SceneMgr } from '../../framework/mgr/SceneMgr';
@@ -26,6 +26,8 @@ export class FileTestLayer extends UILayer {
     private btn_fileSelectText: ButtonPlus;
     @property({ type: ButtonPlus })
     private btn_fileSave: ButtonPlus;
+    @property({ type: Sprite })
+    private img_local: Sprite;
     //数据数组（所有List共用）
     data: number[] = [];
     private fileHander: WebFileHandler;
@@ -55,8 +57,10 @@ export class FileTestLayer extends UILayer {
     }
 
     private _tap_btn_fileSelectImg(){
-        this.fileHander.openImageWin(function(e, i) {
+        let self = this;
+        self.fileHander.openImageWin((e, i) => {
             console.log(e, i);
+            self.img_local.spriteFrame = e;
             // t.bgTex = e;
             // var o = i.name.lastIndexOf(".");
             // t.bgName = i.name.slice(0, o),
