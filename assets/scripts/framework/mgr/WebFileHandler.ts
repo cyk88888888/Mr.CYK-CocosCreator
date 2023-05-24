@@ -52,7 +52,7 @@ export default class WebFileHandler {
     public openDirectoryWin(cb: Function) {
         let self = this;
         self.fileType = 3;
-        self._fileInput.type = "files";
+        self._fileInput.type = "file";
         self._fileInput.accept = ".*";
         self.loadComplete = cb;
         self._fileInput.click();
