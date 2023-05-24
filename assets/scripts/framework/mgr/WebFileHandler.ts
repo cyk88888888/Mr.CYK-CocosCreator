@@ -7,10 +7,10 @@ export default class WebFileHandler {
     private file: File;
     private _img: HTMLImageElement;
     constructor() {
-        this.loadComplete = null,
-            this.file = null,
-            this.fileType = 0,
-            this.init()
+        this.loadComplete = null;
+        this.file = null;
+        this.fileType = 0;
+        this.init();
     }
 
     private init() {
