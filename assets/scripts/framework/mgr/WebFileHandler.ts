@@ -16,10 +16,9 @@ export default class WebFileHandler {
         let self = this;
         self._fileInput = document.createElement("input");
         self._fileInput.id = "finput";
-        self._fileInput.accept = ".*";
-        self._fileInput.style.height = "0px";
-        self._fileInput.style.display = "block";
-        self._fileInput.style.overflow = "hidden";
+        self._fileInput.style.opacity = '0';
+        self._fileInput.style.position = 'absolute';
+        self._fileInput.setAttribute('left', '-999px');
         document.body.insertBefore(self._fileInput, document.body.firstChild);
         self._fileInput.onchange = (e: Event) => {
             self.onSelectFile(e);
