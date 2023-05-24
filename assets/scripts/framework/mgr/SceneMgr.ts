@@ -68,9 +68,9 @@ export class SceneMgr {
             console.error('未注册模块：' + sceneName)
             return;
         }
-        this.curSceneName = sceneName;
+        ResMgr.inst.curSceneName = this.curSceneName = sceneName;
         if (moduleInfo.preResList && moduleInfo.preResList.length > 0) {
-            ResMgr.inst.load(moduleInfo.preResList, this.onUILoaded.bind(this, moduleInfo, data, toPush));
+            ResMgr.inst.loadTo(sceneName, moduleInfo.preResList, this.onUILoaded.bind(this, moduleInfo, data, toPush));
         } else {
             this.onUILoaded(moduleInfo, data, toPush);
         }
@@ -112,7 +112,7 @@ export class SceneMgr {
         self.checkDestoryLastScene(true);
 
         self.curScene = self._popArr.pop();
-        self.curSceneName = self.curScene.className;
+        ResMgr.inst.curSceneName = self.curSceneName = self.curScene.className;
         self.curScene.addToGRoot();
     }
 }

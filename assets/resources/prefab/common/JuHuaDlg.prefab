@@ -8,8 +8,7 @@
       "__id__": 1
     },
     "optimizationPolicy": 0,
-    "persistent": false,
-    "asyncLoadAssets": false
+    "persistent": false
   },
   {
     "__type__": "cc.Node",
@@ -56,6 +55,7 @@
       "y": 1,
       "z": 1
     },
+    "_mobility": 0,
     "_layer": 33554432,
     "_euler": {
       "__type__": "cc.Vec3",
@@ -108,6 +108,7 @@
       "y": 1,
       "z": 1
     },
+    "_mobility": 0,
     "_layer": 33554432,
     "_euler": {
       "__type__": "cc.Vec3",
@@ -156,6 +157,7 @@
       "y": 1,
       "z": 1
     },
+    "_mobility": 0,
     "_layer": 33554432,
     "_euler": {
       "__type__": "cc.Vec3",
@@ -203,7 +205,6 @@
     "__prefab": {
       "__id__": 7
     },
-    "_visFlags": 0,
     "_customMaterial": null,
     "_srcBlendFactor": 2,
     "_dstBlendFactor": 4,
@@ -245,7 +246,10 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "e5X0U+rgVJBZ73z7egYoQ0"
+    "fileId": "e5X0U+rgVJBZ73z7egYoQ0",
+    "instance": null,
+    "targetOverrides": null,
+    "nestedPrefabInstanceRoots": null
   },
   {
     "__type__": "cc.UITransform",
@@ -285,7 +289,6 @@
     "__prefab": {
       "__id__": 12
     },
-    "_visFlags": 0,
     "_customMaterial": null,
     "_srcBlendFactor": 2,
     "_dstBlendFactor": 4,
@@ -327,7 +330,10 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "47CO5XfOFDyIHf03Rn4kWt"
+    "fileId": "47CO5XfOFDyIHf03Rn4kWt",
+    "instance": null,
+    "targetOverrides": null,
+    "nestedPrefabInstanceRoots": null
   },
   {
     "__type__": "cc.UITransform",
@@ -357,7 +363,7 @@
     "fileId": "f0re0fNZVN2KwWkKd++FFA"
   },
   {
-    "__type__": "8573feob4VPW4UFM9Uw0fNI",
+    "__type__": "f4946tQ10xJ8YUGT8unTUIw",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -374,7 +380,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "b4dPJ3Y+9MX48eXXHJKj0I"
+    "fileId": "c4/eFlxUZN2rn7lZ2AxcVL"
   },
   {
     "__type__": "cc.BlockInputEvents",
@@ -401,6 +407,8 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "c46/YsCPVOJYA4mWEpNYRx"
+    "fileId": "c46/YsCPVOJYA4mWEpNYRx",
+    "instance": null,
+    "targetOverrides": null
   }
 ]

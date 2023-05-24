@@ -3,10 +3,8 @@
  * @Author: CYK
  * @Date: 2022-05-12 16:15:52
  */
-import { Asset, assetManager, Prefab, resources, SpriteAtlas } from "cc";
-import { JuHuaDlg } from "../../modules/common/JuHuaDlg";
-import { SceneMgr } from "./SceneMgr";
-import { IndexScene } from "../../modules/index/IndexScene";
+import { Asset, Node, Prefab, resources } from "cc";
+import { JuHuaDlg } from "../ui/JuHuaDlg";
 
 export class ResMgr {
     private static _inst: ResMgr;
@@ -17,13 +15,14 @@ export class ResMgr {
         }
         return this._inst;
     }
-
+    /**当前场景名称(用于管理资源用，开发者请勿使用) */
+    public curSceneName: string;
     /**模块资源列表map */
     public moduleResMap: { [sceneName: string]: string[] };
-    private _juHuaDlg: any;
+    private _juHuaDlg: Node;
     private closeJuHuaDlg() {
         if (this._juHuaDlg) {
-            this._juHuaDlg.close();
+            this._juHuaDlg.destroy();
             this._juHuaDlg = null;
         }
     }
@@ -56,6 +55,7 @@ export class ResMgr {
     }
 
     private async _loadWithItor(res: string[] | string, itorCb?: Function, cb?: Function, ctx?: any, needJuHua: boolean = true, sceneName?: string) {
+        let self = this;
         let resList = typeof res === 'string' ? [res] : res;
         let totLen = resList.length;//待下载总个数
         let hasLoadResCount: number = 0;//已下载个数
@@ -68,8 +68,8 @@ export class ResMgr {
                     break;
                 }
             }
-            if (!isAllLoaded && !this._juHuaDlg && SceneMgr.inst.curSceneName != IndexScene.name) {
-                this._juHuaDlg = await JuHuaDlg.show();
+            if (!isAllLoaded && !this._juHuaDlg && sceneName != "IndexScene") {
+                self._juHuaDlg = await JuHuaDlg.show();
             }
         }
 
@@ -102,6 +102,7 @@ export class ResMgr {
     }
 
     private async _loadWithProgress(res: string, onProgress: (finished: number, total: number, item: any) => void, cb?: Function, ctx?: any, needJuHua: boolean = true, sceneName?: string) {
+        let self = this;
         let resList = typeof res === 'string' ? [res] : res;
         let totLen = resList.length;//待下载总个数
         let hasLoadResCount: number = 0;//已下载个数
@@ -115,7 +116,7 @@ export class ResMgr {
                 }
             }
             if (!isAllLoaded && !this._juHuaDlg) {
-                this._juHuaDlg = await JuHuaDlg.show();
+                self._juHuaDlg = await JuHuaDlg.show();
             }
         }
 
@@ -249,9 +250,10 @@ export class ResMgr {
     }
 
     private pushResNametoMap(resName: string, sceneName?: string) {
-        let moduleName = sceneName ? sceneName : SceneMgr.inst.curSceneName;
-        let globalRes = this.moduleResMap['global'] || [];
-        let resList = this.moduleResMap[moduleName] = this.moduleResMap[moduleName] || [];
+        let self = this;
+        let moduleName = sceneName ? sceneName : self.curSceneName;
+        let globalRes = self.moduleResMap['global'] || [];
+        let resList = self.moduleResMap[moduleName] = self.moduleResMap[moduleName] || [];
         if (globalRes.indexOf(resName) == -1 && resList.indexOf(resName) == -1) resList.push(resName);
     }
 
