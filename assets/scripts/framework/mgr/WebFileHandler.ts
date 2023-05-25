@@ -17,7 +17,6 @@ export default class WebFileHandler {
         this.loadComplete = null;
         this.file = null;
         this.fileType = 0;
-        this.init();
     }
 
     private init() {
@@ -30,15 +29,27 @@ export default class WebFileHandler {
         document.body.insertBefore(self._fileInput, document.body.firstChild);
         self._fileInput.onchange = (e: Event) => {
             self.onSelectFile(e);
+            self.rmFileInput();
         }
         self._fileInput.oncancel = (e: Event) => {
             console.log(e);
+            alert("用户取消了操作！");
+            self.rmFileInput();
+        }
+    }
+
+    private rmFileInput(){
+        let self = this;
+        if(self._fileInput){
+            document.body.removeChild(self._fileInput);
+            self._fileInput = null;
         }
     }
 
     //选中图片文件
     public openImageWin(cb: Function) {
         let self = this;
+        self.init();
         self.fileType = 0;
         self._fileInput.type = "file";
         self._fileInput.accept = "image/png,image/jpeg";//"image/*"
@@ -49,6 +60,7 @@ export default class WebFileHandler {
     //选中文本文件
     public openTextWin(cb: Function) {
         let self = this;
+        self.init();
         self.fileType = 1;
         self._fileInput.type = "file";
         self._fileInput.accept = "application/json";
@@ -59,6 +71,7 @@ export default class WebFileHandler {
     //选中目录文件夹
     public openDirectoryWin(cb: Function) {
         let self = this;
+        self.init();
         self.fileType = 3;
         self._fileInput.type = "file";
         self._fileInput.accept = ".*";
@@ -108,7 +121,7 @@ export default class WebFileHandler {
     * @param {*} textToWrite       要保存的文件内容
     * @param {*} fileNameToSaveAs  要保存的文件名
     */
-    saveForBrowser(textToWrite: BlobPart, fileNameToSaveAs: string) {
+    public saveForBrowser(textToWrite: BlobPart, fileNameToSaveAs: string) {
         let self = this;
         if (sys.isBrowser) {
             console.log("浏览器");
