@@ -4,8 +4,6 @@
  * @Date: 2022-05-12 09:23:41
  */
 import { Button, Node, Sprite, _decorator } from 'cc';
-import { BaseEnum } from '../../framework/base/BaseEnum';
-import { FileMgr } from '../../framework/mgr/FileMgr';
 import { SceneMgr } from '../../framework/mgr/SceneMgr';
 import { UILayer } from '../../framework/ui/UILayer';
 import { ButtonPlus } from '../../framework/uiComp/ButtonPlus';
@@ -30,10 +28,8 @@ export class FileTestLayer extends UILayer {
     private img_local: Sprite;
     //数据数组（所有List共用）
     data: number[] = [];
-    private fileHander: WebFileHandler;
     protected onEnter() {
         this.data = [];
-        this.fileHander = new WebFileHandler();
     }
 
     private _tap_btn_back() {
@@ -42,23 +38,14 @@ export class FileTestLayer extends UILayer {
 
     /** 打开文件选择器+读取数据 */
     private _tap_btn_fileSelect() {
-        // 打开文件选择器
-        // FileMgr.inst.openLocalFile(null, (file) => {
-        //     console.log("file", file)
-        //     // 读取数据
-        //     FileMgr.inst.readLocalFile(file, BaseEnum.READ_FILE_TYPE.TEXT, (result) => {
-        //         console.log("file result", result)
-        //     })
-        // });
-        
-        this.fileHander.openDirectoryWin(function(e, i) {
+        WebFileHandler.inst.openDirectoryWin(function(e, i) {
             console.log(e, i);
         })
     }
 
     private _tap_btn_fileSelectImg(){
         let self = this;
-        self.fileHander.openImageWin((e, i) => {
+        WebFileHandler.inst.openImageWin((e, i) => {
             console.log(e, i);
             self.img_local.spriteFrame = e;
             // t.bgTex = e;
@@ -71,7 +58,7 @@ export class FileTestLayer extends UILayer {
     }
 
     private _tap_btn_fileSelectText(){
-        this.fileHander.openTextWin(function(e, i) {
+        WebFileHandler.inst.openTextWin(function(e, i) {
             console.log(e, i);
         })
     }
@@ -79,7 +66,7 @@ export class FileTestLayer extends UILayer {
     /** 保存数据到文件 */
     private _tap_btn_fileSave() {
         let list = [{type:1,aa:5},{type:3,bb:66}];
-        this.fileHander.saveForBrowser(JSON.stringify(list), `json/${1}.json`);
+        WebFileHandler.inst.saveForBrowser(JSON.stringify(list), `json/${1}.json`);
     }
 }
 

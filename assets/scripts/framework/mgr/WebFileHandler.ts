@@ -5,6 +5,14 @@ export default class WebFileHandler {
     private loadComplete: Function;
     private fileType: number;//文件类型，0图片，1文本, 2文件夹
     private file: File;
+    private static _inst: WebFileHandler;
+    public static get inst() {
+        if (!this._inst) {
+            this._inst = new WebFileHandler();
+        }
+        return this._inst;
+    }
+
     constructor() {
         this.loadComplete = null;
         this.file = null;
