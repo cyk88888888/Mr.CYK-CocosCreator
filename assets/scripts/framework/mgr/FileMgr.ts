@@ -106,19 +106,24 @@ export class FileMgr {
             let downloadLink = document.createElement("a");
             downloadLink.download = fileNameToSaveAs;
             downloadLink.innerHTML = "Download File";
+            let url: string;
             if (window.webkitURL != null) {
                 // Chrome allows the link to be clicked            
-                // without actually adding it to the DOM.            
-                downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+                // without actually adding it to the DOM.      
+                url = window.webkitURL.createObjectURL(textFileAsBlob);
+                downloadLink.href = url;
             } else {
                 // Firefox requires the link to be added to the DOM            
                 // before it can be clicked.            
-                downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+                url = window.URL.createObjectURL(textFileAsBlob);
+                downloadLink.href = url;
                 // downloadLink.onclick = destroyClickedElement;            
                 downloadLink.style.display = "none";
                 document.body.appendChild(downloadLink);
             }
             downloadLink.click();
+            document.body.removeChild(downloadLink);
+            if(url) URL.revokeObjectURL(url);
         }
     }
 

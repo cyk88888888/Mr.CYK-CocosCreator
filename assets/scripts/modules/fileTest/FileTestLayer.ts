@@ -79,7 +79,7 @@ export class FileTestLayer extends UILayer {
     /** 保存数据到文件 */
     private _tap_btn_fileSave() {
         let list = [{type:1,aa:5},{type:3,bb:66}];
-        FileMgr.inst.saveForBrowser(JSON.stringify(list), `json/${1}.json`);
+        this.fileHander.saveForBrowser(JSON.stringify(list), `json/${1}.json`);
     }
 }
 

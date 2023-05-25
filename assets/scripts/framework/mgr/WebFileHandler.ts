@@ -1,4 +1,4 @@
-import { ImageAsset, SpriteFrame, Texture2D, assetManager } from "cc";
+import { ImageAsset, SpriteFrame, Texture2D, assetManager, sys } from "cc";
 
 export default class WebFileHandler {
     private _fileInput: HTMLInputElement;
@@ -73,7 +73,7 @@ export default class WebFileHandler {
 
     private loadLocalImg(url: string) {
         let self = this;
-        assetManager.loadRemote<ImageAsset>(url, {ext: '.png'}, function (err, imageAsset) {
+        assetManager.loadRemote<ImageAsset>(url, { ext: '.png' }, function (err, imageAsset) {
             const spriteFrame = new SpriteFrame();
             const texture = new Texture2D();
             texture.image = imageAsset;
@@ -95,8 +95,31 @@ export default class WebFileHandler {
         }
     }
 
-    private createObjectURL(file: File) {
-        if (!file) return null;
-        return null != window.URL ? window.URL.createObjectURL(file) : window.webkitURL.createObjectURL(file);
+    /**
+    * 保存数据到本地
+    * @param {*} textToWrite       要保存的文件内容
+    * @param {*} fileNameToSaveAs  要保存的文件名
+    */
+    saveForBrowser(textToWrite: BlobPart, fileNameToSaveAs: string) {
+        let self = this;
+        if (sys.isBrowser) {
+            console.log("浏览器");
+            let textFileAsBlob = new Blob([textToWrite], { type: 'application/json' });
+            let downloadLink = document.createElement("a");
+            downloadLink.download = fileNameToSaveAs;
+            downloadLink.innerHTML = "Download File";
+            let url = self.createObjectURL(textFileAsBlob);
+            downloadLink.href = url;
+            downloadLink.style.display = "none";
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+            if (url) URL.revokeObjectURL(url);
+        }
+    }
+
+    private createObjectURL(obj: Blob | MediaSource) {
+        if (!obj) return null;
+        return null != window.URL ? window.URL.createObjectURL(obj) : window.webkitURL.createObjectURL(obj);
     }
 }
