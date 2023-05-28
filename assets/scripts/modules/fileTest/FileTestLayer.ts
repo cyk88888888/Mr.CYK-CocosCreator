@@ -42,32 +42,30 @@ export class FileTestLayer extends UILayer {
         // WebFileHandler.inst.openDirectoryWin(function(e, i) {
         //     console.log(e, i);
         // })
-        async function getDir() {
-            const directoryHandle: FileSystemDirectoryHandle = await window["showDirectoryPicker"]();
-            FileSystemDirectoryHandle;
-            FileSystemFileHandle;
-            // 操作 dirHandle 的后续代码
-            async function* getFilesRecursively(entry) {
-                if (entry.kind === "file") {
-                    const file: File = await entry.getFile();
-                    if (file !== null) {
-                        let url = directoryHandle.resolve(entry);
-                        // file.relativePath = getRelativePath(entry);
-                        yield file;
-                    }
-                } else if (entry.kind === "directory") {
-                    for await (const handle of entry.values()) {
-                        yield* getFilesRecursively(handle);
-                    }
-                }
+        getDirRoot();
+        async function getDirRoot() {
+            try{
+                const directoryHandle: FileSystemDirectoryHandle = await window["showDirectoryPicker"]();
+                // FileSystemDirectoryHandle;
+                // FileSystemFileHandle;
+                const root = await getFilesRecursively(directoryHandle);
+                console.log(root);
+            }catch{
+                console.warn('用户取消授权读取文件内容');
             }
-            for await (const fileHandle of getFilesRecursively(directoryHandle)) {
-                console.log(fileHandle);
-            }
-
         }
-        getDir();
-
+        
+        async function getFilesRecursively(handle: FileSystemDirectoryHandle | FileSystemFileHandle) {
+            if (handle.kind === "file") {
+                return handle;
+            } 
+            handle["children"] = [];
+            const iter = handle["entries"]();
+            for await (const item of iter){
+                handle["children"].push(await getFilesRecursively(item[1]));
+            }
+            return handle;
+        }
         // let fileHandle;
         // async function getFile() {
         //     // open file picker
