@@ -69,7 +69,7 @@ export class ResMgr {
                 }
             }
             if (!isAllLoaded && !this._juHuaDlg && sceneName != "IndexScene") {
-                self._juHuaDlg = await JuHuaDlg.show();
+                self._juHuaDlg = await JuHuaDlg.show(4);
             }
         }
 
@@ -116,7 +116,7 @@ export class ResMgr {
                 }
             }
             if (!isAllLoaded && !this._juHuaDlg) {
-                self._juHuaDlg = await JuHuaDlg.show();
+                self._juHuaDlg = await JuHuaDlg.show(4);
             }
         }
 

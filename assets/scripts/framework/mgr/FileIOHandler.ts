@@ -23,7 +23,7 @@ export class FileIOHandler {
             const root = await getFilesRecursively(directoryHandle);
             return root;
         }catch{
-            console.warn('用户取消授权读取文件内容');
+            alert("用户取消授权读取文件内容");
         }
 
         async function getFilesRecursively(handle: FileSystemDirectoryHandle | FileSystemFileHandle) {
@@ -59,7 +59,7 @@ export class FileIOHandler {
             juhua.destroy();
             MessageTip.show({ msg: '保存成功' });
         }catch{
-            console.warn("用户取消了保存操作");
+            alert("用户取消了保存操作");
         }
     }
 

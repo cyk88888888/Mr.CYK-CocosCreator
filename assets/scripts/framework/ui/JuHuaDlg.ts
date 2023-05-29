@@ -14,18 +14,28 @@ export class JuHuaDlg extends Component {
     private img_maskBg: Node;
 
     private _tid: number;
+    private _delayShowTime: number;
     onLoad() {
         let self = this;
-        self.img_maskBg.active = true;
+        self.img_maskBg.active = false;
         let img_wait = self.img_maskBg.getChildByName('img_wait');
-        tween(img_wait)
-            .to(1, {
-                angle: 360,
-            })
-            .set({ angle: 0 })
-            .union()
-            .repeatForever()
-            .start();
+        let delay = self._delayShowTime || 0;
+        self._tid = setTimeout(() => {
+            self.img_maskBg.active = true;
+            tween(img_wait)
+                .to(1, {
+                    angle: 360,
+                })
+                .set({ angle: 0 })
+                .union()
+                .repeatForever()
+                .start();
+        }, delay * 1000);
+    }
+
+    setShowWait(delay: number) {
+        let self = this;
+        self._delayShowTime = delay | 0;
     }
 
     onDestroy() {
@@ -33,7 +43,7 @@ export class JuHuaDlg extends Component {
         clearTimeout(self._tid);
     }
 
-    public static async show() {
+    public static async show(delayShowTime?: number) {
         let prefabPath = JuHuaDlg.prefabUrl;
         let prefab = await new Promise<Prefab>((resolve, reject) => {
             let cachePrefab = resources.get(prefabPath);
@@ -54,6 +64,7 @@ export class JuHuaDlg extends Component {
         })
         let node = instantiate(prefab);
         let _canvas = director.getScene().getChildByName('Canvas');
+        node.getComponent(JuHuaDlg).setShowWait(delayShowTime);
         node.setParent(_canvas);
         return node;
     }
