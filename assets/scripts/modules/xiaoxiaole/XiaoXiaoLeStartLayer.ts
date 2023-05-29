@@ -36,12 +36,14 @@ export class XiaoXiaoLeStartLayer extends UILayer {
         self.loadingBar.progress = 0;
         self.loadingBar.barSprite.fillRange = 0;
         ResMgr.inst.loadWithProgress(XiaoXiaoLeLayer.prefabUrl, (finished: number, total: number, item: any)=>{
+            if(self.hasDestory) return;
             let progress = finished / total;
             if (progress > self.loadingBar.barSprite.fillRange) {
                 self.loadingBar.barSprite.fillRange = progress;
             }
         },(err: Error | null, asset: Asset) => {
             if (!err) {
+                if(self.hasDestory) return;
                 SceneMgr.inst.curScene.push('XiaoXiaoLeLayer');
             } else {
                 console.error(err);

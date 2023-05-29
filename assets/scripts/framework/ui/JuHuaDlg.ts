@@ -16,19 +16,16 @@ export class JuHuaDlg extends Component {
     private _tid: number;
     onLoad() {
         let self = this;
-        self.img_maskBg.active = false;
-        self._tid = setTimeout(() => {
-            self.img_maskBg.active = true;
-            let img_wait = self.img_maskBg.getChildByName('img_wait');
-            tween(img_wait)
-                .to(1, {
-                    angle: 360,
-                })
-                .set({ angle: 0 })
-                .union()
-                .repeatForever()
-                .start();
-        }, 4000);
+        self.img_maskBg.active = true;
+        let img_wait = self.img_maskBg.getChildByName('img_wait');
+        tween(img_wait)
+            .to(1, {
+                angle: 360,
+            })
+            .set({ angle: 0 })
+            .union()
+            .repeatForever()
+            .start();
     }
 
     onDestroy() {
@@ -37,7 +34,7 @@ export class JuHuaDlg extends Component {
     }
 
     public static async show() {
-        let prefabPath = JuHuaDlg.prefabUrl; 
+        let prefabPath = JuHuaDlg.prefabUrl;
         let prefab = await new Promise<Prefab>((resolve, reject) => {
             let cachePrefab = resources.get(prefabPath);
             if (cachePrefab) {
