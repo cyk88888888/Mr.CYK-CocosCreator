@@ -1,5 +1,5 @@
 /*
- * @Descripttion: 列表测试界面
+ * @Descripttion: 文件IO测试界面
  * @Author: CYK
  * @Date: 2022-05-12 09:23:41
  */
@@ -39,7 +39,7 @@ export class FileTestLayer extends UILayer {
 
     /** 打开文件选择器+读取数据 */
     private async _tap_btn_fileSelect() {
-        let root = await FileIOHandler.inst.getDirRoot();
+        let root = await FileIOHandler.inst.getDirTreeMap();
         console.log(root);
     }
 

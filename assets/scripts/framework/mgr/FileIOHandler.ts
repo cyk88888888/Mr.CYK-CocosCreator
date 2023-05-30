@@ -17,7 +17,7 @@ export class FileIOHandler {
     }
 
     /**获取文件夹的树结构数据 */
-    public async getDirRoot():Promise<FileSystemDirectoryHandle | FileSystemFileHandle> {
+    public async getDirTreeMap():Promise<FileSystemDirectoryHandle | FileSystemFileHandle> {
         try{
             const directoryHandle: FileSystemDirectoryHandle = await window["showDirectoryPicker"]();
             const root = await getFilesRecursively(directoryHandle);
