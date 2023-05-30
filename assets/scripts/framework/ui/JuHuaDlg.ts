@@ -43,7 +43,12 @@ export class JuHuaDlg extends Component {
         clearTimeout(self._tid);
     }
 
-    public static async show(delayShowTime?: number) {
+    close(){
+        let self = this;
+        self.node.destroy();
+    }
+
+    public static async show(delayShowTime?: number):Promise<JuHuaDlg> {
         let prefabPath = JuHuaDlg.prefabUrl;
         let prefab = await new Promise<Prefab>((resolve, reject) => {
             let cachePrefab = resources.get(prefabPath);
@@ -63,10 +68,11 @@ export class JuHuaDlg extends Component {
             }
         })
         let node = instantiate(prefab);
+        let script = node.getComponent(JuHuaDlg);
         let _canvas = director.getScene().getChildByName('Canvas');
-        node.getComponent(JuHuaDlg).setShowWait(delayShowTime);
+        script.setShowWait(delayShowTime);
         node.setParent(_canvas);
-        return node;
+        return script;
     }
 }
 

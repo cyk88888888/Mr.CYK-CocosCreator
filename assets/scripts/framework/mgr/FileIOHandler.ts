@@ -56,7 +56,7 @@ export class FileIOHandler {
             let juhua = await JuHuaDlg.show();
             await writableStream.write(data);
             await writableStream.close();
-            juhua.destroy();
+            juhua.close();
             MessageTip.show({ msg: '保存成功' });
         }catch{
             alert("用户取消了保存操作");

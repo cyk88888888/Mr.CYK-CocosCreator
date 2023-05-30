@@ -19,10 +19,10 @@ export class ResMgr {
     public curSceneName: string;
     /**模块资源列表map */
     public moduleResMap: { [sceneName: string]: string[] };
-    private _juHuaDlg: Node;
+    private _juHuaDlg: JuHuaDlg;
     private closeJuHuaDlg() {
         if (this._juHuaDlg) {
-            this._juHuaDlg.destroy();
+            this._juHuaDlg.close();
             this._juHuaDlg = null;
         }
     }
