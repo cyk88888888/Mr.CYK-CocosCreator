@@ -17,39 +17,61 @@ export class FileIOHandler {
     }
 
     /**获取文件夹的树结构数据 */
-    public async getDirTreeMap():Promise<FileSystemDirectoryHandle | FileSystemFileHandle> {
-        try{
+    public async getDirTreeMap(): Promise<FileSystemDirectoryHandle | FileSystemFileHandle> {
+        try {
             const directoryHandle: FileSystemDirectoryHandle = await window["showDirectoryPicker"]();
             const root = await getFilesRecursively(directoryHandle);
             return root;
-        }catch{
-            alert("用户取消授权读取文件内容");
+        } catch(e) {
+            alert(e);
         }
 
         async function getFilesRecursively(handle: FileSystemDirectoryHandle | FileSystemFileHandle) {
             if (handle.kind === "file") {
                 return handle;
-            } 
+            }
             handle["children"] = [];
             const iter = handle["entries"]();
-            for await (const item of iter){
+            for await (const item of iter) {
                 handle["children"].push(await getFilesRecursively(item[1]));
             }
             return handle;
         }
     }
 
+    /** 读取本地文件内容*/
+    public async readLocalText(file: File): Promise<string> {
+        return new Promise<string>((resolve, reject) => {
+            if (!file) {
+                reject(null);
+                return;
+            }
+            let reader = new FileReader();
+            reader.readAsText(file, "utf-8");
+            // reader.onprogress = (e: ProgressEvent) => {
+            //     console.log(`${file.name}加载进度: ${e.loaded}`);
+            // }
+            reader.onload = () => {
+                resolve(reader.result + '');
+            }
+            reader.onerror = (ev: ProgressEvent) => {
+                reject(null);
+            }
+        })
+    }
+
     /**保存文本到本地 */
-    public async saveTextToLocal(data: string){
-        try{
+    public async saveTextToLocal(data: string) {
+        try {
             const opts = {
+                suggestedName: "mapData.json",
                 types: [
                     {
-                        suggestedName: "mapData.json",
                         description: "保存的文件名称",
                         accept: { "text/plain": [".json"] },
                     },
                 ],
+                excludeAcceptAllOption: true,
             };
             let newHandle = await window["showSaveFilePicker"](opts);
             const writableStream = await newHandle.createWritable();
@@ -58,9 +80,14 @@ export class FileIOHandler {
             await writableStream.close();
             juhua.close();
             MessageTip.show({ msg: '保存成功' });
-        }catch{
-            alert("用户取消了保存操作");
+        } catch(e) {
+            alert(e);
         }
+    }
+
+    public createObjectURL(obj: Blob | MediaSource) {
+        if (!obj) return null;
+        return null != window.URL ? window.URL.createObjectURL(obj) : window.webkitURL.createObjectURL(obj);
     }
 
 }
