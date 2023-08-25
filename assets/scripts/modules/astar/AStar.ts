@@ -148,6 +148,52 @@ export class AStar {
             self._path.unshift(node);
         }
         self._path.shift();//第一个点是当前位置的，先移除
+        //第一阶段优化： 对横，竖，正斜进行优化
+        //把多个节点连在一起的，横向或者斜向的一连串点，除两边的点保留
+        for (var i: number = 1; i < self._path.length - 1; i++) {
+            var preNode: Nodes = self._path[i - 1];
+            var midNode: Nodes = self._path[i];
+            var nextNode: Nodes = self._path[i + 1];
+
+            var bool1: Boolean = midNode.x == preNode.x && midNode.x == nextNode.x;
+            var bool2: Boolean = midNode.y == preNode.y && midNode.y == nextNode.y;
+            var bool3: Boolean = false;
+
+            //寻路类型是8方向时才考虑正斜角路径优化
+            bool3 = ((midNode.x - preNode.x) / (midNode.y - preNode.y)) * ((nextNode.x - midNode.x) / (nextNode.y - midNode.y)) == 1;
+            if (bool1 || bool2 || bool3) {
+                self._path.splice(i, 1);
+                i--;
+            }
+        }
+
+        // //第二阶段优化：对不在横，竖，正斜的格子进行优化
+        // for (var i: number = 0; i < self._path.length - 2; i++) {
+        //     var startNode: Nodes = self._path[i];
+        //     var optimizeNode: Nodes = null;
+
+        //     //优先从尾部对比，如果能直达就把中间多余的路点删掉
+        //     for (var j: number = self._path.length - 1; j > i + 1; j--) {
+        //         var targetNode: Nodes = self._path[j];
+
+        //         //在第一阶段优已经优化过横，竖，正斜了，所以再出现是肯定不能优化的，可以忽略
+        //         if (startNode.x == targetNode.x || startNode.y == targetNode.y || Math.abs(targetNode.x - startNode.x) == Math.abs(targetNode.y - startNode.y)) {
+        //             continue;
+        //         }
+
+        //         if (this.isArriveBetweenTwoNodes(startNode, targetNode)) {
+        //             optimizeNode = targetNode;
+        //             break;
+        //         }
+
+        //     }
+
+        //     if (optimizeNode) {
+        //         var optimizeLen: number = j - i - 1;
+        //         self._path.splice(i + 1, optimizeLen);
+        //     }
+
+        // }
         let totTime = self.getTime() - self._startCalculateTime;
         self.costTotTime = totTime;
         console.log("本次寻路计算总耗时: " + totTime + "ms");
@@ -172,6 +218,148 @@ export class AStar {
         }
         return true;
     }
+
+    /**
+     * 两点之间是否可到达
+     */
+    public isArriveBetweenTwoNodes(startNode: Nodes, targetNode: Nodes): boolean {
+        if (startNode == targetNode) {
+            return false;
+        }
+
+        var disX: number = Math.abs(targetNode.x - startNode.x);
+        var disY: number = Math.abs(targetNode.y - startNode.y);
+
+        var dirX = 0;
+
+        if (targetNode.x > startNode.x) {
+            dirX = 1;
+        } else if (targetNode.x < startNode.x) {
+            dirX = -1;
+        }
+
+        var dirY = 0;
+
+        if (targetNode.y > startNode.y) {
+            dirY = 1;
+        } else if (targetNode.y < startNode.y) {
+            dirY = -1;
+        }
+
+        var rx: number = 0;
+        var ry: number = 0;
+        var intNum: number = 0;
+        var decimal: number = 0;
+
+        if (disX > disY) {
+            var rate: number = disY / disX;
+
+            for (var i = 0; i < disX; i++) {
+                ry = startNode.y + i * dirY * rate;
+                intNum = Math.floor(ry);
+                decimal = ry % 1;
+
+                var cx1: number = startNode.x + i * dirX;
+                var cy1: number = decimal <= 0.5 ? intNum : intNum + 1;
+
+                ry = startNode.y + (i + 1) * dirY * rate;
+                intNum = Math.floor(ry);
+                decimal = ry % 1;
+
+                var cx2: number = startNode.x + (i + 1) * dirX;
+                var cy2: number = decimal <= 0.5 ? intNum : intNum + 1;
+
+                var node1: Nodes = this._grid.getNode(cx1, cy1);
+                var node2: Nodes = this._grid.getNode(cx2, cy2);
+
+                //cc.log(i + "  :: " + node1.cy," yy ",startNode.cy + i * rate,ry % 1);
+
+                if (!this.isCrossAtAdjacentNodes(node1, node2)) {
+                    return false;
+                }
+            }
+
+        } else {
+            var rate: number = disX / disY;
+
+            for (var i = 0; i < disY; i++) {
+                rx = i * dirX * rate;
+                intNum = dirX > 0 ? Math.floor(startNode.x + rx) : Math.ceil(startNode.x + rx);
+                decimal = Math.abs(rx % 1);
+
+                var cx1: number = decimal <= 0.5 ? intNum : intNum + 1 * dirX;
+                var cy1: number = startNode.y + i * dirY;
+
+                rx = (i + 1) * dirX * rate;
+                intNum = dirX > 0 ? Math.floor(startNode.x + rx) : Math.ceil(startNode.x + rx);
+                decimal = Math.abs(rx % 1);
+
+                var cx2: number = decimal <= 0.5 ? intNum : intNum + 1 * dirX;
+                var cy2: number = startNode.y + (i + 1) * dirY;
+
+                var node1: Nodes = this._grid.getNode(cx1, cy1);
+                var node2: Nodes = this._grid.getNode(cx2, cy2);
+
+                if (!this.isCrossAtAdjacentNodes(node1, node2)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    /**
+    * 判断两个相邻的点是否可通过
+    * @param node1 
+    * @param node2 
+    */
+    private isCrossAtAdjacentNodes(node1: Nodes, node2: Nodes): boolean {
+        if (node1 == node2) {
+            return false;
+        }
+
+        //两个点只要有一个点不能通过就不能通过
+        if (!this.isPassNode(node1) || !this.isPassNode(node2)) {
+            return false;
+        }
+
+        var dirX = node2.x - node1.x;
+        var dirY = node2.y - node1.y
+
+        //如果不是相邻的两个点 则不能通过
+        if (Math.abs(dirX) > 1 || Math.abs(dirY) > 1) {
+            return false;
+        }
+
+        //如果相邻的点是在同一行，或者同一列，则判定为可通过
+        if ((node1.x == node2.x) || (node1.y == node2.y)) {
+            return true;
+        }
+
+        //只剩对角情况了
+        if (
+            this.isPassNode(this._grid.getNode(node1.x, node1.y + dirY)) &&
+            this.isPassNode(this._grid.getNode((node1.x + dirX), node1.y))
+        ) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * 是否是可通过的点 
+     * @param node 
+     */
+    public isPassNode(node: Nodes): boolean {
+        if (node == null || !node.walkable) {
+            return false;
+        }
+
+        return true;
+    }
+
 
     /** 获取当前时间(毫秒)*/
     private getTime() {
