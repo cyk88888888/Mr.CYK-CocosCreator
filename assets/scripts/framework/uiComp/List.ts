@@ -5,7 +5,7 @@
  * @end
  ******************************************/
 const { ccclass, property, disallowMultiple, menu, executionOrder, requireComponent } = _decorator;
-import { Node, Component, Enum, tween, _decorator, EventHandler, Tween, ScrollView, Prefab, Layout, Vec2, Size, NodePool, isValid, instantiate, Vec3, Widget, UITransform, CCFloat, CCBoolean, CCInteger } from 'cc';
+import { Node, Component, Enum, tween, _decorator, EventHandler, Tween, ScrollView, Prefab, Layout, Vec2, Size, NodePool, isValid, instantiate, Vec3, Widget, UITransform, CCFloat, CCBoolean, CCInteger, EventTouch } from 'cc';
 import { DEV } from 'cc/env';
 import { ListItem } from './ListItem';
 
@@ -1361,11 +1361,11 @@ export class List extends Component {
         }
     }
     // 触摸时
-    _onTouchStart(ev, captureListeners) {
+    _onTouchStart(ev:EventTouch, captureListeners) {
         if (this._scrollView['_hasNestedViewGroup'](ev, captureListeners))
             return;
         this._curScrollIsTouch = true;
-        let isMe = ev.eventPhase === Event.AT_TARGET && ev.target === this.node;
+        let isMe = ev.eventPhase === EventTouch.AT_TARGET && ev.target === this.node;
         if (!isMe) {
             let itemNode: any = ev.target;
             while (itemNode._listId == null && itemNode.parent)

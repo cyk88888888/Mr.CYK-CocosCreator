@@ -3,6 +3,7 @@
  * @Author: CYK
  * @Date: 2022-05-23 09:27:58
  */
+import { js } from "cc";
 import { ModuleCfgInfo } from "../base/ModuleCfgInfo";
 import { UIScene } from "../ui/UIScene";
 
@@ -25,8 +26,8 @@ export let moduleInfoMap: { [sceneName: string]: ModuleCfgInfo } = {};
 export function registerModule(targetClass: typeof UIScene, preResList: string[], cacheEnabled?: boolean) {
     let moduleCfgInfo = new ModuleCfgInfo();
     moduleCfgInfo.targetClass = targetClass;
-    moduleCfgInfo.name = targetClass.name;
+    moduleCfgInfo.name = js.getClassName(targetClass);;
     moduleCfgInfo.cacheEnabled = cacheEnabled;
     moduleCfgInfo.preResList = preResList;
-    moduleInfoMap[targetClass.name] = moduleCfgInfo;
+    moduleInfoMap[moduleCfgInfo.name] = moduleCfgInfo;
 }

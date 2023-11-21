@@ -3,7 +3,7 @@
  * @Author: CYK
  * @Date: 2022-05-16 09:18:45
  */
-import { director, Node} from "cc";
+import { director, js, Node} from "cc";
 import { BaseUT } from "../base/BaseUtil";
 import { ModuleCfgInfo } from "../base/ModuleCfgInfo";
 import { UIScene } from "../ui/UIScene";
@@ -61,7 +61,7 @@ export class SceneMgr {
     }
 
     private showScene(scene: string | typeof UIScene, data?: any, toPush?: boolean) {
-        let sceneName = typeof scene === 'string' ? scene : scene.name;
+        let sceneName = typeof scene === 'string' ? scene : js.getClassName(scene);
         if (this.curScene && this.curScene.className == sceneName) return;//相同场景
         let moduleInfo = moduleInfoMap[sceneName];
         if (!moduleInfo) {
