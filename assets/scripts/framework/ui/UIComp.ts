@@ -28,7 +28,7 @@ export class UIComp extends Component {
 
     onLoad() {
         this.scriptName = js.getClassName(this);
-        console.log('onLoad: ' + this.scriptName);
+        // console.log('onLoad: ' + this.scriptName);
     }
 
     onEnable() {
