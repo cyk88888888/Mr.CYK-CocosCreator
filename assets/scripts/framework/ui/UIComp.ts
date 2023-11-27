@@ -3,7 +3,11 @@ import { emmiter } from '../base/Emmiter';
 import { List, SelectedType_List, SlideType } from '../uiComp/List';
 import { ListItem } from '../uiComp/ListItem';
 const { ccclass, property } = _decorator;
-
+/** 
+ * @descripttion UI组件基类
+ * @author cyk
+ * @date 2022-05-12 09:23:41
+ */
 @ccclass('UIComp')
 export class UIComp extends Component {
     private _emmitMap: { [event: string]: Function };//已注册的监听事件列表
@@ -28,7 +32,7 @@ export class UIComp extends Component {
 
     onLoad() {
         this.scriptName = js.getClassName(this);
-        console.log('onLoad: ' + this.scriptName);
+        // console.log('onLoad: ' + this.scriptName);
     }
 
     onEnable() {
@@ -113,7 +117,7 @@ export class UIComp extends Component {
         if(self.isEnter) return;
         self.isEnter = true;
         self.addListener();
-        console.log('进入' + self.scriptName);
+        console.log('进入：' + self.scriptName);
         self.onEnter_b();
         self.onEnter();
         if (self.isFirstEnter) {
@@ -340,7 +344,7 @@ export class UIComp extends Component {
         self.clearAllTimeoutOrInterval();
         self.rmAllTweens();
 
-        console.log('退出' + self.scriptName);
+        console.log('退出：' + self.scriptName);
         self.onExit_b();
         self.onExit();
         self.onExit_a();

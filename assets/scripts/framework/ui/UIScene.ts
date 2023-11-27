@@ -1,9 +1,4 @@
-/*
- * @Description: UI场景基类
- * @Author: CYK
- * @Date: 2022-05-20 09:53:17
- */
-import { _decorator, js } from 'cc';
+import { UITransform, _decorator, js } from 'cc';
 import { SubLayerMgr } from '../mgr/SubLayerMgr';
 import { UILayer } from './UILayer';
 import { emmiter } from '../base/Emmiter';
@@ -11,7 +6,11 @@ import { BaseUT } from '../base/BaseUtil';
 import { Component, Node} from 'cc';
 import { SceneMgr } from '../mgr/SceneMgr';
 const { ccclass } = _decorator;
-
+/** 
+ * @descripttion UI场景基类
+ * @author cyk
+ * @date 2022-05-20 09:53:17
+ */
 @ccclass('UIScene')
 export class UIScene extends Component{
     protected mainClassLayer: typeof UILayer;
@@ -84,6 +83,11 @@ export class UIScene extends Component{
         }
     }
 
+    public get uiTransform() {
+        let self = this;
+        return self.getComponent(UITransform);
+    }
+
     private initLayer() {
         let self = this;
         self.layer = self.addGCom2GRoot('UILayer');
@@ -108,7 +112,7 @@ export class UIScene extends Component{
         let self = this;
         if(self.isEnter) return;
         self.isEnter = true;
-        console.log('进入' + self.className);
+        console.log('进入场景：' + self.className);
         self.onEnter_b();
         self.onEnter();
         if (self._isFirstEnter) {
@@ -183,7 +187,7 @@ export class UIScene extends Component{
             }
             self._emmitMap = null;
         }
-        console.log('退出' + self.className);
+        console.log('退出场景：' + self.className);
         this.onExit_b();
         self.onExit();
         this.onExit_a();
