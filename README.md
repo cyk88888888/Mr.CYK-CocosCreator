@@ -7,3 +7,5 @@ windows
 
 mac
 项目下载后执行 update-cocos-framework.sh 下载最新版本框架插件
+
+2、下载好框架代码后需要重启creator
