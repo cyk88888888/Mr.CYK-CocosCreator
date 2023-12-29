@@ -1,6 +1,5 @@
-import { _decorator, Component, Label, Layout, Node, RichText, Sprite, SpriteFrame, UITransform, Vec3 } from 'cc';
-import { UIComp } from '../../framework/ui/UIComp';
-import { ListItem } from '../../framework/uiComp/ListItem';
+import { _decorator, Label, Layout, Node, RichText, Sprite, SpriteFrame, UITransform, Vec3 } from 'cc';
+import { ListItem } from '../../../../extensions/cocos-framework/src/uiComp/ListItem';
 const { ccclass, property } = _decorator;
 
 @ccclass('ChatIR')

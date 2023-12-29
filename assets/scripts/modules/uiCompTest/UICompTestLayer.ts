@@ -4,9 +4,8 @@
  * @Date: 2022-05-16 09:18:45
  */
 import { Button, _decorator} from 'cc';
-import { SceneMgr } from '../../framework/mgr/SceneMgr';
-import { SoundMgr } from '../../framework/mgr/SoundMgr';
-import { UILayer } from '../../framework/ui/UILayer';
+import { UILayer } from '../../../../extensions/cocos-framework/src/ui/UILayer';
+import { SceneMgr } from '../../../../extensions/cocos-framework/src/mgr/SceneMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('UICompTestLayer')

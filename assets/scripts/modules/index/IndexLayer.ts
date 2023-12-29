@@ -4,13 +4,13 @@
  * @Date: 2022-05-16 09:18:45
  */
 import { _decorator, Node, ProgressBar } from 'cc';
-import { UILayer } from '../../framework/ui/UILayer';
-import { SceneMgr } from '../../framework/mgr/SceneMgr';
-import { ResMgr } from '../../framework/mgr/ResMgr';
 import { HomeLayer } from '../home/HomeLayer';
 import { HomeScene } from '../home/HomeScene';
 import { TopUsrInfoLayer } from '../home/TopUsrInfoLayer';
 import { BottomTabLayer } from '../home/BottomTabLayer';
+import { UILayer } from '../../../../extensions/cocos-framework/src/ui/UILayer';
+import { ResMgr } from '../../../../extensions/cocos-framework/src/mgr/ResMgr';
+import { SceneMgr } from '../../../../extensions/cocos-framework/src/mgr/SceneMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('IndexLayer')

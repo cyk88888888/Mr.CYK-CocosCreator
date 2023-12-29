@@ -4,8 +4,8 @@
  * @Date: 2022-05-12 09:23:41
  */
 import { Button, Label, _decorator } from 'cc';
-import { UIDlg } from '../../framework/ui/UIDlg';
-import { List } from '../../framework/uiComp/List';
+import { UIDlg } from '../../../../extensions/cocos-framework/src/ui/UIDlg';
+import { List } from '../../../../extensions/cocos-framework/src/uiComp/List';
 const { ccclass, property } = _decorator;
 
 @ccclass('BagDlg')
@@ -43,10 +43,6 @@ export class BagDlg extends UIDlg {
 
     private _pageChange_list_bag(pageNum: number){
         this.curPage.string = '当前页数：' + (pageNum + 1);
-    }
-
-    private _tap_btn_close() {
-        this.close();
     }
 }
 

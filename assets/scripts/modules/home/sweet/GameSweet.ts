@@ -1,8 +1,7 @@
 import { _decorator, Component, Node } from 'cc';
-import { UIComp } from '../../../framework/ui/UIComp';
 import { CONST } from '../../base/CONST';
-import { XiaoXiaoLeLayer } from '../xiaoxiaole/XiaoXiaoLeLayer';
 import { SweetLayer } from './SweetLayer';
+import { UIComp } from '../../../../../extensions/cocos-framework/src/ui/UIComp';
 const { ccclass, property } = _decorator;
 
 /*

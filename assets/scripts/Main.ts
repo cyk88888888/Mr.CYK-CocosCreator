@@ -4,15 +4,15 @@
  * @Date: 2022-05-13 09:40:14
  */
 import { _decorator, Component, Prefab, Node, EventTouch, instantiate } from 'cc';
-import { BaseEnum } from './framework/base/BaseEnum';
-import { BaseUT } from './framework/base/BaseUtil';
-import { scaleMode } from './framework/base/ScaleMode';
-import { ResMgr } from './framework/mgr/ResMgr';
-import { SceneMgr } from './framework/mgr/SceneMgr';
-import { SoundMgr } from './framework/mgr/SoundMgr';
-import { TickMgr } from './framework/mgr/TickMgr';
-import { Sp } from './framework/uiComp/Sp';
 import { IndexScene } from './modules/index/IndexScene';
+import { BaseUT } from '../../extensions/cocos-framework/src/base/BaseUtil';
+import { SoundMgr } from '../../extensions/cocos-framework/src/mgr/SoundMgr';
+import { SceneMgr } from '../../extensions/cocos-framework/src/mgr/SceneMgr';
+import { TickMgr } from '../../extensions/cocos-framework/src/mgr/TickMgr';
+import { ResMgr } from '../../extensions/cocos-framework/src/mgr/ResMgr';
+import { scaleMode } from '../../extensions/cocos-framework/src/base/ScaleMode';
+import { Sp } from '../../extensions/cocos-framework/src/uiComp/Sp';
+import { BaseEnum } from '../../extensions/cocos-framework/src/base/BaseEnum';
 const { ccclass, property } = _decorator;
 
 @ccclass('Main')
@@ -25,12 +25,12 @@ export class Main extends Component {
         SoundMgr.inst.defaultBgMusic = "dy/sound/lover";//设置默认背景音乐
         SceneMgr.inst.mainScene = 'HomeScene';//设置主场景
         SoundMgr.inst.buttonSound = "dy/sound/click";//设置全局按钮点击音效
-        TickMgr.inst.mainNode = this;
         ResMgr.inst.setGlobal(
             'dy/sp/click',  
             'dy/sound/click',
             'ui/common'
         )
+        scaleMode.fitMode = BaseEnum.FitMode.FitWidth;
         scaleMode.designWidth = 640;
         scaleMode.designHeight = 1280;
         scaleMode.designHeight_min = 1030;

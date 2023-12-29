@@ -4,9 +4,9 @@
  * @Date: 2023-04-12 23:23:41
  */
 import { Button,  _decorator } from 'cc';
-import { SceneMgr } from '../../framework/mgr/SceneMgr';
-import { UILayer } from '../../framework/ui/UILayer';
-import { List } from '../../framework/uiComp/List';
+import { UILayer } from '../../../../extensions/cocos-framework/src/ui/UILayer';
+import { List } from '../../../../extensions/cocos-framework/src/uiComp/List';
+import { SceneMgr } from '../../../../extensions/cocos-framework/src/mgr/SceneMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('ChatLayer')

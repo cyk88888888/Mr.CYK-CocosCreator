@@ -1,7 +1,6 @@
-import { _decorator, Component, instantiate, Label, Layout, Node, Prefab, RichText, Sprite, SpriteFrame, UITransform, Vec3 } from 'cc';
-import { UIComp } from '../../framework/ui/UIComp';
-import { ListItem } from '../../framework/uiComp/ListItem';
-import { ImgLoader } from '../../framework/uiComp/ImgLoader';
+import { _decorator, instantiate, Prefab } from 'cc';
+import { ListItem } from '../../../../extensions/cocos-framework/src/uiComp/ListItem';
+import { ImgLoader } from '../../../../extensions/cocos-framework/src/uiComp/ImgLoader';
 const { ccclass, property } = _decorator;
 
 @ccclass('BagPageIR')

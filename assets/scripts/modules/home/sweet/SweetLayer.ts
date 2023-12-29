@@ -1,10 +1,10 @@
 
 import { _decorator, Component, Node, ProgressBar, Button, Label, UITransform, Prefab, instantiate, Vec2, Vec3, Enum } from 'cc';
-import { SoundMgr } from '../../../framework/mgr/SoundMgr';
-import { TickMgr } from '../../../framework/mgr/TickMgr';
-import { UILayer } from '../../../framework/ui/UILayer';
 import { CONST } from '../../base/CONST';
 import { GameSweet } from './GameSweet';
+import { UILayer } from '../../../../../extensions/cocos-framework/src/ui/UILayer';
+import { SoundMgr } from '../../../../../extensions/cocos-framework/src/mgr/SoundMgr';
+import { TickMgr } from '../../../../../extensions/cocos-framework/src/mgr/TickMgr';
 const { ccclass, property } = _decorator;
 
 /*

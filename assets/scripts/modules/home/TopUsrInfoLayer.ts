@@ -3,11 +3,11 @@
  * @Author: CYK
  * @Date: 2022-05-16 09:18:45
  */
-import { isDisplayStats, Label, Node, profiler, setDisplayStats, _decorator } from 'cc';
-import { SceneMgr } from '../../framework/mgr/SceneMgr';
-import { UIMenu } from '../../framework/ui/UIMenu';
-import { ButtonPlus } from '../../framework/uiComp/ButtonPlus';
+import {Label, Node, profiler, _decorator } from 'cc';
 import { FileTestScene } from '../fileTest/FileTestScene';
+import { UIMenu } from '../../../../extensions/cocos-framework/src/ui/UIMenu';
+import { ButtonPlus } from '../../../../extensions/cocos-framework/src/uiComp/ButtonPlus';
+import { SceneMgr } from '../../../../extensions/cocos-framework/src/mgr/SceneMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('TopUsrInfoLayer')
@@ -24,8 +24,7 @@ export class TopUsrInfoLayer extends UIMenu {
 
     }
 
-    update(deltaTime: number) {
-    }
+    update(deltaTime: number) {}
 
     private _tap_grp_head() {
         SceneMgr.inst.push(FileTestScene);

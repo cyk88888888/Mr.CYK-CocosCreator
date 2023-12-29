@@ -4,11 +4,11 @@
  * @Date: 2022-05-12 09:23:41
  */
 import { Button, Node, Sprite, _decorator } from 'cc';
-import { SceneMgr } from '../../framework/mgr/SceneMgr';
-import { UILayer } from '../../framework/ui/UILayer';
-import { ButtonPlus } from '../../framework/uiComp/ButtonPlus';
-import WebFileHandler from '../../framework/mgr/WebFileHandler';
-import { FileIOHandler } from '../../framework/mgr/FileIOHandler';
+import { UILayer } from '../../../../extensions/cocos-framework/src/ui/UILayer';
+import { ButtonPlus } from '../../../../extensions/cocos-framework/src/uiComp/ButtonPlus';
+import { SceneMgr } from '../../../../extensions/cocos-framework/src/mgr/SceneMgr';
+import { FileIOHandler } from '../../../../extensions/cocos-framework/src/mgr/FileIOHandler';
+import WebFileHandler from '../../../../extensions/cocos-framework/src/mgr/WebFileHandler';
 const { ccclass, property } = _decorator;
 
 @ccclass('FileTestLayer')

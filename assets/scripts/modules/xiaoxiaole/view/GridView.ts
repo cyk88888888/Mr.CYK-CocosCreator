@@ -1,14 +1,14 @@
 import { _decorator, Camera, Component, EventTouch, instantiate, Node, Prefab, Vec2 } from 'cc';
-import { UIComp } from '../../../framework/ui/UIComp';
 import { AudioUtils } from '../util/AudioUtils';
 import { CellView } from './CellView';
 import { CONST } from '../../base/CONST';
 import { UITransform } from 'cc';
 import { Vec3 } from 'cc';
 import { XiaoXiaoLeLayer } from '../XiaoXiaoLeLayer';
-import { SceneMgr } from '../../../framework/mgr/SceneMgr';
 import { XiaoXiaoleEffectCtrl } from '../model/XiaoXiaoleEffectCtrl';
 import { CellModel } from '../model/CellModel';
+import { UIComp } from '../../../../../extensions/cocos-framework/src/ui/UIComp';
+import { SceneMgr } from '../../../../../extensions/cocos-framework/src/mgr/SceneMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('GridView')

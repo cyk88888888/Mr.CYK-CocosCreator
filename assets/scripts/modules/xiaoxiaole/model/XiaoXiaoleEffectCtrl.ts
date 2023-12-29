@@ -1,7 +1,7 @@
 import { _decorator, Animation, Component, instantiate, Node, Prefab, Vec3 } from 'cc';
 import { AudioUtils } from '../util/AudioUtils';
-import { UIComp } from '../../../framework/ui/UIComp';
 import { CONST } from '../../base/CONST';
+import { UIComp } from '../../../../../extensions/cocos-framework/src/ui/UIComp';
 const { ccclass, property } = _decorator;
 /*
  * @Descripttion: 消消乐特效处理脚本

@@ -4,9 +4,9 @@
  * @Date: 2023-04-12 23:23:20
  */
 import { _decorator } from "cc";
-import { UIScene } from "../../framework/ui/UIScene";
-import { registerModule } from "../../framework/mgr/ModuleMgr";
 import { ChatLayer } from "./ChatLayer";
+import { UIScene } from "../../../../extensions/cocos-framework/src/ui/UIScene";
+import { registerModule } from "../../../../extensions/cocos-framework/src/mgr/ModuleMgr";
 const { ccclass, property } = _decorator;
 @ccclass('ChatScene')
 export class ChatScene extends UIScene {

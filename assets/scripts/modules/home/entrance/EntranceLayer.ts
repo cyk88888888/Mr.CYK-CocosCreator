@@ -4,12 +4,12 @@
  * @Date: 2022-05-16 09:18:45
  */
 import { _decorator, Node} from 'cc';
-import { SceneMgr } from '../../../framework/mgr/SceneMgr';
-import { SoundMgr } from '../../../framework/mgr/SoundMgr';
-import { UILayer } from '../../../framework/ui/UILayer';
 import { UICompTestScene } from '../../uiCompTest/UICompTestScene';
 import { XiaoXiaoLeScene } from '../../xiaoxiaole/XiaoXiaoLeScene';
 import { ChatScene } from '../../chat/ChatScene';
+import { UILayer } from '../../../../../extensions/cocos-framework/src/ui/UILayer';
+import { SceneMgr } from '../../../../../extensions/cocos-framework/src/mgr/SceneMgr';
+import { SoundMgr } from '../../../../../extensions/cocos-framework/src/mgr/SoundMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('EntranceLayer')

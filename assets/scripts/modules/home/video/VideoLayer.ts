@@ -4,9 +4,9 @@
  * @Date: 2022-05-16 09:18:45
  */
 import { _decorator, Button, VideoPlayer, Vec3 } from 'cc';
-import { BaseUT } from '../../../framework/base/BaseUtil';
-import { SoundMgr } from '../../../framework/mgr/SoundMgr';
-import { UILayer } from '../../../framework/ui/UILayer';
+import { UILayer } from '../../../../../extensions/cocos-framework/src/ui/UILayer';
+import { SoundMgr } from '../../../../../extensions/cocos-framework/src/mgr/SoundMgr';
+import { BaseUT } from '../../../../../extensions/cocos-framework/src/base/BaseUtil';
 const { ccclass, property } = _decorator;
 
 @ccclass('VideoLayer')

@@ -3,6 +3,7 @@
     "__type__": "cc.Prefab",
     "_name": "FileTestLayer",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_native": "",
     "data": {
       "__id__": 1
@@ -75,6 +76,7 @@
     "__type__": "cc.Node",
     "_name": "bg",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 1
     },
@@ -124,6 +126,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 2
     },
@@ -151,6 +154,7 @@
     "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 2
     },
@@ -208,6 +212,7 @@
     "__type__": "cc.Node",
     "_name": "ScrollView",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 1
     },
@@ -264,6 +269,7 @@
     "__type__": "cc.Node",
     "_name": "view",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 8
     },
@@ -323,6 +329,7 @@
     "__type__": "cc.Node",
     "_name": "img_locall",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 9
     },
@@ -375,6 +382,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 10
     },
@@ -402,6 +410,7 @@
     "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 10
     },
@@ -443,6 +452,7 @@
     "__type__": "cc.Widget",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 10
     },
@@ -491,6 +501,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 9
     },
@@ -518,6 +529,7 @@
     "__type__": "cc.Mask",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 9
     },
@@ -539,6 +551,7 @@
     "__type__": "cc.Graphics",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 9
     },
@@ -584,6 +597,7 @@
     "__type__": "cc.Widget",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 9
     },
@@ -632,6 +646,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 8
     },
@@ -659,6 +674,7 @@
     "__type__": "cc.ScrollView",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 8
     },
@@ -689,6 +705,7 @@
     "__type__": "cc.Widget",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 8
     },
@@ -737,6 +754,7 @@
     "__type__": "cc.Node",
     "_name": "btn_back",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 1
     },
@@ -792,6 +810,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 34
     },
@@ -819,6 +838,7 @@
     "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 34
     },
@@ -863,6 +883,7 @@
     "__type__": "cc.Button",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 34
     },
@@ -923,6 +944,7 @@
     "__type__": "cc.Widget",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 34
     },
@@ -971,6 +993,7 @@
     "__type__": "cc.Node",
     "_name": "Node",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 1
     },
@@ -1649,6 +1672,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 44
     },
@@ -1676,6 +1700,7 @@
     "__type__": "cc.Widget",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 44
     },
@@ -1724,6 +1749,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 1
     },
@@ -1751,6 +1777,7 @@
     "__type__": "5f1f0IKO8ZKw7HDujR8gsB2",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 1
     },
@@ -1832,7 +1859,7 @@
   {
     "__type__": "cc.TargetInfo",
     "localID": [
-      "3cMWOkzjNIUJ+Aj3kbYWku"
+      "43O1FCj9NE3rafnrUhgSGF"
     ]
   },
   {
@@ -1854,7 +1881,7 @@
   {
     "__type__": "cc.TargetInfo",
     "localID": [
-      "3cMWOkzjNIUJ+Aj3kbYWku"
+      "43O1FCj9NE3rafnrUhgSGF"
     ]
   },
   {
@@ -1876,7 +1903,7 @@
   {
     "__type__": "cc.TargetInfo",
     "localID": [
-      "3cMWOkzjNIUJ+Aj3kbYWku"
+      "43O1FCj9NE3rafnrUhgSGF"
     ]
   },
   {
@@ -1898,7 +1925,7 @@
   {
     "__type__": "cc.TargetInfo",
     "localID": [
-      "3cMWOkzjNIUJ+Aj3kbYWku"
+      "43O1FCj9NE3rafnrUhgSGF"
     ]
   }
 ]

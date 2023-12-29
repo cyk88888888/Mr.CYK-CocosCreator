@@ -3,13 +3,13 @@
     "__type__": "cc.Prefab",
     "_name": "ImgLoader",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_native": "",
     "data": {
       "__id__": 1
     },
     "optimizationPolicy": 0,
-    "persistent": false,
-    "asyncLoadAssets": false
+    "persistent": false
   },
   {
     "__type__": "cc.Node",
@@ -52,6 +52,7 @@
       "y": 1,
       "z": 1
     },
+    "_mobility": 0,
     "_layer": 33554432,
     "_euler": {
       "__type__": "cc.Vec3",
@@ -65,6 +66,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 1
     },
@@ -92,6 +94,7 @@
     "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 1
     },
@@ -99,7 +102,6 @@
     "__prefab": {
       "__id__": 5
     },
-    "_visFlags": 0,
     "_customMaterial": null,
     "_srcBlendFactor": 2,
     "_dstBlendFactor": 4,
@@ -131,9 +133,10 @@
     "fileId": "d72/DhLxZKPJnNfdms8INN"
   },
   {
-    "__type__": "bd5ffXtU0JG9LgAlbDlBRyw",
+    "__type__": "fd00aGRlqZLi6gNoGSWUVRs",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 1
     },
@@ -145,7 +148,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "dbk1qjL7tEJYeE+kO1LGpj"
+    "fileId": "5auQ1N629L6rvEpiUoR6ki"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -155,6 +158,8 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "c46/YsCPVOJYA4mWEpNYRx"
+    "fileId": "c46/YsCPVOJYA4mWEpNYRx",
+    "instance": null,
+    "targetOverrides": null
   }
 ]

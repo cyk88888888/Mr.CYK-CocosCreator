@@ -4,14 +4,14 @@
  * @Date: 2022-05-16 09:18:45
  */
 import { Node, _decorator } from 'cc';
-import { ResMgr } from '../../framework/mgr/ResMgr';
-import { UIMenu } from '../../framework/ui/UIMenu';
 import { EntranceLayer } from './entrance/EntranceLayer';
 import { HomeLayer } from './HomeLayer';
 import { SweetLayer } from './sweet/SweetLayer';
 import { VideoLayer } from './video/VideoLayer';
 import { SpLayer } from './sp/SpLayer';
-import { List } from '../../framework/uiComp/List';
+import { UIMenu } from '../../../../extensions/cocos-framework/src/ui/UIMenu';
+import { List } from '../../../../extensions/cocos-framework/src/uiComp/List';
+import { ResMgr } from '../../../../extensions/cocos-framework/src/mgr/ResMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('BottomTabLayer')

@@ -1,10 +1,10 @@
 
-import { Asset, Button, ProgressBar, _decorator, resources } from 'cc';
-import { SceneMgr } from '../../framework/mgr/SceneMgr';
-import { SoundMgr } from '../../framework/mgr/SoundMgr';
-import { UILayer } from '../../framework/ui/UILayer';
+import { Asset, Button, ProgressBar, _decorator } from 'cc';
 import { XiaoXiaoLeLayer } from './XiaoXiaoLeLayer';
-import { ResMgr } from '../../framework/mgr/ResMgr';
+import { UILayer } from '../../../../extensions/cocos-framework/src/ui/UILayer';
+import { SoundMgr } from '../../../../extensions/cocos-framework/src/mgr/SoundMgr';
+import { ResMgr } from '../../../../extensions/cocos-framework/src/mgr/ResMgr';
+import { SceneMgr } from '../../../../extensions/cocos-framework/src/mgr/SceneMgr';
 const { ccclass, property } = _decorator;
 
 /*
@@ -36,14 +36,14 @@ export class XiaoXiaoLeStartLayer extends UILayer {
         self.loadingBar.progress = 0;
         self.loadingBar.barSprite.fillRange = 0;
         ResMgr.inst.loadWithProgress(XiaoXiaoLeLayer.prefabUrl, (finished: number, total: number, item: any)=>{
-            if(self.hasDestory) return;
+            if(self.isDestory) return;
             let progress = finished / total;
             if (progress > self.loadingBar.barSprite.fillRange) {
                 self.loadingBar.barSprite.fillRange = progress;
             }
         },(err: Error | null, asset: Asset) => {
             if (!err) {
-                if(self.hasDestory) return;
+                if(self.isDestory) return;
                 SceneMgr.inst.curScene.push('XiaoXiaoLeLayer');
             } else {
                 console.error(err);

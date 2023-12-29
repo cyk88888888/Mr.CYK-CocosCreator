@@ -1,7 +1,7 @@
 import { _decorator, Animation, Component, Node, Sprite, SpriteFrame, Tween, UI, UIOpacity, Vec3 } from 'cc';
-import { UIComp } from '../../../framework/ui/UIComp';
 import { CONST } from '../../base/CONST';
 import { CellModel } from '../model/CellModel';
+import { UIComp } from '../../../../../extensions/cocos-framework/src/ui/UIComp';
 const { ccclass, property } = _decorator;
 
 @ccclass('CellView')

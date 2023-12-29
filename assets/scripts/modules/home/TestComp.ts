@@ -4,7 +4,7 @@
  * @Date: 2022-05-16 09:18:45
  */
 import { Label, Node, _decorator } from 'cc';
-import { UIComp } from '../../framework/ui/UIComp';
+import { UIComp } from '../../../../extensions/cocos-framework/src/ui/UIComp';
 const { ccclass, property } = _decorator;
 
 @ccclass('TestComp')

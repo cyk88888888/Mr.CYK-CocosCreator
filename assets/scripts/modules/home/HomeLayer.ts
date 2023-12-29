@@ -1,6 +1,5 @@
 import { _decorator, Animation, Button, instantiate, Node, Prefab, Tween, Vec3 } from 'cc';
-import { UILayer } from '../../framework/ui/UILayer';
-import { ResMgr } from '../../framework/mgr/ResMgr';
+import { UILayer } from '../../../../extensions/cocos-framework/src/ui/UILayer';
 const { ccclass, property } = _decorator;
 /*
  * @Descripttion: 主界面
