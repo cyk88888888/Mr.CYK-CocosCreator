@@ -9,7 +9,9 @@ export class BottomTabIR extends ListItem {
     protected dchg(): void {
         let self = this; 
         let data = self. data;
-        self.node.getChildByName('icon').getComponent(ImgLoader).url = data.icon;
+        let icon = self.node.getChildByName('icon');
+        let imgLoader = icon.getComponent(ImgLoader);
+        imgLoader.url = data.icon;
     }
 }
 
