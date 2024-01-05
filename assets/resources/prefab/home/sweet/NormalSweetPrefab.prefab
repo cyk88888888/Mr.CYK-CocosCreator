@@ -3,6 +3,7 @@
     "__type__": "cc.Prefab",
     "_name": "NormalSweetPrefab",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_native": "",
     "data": {
       "__id__": 1
@@ -66,6 +67,7 @@
     "__type__": "cc.Node",
     "_name": "sweet",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_parent": {
       "__id__": 1
     },
@@ -115,6 +117,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 2
     },
@@ -142,6 +145,7 @@
     "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 2
     },
@@ -199,6 +203,7 @@
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 1
     },
@@ -223,9 +228,10 @@
     "fileId": "e8iUVI4wBAJoLqSsjvOuDr"
   },
   {
-    "__type__": "845dbKjHPRCEKF27ftBvPee",
+    "__type__": "c8f22OVPQ9H0YmJPtJ73kOK",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 1
     },
@@ -237,7 +243,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "e4NRhJLuRCbpfZ1cPVsric"
+    "fileId": "54cxZTqDVJabzyrkjJm1vR"
   },
   {
     "__type__": "cc.PrefabInfo",

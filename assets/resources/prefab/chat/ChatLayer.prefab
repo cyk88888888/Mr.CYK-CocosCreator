@@ -31,20 +31,20 @@
         "__id__": 69
       },
       {
-        "__id__": 100
+        "__id__": 99
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 110
+        "__id__": 109
       },
       {
-        "__id__": 112
+        "__id__": 111
       }
     ],
     "_prefab": {
-      "__id__": 114
+      "__id__": 113
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -1741,9 +1741,6 @@
     "removedComponents": [
       {
         "__id__": 98
-      },
-      {
-        "__id__": 99
       }
     ]
   },
@@ -2030,26 +2027,20 @@
       "tmpPrefab"
     ],
     "value": {
-      "__uuid__": "aaacff07-8a1d-4a0d-9638-83741e216604",
+      "__uuid__": "6eba33b8-d359-40fc-a340-2c3fed2859d7",
       "__expectedType__": "cc.Prefab"
     }
   },
   {
     "__type__": "cc.TargetInfo",
     "localID": [
-      "7bzP24ysBK4LOPh5m8SM+w"
+      "6cUJ2lFTVOsaP656hSKmcQ"
     ]
   },
   {
     "__type__": "cc.TargetInfo",
     "localID": [
       "19+ux/zNtCtZVYjqJrnC2O"
-    ]
-  },
-  {
-    "__type__": "cc.TargetInfo",
-    "localID": [
-      "6cUJ2lFTVOsaP656hSKmcQ"
     ]
   },
   {
@@ -2064,20 +2055,20 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 101
+        "__id__": 100
       },
       {
-        "__id__": 103
+        "__id__": 102
       },
       {
-        "__id__": 105
+        "__id__": 104
       },
       {
-        "__id__": 107
+        "__id__": 106
       }
     ],
     "_prefab": {
-      "__id__": 109
+      "__id__": 108
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -2114,11 +2105,11 @@
     "_objFlags": 0,
     "__editorExtras__": {},
     "node": {
-      "__id__": 100
+      "__id__": 99
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 102
+      "__id__": 101
     },
     "_contentSize": {
       "__type__": "cc.Size",
@@ -2142,11 +2133,11 @@
     "_objFlags": 0,
     "__editorExtras__": {},
     "node": {
-      "__id__": 100
+      "__id__": 99
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 104
+      "__id__": 103
     },
     "_customMaterial": null,
     "_srcBlendFactor": 2,
@@ -2187,11 +2178,11 @@
     "_objFlags": 0,
     "__editorExtras__": {},
     "node": {
-      "__id__": 100
+      "__id__": 99
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 106
+      "__id__": 105
     },
     "clickEvents": [],
     "_interactable": true,
@@ -2234,7 +2225,7 @@
     "_duration": 0.1,
     "_zoomScale": 1.2,
     "_target": {
-      "__id__": 100
+      "__id__": 99
     },
     "_id": ""
   },
@@ -2248,11 +2239,11 @@
     "_objFlags": 0,
     "__editorExtras__": {},
     "node": {
-      "__id__": 100
+      "__id__": 99
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 108
+      "__id__": 107
     },
     "_alignFlags": 9,
     "_target": null,
@@ -2301,7 +2292,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 111
+      "__id__": 110
     },
     "_contentSize": {
       "__type__": "cc.Size",
@@ -2320,7 +2311,7 @@
     "fileId": "96GqNAaBZIG6gm0kujr6aW"
   },
   {
-    "__type__": "ca121v5rT9BGKr13BAVSENh",
+    "__type__": "c34c8IgPxpL46roDbGB/fqf",
     "_name": "",
     "_objFlags": 0,
     "__editorExtras__": {},
@@ -2329,17 +2320,17 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 113
+      "__id__": 112
     },
     "btn_back": {
-      "__id__": 105
+      "__id__": 104
     },
     "list_chat": null,
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "c7VS7nWyNG86pHeC5Ix1bW"
+    "fileId": "c6Jb+TKsBMqIkxEVUj72Fa"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -2353,7 +2344,7 @@
     "instance": null,
     "targetOverrides": [
       {
-        "__id__": 115
+        "__id__": 114
       }
     ],
     "nestedPrefabInstanceRoots": [
@@ -2365,7 +2356,7 @@
   {
     "__type__": "cc.TargetOverrideInfo",
     "source": {
-      "__id__": 112
+      "__id__": 111
     },
     "sourceInfo": null,
     "propertyPath": [
@@ -2375,13 +2366,13 @@
       "__id__": 69
     },
     "targetInfo": {
-      "__id__": 116
+      "__id__": 115
     }
   },
   {
     "__type__": "cc.TargetInfo",
     "localID": [
-      "7bzP24ysBK4LOPh5m8SM+w"
+      "6cUJ2lFTVOsaP656hSKmcQ"
     ]
   }
 ]
