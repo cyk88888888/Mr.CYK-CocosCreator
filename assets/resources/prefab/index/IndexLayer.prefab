@@ -378,7 +378,7 @@
       "__id__": 12
     },
     "asset": {
-      "__uuid__": "0166a54b-313e-41d8-b785-78733f5eeb4f",
+      "__uuid__": "dbac6c7e-9e94-4170-a5be-c186bbdd5593",
       "__expectedType__": "cc.Prefab"
     },
     "fileId": "c46/YsCPVOJYA4mWEpNYRx",
@@ -546,14 +546,14 @@
       "__id__": 25
     },
     "propertyPath": [
-      "url"
+      "frameRate"
     ],
-    "value": "dy/sp/pet"
+    "value": 12
   },
   {
     "__type__": "cc.TargetInfo",
     "localID": [
-      "fcc1shdbVFaLNalzOZz/rw"
+      "24I7mMbj1My4VNljB0/lug"
     ]
   },
   {
@@ -562,9 +562,9 @@
       "__id__": 25
     },
     "propertyPath": [
-      "frameRate"
+      "url"
     ],
-    "value": 12
+    "value": "dy/sp/pet"
   },
   {
     "__type__": "cc.UITransform",

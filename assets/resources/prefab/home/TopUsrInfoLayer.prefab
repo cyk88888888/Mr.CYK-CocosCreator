@@ -1930,7 +1930,7 @@
       "__id__": 81
     },
     "asset": {
-      "__uuid__": "1a41ac40-908a-4f23-abd0-e3704c50049b",
+      "__uuid__": "ed53bf13-0d51-46fc-a0f7-bba28f58b7cb",
       "__expectedType__": "cc.Prefab"
     },
     "fileId": "c46/YsCPVOJYA4mWEpNYRx",
@@ -2362,7 +2362,7 @@
   {
     "__type__": "cc.TargetInfo",
     "localID": [
-      "3cMWOkzjNIUJ+Aj3kbYWku"
+      "c5NNVh+uhDv7eg+ul58XZ4"
     ]
   }
 ]
