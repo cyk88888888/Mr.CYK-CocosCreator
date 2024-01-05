@@ -21,6 +21,11 @@ export class BagDlg extends UIDlg {
 
     private totalItemNum: number = 90;  //总Item数
     private pagePreNum: number = 12;    //每页Item数量
+    protected ctor(): void {
+        let self = this;
+        self.outSideClosed = true;
+    }
+
     protected onEnter() {
         let self = this;
         self._pageChange_list_bag(1);
