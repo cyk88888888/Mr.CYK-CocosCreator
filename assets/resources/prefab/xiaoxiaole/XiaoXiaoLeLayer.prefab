@@ -1097,7 +1097,7 @@
     "fileId": "65cNfgGElNYJMkSkU/6vfX"
   },
   {
-    "__type__": "cc.Button",
+    "__type__": "668dcQo8b9L7bzcNhn/f/X6",
     "_name": "",
     "_objFlags": 0,
     "__editorExtras__": {},
@@ -1113,9 +1113,9 @@
     "_transition": 3,
     "_normalColor": {
       "__type__": "cc.Color",
-      "r": 214,
-      "g": 214,
-      "b": 214,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_hoverColor": {
@@ -1139,23 +1139,18 @@
       "b": 124,
       "a": 255
     },
-    "_normalSprite": {
-      "__uuid__": "aff310a6-417f-4230-a7db-934acaea408f@bda69",
-      "__expectedType__": "cc.SpriteFrame"
-    },
+    "_normalSprite": null,
     "_hoverSprite": null,
     "_pressedSprite": null,
     "_disabledSprite": null,
     "_duration": 0.1,
-    "_zoomScale": 1.2,
-    "_target": {
-      "__id__": 42
-    },
+    "_zoomScale": 0.8,
+    "_target": null,
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "70atdyZ0RMBplQSThYnNo+"
+    "fileId": "3cUkBGZUdGOatM+xxikRw5"
   },
   {
     "__type__": "cc.Widget",
