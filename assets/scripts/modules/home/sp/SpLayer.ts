@@ -13,14 +13,9 @@ export class SpLayer extends UILayer {
     /** 预制体路径 */
     public static prefabUrl: string = 'prefab/home/SpLayer';
 
-    @property(Button)
-    private btn_bag: Button;
     protected onEnter() {
     }
 
-    private _tap_btn_bag(){
-        BagDlg.show();
-    }
 
 }
 
