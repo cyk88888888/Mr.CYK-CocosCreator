@@ -1,20 +1,6 @@
-
 import { _decorator } from 'cc';
 import { Nodes } from './Nodes';
 const { ccclass, property } = _decorator;
-
-/**
- * Predefined variables
- * Name = Grid
- * DateTime = Tue Mar 29 2022 17:44:30 GMT+0800 (中国标准时间)
- * Author = cyk54088
- * FileBasename = Grid.ts
- * FileBasenameNoExtension = Grid
- * URL = db://assets/scripts/Grid.ts
- * ManualUrl = https://docs.cocos.com/creator/3.4/manual/zh/
- *
- */
- 
 @ccclass('Grid')
 export class Grid {
 

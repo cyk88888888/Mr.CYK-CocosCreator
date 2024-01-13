@@ -3,10 +3,10 @@ import { AudioUtils } from '../util/AudioUtils';
 import { CONST } from '../../base/CONST';
 import { UIComp } from '../../../../../extensions/cocos-framework/src/ui/UIComp';
 const { ccclass, property } = _decorator;
-/*
- * @Descripttion: 消消乐特效处理脚本
- * @Author: CYK
- * @Date: 2023-04-1 09:18:45
+/** 
+ * @Descripttion 消消乐特效处理脚本
+ * @Author CYK
+ * @Date 2023-04-1 09:18:45
  */
 @ccclass('XiaoXiaoleEffectCtrl')
 export class XiaoXiaoleEffectCtrl extends UIComp {

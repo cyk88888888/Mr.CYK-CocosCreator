@@ -1,15 +1,14 @@
-/*
- * @Descripttion: 入口集合界面
- * @Author: CYK
- * @Date: 2022-05-16 09:18:45
- */
 import { _decorator, js, Node } from 'cc';
 import { UILayer } from '../../../../../extensions/cocos-framework/src/ui/UILayer';
 import { SceneMgr } from '../../../../../extensions/cocos-framework/src/mgr/SceneMgr';
 import { SoundMgr } from '../../../../../extensions/cocos-framework/src/mgr/SoundMgr';
 import { List } from '../../../../../extensions/cocos-framework/src/uiComp/List';
 const { ccclass, property } = _decorator;
-
+/** 
+ * @Descripttion 入口集合界面
+ * @Author CYK
+ * @Date 2022-05-16 09:18:45
+ */
 @ccclass('EntranceLayer')
 export class EntranceLayer extends UILayer {
     /** 预制体路径 */

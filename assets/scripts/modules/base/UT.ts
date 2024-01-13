@@ -1,6 +1,10 @@
 import { SceneMgr } from "../../../../extensions/cocos-framework/src/mgr/SceneMgr";
 import { UIDlg } from "../../../../extensions/cocos-framework/src/ui/UIDlg";
-
+/** 
+ * @Descripttion 工具类
+ * @Author CYK
+ * @Date 2023-03-24 23:26:33
+ */
 export namespace UT{
      /**关闭指定弹窗 */
     export function closeDlgByName(dlgNames: string[]) {

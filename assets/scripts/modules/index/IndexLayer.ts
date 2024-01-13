@@ -1,8 +1,3 @@
-/*
- * @Descripttion: 说明
- * @Author: CYK
- * @Date: 2022-05-16 09:18:45
- */
 import { _decorator, Node, ProgressBar } from 'cc';
 import { HomeLayer } from '../home/HomeLayer';
 import { HomeScene } from '../home/HomeScene';
@@ -12,7 +7,11 @@ import { UILayer } from '../../../../extensions/cocos-framework/src/ui/UILayer';
 import { ResMgr } from '../../../../extensions/cocos-framework/src/mgr/ResMgr';
 import { SceneMgr } from '../../../../extensions/cocos-framework/src/mgr/SceneMgr';
 const { ccclass, property } = _decorator;
-
+/** 
+ * @Descripttion 首页
+ * @Author CYK
+ * @Date 2022-05-16 09:18:45
+ */
 @ccclass('IndexLayer')
 export class IndexLayer extends UILayer {
     /** 预制体路径 */

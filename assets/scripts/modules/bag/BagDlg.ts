@@ -1,13 +1,12 @@
-/*
- * @Descripttion: 背包弹窗
- * @Author: CYK
- * @Date: 2022-05-12 09:23:41
- */
 import { Button, Label, _decorator } from 'cc';
 import { UIDlg } from '../../../../extensions/cocos-framework/src/ui/UIDlg';
 import { List } from '../../../../extensions/cocos-framework/src/uiComp/List';
 const { ccclass, property } = _decorator;
-
+/** 
+ * @Descripttion 背包弹窗
+ * @Author CYK
+ * @Date 2022-05-12 09:23:41
+ */
 @ccclass('BagDlg')
 export class BagDlg extends UIDlg {
     /** 预制体路径 */

@@ -1,14 +1,13 @@
-/*
- * @Descripttion: 列表测试界面
- * @Author: CYK
- * @Date: 2023-04-12 23:23:41
- */
 import { Button,  _decorator } from 'cc';
 import { UILayer } from '../../../../extensions/cocos-framework/src/ui/UILayer';
 import { List } from '../../../../extensions/cocos-framework/src/uiComp/List';
 import { SceneMgr } from '../../../../extensions/cocos-framework/src/mgr/SceneMgr';
 const { ccclass, property } = _decorator;
-
+/** 
+ * @Descripttion 列表测试界面
+ * @Author CYK
+ * @Date 2023-04-12 23:23:41
+ */
 @ccclass('ChatLayer')
 export class ChatLayer extends UILayer {
     /** 预制体路径 */

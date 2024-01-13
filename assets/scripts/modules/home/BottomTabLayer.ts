@@ -1,8 +1,3 @@
-/*
- * @Descripttion: 主界面底部选中页签
- * @Author: CYK
- * @Date: 2022-05-16 09:18:45
- */
 import { Node, _decorator } from 'cc';
 import { EntranceLayer } from './entrance/EntranceLayer';
 import { HomeLayer } from './HomeLayer';
@@ -13,7 +8,11 @@ import { UIMenu } from '../../../../extensions/cocos-framework/src/ui/UIMenu';
 import { List } from '../../../../extensions/cocos-framework/src/uiComp/List';
 import { ResMgr } from '../../../../extensions/cocos-framework/src/mgr/ResMgr';
 const { ccclass, property } = _decorator;
-
+/** 
+ * @Descripttion 主界面底部选中页签
+ * @Author CYK
+ * @Date 2022-05-16 09:18:45
+ */
 @ccclass('BottomTabLayer')
 export class BottomTabLayer extends UIMenu {
     /** 预制体路径 */

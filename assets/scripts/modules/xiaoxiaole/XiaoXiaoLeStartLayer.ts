@@ -6,11 +6,10 @@ import { SoundMgr } from '../../../../extensions/cocos-framework/src/mgr/SoundMg
 import { ResMgr } from '../../../../extensions/cocos-framework/src/mgr/ResMgr';
 import { SceneMgr } from '../../../../extensions/cocos-framework/src/mgr/SceneMgr';
 const { ccclass, property } = _decorator;
-
-/*
- * @Descripttion: 开心消消乐开始界面
- * @Author: CYK
- * @Date: 2023-04-3 23:45:45
+/** 
+ * @Descripttion 开心消消乐开始界面
+ * @Author CYK
+ * @Date 2023-04-3 23:45:45
  */
 @ccclass('XiaoXiaoLeStartLayer')
 export class XiaoXiaoLeStartLayer extends UILayer {

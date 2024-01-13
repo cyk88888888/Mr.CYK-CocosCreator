@@ -1,10 +1,10 @@
 import { _decorator, AudioClip, Component, Node } from 'cc';
 import { SoundMgr } from '../../../../../extensions/cocos-framework/src/mgr/SoundMgr';
 const { ccclass, property } = _decorator;
-/*
- * @Descripttion: 开心消消乐音效管理
- * @Author: CYK
- * @Date: 2023-04-3 23:45:45
+/** 
+ * @Descripttion 开心消消乐音效管理
+ * @Author CYK
+ * @Date 2023-04-3 23:45:45
  */
 @ccclass('AudioUtils')
 export class AudioUtils extends Component {

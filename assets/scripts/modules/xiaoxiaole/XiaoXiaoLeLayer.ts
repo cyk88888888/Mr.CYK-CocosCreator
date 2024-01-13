@@ -7,10 +7,10 @@ import { SoundMgr } from '../../../../extensions/cocos-framework/src/mgr/SoundMg
 import { SceneMgr } from '../../../../extensions/cocos-framework/src/mgr/SceneMgr';
 const { ccclass, property } = _decorator;
 
-/*
- * @Descripttion: 开心消消乐界面
- * @Author: CYK
- * @Date: 2023-04-3 23:45:45
+/** 
+ * @Descripttion 开心消消乐界面
+ * @Author CYK
+ * @Date 2023-04-3 23:45:45
  */
 @ccclass('XiaoXiaoLeLayer')
 export class XiaoXiaoLeLayer extends UILayer {

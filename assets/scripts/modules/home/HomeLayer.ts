@@ -1,10 +1,10 @@
 import { _decorator, Animation, Button, instantiate, Node, Prefab, Tween, Vec3 } from 'cc';
 import { UILayer } from '../../../../extensions/cocos-framework/src/ui/UILayer';
 const { ccclass, property } = _decorator;
-/*
- * @Descripttion: 主界面
- * @Author: CYK
- * @Date: 2022-05-16 09:18:45
+/** 
+ * @Descripttion 主界面
+ * @Author CYK
+ * @Date 2022-05-16 09:18:45
  */
 @ccclass('HomeLayer')
 export class HomeLayer extends UILayer {

@@ -1,8 +1,3 @@
-/*
- * @Descripttion: 文件IO测试界面
- * @Author: CYK
- * @Date: 2022-05-12 09:23:41
- */
 import { Button, Node, Sprite, _decorator } from 'cc';
 import { UILayer } from '../../../../extensions/cocos-framework/src/ui/UILayer';
 import { ButtonPlus } from '../../../../extensions/cocos-framework/src/uiComp/ButtonPlus';
@@ -10,7 +5,11 @@ import { SceneMgr } from '../../../../extensions/cocos-framework/src/mgr/SceneMg
 import { FileIOHandler } from '../../../../extensions/cocos-framework/src/mgr/FileIOHandler';
 import WebFileHandler from '../../../../extensions/cocos-framework/src/mgr/WebFileHandler';
 const { ccclass, property } = _decorator;
-
+/** 
+ * @Descripttion 文件IO测试界面
+ * @Author CYK
+ * @Date 2022-05-12 09:23:41
+ */
 @ccclass('FileTestLayer')
 export class FileTestLayer extends UILayer {
     /** 预制体路径 */
