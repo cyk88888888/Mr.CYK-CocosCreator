@@ -255,10 +255,6 @@ export class TestAStar extends UIComp {
             return '#ff0000';
         return '#ffffff';
     }
-
-    protected onExit() {
-        let self = this;
-    }
 }
 
 
