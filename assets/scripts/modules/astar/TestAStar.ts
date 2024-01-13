@@ -10,7 +10,7 @@ import { MessageTip } from '../../../../extensions/cocos-framework/src/ui/Messag
 const { ccclass, property } = _decorator;
 
 /**
- * 测试AStar（平路情况下（代价因子一样大））
+ * @Descripttion 测试AStar（平路情况下（代价因子一样大））
  * @author CYK
  */
 @ccclass('TestAStar')
