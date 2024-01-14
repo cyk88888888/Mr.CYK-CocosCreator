@@ -20,8 +20,7 @@ export class EntranceLayer extends UILayer {
     @property({ type: Node })
     public btn_soundEff: Node;
 
-    protected onEnter() {
-    }
+    protected onEnter() {}
 
     private _data_list_btns() {
         let datas = [
