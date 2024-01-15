@@ -1,0 +1,333 @@
+{
+  "ver": "2.3.12",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "85b966e2-a177-44af-be5b-8cc5fd7b5b51",
+  "files": [
+    "__original-animation-0.cconb"
+  ],
+  "subMetas": {
+    "cb203": {
+      "importer": "gltf-mesh",
+      "uuid": "85b966e2-a177-44af-be5b-8cc5fd7b5b51@cb203",
+      "displayName": "",
+      "id": "cb203",
+      "name": "hellFire.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 1054
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "1f586": {
+      "importer": "gltf-animation",
+      "uuid": "85b966e2-a177-44af-be5b-8cc5fd7b5b51@1f586",
+      "displayName": "",
+      "id": "1f586",
+      "name": "idle.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 1
+        },
+        "events": []
+      },
+      "ver": "1.0.17",
+      "imported": true,
+      "files": [
+        ".cconb"
+      ],
+      "subMetas": {}
+    },
+    "ca16a": {
+      "importer": "gltf-animation",
+      "uuid": "85b966e2-a177-44af-be5b-8cc5fd7b5b51@ca16a",
+      "displayName": "",
+      "id": "ca16a",
+      "name": "attack1.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 1.3333333333333333,
+          "to": 2.966666666666667
+        },
+        "events": [
+          {
+            "frame": 0.5,
+            "func": "",
+            "params": []
+          },
+          {
+            "frame": 0.5,
+            "func": "onFrameAttack",
+            "params": []
+          }
+        ],
+        "speed": 1
+      },
+      "ver": "1.0.17",
+      "imported": true,
+      "files": [
+        ".cconb"
+      ],
+      "subMetas": {}
+    },
+    "bd671": {
+      "importer": "gltf-animation",
+      "uuid": "85b966e2-a177-44af-be5b-8cc5fd7b5b51@bd671",
+      "displayName": "",
+      "id": "bd671",
+      "name": "attack2.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 3.3333333333333335,
+          "to": 4.466666666666667
+        },
+        "events": [
+          {
+            "frame": 0.23333333333333334,
+            "func": "onFrameAttack",
+            "params": []
+          }
+        ],
+        "speed": 1
+      },
+      "ver": "1.0.17",
+      "imported": true,
+      "files": [
+        ".cconb"
+      ],
+      "subMetas": {}
+    },
+    "79e35": {
+      "importer": "gltf-animation",
+      "uuid": "85b966e2-a177-44af-be5b-8cc5fd7b5b51@79e35",
+      "displayName": "",
+      "id": "79e35",
+      "name": "hit.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 4.666666666666667,
+          "to": 5.433333333333334
+        },
+        "events": []
+      },
+      "ver": "1.0.17",
+      "imported": true,
+      "files": [
+        ".cconb"
+      ],
+      "subMetas": {}
+    },
+    "b4251": {
+      "importer": "gltf-animation",
+      "uuid": "85b966e2-a177-44af-be5b-8cc5fd7b5b51@b4251",
+      "displayName": "",
+      "id": "b4251",
+      "name": "die.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 5.666666666666667,
+          "to": 6.733333333333333
+        },
+        "events": [],
+        "speed": 1
+      },
+      "ver": "1.0.17",
+      "imported": true,
+      "files": [
+        ".cconb"
+      ],
+      "subMetas": {}
+    },
+    "cf5ee": {
+      "importer": "gltf-animation",
+      "uuid": "85b966e2-a177-44af-be5b-8cc5fd7b5b51@cf5ee",
+      "displayName": "",
+      "id": "cf5ee",
+      "name": "run.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 7,
+          "to": 8
+        },
+        "events": [],
+        "speed": 1
+      },
+      "ver": "1.0.17",
+      "imported": true,
+      "files": [
+        ".cconb"
+      ],
+      "subMetas": {}
+    },
+    "438fe": {
+      "importer": "gltf-skeleton",
+      "uuid": "85b966e2-a177-44af-be5b-8cc5fd7b5b51@438fe",
+      "displayName": "",
+      "id": "438fe",
+      "name": "UnnamedSkeleton.skeleton",
+      "userData": {
+        "gltfIndex": 0,
+        "jointsLength": 44
+      },
+      "ver": "1.0.1",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "ea6e2": {
+      "importer": "gltf-material",
+      "uuid": "85b966e2-a177-44af-be5b-8cc5fd7b5b51@ea6e2",
+      "displayName": "",
+      "id": "ea6e2",
+      "name": "DefaultMaterial.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "e06a4": {
+      "importer": "gltf-scene",
+      "uuid": "85b966e2-a177-44af-be5b-8cc5fd7b5b51@e06a4",
+      "displayName": "",
+      "id": "e06a4",
+      "name": "hellFireAll.FBX.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "legacyFbxImporter": true,
+    "animationImportSettings": [
+      {
+        "name": "Take 001",
+        "duration": 8,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "idle",
+            "from": 0,
+            "to": 1,
+            "wrapMode": 2,
+            "previousId": "1f586"
+          },
+          {
+            "name": "attack1",
+            "from": 1.3333333333333333,
+            "to": 2.966666666666667,
+            "wrapMode": 2,
+            "previousId": "ca16a"
+          },
+          {
+            "name": "attack2",
+            "from": 3.3333333333333335,
+            "to": 4.466666666666667,
+            "wrapMode": 2,
+            "previousId": "bd671"
+          },
+          {
+            "name": "hit",
+            "from": 4.666666666666667,
+            "to": 5.433333333333334,
+            "wrapMode": 2,
+            "previousId": "79e35"
+          },
+          {
+            "name": "die",
+            "from": 5.666666666666667,
+            "to": 6.733333333333333,
+            "wrapMode": 2,
+            "previousId": "b4251"
+          },
+          {
+            "name": "run",
+            "from": 7,
+            "to": 8,
+            "wrapMode": 2,
+            "previousId": "cf5ee"
+          }
+        ]
+      }
+    ],
+    "redirect": "85b966e2-a177-44af-be5b-8cc5fd7b5b51@e06a4",
+    "assetFinder": {
+      "meshes": [
+        "85b966e2-a177-44af-be5b-8cc5fd7b5b51@cb203"
+      ],
+      "skeletons": [
+        "85b966e2-a177-44af-be5b-8cc5fd7b5b51@438fe"
+      ],
+      "textures": [],
+      "materials": [
+        "85b966e2-a177-44af-be5b-8cc5fd7b5b51@ea6e2"
+      ],
+      "scenes": [
+        "85b966e2-a177-44af-be5b-8cc5fd7b5b51@e06a4"
+      ]
+    },
+    "dumpMaterials": false,
+    "materialDumpDir": "db://assets/res/model/monster/hellFireNew",
+    "disableMeshSplit": true,
+    "fbx": {
+      "smartMaterialEnabled": false,
+      "matchMeshNames": false
+    },
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    }
+  }
+}
